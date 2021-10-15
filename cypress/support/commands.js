@@ -14,6 +14,23 @@ Cypress.Commands.add("login", (email, password) => {
   });
 });
 
+Cypress.Commands.add("loginAs", (user) => {
+  let userFiles =  {
+    'Case Manager': 'user/case-manager.json',
+    'Allocations User': 'user/allocations.json',
+  };
+
+  let userFile = userFiles[user];
+
+  if (userFile == null) {
+    throw new Error("Could not find test login details for user " + user);
+  }
+
+  return cy.fixture(userFile).then(user => {
+    cy.login(user.email, user.password);
+  });
+});
+
 Cypress.Commands.add('postToApi', (url, data) => {
   cy.request({
     url: '/api/v1/users/current',
@@ -34,7 +51,7 @@ Cypress.Commands.add('postToApi', (url, data) => {
 
   cy.get('@jwtToken').then(jwtToken => {
     cy.get('@csrfToken').then(csrfToken => {
-      cy.request({
+      return cy.request({
         method: 'POST',
         url: url,
         headers: {
@@ -45,11 +62,7 @@ Cypress.Commands.add('postToApi', (url, data) => {
           'x-xsrf-token': csrfToken
         },
         body: data
-      })
-        .its('body')
-        .then(res => {
-          cy.wrap(res.id).as('clientId');
-        });
+      });
     });
   });
 });
