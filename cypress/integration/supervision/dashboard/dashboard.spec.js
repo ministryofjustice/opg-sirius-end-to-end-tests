@@ -1,4 +1,4 @@
-before(function loginAsCaseManager () {
+before(() => {
   cy.loginAs('Case Manager');
 });
 

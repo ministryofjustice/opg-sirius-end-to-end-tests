@@ -15,7 +15,7 @@ Cypress.Commands.add("login", (email, password) => {
 });
 
 Cypress.Commands.add("loginAs", (user) => {
-  let userFiles =  {
+  const userFiles =  {
     'Case Manager': 'user/case-manager.json',
     'Allocations User': 'user/allocations.json',
   };
