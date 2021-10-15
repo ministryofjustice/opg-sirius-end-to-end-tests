@@ -1,15 +1,5 @@
-before(function fetchUser () {
-  cy.request({
-    method: 'POST',
-    url: '/',
-    form: true,
-    body: {
-      email: 'case.manager@opgtest.com',
-      password: 'Password1',
-      submit: 'Sign In',
-      'OPG-Bypass-Membrane': 1
-    }
-  });
+before(function loginAsCaseManager () {
+  cy.loginAs('Case Manager');
 });
 
 describe('Viewing the dashboard', { tags: ['@supervision', '@dashboard'] }, () => {
