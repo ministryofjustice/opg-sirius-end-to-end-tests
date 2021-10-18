@@ -16,8 +16,9 @@ Cypress.Commands.add("login", (email, password) => {
 
 Cypress.Commands.add("loginAs", (user) => {
   const userFiles =  {
-    'Case Manager': 'user/case-manager.json',
     'Allocations User': 'user/allocations.json',
+    'Case Manager': 'user/case-manager.json',
+    'Lay User': 'user/lay.json',
   };
 
   let userFile = userFiles[user];
@@ -31,15 +32,14 @@ Cypress.Commands.add("loginAs", (user) => {
   });
 });
 
-Cypress.Commands.add('postToApi', (url, data) => {
+const getAndStoreTokens = () => {
   cy.request({
     url: '/api/v1/users/current',
     headers: {
       'accept': 'application/json',
       'opg-bypass-membrane': 1
     }
-  })
-    .its('headers')
+  }).its('headers')
     .then((res) => {
       cy.wrap(res.authorization).as('jwtToken');
     });
@@ -48,11 +48,15 @@ Cypress.Commands.add('postToApi', (url, data) => {
     .then((res) => {
       cy.wrap(decodeURIComponent(res.value)).as('csrfToken');
     });
+}
+
+Cypress.Commands.add('sendToApi', (verb, url, data) => {
+  cy.then(getAndStoreTokens);
 
   cy.get('@jwtToken').then(jwtToken => {
     cy.get('@csrfToken').then(csrfToken => {
       return cy.request({
-        method: 'POST',
+        method: verb,
         url: url,
         headers: {
           'accept': 'application/json',
@@ -65,4 +69,12 @@ Cypress.Commands.add('postToApi', (url, data) => {
       });
     });
   });
+});
+
+Cypress.Commands.add('postToApi', (url, data) => {
+  cy.sendToApi('POST', url, data);
+});
+
+Cypress.Commands.add('putToApi', (url, data) => {
+  cy.sendToApi('PUT', url, data);
 });
