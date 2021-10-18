@@ -1,13 +1,15 @@
-before(function fetchUser () {
-    cy.fixture('user/case-manager.json').then(user => {
-        cy.login(user.email, user.password)
-    });
+before(() => {
+  cy.loginAs('Case Manager');
 });
 
 beforeEach(function createClient () {
-    cy.fixture('client/minimal.json').then(client => {
-        cy.postToApi('/api/v1/clients', client);
-    });
+  cy.fixture('client/minimal.json').then(client => {
+    cy.postToApi('/api/v1/clients', client)
+      .its('body')
+      .then(res => {
+          cy.wrap(res.id).as('clientId');
+      });
+  });
 });
 
 describe('Viewing the client dashboard', { tags: ['@supervision', '@supervision-regression', '@client-dashboard'] }, () => {
