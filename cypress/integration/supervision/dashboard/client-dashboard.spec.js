@@ -21,5 +21,6 @@ describe('Viewing the client dashboard', { tags: ['@supervision', '@supervision-
         cy.visit('/supervision#/clients/' + clientId);
       });
       cy.get('.title-person-name').contains('Ted Tedson');
-    });
+    }
+  );
 });
