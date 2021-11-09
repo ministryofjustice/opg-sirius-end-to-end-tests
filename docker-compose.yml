@@ -3,12 +3,15 @@ version: "3.6"
 
 services:
   cypress:
+    image: sirius/end-to-end-tests:latest
     build:
       context: .
       dockerfile: Dockerfile
-    command: [ "--headless", "-b", "chrome"]
     volumes:
       - "./cypress:/root/cypress"
+      - "./cypress.json:/root/cypress.json"
+      - "./test-results:/test-results"
+    command: [ "--headless", "-b", "chrome"]
 
 networks:
   default:
