@@ -39,42 +39,47 @@ before(function setupAllocatedClient () {
     .then(allocateTheClientToHWTeam);
 });
 
-describe('Reassign client on the dashboard', { tags: ['@supervision', '@supervision-regression', '@xxx'] }, () => {
-  it(
-    'Given I\'m a Case Manager on Supervision and on the client dashboard page' +
-    'Then the Client Dashboard page loads as expected',
-    () => {
-      cy.loginAs('Lay User');
-      cy.visit('/supervision/#/dashboard');
-      cy.get('li[class="tab-container__tab TABS_CLIENTS"]').click();
+describe(
+  'Reassign client on the dashboard',
+  { tags: ['@supervision', '@supervision-core', '@supervision-regression', '@reassign-client-dashboard', '@smoke-journey'] },
+  () => {
+    it(
+      'Given I\'m a Case Manager on Supervision and on the client dashboard page' +
+      'Then the Client Dashboard page loads as expected',
+      () => {
+        cy.loginAs('Lay User');
+        cy.visit('/supervision/#/dashboard');
 
-      cy.get('[data-role="main-filter-base-dropdown"]')
-       .find('select')
-       .select('AnotherTeam');
+        cy.get('li[class="tab-container__tab TABS_CLIENTS"]').click();
 
-      cy.get('[data-role="main-filter-team-dropdown"]')
-        .find('select')
-        .select('Health & Welfare - (Supervision)');
+        cy.get('[data-role="main-filter-base-dropdown"]')
+         .find('select')
+         .select('AnotherTeam');
 
-      cy.get('[data-role="main-filter-apply-button"]').click({force: true});
+        cy.get('[data-role="main-filter-team-dropdown"]')
+          .find('select')
+          .select('Health & Welfare - (Supervision)');
 
-      cy.get('@courtReference').then(courtRef => {
-        cy.contains(courtRef).parents().find('[type="checkbox"]').check({force: true});
-      });
+        cy.get('[data-role="main-filter-apply-button"]').click({force: true});
 
-      cy.get('[data-role="reassign-filter-base-dropdown"]')
-        .find('select')
-        .select('MyTeam');
+        cy.get('@courtReference').then(courtRef => {
+          cy.contains(courtRef).parents().find('[type="checkbox"]').check({force: true});
+        });
 
-      cy.get('[data-role="reassign-filter-user-dropdown"]')
-        .find('select')
-        .select('LayTeam1 User14');
+        cy.get('[data-role="reassign-filter-base-dropdown"]')
+          .find('select')
+          .select('MyTeam');
 
-      cy.get('[data-role="reassign-filter-reassign-button"]').click({force: true});
+        cy.get('[data-role="reassign-filter-user-dropdown"]')
+          .find('select')
+          .select('LayTeam1 User14');
 
-      cy.contains('Yes, reassign').click();
+        cy.get('[data-role="reassign-filter-reassign-button"]').click({force: true});
 
-      cy.contains('Client(s) reassigned successfully');
-    }
-  );
-});
+        cy.contains('Yes, reassign').click();
+
+        cy.contains('Client(s) reassigned successfully');
+      }
+    );
+  }
+);
