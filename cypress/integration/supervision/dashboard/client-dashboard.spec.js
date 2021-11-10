@@ -20,7 +20,7 @@ describe('Viewing the client dashboard', { tags: ['@supervision', '@supervision-
       cy.get('@clientId').then(clientId => {
         cy.visit('/supervision#/clients/' + clientId);
       });
-      cy.get('.title-person-name').contains('Ted Tedson');
+      cy.get('.title-person-name', {timeout: 30000}).contains('Ted Tedson');
     }
   );
 });
