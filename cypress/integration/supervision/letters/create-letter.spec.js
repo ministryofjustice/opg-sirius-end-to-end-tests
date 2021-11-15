@@ -22,13 +22,20 @@ const createOrder = () => {
 };
 
 const getIframeDocument = () => {
-  return cy.get('iframe').its('0.contentDocument').should('exist')
+  return cy.get('iframe[id="editor_ifr"]', {timeout:60000}).its('0.contentDocument').should('exist')
 }
 
 const getIframeBody = () => {
   return getIframeDocument().its('body').should('not.be.undefined').then(cy.wrap)
 }
 
+const getRecipientHeader = () => {
+  return cy.get('.smart__action > ng-component:nth-child(2) > div:nth-child(1) > draft-select-recipients:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1)', {timeout: 30000});
+}
+
+const getFirstSelectableRecipient = () => {
+  return cy.get('li.selectable-list-item > draft-recipient:nth-child(1) > label:nth-child(1)', {timeout: 30000});
+}
 
 before(function setupAllocatedClient () {
   cy.loginAs('Allocations User')
@@ -44,7 +51,7 @@ beforeEach(function navigateToClient () {
 
 describe('Creating, editing and retrieving a letter', { tags: ['@supervision', '@supervision-regression', '@letter'] }, () => {
   it(
-    'Given I\'m a Case Manager on Supervision' +
+    'Given I\'m a Case Manager on Supervision creating a letter template' +
     'Then the letter is edited as expected',
     () => {
       cy.get('.title-person-name', {timeout: 30000}).contains('Ted Tedson');
@@ -56,40 +63,24 @@ describe('Creating, editing and retrieving a letter', { tags: ['@supervision', '
       });
 
       cy.get('.select-template', {timeout: 30000}).contains('Select a template');
+      cy.contains('blank: Blank template').click();
 
-      cy.get('div.document-item:nth-child(1) > button:nth-child(1) > span:nth-child(1)').click();
-
-      cy.get('.smart__action > ng-component:nth-child(2) > div:nth-child(1) > draft-select-recipients:nth-child(1) > div:nth-child(1) > div:nth-child(1) > h2:nth-child(1)', {timeout: 30000}).contains('Select recipient/s');
-
-      cy.get('li.selectable-list-item > draft-recipient:nth-child(1) > label:nth-child(1)').click();
+      getRecipientHeader().contains('Select recipient/s');
+      getFirstSelectableRecipient().click();
 
       cy.get('#create-letter-button').click();
-
       cy.get('#preview-publish-button', {timeout:30000}).contains('Preview & publish');
-
       cy.get('.document-editor__sub-title', {timeout:30000}).contains('Edit document...');
 
-      // errors - screenshot shows empty editor
-      // cy.get("iframe").then( $iframe => {
-      //   const $body = $element.contents().find('body');
-      //   cy.wrap( $body.find('#content')).clear({force:true}); //errors //screenshot clears editor
-      // });
-
-      // getIframeBody().clear(); //errors
-      // getIframeBody().find("p").should('exist'); //doesn't exist
-      // getIframeBody().find("h2").type("Test");
-      // getIframeBody().find("p").type("Test Blog Entry");
-
-      //errors, no text added but cleared editor
-      // cy.setTinyMceContent('#editor_ifr', 'User added text');
+      getIframeBody().find("section").clear();
+      getIframeBody().find("p").type("My test letter content");
 
       cy.get('#save-draft-and-exit-button').click();
       cy.get('#publish-close-button', {timeout:30000}).click();
-
-      cy.get('#retrieve-drafts-button', {timeout:30000}).click();
+      cy.get('#retrieve-drafts-button', {timeout:30000}).should('not.be.disabled').click();
       cy.get('#preview-publish-button', {timeout:30000}).contains('Preview & publish');
 
-      // cy.getTinyMce('#editor_ifr').contains('User added text');
+      getIframeBody().contains("My test letter content");
     }
   );
 });

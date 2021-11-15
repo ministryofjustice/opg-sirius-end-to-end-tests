@@ -78,16 +78,3 @@ Cypress.Commands.add('postToApi', (url, data) => {
 Cypress.Commands.add('putToApi', (url, data) => {
   cy.sendToApi('PUT', url, data);
 });
-
-// Cypress.Commands.add('getTinyMce', (tinyMceId) => {
-//   cy.window().then((win) => {
-//     return win.tinymce.editors[tinyMceId];
-//   });
-// });
-//
-// Cypress.Commands.add('setTinyMceContent', (tinyMceId, content) => {
-//   cy.window().then((win) => {
-//     const editor = win.tinymce.editors[tinyMceId];
-//     editor.setContent(content);
-//   });
-// });
