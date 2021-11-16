@@ -22,7 +22,7 @@ const createOrder = () => {
 };
 
 const getIframeDocument = () => {
-  return cy.get('iframe[id="editor_ifr"]', {timeout:60000}).its('0.contentDocument').should('exist')
+  return cy.get('iframe[id="editor_ifr"]', {timeout:30000}).its('0.contentDocument').should('exist')
 }
 
 const getIframeBody = () => {
