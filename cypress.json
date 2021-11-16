@@ -1,6 +1,7 @@
 {
   "baseUrl": "http://frontend-proxy",
   "reporter": "junit",
+  "chromeWebSecurity": false,
   "reporterOptions": {
     "mochaFile": "/test-results/junit-[hash].xml",
     "toConsole": false
