@@ -3,7 +3,6 @@
   "reporter": "junit",
   "chromeWebSecurity": false,
   "reporterOptions": {
-    "mochaFile": "/test-results/junit-[hash].xml",
-    "toConsole": false
+    "mochaFile": "/test-results/junit-[hash].xml"
   }
 }
