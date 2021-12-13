@@ -18,7 +18,7 @@ describe('Viewing the client dashboard', { tags: ['@supervision', '@supervision-
     'Then the Client Dashboard page loads as expected',
     () => {
       cy.get('@clientId').then(clientId => {
-        cy.visit('/supervision#/clients/' + clientId);
+        cy.visit('/supervision/#/clients/' + clientId);
       });
       cy.get('.title-person-name', {timeout: 30000}).contains('Ted Tedson');
     }
