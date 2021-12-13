@@ -1,7 +1,9 @@
-FROM cypress/included:8.3.1
-RUN npm install "cypress-grep"
+FROM cypress/included:9.1.1
 
 WORKDIR /root
+
+RUN npm install "cypress-grep"
+RUN npm install "cypress-failed-log"
 
 ENV CYPRESS_VIDEO=false
 
