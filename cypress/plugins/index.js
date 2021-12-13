@@ -16,4 +16,8 @@
  */
 module.exports = (on, config) => {
   require('cypress-grep/src/plugin')(config);
+
+  on('task', {
+    failed: require('cypress-failed-log/src/failed')(),
+  })
 };
