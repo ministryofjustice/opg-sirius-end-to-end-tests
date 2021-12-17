@@ -2,8 +2,6 @@ FROM cypress/included:9.1.1
 
 WORKDIR /root
 
-RUN apt-get update
-RUN apt-get upgrade -y
 RUN npm install "cypress-grep"
 RUN npm install "cypress-failed-log"
 
