@@ -4,8 +4,9 @@ WORKDIR /root
 
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN npm install "cypress-grep"
-RUN npm install "cypress-failed-log"
+
+RUN npm install "cypress-grep@2.12.0"
+RUN npm install "cypress-failed-log@2.9.2"
 
 ENV CYPRESS_VIDEO=false
 
