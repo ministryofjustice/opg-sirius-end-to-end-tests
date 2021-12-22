@@ -8,8 +8,8 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - "./cypress:/root/cypress"
-      - "./cypress.json:/root/cypress.json"
+      - "./cypress:/home/node/cypress"
+      - "./cypress.json:/home/node/cypress.json"
       - "./test-results:/test-results"
     command: [ "--headless", "-b", "chrome"]
 
