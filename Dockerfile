@@ -58,6 +58,7 @@ ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 
 # add codecs needed for video playback in firefox
 # https://github.com/cypress-io/cypress-docker-images/issues/150
+# We don't use video so disabling until we need it
 #RUN apt-get install mplayer -y
 
 # install Firefox browser
@@ -77,25 +78,16 @@ ENV QT_X11_NO_MITSHM=1
 ENV _X11_NO_MITSHM=1
 ENV _MITSHM=0
 
-# point Cypress at the /root/cache no matter what user account is used
-# see https://on.cypress.io/caching
-ENV CYPRESS_CACHE_FOLDER=/root/.cache/Cypress
 RUN npm install -g "cypress@9.1.1"
-RUN cypress verify
 
-# Cypress cache and installed version
-# should be in the root user's home folder
-RUN cypress cache path
-RUN cypress cache list
-RUN cypress info
-RUN cypress version
+RUN mv /root/.cache /home/node/.cache
+RUN chown -R node /home/node
+RUN mkdir /test-results
+RUN chown node /test-results
 
-# give every user read access to the "/root" folder where the binary is cached
-# we really only need to worry about the top folder, fortunately
-RUN ls -la /root
-RUN chmod 755 /root
+USER node
 
-WORKDIR /root
+WORKDIR /home/node
 
 RUN npm install "cypress-grep@2.12.0"
 RUN npm install "cypress-failed-log@2.9.2"
@@ -104,5 +96,9 @@ ENV CYPRESS_VIDEO=false
 
 COPY cypress.json cypress.json
 COPY cypress cypress
+
+ENV CYPRESS_CACHE_FOLDER=/home/node/.cache/Cypress
+
+RUN cypress verify
 
 ENTRYPOINT ["cypress", "run"]
