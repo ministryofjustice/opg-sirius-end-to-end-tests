@@ -1,5 +1,9 @@
 FROM node:16-buster-slim
 
+#based on the official cypress image, but flattened to reduce duplication and
+#using -slim rather than buster to reduce size and a non-root user to run tests
+#uses the chrome stable repo
+
 RUN apt-get update && apt-get upgrade && \
   apt-get install --no-install-recommends -y \
   bzip2 \
@@ -30,6 +34,7 @@ ENV npm_config_unsafe_perm true
 RUN node -p process.versions
 
 # Install deps + add Chrome Stable + purge all the things
+#from https://hub.docker.com/r/justinribeiro/chrome-headless/dockerfile/
 RUN apt-get update && apt-get install -y \
 	apt-transport-https \
 	ca-certificates \
