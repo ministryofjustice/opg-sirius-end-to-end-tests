@@ -1,4 +1,5 @@
 Cypress.Commands.add("login", (email, password) => {
+  cy.visit('/auth/logout');
   cy.clearCookies();
 
   cy.request({

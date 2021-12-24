@@ -1,4 +1,5 @@
 require('./commands');
+require('./client-commands');
 
 require('cypress-grep')();
 require('cypress-failed-log');
