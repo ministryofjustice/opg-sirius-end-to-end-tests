@@ -1,13 +1,3 @@
-const createClient = () => {
-  return cy.fixture('client/minimal.json').then(client => {
-    cy.postToApi('/api/v1/clients', client)
-      .its('body')
-      .then(res => {
-        cy.wrap(res.id).as('clientId');
-      });
-  });
-};
-
 const createOrder = () => {
   return cy.get('@clientId').then(clientId => {
     cy.fixture('order/minimal.json').then(order => {
@@ -38,9 +28,9 @@ const getFirstSelectableRecipient = () => {
 }
 
 before(function setupAllocatedClient () {
-  cy.loginAs('Allocations User')
-    .then(createClient)
-    .then(createOrder)
+  cy.loginAs('Allocations User');
+  cy.createAClient()
+    .then(createOrder);
 });
 
 beforeEach(function navigateToClient () {
