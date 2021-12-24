@@ -1,14 +1,3 @@
-const createClient = () => {
-  return cy.fixture('client/minimal.json').then(client => {
-    cy.postToApi('/api/v1/clients', client)
-      .its('body')
-      .then(res => {
-        cy.wrap(res.caseRecNumber).as('courtReference');
-        cy.wrap(res.id).as('clientId');
-      });
-  });
-};
-
 const allocateTheClientToHWTeam = () => {
   cy.request({
     url: '/api/v1/teams',
@@ -34,8 +23,8 @@ const allocateTheClientToHWTeam = () => {
 }
 
 before(function setupAllocatedClient () {
-  cy.loginAs('Allocations User')
-    .then(createClient)
+  cy.loginAs('Allocations User');
+  cy.createAClient()
     .then(allocateTheClientToHWTeam);
 });
 
@@ -62,7 +51,7 @@ describe(
 
         cy.get('[data-role="main-filter-apply-button"]').click({force: true});
 
-        cy.get('@courtReference').then(courtRef => {
+        cy.get('@clientCourtReference').then(courtRef => {
           cy.contains(courtRef).parents().find('[type="checkbox"]').check({force: true});
         });
 
