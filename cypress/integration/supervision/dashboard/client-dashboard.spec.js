@@ -1,26 +1,19 @@
-before(() => {
+beforeEach(() => {
   cy.loginAs('Case Manager');
-});
+  cy.createAClient();
 
-beforeEach(function createClient () {
-  cy.fixture('client/minimal.json').then(client => {
-    cy.postToApi('/api/v1/clients', client)
-      .its('body')
-      .then(res => {
-          cy.wrap(res.id).as('clientId');
-      });
+  cy.get('@clientId').then(clientId => {
+    cy.visit('/supervision/#/clients/' + clientId);
   });
 });
 
 describe('Viewing the client dashboard', { tags: ['@supervision', '@supervision-regression', '@client-dashboard'] }, () => {
-  it(
-    'Given I\'m a Case Manager on Supervision and on the client dashboard page' +
-    'Then the Client Dashboard page loads as expected',
-    () => {
-      cy.get('@clientId').then(clientId => {
-        cy.visit('/supervision/#/clients/' + clientId);
-      });
-      cy.get('.title-person-name', {timeout: 30000}).contains('Ted Tedson');
-    }
-  );
+  it('should load the client dashboard', () => {
+    cy.contains('.title-person-name', 'Ted Tedson', {timeout: 30000});
+  });
+
+  it('should navigate to the Edit Client page when the edit button is clicked', () => {
+    cy.contains('Edit client', {timeout: 30000}).click();
+    cy.contains('Edit Client: Ted Tedson');
+  });
 });
