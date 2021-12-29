@@ -14,7 +14,7 @@ defaults:
 
 jobs:
   build:
-    name: "Build & Push Containers"
+    name: "Build, Test and Push Container"
     runs-on: ubuntu-latest
     outputs:
       branch: ${{ steps.set-outputs.outputs.branch }}
@@ -23,6 +23,24 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: '0'
+          path: main
+
+      - name: Checkout Sirius
+        uses: actions/checkout@v2
+        with:
+          repository: ministryofjustice/opg-sirius
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: sirius
+
+      - name: Build Container
+        run: |
+          docker build --tag sirius/end-to-end-tests:latest -f Dockerfile .
+
+      - name: Test
+        run: |
+          docker compose up
+
       - name: Extract branch name
         run: |
           if [ "$GITHUB_EVENT_NAME" == "push" ]; then
@@ -33,9 +51,6 @@ jobs:
         id: extract_branch
       - uses: unfor19/install-aws-cli-action@v1
 
-      - name: Build Container
-        run: |
-          docker build --tag sirius/end-to-end-tests:latest -f Dockerfile .
       - name: Scan
         run: |
           docker run --rm  -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy sirius/end-to-end-tests:latest
