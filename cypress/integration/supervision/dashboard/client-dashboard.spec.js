@@ -13,7 +13,7 @@ describe('Viewing the client dashboard', { tags: ['@supervision', '@supervision-
   });
 
   it('should navigate to the Edit Client page when the edit button is clicked', () => {
-    cy.contains('Edit client', {timeout: 30000}).click();
+    cy.contains('Edit client', {timeout: 30000}).should('be.visible').click();
     cy.contains('Edit Client: Ted Tedson');
   });
 });
