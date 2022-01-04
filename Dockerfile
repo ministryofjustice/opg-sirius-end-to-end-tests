@@ -4,7 +4,7 @@ FROM node:16-bullseye-slim
 #using -slim rather than buster to reduce size and a non-root user to run tests
 #uses the chrome stable repo
 
-RUN apt-get update && apt-get upgrade && \
+RUN apt-get update && apt-get upgrade -y && \
   apt-get install --no-install-recommends -y \
   bzip2 \
   libgtk2.0-0 \
