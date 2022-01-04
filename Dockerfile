@@ -83,7 +83,7 @@ ENV QT_X11_NO_MITSHM=1
 ENV _X11_NO_MITSHM=1
 ENV _MITSHM=0
 
-RUN npm install -g "cypress@9.1.1"
+RUN npm install -g "cypress@9.2.0"
 
 RUN mv /root/.cache /home/node/.cache
 RUN chown -R node /home/node
