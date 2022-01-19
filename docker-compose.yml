@@ -12,6 +12,8 @@ services:
       - "./cypress.json:/home/node/cypress.json"
       - "./test-results:/test-results"
     command: [ "--headless", "-b", "chrome"]
+    environment:
+      - CYPRESS_VIDEO=true
 
 networks:
   default:
