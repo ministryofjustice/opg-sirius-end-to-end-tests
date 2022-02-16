@@ -38,7 +38,7 @@ jobs:
           docker build --tag sirius/end-to-end-tests:latest -f Dockerfile .
       - name: Scan
         run: |
-          docker run --rm  -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy sirius/end-to-end-tests:latest
+          docker run --rm  -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image sirius/end-to-end-tests:latest
 
       - name: Bump version
         id: bump_version
