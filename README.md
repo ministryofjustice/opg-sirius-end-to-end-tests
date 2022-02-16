@@ -10,7 +10,7 @@ Specifics on migration from our old UI tests [here](/docs/Migration.md)
 
 Ensure Sirius is running
 
-Usually something like
+Usually something like:
 
 ```shell
 (cd ../opg-sirius && make dev-up)
