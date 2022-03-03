@@ -14,7 +14,7 @@ defaults:
 
 jobs:
   build:
-    name: "Build & Push Containers"
+    name: "Build, Test & Push Containers"
     runs-on: ubuntu-latest
     outputs:
       branch: ${{ steps.set-outputs.outputs.branch }}
@@ -39,6 +39,28 @@ jobs:
       - name: Scan
         run: |
           docker run --rm  -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image sirius/end-to-end-tests:latest
+
+      - name: Checkout Sirius
+        uses: snow-actions/sparse-checkout@v1.1.0
+        with:
+          repository: ministryofjustice/opg-sirius
+          ref: master
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: sirius
+          patterns: |
+            Makefile*
+            docker-compose*
+            **/docker-compose.env
+            scripts/localstack/**
+            scripts/localstack-s3/**
+            ci/**
+
+      - name: Standup Sirius
+        working-directory: sirius
+        run: make dev-up
+
+      - name: Test
+        run: docker-compose up cypress
 
       - name: Bump version
         id: bump_version
