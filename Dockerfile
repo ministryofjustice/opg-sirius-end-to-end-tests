@@ -96,6 +96,7 @@ WORKDIR /home/node
 
 RUN npm install "cypress-grep@2.12.0"
 RUN npm install "cypress-failed-log@2.9.2"
+RUN npm install "cypress-iframe@1.0.1"
 
 ENV CYPRESS_VIDEO=false
 
