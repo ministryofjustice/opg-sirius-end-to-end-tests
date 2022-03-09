@@ -2,6 +2,7 @@
   "baseUrl": "http://frontend-proxy",
   "reporter": "junit",
   "chromeWebSecurity": false,
+  "modifyObstructiveCode": false,
   "reporterOptions": {
     "mochaFile": "/test-results/junit-[hash].xml"
   }
