@@ -1,3 +1,5 @@
+require('cypress-iframe');
+
 Cypress.Commands.add("login", (email, password) => {
   cy.visit('/auth/logout');
   cy.clearCookies();
@@ -16,7 +18,7 @@ Cypress.Commands.add("login", (email, password) => {
 });
 
 Cypress.Commands.add("loginAs", (user) => {
-  const userFiles =  {
+  const userFiles = {
     'Allocations User': 'user/allocations.json',
     'Case Manager': 'user/case-manager.json',
     'LPA Manager': 'user/lpa-manager.json',
