@@ -1,8 +1,8 @@
 describe("Create LPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
   beforeEach(() => {
     cy.loginAs("LPA Manager");
-    cy.createDonor().then((donorId) => {
-      cy.wrap(donorId).as("donorId");
+    cy.createDonor().then(({ id }) => {
+      cy.wrap(id).as("donorId");
     });
   });
 
@@ -83,10 +83,10 @@ describe("Create LPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
 });
 
 describe("Edit LPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
-  beforeEach(() => {
+  before(() => {
     cy.loginAs("LPA Manager");
-    cy.createDonor().then((donorId) => {
-      cy.createLpa(donorId).then((lpaId) => {
+    cy.createDonor().then(({ id: donorId }) => {
+      cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.wrap(donorId).as("donorId");
         cy.wrap(lpaId).as("lpaId");
       });
