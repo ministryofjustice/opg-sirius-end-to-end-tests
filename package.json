@@ -1,0 +1,29 @@
+{
+  "name": "opg-sirius-end-to-end-tests",
+  "version": "1.0.0",
+  "description": "End-to-end tests for the components that make up Sirius: Managed by opg-org-infra &amp; Terraform",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ministryofjustice/opg-sirius-end-to-end-tests.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ministryofjustice/opg-sirius-end-to-end-tests/issues"
+  },
+  "homepage": "https://github.com/ministryofjustice/opg-sirius-end-to-end-tests#readme",
+  "dependencies": {
+    "cypress": "^9.2.0",
+    "cypress-failed-log": "^2.9.2",
+    "cypress-grep": "^2.12.0",
+    "cypress-iframe": "^1.0.1"
+  }
+}

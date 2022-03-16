@@ -1,8 +1,8 @@
 describe('Create a warning', { tags: ["@lpa", "@smoke-journey"] }, () => {
   before(() => {
     cy.loginAs('LPA Manager');
-    cy.createDonor().then((donorId) => {
-      cy.createLpa(donorId).then((lpaId) => {
+    cy.createDonor().then(({ id: donorId }) => {
+      cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
       });
     });
