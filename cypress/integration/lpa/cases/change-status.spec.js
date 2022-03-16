@@ -1,7 +1,7 @@
 before(() => {
   cy.loginAs("LPA Manager");
-  cy.createDonor().then((donorId) => {
-    cy.createLpa(donorId).then((lpaId) => {
+  cy.createDonor().then(({ id: donorId }) => {
+    cy.createLpa(donorId).then(({ id: lpaId }) => {
       cy.wrap(donorId).as("donorId");
       cy.wrap(lpaId).as("lpaId");
     });
