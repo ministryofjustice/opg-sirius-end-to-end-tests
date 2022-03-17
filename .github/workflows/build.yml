@@ -35,7 +35,8 @@ jobs:
 
       - name: Build Container
         run: |
-          docker build --tag sirius/end-to-end-tests:latest -f Dockerfile .
+          make build
+
       - name: Scan
         run: |
           docker run --rm  -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image sirius/end-to-end-tests:latest
@@ -66,6 +67,27 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
         with:
           registries: 311462405659
+
+      - name: Run Tests against local Sirius
+        run: |
+          make unpack-sirius-components
+          make pull-sirius-containers
+          make start-sirius
+          make local-end-to-end-tests
+          make stop-sirius
+
+      - name: Upload Logs & Screenshots
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: Test Logs & Screenshots
+          path: artifacts/end-to-end-results/
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: "artifacts/test-results/*.xml"
 
       - name: Push Container
         env:
