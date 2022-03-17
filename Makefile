@@ -14,10 +14,11 @@ unpack-sirius-components:
 	docker kill build-artifacts
 
 pull-sirius-containers:
-	cd artifacts && docker-compose pull --include-deps frontend-proxy
+	cd artifacts && docker-compose pull --quiet --include-deps frontend-proxy
 
 start-sirius:
 	cd artifacts && make import-fixtures
+	cd artifacts && docker-compose stop queue
 
 local-end-to-end-tests:
 	mkdir -p -m777 artifacts/end-to-end-results/logs
