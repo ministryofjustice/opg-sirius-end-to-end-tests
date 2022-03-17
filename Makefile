@@ -8,8 +8,8 @@ scan:
 	trivy image sirius/end-to-end-tests:latest
 
 unpack-sirius-components:
-	docker image pull 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/build-artifacts:v6.77.0-SW-5434.2
-	docker run --rm -d -i --name build-artifacts 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/build-artifacts:v6.77.0-SW-5434.2
+	docker image pull 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/build-artifacts:latest
+	docker run --rm -d -i --name build-artifacts 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/build-artifacts:latest
 	docker cp build-artifacts:/artifacts .
 	docker kill build-artifacts
 
