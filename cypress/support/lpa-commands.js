@@ -11,3 +11,10 @@ Cypress.Commands.add("createLpa", (donorId) =>
       cy.postToApi(`/api/v1/donors/${donorId}/lpas`, lpa).its("body")
     )
 );
+
+Cypress.Commands.add("createDraft", (donorId, lpaId) =>
+  cy.postToApi(
+    `/api/v1/lpas/${lpaId}/documents/draft`,
+    `{"templateId": "IT-AT-LPA", "inserts": ["IT-11"], "correspondentId": ${donorId}}`,
+  ).its("body")
+);
