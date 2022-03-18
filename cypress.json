@@ -3,6 +3,8 @@
   "reporter": "junit",
   "chromeWebSecurity": false,
   "modifyObstructiveCode": false,
+  "viewportHeight": 1080,
+  "viewportWidth": 1920,
   "reporterOptions": {
     "mochaFile": "/test-results/junit-[hash].xml"
   }
