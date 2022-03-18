@@ -13,7 +13,7 @@ describe("Create EPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.get(".action-widget-content").within(() => {
       cy.get("#epaDonorSignatureDate0").type("21/09/2007");
-      cy.get("#epaDonorNoticeGivenDate0").type("21/09/2007");
+      cy.get("#epaDonorNoticeGivenDate0").type("21/09/2007", { force: true });
 
       cy.contains(
         "To your knowledge, has the donor made any other Enduring Powers of Attorney?"
