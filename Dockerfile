@@ -83,20 +83,17 @@ ENV QT_X11_NO_MITSHM=1
 ENV _X11_NO_MITSHM=1
 ENV _MITSHM=0
 
-RUN npm install -g "cypress@9.2.0"
-
-RUN mv /root/.cache /home/node/.cache
-RUN chown -R node /home/node
 RUN mkdir /test-results
 RUN chown node /test-results
 
-USER node
-
 WORKDIR /home/node
 
-RUN npm install "cypress-grep@2.12.0"
-RUN npm install "cypress-failed-log@2.9.2"
-RUN npm install "cypress-iframe@1.0.1"
+COPY --chown=node:node package.json package.json
+COPY --chown=node:node package-lock.json package-lock.json
+
+USER node
+
+RUN npm install
 
 ENV CYPRESS_VIDEO=false
 
@@ -105,6 +102,6 @@ COPY cypress cypress
 
 ENV CYPRESS_CACHE_FOLDER=/home/node/.cache/Cypress
 
-RUN cypress verify
+RUN npx cypress verify
 
-ENTRYPOINT ["cypress", "run"]
+ENTRYPOINT ["npx", "cypress", "run"]
