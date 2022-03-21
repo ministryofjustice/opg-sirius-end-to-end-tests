@@ -40,44 +40,4 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().should("contain", "explanations of any transactions that are not detailed in their financial records");
     });
   });
-
-  it("should publish and compare documents", function() {
-    cy.postToApi(
-      `/api/v1/lpas/${this.lpaId}/documents/draft`,
-      `{"templateId": "IT-AT-LPA", "inserts": ["IT-11"], "correspondentId": ${this.donorId}}`,
-    );
-
-    cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
-    cy.wait(["@casesRequest", "@eventsRequest", "@draftCountRequest"]);
-    cy.wait("@draftCountRequest");
-
-    cy.get("#RetrieveDraft").not('have.class', 'disabled');
-    cy.get("#RetrieveDraft").click();
-    cy.wait("@getDocumentRequest");
-
-    cy.frameLoaded(".tox-edit-area__iframe");
-    cy.enter(".tox-edit-area__iframe").then(getBody => {
-      getBody().should("contain", "Dear Sponge");
-      getBody().should("contain", "explanations of any transactions that are not detailed in their financial records");
-    });
-
-    cy.contains("Publish Draft").click();
-    cy.wait("@documentsRequest");
-    cy.wait("@eventsRequest");
-
-    cy.contains(".timeline-event", "Bob Sponge - Letter to attorney - LPA");
-
-    cy.get("button[title='Documents associated to this case']").click();
-    cy.wait("@documentsListRequest");
-    cy.contains(".document-list a", "Bob Sponge - Letter to attorney - LPA").click();
-
-    cy.wait("@documentGetRequest");
-    cy.frameLoaded(".doc-viewer iframe");
-    cy.contains("button", "Compare").click();
-    cy.wait("@documentsListRequest");
-
-    cy.get(".document-table tbody tr:first-child td:first-child a").click();
-    cy.wait("@documentGetRequest");
-    cy.frameLoaded(".doc-viewer:last-child iframe");
-  });
 });
