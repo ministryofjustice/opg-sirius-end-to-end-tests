@@ -51,7 +51,8 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.wait(["@casesRequest", "@eventsRequest", "@draftCountRequest"]);
     cy.wait("@draftCountRequest");
 
-    cy.get("#RetrieveDraft").not('have.class', 'disabled').click();
+    cy.get("#RetrieveDraft").not('have.class', 'disabled');
+    cy.get("#RetrieveDraft").click();
     cy.wait("@getDocumentRequest");
 
     cy.frameLoaded(".tox-edit-area__iframe");
