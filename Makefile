@@ -1,6 +1,8 @@
 SHELL = '/bin/bash'
 export DOCKER_BUILDKIT ?= 1
 
+all: build scan local-run
+
 build:
 	docker-compose build cypress
 
