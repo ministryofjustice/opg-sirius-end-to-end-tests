@@ -10,7 +10,6 @@ describe('Create an event', { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it('should show the event', () => {
     cy.intercept({ method: 'GET', url: '/api/v1/persons/*' }).as('personRequest');
-    cy.intercept({ method: 'GET', url: '/api/v1/persons/*/events?*' }).as('eventsRequest');
 
     cy.wait('@personRequest');
 
@@ -25,7 +24,6 @@ describe('Create an event', { tags: ["@lpa", "@smoke-journey"] }, () => {
     });
 
     cy.wait('@personRequest');
-    cy.wait('@eventsRequest').its('response.statusCode').should('equal', 200);
 
     cy.get('.timeline .timeline-event', { timeout: 10000 });
     cy.contains('.timeline-event', 'Application returned')
