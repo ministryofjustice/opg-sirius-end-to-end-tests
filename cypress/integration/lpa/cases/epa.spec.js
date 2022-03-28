@@ -20,7 +20,7 @@ describe("Create EPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
       )
         .closest("fieldset")
         .contains("Yes")
-        .click();
+        .click({ force: true });
 
       cy.contains("Save and Exit").click();
     });
