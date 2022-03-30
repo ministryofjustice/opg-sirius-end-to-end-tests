@@ -18,6 +18,8 @@ describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
     });
 
     cy.contains(/Person (\d+(-|)){3} was created/).click();
+
+    cy.get('.timeline .timeline-event', { timeout: 10000 });
     cy.get(".timeline-event").last().should("contain", "Person (Create / Edit)");
     cy.get(".timeline-event").last().should("contain", "Spongebob Squarepants");
   });
@@ -34,9 +36,8 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
   it("should change the donors firstname", function () {
     cy.visit(`/lpa/#/person/${this.donorId}`);
     cy.intercept({ method: 'GET', url: '/api/v1/persons/*' }).as('personRequest');
-    cy.intercept({ method: 'GET', url: '/api/v1/persons/*/warnings' }).as('warningsRequest');
 
-    cy.wait(['@personRequest', '@warningsRequest']);
+    cy.wait('@personRequest');
 
     cy.contains("Edit Donor").click();
     cy.get(".action-widget-content").within(() => {
@@ -45,7 +46,7 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
     });
 
     cy.wait('@personRequest');
-    
+
     cy.get('.timeline .timeline-event', { timeout: 10000 });
     cy.get(".timeline-event").first().should("contain", "First name: Bob changed to: Patrick");
   });
