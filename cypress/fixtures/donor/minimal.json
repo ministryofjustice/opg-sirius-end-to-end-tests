@@ -1,27 +1,5 @@
 {
   "personType": "Donor",
-  "salutation": "",
   "firstname": "Bob",
-  "middlenames": "",
-  "surname": "Sponge",
-  "otherNames": "",
-  "dob": "",
-  "dateOfDeath": "",
-  "previousNames": "",
-  "phoneNumber": "",
-  "email": "",
-  "maritalStatus": "",
-  "statusDate": "",
-  "correspondenceByPost": "",
-  "correspondenceByEmail": "",
-  "correspondenceByPhone": "",
-  "correspondenceByWelsh": "",
-  "addressLine1": "",
-  "addressLine2": "",
-  "addressLine3": "",
-  "town": "",
-  "postcode": "",
-  "county": "",
-  "country": "",
-  "isAirmailRequired": ""
+  "surname": "Sponge"
 }
