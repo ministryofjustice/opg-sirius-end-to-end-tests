@@ -1,5 +1,6 @@
 {
   "baseUrl": "http://frontend-proxy",
+  "defaultCommandTimeout": 60000,
   "reporter": "junit",
   "chromeWebSecurity": false,
   "modifyObstructiveCode": false,
