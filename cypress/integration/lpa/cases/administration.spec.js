@@ -29,7 +29,7 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
     cy.contains("Save and Exit").click();
 
     cy.wait("@putRequest");
-    cy.reload();
+    cy.reload(true);
     cy.wait("@eventsRequest");
 
     cy.get(".timeline-event")
@@ -42,7 +42,7 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
     cy.contains("Save and Exit").click();
 
     cy.wait("@putRequest");
-    cy.reload();
+    cy.reload(true);
     cy.wait("@eventsRequest");
 
     cy.get(".timeline-event")
