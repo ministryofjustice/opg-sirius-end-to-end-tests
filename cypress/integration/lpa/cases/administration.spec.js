@@ -24,7 +24,7 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
     cy.get("#receiptDate0:not([disabled])").type('01/02/2022');
     cy.contains("Save and Exit").click();
 
-    cy.wait("@eventsRequest");
+    cy.wait(["@eventsRequest", "@eventsRequest"]);
 
     cy.get(".timeline-event")
       .first()
@@ -34,7 +34,7 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
     cy.get("#receiptDate0:not([disabled])").clear().type('12/02/2022');
     cy.contains("Save and Exit").click();
 
-    cy.wait("@eventsRequest");
+    cy.wait(["@eventsRequest", "@eventsRequest"]);
 
     cy.get(".timeline-event")
       .first()
