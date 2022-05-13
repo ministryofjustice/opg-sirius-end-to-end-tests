@@ -21,6 +21,7 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
     );
 
     cy.wait("@eventsRequest");
+    cy.wait(2000);
 
     cy.get("uib-tab-heading[id=Administration]").contains("Administration").click();
 
@@ -28,6 +29,7 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
     cy.get("#receiptDate0:not([disabled])").type('01/02/2022');
     cy.contains("Save and Exit").click();
 
+    cy.wait(2000);
     cy.wait("@putRequest");
     cy.reload(true);
     cy.wait("@eventsRequest");
@@ -41,6 +43,7 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
     cy.get("#receiptDate0:not([disabled])").clear().type('12/02/2022');
     cy.contains("Save and Exit").click();
 
+    cy.wait(2000);
     cy.wait("@putRequest");
     cy.reload(true);
     cy.wait("@eventsRequest");
