@@ -28,6 +28,8 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
     cy.contains("Save and Exit").click();
 
     cy.wait(["@putRequest", "@eventsRequest"]);
+    cy.reload();
+    cy.wait(5000);
 
     cy.get(".timeline-event")
       .first()
