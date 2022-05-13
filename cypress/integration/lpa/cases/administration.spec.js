@@ -23,29 +23,15 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
     cy.wait("@eventsRequest");
 
     cy.get("uib-tab-heading[id=Administration]").contains("Administration").click();
-
     cy.contains("Edit Dates").click();
-    cy.get("#receiptDate0:not([disabled])").type('01/02/2022');
+    cy.get("#receiptDate0:not([disabled])").clear().type('06/04/2019');
     cy.contains("Save and Exit").click();
 
-    cy.wait("@putRequest");
-    cy.wait("@eventsRequest");
+    cy.wait(["@putRequest", "@eventsRequest"]);
 
     cy.get(".timeline-event")
       .first()
-      .contains("p", "Receipt date: 01/02/2022");
-
-    cy.get("uib-tab-heading[id=Administration]").contains("Administration").click();
-    cy.contains("Edit Dates").click();
-    cy.get("#receiptDate0:not([disabled])").clear().type('12/02/2022');
-    cy.contains("Save and Exit").click();
-
-    cy.wait("@putRequest");
-    cy.wait("@eventsRequest");
-
-    cy.get(".timeline-event")
-      .first()
-      .contains("p", "Receipt date: 01/02/2022 changed to: 12/02/2022");
+      .contains("p", "Receipt date: 02/04/2019 changed to: 06/04/2019");
   });
 });
 
