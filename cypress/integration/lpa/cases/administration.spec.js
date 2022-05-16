@@ -24,16 +24,16 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
 
     cy.get("uib-tab-heading[id=Administration]").contains("Administration").click();
     cy.contains("Edit Dates").click();
-    cy.get("#receiptDate0:not([disabled])").clear().type('06/04/2019');
+
+    cy.wait(500);
+    cy.get('#receiptDate0').clear().type('13/04/2019');
     cy.contains("Save and Exit").click();
 
     cy.wait(["@putRequest", "@eventsRequest"]);
-    cy.reload(true);
-    cy.wait(5000);
 
     cy.get(".timeline-event")
       .first()
-      .contains("p", "Receipt date: 02/04/2019 changed to: 06/04/2019");
+      .contains("p", "Receipt date: 02/04/2019 changed to: 13/04/2019");
   });
 });
 
