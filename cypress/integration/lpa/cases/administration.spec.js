@@ -22,6 +22,7 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
     cy.contains("Edit Dates").click();
 
     cy.wait("@casesRequest");
+    cy.wait(500);
 
     cy.get('#receiptDate0').clear().type('13/04/2019');
     cy.contains("Save and Exit").click();
