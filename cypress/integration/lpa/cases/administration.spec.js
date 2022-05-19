@@ -9,7 +9,7 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
     });
   });
 
-  it("should change the LPA receipt date", function () {
+  it("should change the LPA receipt date", function() {
     cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
 
     cy.intercept({ method: "GET", url: "/api/v1/persons/*/events*" }).as("eventsRequest");
@@ -28,9 +28,7 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
 
     cy.wait(["@putRequest", "@eventsRequest"]);
 
-    cy.get(".timeline-event")
-      .first()
-      .contains("p", "Receipt date: 02/04/2019 changed to: 13/04/2019");
+    cy.get(".timeline").contains(".timeline-event p", "Receipt date: 02/04/2019 changed to: 13/04/2019");
   });
 });
 
@@ -39,7 +37,7 @@ describe("Visit Admin Service", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.loginAs("LPA Manager");
   });
 
-  it("should take user to admin service", function () {
+  it("should take user to admin service", function() {
     cy.visit(`/lpa/home`);
 
     cy.contains("Admin").click();
