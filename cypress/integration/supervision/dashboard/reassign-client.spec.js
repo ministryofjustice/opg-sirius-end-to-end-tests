@@ -1,6 +1,6 @@
 const allocateTheClientToHWTeam = () => {
   cy.request({
-    url: '/api/v1/teams',
+    url: '/supervision-api/v1/teams',
     headers: {
       'accept': 'application/json',
       'opg-bypass-membrane': 1
@@ -17,7 +17,7 @@ const allocateTheClientToHWTeam = () => {
 
   cy.get('@hwTeamId').then(hwTeamId => {
     cy.get('@clientId').then(clientId => {
-      return cy.putToApi(`/api/v1/clients/${clientId}/edit/allocate`, `{"teamId":"${hwTeamId}"}`);
+      return cy.putToApi(`/supervision-api/v1/clients/${clientId}/edit/allocate`, `{"teamId":"${hwTeamId}"}`);
     });
   });
 }

@@ -12,9 +12,9 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
   it("should change the LPA receipt date", function() {
     cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
 
-    cy.intercept({ method: "GET", url: "/api/v1/persons/*/events*" }).as("eventsRequest");
-    cy.intercept({ method: "GET", url: "/api/v1/cases/*" }).as("casesRequest");
-    cy.intercept({ method: "PUT", url: "/api/v1/lpas/*" }).as("putRequest");
+    cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as("eventsRequest");
+    cy.intercept({ method: "GET", url: "/*/v1/cases/*" }).as("casesRequest");
+    cy.intercept({ method: "PUT", url: "/*/v1/lpas/*" }).as("putRequest");
 
     cy.wait("@eventsRequest");
 
