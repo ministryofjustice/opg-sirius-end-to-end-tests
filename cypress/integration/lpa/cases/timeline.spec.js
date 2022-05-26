@@ -10,7 +10,7 @@ describe("Timeline", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("should filter events", function () {
-    cy.intercept({ method: "GET", url: "/api/v1/persons/*/events*" }).as(
+    cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as(
       "eventsRequest"
     );
 

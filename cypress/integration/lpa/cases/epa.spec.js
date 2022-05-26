@@ -39,7 +39,7 @@ describe("Create EPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("should add an attorney to the EPA", function () {
-    cy.intercept({ method: "GET", url: "/api/v1/persons/*/events*" }).as(
+    cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as(
       "eventsRequest"
     );
     cy.visit(this.epaUrl);

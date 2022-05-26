@@ -12,10 +12,10 @@ describe("Link donors", { tags: ["@lpa", "@smoke-journey"] }, () => {
   it("should link 2 donors", function () {
     cy.intercept({
       method: "GET",
-      url: `/api/v1/persons/${this.primaryDonorId}`,
+      url: `/*/v1/persons/${this.primaryDonorId}`,
     }).as("donorRequest");
 
-    cy.intercept({ method: "GET", url: `/api/v1/persons/*/events*` }).as(
+    cy.intercept({ method: "GET", url: `/*/v1/persons/*/events*` }).as(
       "eventsRequest"
     );
 

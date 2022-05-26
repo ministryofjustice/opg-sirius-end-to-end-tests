@@ -9,7 +9,7 @@ describe('Create a task', { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it('should show the task', () => {
-    cy.intercept({ method: 'GET', url: '/api/v1/persons/*' }).as('personRequest');
+    cy.intercept({ method: 'GET', url: '/*/v1/persons/*' }).as('personRequest');
 
     cy.wait('@personRequest');
 

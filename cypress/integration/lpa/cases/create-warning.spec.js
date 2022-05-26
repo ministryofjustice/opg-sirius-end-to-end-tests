@@ -9,8 +9,8 @@ describe('Create a warning', { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it('should show the warning and a timeline event', () => {
-    cy.intercept({ method: 'GET', url: '/api/v1/persons/*' }).as('personRequest');
-    cy.intercept({ method: 'GET', url: '/api/v1/persons/*/warnings' }).as('warningsRequest');
+    cy.intercept({ method: 'GET', url: '/*/v1/persons/*' }).as('personRequest');
+    cy.intercept({ method: 'GET', url: '/*/v1/persons/*/warnings' }).as('warningsRequest');
 
     cy.wait(['@personRequest', '@warningsRequest']);
 
