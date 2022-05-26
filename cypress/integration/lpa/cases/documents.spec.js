@@ -1,15 +1,15 @@
 describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
   beforeEach(() => {
-    cy.intercept({ method: "GET", url: "/api/v1/persons/*/cases" }).as("casesRequest");
-    cy.intercept({ method: "GET", url: "/api/v1/templates/lpa" }).as("templatesRequest");
-    cy.intercept({ method: "GET", url: "/api/v1/lpas/*/draft-count" }).as("draftCountRequest");
-    cy.intercept({ method: "POST", url: "/api/v1/lpas/*/documents" }).as("documentsRequest");
-    cy.intercept({ method: "GET", url: "/api/v1/lpas/*/documents" }).as("getDocumentRequest");
-    cy.intercept({ method: "POST", url: "/api/v1/lpas/*/documents/draft" }).as("draftRequest");
-    cy.intercept({ method: "GET", url: "/api/v1/persons/*/events?*" }).as("eventsRequest");
-    cy.intercept({ method: "GET", url: "/api/v1/persons/*/documents?*" }).as("documentsListRequest");
-    cy.intercept({ method: "HEAD", url: "/api/v1/documents/*/download" }).as("documentDownloadRequest");
-    cy.intercept({ method: "GET", url: "/api/v1/documents/*" }).as("documentGetRequest");
+    cy.intercept({ method: "GET", url: "/*/v1/persons/*/cases" }).as("casesRequest");
+    cy.intercept({ method: "GET", url: "/*/v1/templates/lpa" }).as("templatesRequest");
+    cy.intercept({ method: "GET", url: "/*/v1/lpas/*/draft-count" }).as("draftCountRequest");
+    cy.intercept({ method: "POST", url: "/*/v1/lpas/*/documents" }).as("documentsRequest");
+    cy.intercept({ method: "GET", url: "/*/v1/lpas/*/documents" }).as("getDocumentRequest");
+    cy.intercept({ method: "POST", url: "/*/v1/lpas/*/documents/draft" }).as("draftRequest");
+    cy.intercept({ method: "GET", url: "/*/v1/persons/*/events?*" }).as("eventsRequest");
+    cy.intercept({ method: "GET", url: "/*/v1/persons/*/documents?*" }).as("documentsListRequest");
+    cy.intercept({ method: "HEAD", url: "/*/v1/documents/*/download" }).as("documentDownloadRequest");
+    cy.intercept({ method: "GET", url: "/*/v1/documents/*" }).as("documentGetRequest");
 
     cy.loginAs("LPA Manager");
     cy.createDonor().then(({ id: donorId }) => {

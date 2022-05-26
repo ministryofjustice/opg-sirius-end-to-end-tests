@@ -5,7 +5,7 @@ describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("should create a new donor", function () {
-    cy.intercept({ method: 'GET', url: '/api/v1/assignees/*/tasks*' }).as('tasksRequest');
+    cy.intercept({ method: 'GET', url: '/*/v1/assignees/*/tasks*' }).as('tasksRequest');
     cy.wait('@tasksRequest');
 
     cy.get("uib-tab-heading[id=Timeline]").contains("Timeline").click();
@@ -35,7 +35,7 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it("should change the donors firstname", function () {
     cy.visit(`/lpa/#/person/${this.donorId}`);
-    cy.intercept({ method: 'GET', url: '/api/v1/persons/*' }).as('personRequest');
+    cy.intercept({ method: 'GET', url: '/*/v1/persons/*' }).as('personRequest');
 
     cy.wait('@personRequest');
 
