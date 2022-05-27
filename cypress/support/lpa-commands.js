@@ -11,3 +11,11 @@ Cypress.Commands.add("createLpa", (donorId) =>
       cy.postToApi(`/api/v1/donors/${donorId}/lpas`, lpa).its("body")
     )
 );
+
+Cypress.Commands.add("createEpa", (donorId) =>
+  cy
+    .fixture("epa/minimal.json")
+    .then((lpa) =>
+      cy.postToApi(`/api/v1/donors/${donorId}/epas`, lpa).its("body")
+    )
+);
