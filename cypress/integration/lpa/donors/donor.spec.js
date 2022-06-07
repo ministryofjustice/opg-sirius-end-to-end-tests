@@ -20,8 +20,8 @@ describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.contains(/Person (\d+(-|)){3} was created/).click();
 
     cy.get('.timeline .timeline-event', { timeout: 10000 });
-    cy.get(".timeline-event").last().should("contain", "Person (Create / Edit)");
-    cy.get(".timeline-event").last().should("contain", "Spongebob Squarepants");
+    cy.contains(".timeline-event", "Person (Create / Edit)");
+    cy.contains(".timeline-event", "Spongebob Squarepants");
   });
 });
 
@@ -48,6 +48,6 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.wait('@personRequest');
 
     cy.get('.timeline .timeline-event', { timeout: 10000 });
-    cy.get(".timeline-event").first().should("contain", "First name: Bob changed to: Patrick");
+    cy.contains(".timeline-event", "First name: Bob changed to: Patrick");
   });
 });
