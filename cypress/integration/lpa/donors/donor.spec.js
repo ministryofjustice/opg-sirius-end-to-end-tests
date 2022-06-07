@@ -47,7 +47,7 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.wait('@personRequest');
 
-    cy.get('.timeline .timeline-event', { timeout: 10000 });
-    cy.contains(".timeline-event", "First name: Bob changed to: Patrick");
+    cy.get('.timeline-event').contains("First name: Bob changed to: Patrick", { timeout: 20000 }).should('be.visible');
+
   });
 });
