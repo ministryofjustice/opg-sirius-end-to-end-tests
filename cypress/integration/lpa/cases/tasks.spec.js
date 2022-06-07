@@ -52,18 +52,18 @@ describe('Complete a task', { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it('a task completed timeline event is recorded', () => {
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as("eventsRequest");
-    cy.intercept({ method: "PUT", url: "/*/v1/tasks/*" }).as("tasksRequest");
+    cy.intercept({ method: 'GET', url: '/*/v1/persons/*/events*' }).as('eventsRequest');
+    cy.intercept({ method: 'PUT', url: '/*/v1/tasks/*' }).as('tasksRequest');
 
     cy.wait("@eventsRequest");
 
-    cy.get('.task-list .task-actions').first().contains("Complete").click();
+    cy.get('.task-list').contains('Complete Create physical case file').click();
     cy.contains('Yes, confirm').click();
 
-    cy.wait("@eventsRequest");
-    cy.wait("@tasksRequest");
+    cy.wait('@eventsRequest');
+    cy.wait('@tasksRequest');
 
-    cy.get('.timeline-event').first().next().contains('Create physical case file Completed');
+    cy.contains('.timeline-event', 'Create physical case file Completed');
   });
 });
 
@@ -78,23 +78,19 @@ describe('Reassign a task', { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it('a task reassign timeline event is recorded', () => {
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as("eventsRequest");
+    cy.intercept({ method: 'GET', url: '/*/v1/persons/*/events*' }).as('eventsRequest');
     cy.intercept({ method: 'GET', url: '/*/v1/teams/*' }).as('teamsRequest');
 
-    cy.wait("@eventsRequest");
+    cy.wait('@eventsRequest');
 
-    cy.get('.task-list .task-actions').first().contains("Allocate").click();
-    cy.get('.assigneeType').contains("team").click();
-    cy.get('[id=assigneeTeam0').click();
-    cy.contains("Card Payment Team").click();
-    cy.get('button[type=submit]').contains("Assign task").click();
+    cy.contains('.task-actions .icon-button', 'Allocate Create physical case file').click();
+    cy.contains('.assigneeType', 'team').click();
+    cy.get('#assigneeTeam0').click().contains('Card Payment Team').click();
+    cy.contains('button[type=submit]', 'Assign task').click();
 
-    cy.wait("@teamsRequest");
+    cy.wait('@teamsRequest');
 
-    cy.get('.timeline-event')
-      .first()
-      .contains('Task was assigned to File Creation Team now assigned to Card Payment Team');
-
-    cy.get('.task-list').first().contains("Assigned to Card Payment Team");
+    cy.contains('.timeline-event', 'Task was assigned to File Creation Team now assigned to Card Payment Team');
+    cy.contains('.task-list', 'Assigned to Card Payment Team');
   });
 });
