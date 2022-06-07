@@ -5,7 +5,7 @@ describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("should create a new donor", function () {
-    cy.intercept({ method: 'GET', url: '/api/v1/assignees/*/tasks*' }).as('tasksRequest');
+    cy.intercept({ method: 'GET', url: '/*/v1/assignees/*/tasks*' }).as('tasksRequest');
     cy.wait('@tasksRequest');
 
     cy.get("uib-tab-heading[id=Timeline]").contains("Timeline").click();
@@ -20,8 +20,8 @@ describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.contains(/Person (\d+(-|)){3} was created/).click();
 
     cy.get('.timeline .timeline-event', { timeout: 10000 });
-    cy.get(".timeline-event").last().should("contain", "Person (Create / Edit)");
-    cy.get(".timeline-event").last().should("contain", "Spongebob Squarepants");
+    cy.contains(".timeline-event", "Person (Create / Edit)")
+      .should("contain", "Spongebob Squarepants");
   });
 });
 
@@ -35,7 +35,7 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it("should change the donors firstname", function () {
     cy.visit(`/lpa/#/person/${this.donorId}`);
-    cy.intercept({ method: 'GET', url: '/api/v1/persons/*' }).as('personRequest');
+    cy.intercept({ method: 'GET', url: '/*/v1/persons/*' }).as('personRequest');
 
     cy.wait('@personRequest');
 
@@ -49,5 +49,6 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.get('.timeline-event').contains('Person (Create / Edit)', { timeout: 10000 });
     cy.get(".timeline-event").first().should("contain", "First name: Bob changed to: Patrick");
+
   });
 });

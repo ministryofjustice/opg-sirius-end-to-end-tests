@@ -1,7 +1,7 @@
 const createOrder = () => {
   return cy.get('@clientId').then(clientId => {
     cy.fixture('order/minimal.json').then(order => {
-      cy.postToApi('/api/v1/clients/' + clientId + '/orders', order)
+      cy.postToApi('/supervision-api/v1/clients/' + clientId + '/orders', order)
         .its('body')
         .then(res => {
           cy.wrap(res.caseRecNumber).as('courtReference');
