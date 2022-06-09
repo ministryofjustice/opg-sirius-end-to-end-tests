@@ -9,9 +9,10 @@ describe('Create a task', { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it('should show the task', () => {
+    cy.intercept({ method: 'GET', url: '/*/v1/persons/*/cases' }).as('casesRequest');
     cy.intercept({ method: 'GET', url: '/*/v1/persons/*' }).as('personRequest');
 
-    cy.wait('@personRequest');
+    cy.wait('@casesRequest');
 
     cy.contains('New Task').click();
 
@@ -26,7 +27,7 @@ describe('Create a task', { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().find('button[type=submit]').click();
     });
 
-    cy.wait('@personRequest');
+    cy.wait('@casesRequest');
 
     cy.get('.task-list', { timeout: 10000 });
     cy.contains('.task-list-task', 'Donor has moved')
@@ -53,9 +54,10 @@ describe('Complete a task', { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it('a task completed timeline event is recorded', () => {
     cy.intercept({ method: 'GET', url: '/*/v1/persons/*/events*' }).as('eventsRequest');
+    cy.intercept({ method: 'GET', url: '/*/v1/persons/*/tasks*' }).as('getTasksRequest');
     cy.intercept({ method: 'PUT', url: '/*/v1/tasks/*' }).as('tasksRequest');
 
-    cy.wait("@eventsRequest");
+    cy.wait("@getTasksRequest");
 
     cy.get('.task-list').contains('Complete Create physical case file').click();
     cy.contains('Yes, confirm').click();
