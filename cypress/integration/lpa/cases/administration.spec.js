@@ -9,27 +9,29 @@ describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () 
     });
   });
 
-  // it("should change the LPA receipt date", function() {
-  //   cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
+  it("should change the LPA receipt date", function () {
+    cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
 
-  //   cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as("eventsRequest");
-  //   cy.intercept({ method: "GET", url: "/*/v1/cases/*" }).as("casesRequest");
-  //   cy.intercept({ method: "PUT", url: "/*/v1/lpas/*" }).as("putRequest");
+    cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as("eventsRequest");
+    cy.intercept({ method: "GET", url: "/*/v1/cases/*" }).as("casesRequest");
 
-  //   cy.wait("@eventsRequest");
+    cy.wait("@eventsRequest");
 
-  //   cy.get("uib-tab-heading[id=Administration]").contains("Administration").click();
-  //   cy.contains("Edit Dates").click();
+    cy.get("uib-tab-heading[id=Administration]").contains("Administration").click();
+    cy.contains("Edit Dates").click();
 
-  //   cy.wait("@casesRequest");
+    cy.wait("@casesRequest");
 
-  //   cy.get('#receiptDate0').clear().type('13/04/2019');
-  //   cy.contains("Save and Exit").click();
+    cy.frameLoaded('.action-widget-content iframe');
+    cy.enter('.action-widget-content iframe').then(getBody => {
+      getBody().find('#f-receiptDate').clear().type('2019-04-13');
+      getBody().find("button[type=submit]").click();
+    });
 
-  //   cy.wait(["@putRequest", "@eventsRequest"]);
+    cy.wait("@eventsRequest");
 
-  //   cy.get(".timeline").contains(".timeline-event p", "Receipt date: 02/04/2019 changed to: 13/04/2019");
-  // });
+    cy.contains(".timeline-event", "Receipt date: 02/04/2019 changed to: 13/04/2019");
+  });
 });
 
 describe("Visit Admin Service", { tags: ["@lpa", "@smoke-journey"] }, () => {
