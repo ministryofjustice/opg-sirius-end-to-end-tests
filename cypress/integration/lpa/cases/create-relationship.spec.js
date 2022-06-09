@@ -30,7 +30,7 @@ describe('Create a relationship', { tags: ["@lpa", "@smoke-journey"] }, () => {
       });
     });
 
-    cy.wait(['@personRequest', '@referenceRequest']);
+    cy.wait('@referenceRequest');
 
     cy.contains('.case-summary', 'This donor has a link with Bob Sponge (Sponge)');
   });
