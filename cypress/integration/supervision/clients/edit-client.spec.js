@@ -1,34 +1,33 @@
-// TODO - This passes locally, but getting input[name="firstName"] is regularly failing in CI due to
-//  Angular re-rendering the element. As the feedback loop is currently nearly 30 minutes I'm pausing investigation
-//  until the test running for this repository is completed
+ beforeEach(() => {
+  cy.loginAs('Case Manager');
+  cy.createAClient();
+});
 
-// beforeEach(() => {
-//   cy.loginAs('Case Manager');
-//   cy.createAClient();
-// });
-//
-// describe('Edit a client', { tags: ['@supervision', 'client', '@smoke-journey'] }, () => {
-//   it(
-//     'Given I\'m a Case Manager on Supervision and on the client dashboard page' +
-//     'Then the Client Dashboard page loads as expected',
-//     () => {
-//       cy.get('@clientId').then(clientId => {
-//         cy.visit('/supervision/#/clients/' + clientId + '/edit');
-//       });
-//       cy.contains('Edit Client: Ted Tedson');
-//
-//       const suffix = Math.floor(Math.random() * 10000);
-//
-//       cy.get('input[name="firstName"]', {timeout: 30000}).should('have.value', 'Ted').clear().type('Bill' + suffix);
-//       cy.get('input[name="lastName"]').clear().type('Billson' + suffix);
-//       cy.get('input[name="memorablePhrase"]').clear().type('Memorable' + suffix);
-//
-//       cy.contains('Save & Exit').click();
-//
-//       cy.contains('Client details');
-//       cy.contains('Bill' + suffix, {timeout: 30000});
-//       cy.contains('Billson' + suffix);
-//       cy.contains('Memorable' + suffix);
-//     }
-//   );
-// });
+describe('Edit a client', { tags: ['@supervision', 'client', '@smoke-journey'] }, () => {
+  it(
+    'Given I\'m a Case Manager on Supervision and on the client dashboard page' +
+    'Then the Client Dashboard page loads as expected',
+    () => {
+      cy.get('@clientId').then(clientId => {
+        cy.visit('/supervision/#/clients/' + clientId + '/edit');
+      });
+      cy.contains('Edit Client: Ted Tedson');
+
+      const suffix = Math.floor(Math.random() * 10000);
+
+      cy.get('#editClientFormContent').as('edit-panel');
+      cy.get('@edit-panel').within(() => {
+        cy.get('input[name="firstName"]').clear().type('Bill' + suffix);
+        cy.get('input[name="lastName"]').clear().type('Billson' + suffix);
+        cy.get('input[name="memorablePhrase"]').clear().type('Memorable' + suffix);
+      });
+
+      cy.contains('Save & Exit').click();
+
+      cy.contains('Client details');
+      cy.contains('Bill' + suffix, {timeout: 30000});
+      cy.contains('Billson' + suffix);
+      cy.contains('Memorable' + suffix);
+    }
+  );
+});
