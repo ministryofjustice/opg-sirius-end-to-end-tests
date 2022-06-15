@@ -81,7 +81,6 @@ describe('Reassign a task', { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it('a task reassign timeline event is recorded', () => {
     cy.intercept({ method: 'GET', url: '/*/v1/persons/*/events*' }).as('eventsRequest');
-    cy.intercept({ method: 'GET', url: '/*/v1/teams/*' }).as('teamsRequest');
 
     cy.wait('@eventsRequest');
 
@@ -90,7 +89,7 @@ describe('Reassign a task', { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.get('#assigneeTeam0').click().contains('Card Payment Team').click();
     cy.contains('button[type=submit]', 'Assign task').click();
 
-    cy.wait('@teamsRequest');
+    cy.wait('@eventsRequest');
 
     cy.contains('.timeline-event', 'Task was assigned to File Creation Team now assigned to Card Payment Team');
     cy.contains('.task-list', 'Assigned to Card Payment Team');
