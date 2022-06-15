@@ -59,8 +59,8 @@ describe('Complete a task', { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.wait("@getTasksRequest");
 
-    cy.get('.task-list').contains('Complete Create physical case file').click();
-    cy.contains('Yes, confirm').click();
+    cy.contains('.task-list', 'Complete Create physical case file').click();
+    cy.contains('[name="TaskCompleteConfirm"]', 'Yes, confirm').click();
 
     cy.wait('@eventsRequest');
     cy.wait('@tasksRequest');
@@ -87,7 +87,8 @@ describe('Reassign a task', { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.contains('.task-actions .icon-button', 'Allocate Create physical case file').click();
     cy.contains('.assigneeType', 'team').click();
-    cy.get('#assigneeTeam0').click().contains('Card Payment Team').click();
+    cy.get('#assigneeTeam0').click();
+    cy.contains('#assigneeTeam0', 'Card Payment Team').click();
     cy.contains('button[type=submit]', 'Assign task').click();
 
     cy.wait('@teamsRequest');
