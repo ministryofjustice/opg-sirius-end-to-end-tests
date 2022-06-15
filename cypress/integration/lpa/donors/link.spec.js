@@ -10,47 +10,44 @@ describe("Link donors", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("should link 2 donors", function () {
-    // cy.intercept({
-    //   method: "GET",
-    //   url: `/*/v1/persons/${this.primaryDonorId}`,
-    // }).as("donorRequest");
+    cy.intercept({
+      method: "GET",
+      url: `/*/v1/persons/${this.primaryDonorId}`,
+    }).as("donorRequest");
 
-    // cy.intercept({ method: "GET", url: `/*/v1/persons/*/events*` }).as(
-    //   "eventsRequest"
-    // );
+    cy.intercept({ method: "GET", url: `/*/v1/persons/*/events*` }).as(
+      "eventsRequest"
+    );
 
-    // cy.visit(`/lpa/#/person/${this.primaryDonorId}`);
+    cy.visit(`/lpa/#/person/${this.primaryDonorId}`);
 
-    // cy.wait("@donorRequest");
-    // cy.wait("@eventsRequest");
+    cy.wait("@donorRequest");
+    cy.wait("@eventsRequest");
 
-    // cy.contains("Workflow").click();
-    // cy.contains("Link Record").click();
+    cy.contains("Workflow").click();
+    cy.contains("Link Record").click();
 
-    // cy.frameLoaded(".action-widget-content iframe");
-    // cy.enter(".action-widget-content iframe").then((getBody) => {
-    //   getBody().find("#f-uid").type(`${this.secondaryDonorUid}{enter}`);
-    //   getBody().contains("button", "Search").click();
-    // });
+    cy.frameLoaded(".action-widget-content iframe");
+    cy.enter(".action-widget-content iframe").then((getBody) => {
+      getBody().find("#f-uid").type(`${this.secondaryDonorUid}{enter}`);
+      getBody().contains("button", "Search").click();
+    });
 
-    // cy.wait(3000);
-    // cy.enter(".action-widget-content iframe").then((getBody) => {
-    //   getBody()
-    //     .find(`input[name="primary-id"][value="${this.primaryDonorId}"]`)
-    //     .click();
-    //   getBody().contains("button", "Link records").click();
-    // });
+    cy.wait(3000);
+    cy.enter(".action-widget-content iframe").then((getBody) => {
+      getBody()
+        .find(`input[name="primary-id"][value="${this.primaryDonorId}"]`)
+        .click();
+      getBody().contains("button", "Link records").click();
+    });
 
-    // cy.wait("@eventsRequest");
+    cy.wait("@eventsRequest");
 
-    // cy.get(".timeline").contains(
-    //   ".timeline-event h2",
-    //   "Person (Create / Edit)"
-    // );
+    cy.get(".timeline").contains(
+      ".timeline-event h2",
+      "Person (Create / Edit)"
+    );
 
-    // cy.get(".timeline").contains(
-    //   ".timeline-event p",
-    //   "Primary record was linked to child record"
-    // );
+    cy.contains(".timeline-event", "Primary record was linked to child record");
   });
 });
