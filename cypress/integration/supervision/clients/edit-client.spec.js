@@ -9,7 +9,7 @@ describe('Edit a client', { tags: ['@supervision', 'client', '@smoke-journey'] }
     'Then the Client Dashboard page loads as expected',
     () => {
       cy.get('@clientId').then(clientId => {
-        cy.visit('/supervision/#/clients/' + clientId + '/edit');
+        cy.visit(`/supervision/#/clients/${clientId}/edit`);
       });
       cy.contains('Edit Client: Ted Tedson');
 
@@ -25,7 +25,7 @@ describe('Edit a client', { tags: ['@supervision', 'client', '@smoke-journey'] }
       cy.contains('Save & Exit').click();
 
       cy.contains('Client details');
-      cy.contains('Bill' + suffix, {timeout: 30000});
+      cy.contains('Bill' + suffix);
       cy.contains('Billson' + suffix);
       cy.contains('Memorable' + suffix);
     }
