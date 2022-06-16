@@ -3,7 +3,8 @@
   cy.createAClient();
 });
 
-describe('Edit a client', { tags: ['@supervision', 'client', '@smoke-journey'] }, () => {
+//TODO: sw-5435 - Triaged. Passing in GH Actions build, fails main Sirius Jenkins pipeline
+describe.skip('Edit a client', { tags: ['@supervision', 'client', '@smoke-journey'] }, () => {
   it(
     'Given I\'m a Case Manager on Supervision and on the client dashboard page' +
     'Then the Client Dashboard page loads as expected',
