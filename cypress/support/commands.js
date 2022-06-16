@@ -1,4 +1,5 @@
 require('cypress-iframe');
+require('cypress-wait-until');
 
 Cypress.Commands.add("login", (email, password) => {
   cy.visit('/auth/logout');
