@@ -104,6 +104,11 @@ jobs:
             docker push $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY:${{ steps.bump_version.outputs.tag }}
           fi
 
+      - name: Trigger remote testing
+        if: github.actor != 'dependabot[bot]'
+        shell: bash
+        run: curl -XPOST -u ${{ secrets.JENKINS_API_USER }}:${{ secrets.JENKINS_API_TOKEN }} "https://${{ secrets.JENKINS_URL }}/job/Sirius/job/End-to-End test/buildWithParameters?token=${{ secrets.JENKINS_API_TOKEN_NAME }}&e2e_tag=${{ steps.bump_version.outputs.tag }}&e2e_commit=${{ github.event.pull_request.head.sha }}"
+
   push-tags:
     runs-on: ubuntu-latest
     needs: build
