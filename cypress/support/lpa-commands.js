@@ -1,7 +1,7 @@
 Cypress.Commands.add("createDonor", () =>
   cy
     .fixture("donor/minimal.json")
-    .then((donor) => cy.postToApi("/api/v1/donors", donor).its("body"))
+    .then((donor) => cy.postToApi("/api/v1/donors", donor, true).its("body"))
 );
 
 Cypress.Commands.add("createLpa", (donorId) =>

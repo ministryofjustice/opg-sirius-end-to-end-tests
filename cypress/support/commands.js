@@ -55,8 +55,12 @@ const getAndStoreTokens = () => {
     });
 }
 
-Cypress.Commands.add('sendToApi', (verb, url, data) => {
+Cypress.Commands.add('sendToApi', (verb, url, data, retry) => {
   cy.then(getAndStoreTokens);
+
+  const retryOptions = retry
+    ? { retryOnStatusCodeFailure: true, retryOnNetworkFailure: true }
+    : {};
 
   cy.get('@jwtToken').then(jwtToken => {
     cy.get('@csrfToken').then(csrfToken => {
@@ -70,14 +74,15 @@ Cypress.Commands.add('sendToApi', (verb, url, data) => {
           'opg-bypass-membrane': 1,
           'x-xsrf-token': csrfToken
         },
-        body: data
+        body: data,
+        ...retryOptions,
       });
     });
   });
 });
 
-Cypress.Commands.add('postToApi', (url, data) => {
-  cy.sendToApi('POST', url, data);
+Cypress.Commands.add('postToApi', (url, data, retry) => {
+  cy.sendToApi('POST', url, data, retry);
 });
 
 Cypress.Commands.add('putToApi', (url, data) => {
