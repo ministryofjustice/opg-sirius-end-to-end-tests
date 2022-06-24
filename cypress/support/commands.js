@@ -24,6 +24,7 @@ Cypress.Commands.add("loginAs", (user) => {
     'Case Manager': 'user/case-manager.json',
     'LPA Manager': 'user/lpa-manager.json',
     'Lay User': 'user/lay.json',
+    'System Admin': 'user/system-admin.json',
   };
 
   let userFile = userFiles[user];
