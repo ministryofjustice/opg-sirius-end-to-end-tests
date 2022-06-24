@@ -1,6 +1,6 @@
 describe("LPA administration changes", { tags: ["@lpa", "@smoke-journey"] }, () => {
   beforeEach(() => {
-    cy.loginAs("LPA Manager");
+    cy.loginAs("System Admin");
     cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.wrap(donorId).as("donorId");
