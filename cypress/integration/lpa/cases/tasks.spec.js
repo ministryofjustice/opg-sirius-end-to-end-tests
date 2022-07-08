@@ -69,30 +69,30 @@ describe('Complete a task', { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 });
 
-describe('Reassign a task', { tags: ["@lpa", "@smoke-journey"] }, () => {
-  before(() => {
-    cy.loginAs('LPA Manager');
-    cy.createDonor().then(({ id: donorId }) => {
-      cy.createLpa(donorId).then(({ id: lpaId }) => {
-        cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
-      });
-    });
-  });
+// describe('Reassign a task', { tags: ["@lpa", "@smoke-journey"] }, () => {
+//   before(() => {
+//     cy.loginAs('LPA Manager');
+//     cy.createDonor().then(({ id: donorId }) => {
+//       cy.createLpa(donorId).then(({ id: lpaId }) => {
+//         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
+//       });
+//     });
+//   });
 
-  it('a task reassign timeline event is recorded', () => {
-    cy.intercept({ method: 'GET', url: '/*/v1/persons/*/events*' }).as('eventsRequest');
-    cy.intercept({ method: 'GET', url: '/*/v1/persons/*/tasks*' }).as('getTasksRequest');
+//   it('a task reassign timeline event is recorded', () => {
+//     cy.intercept({ method: 'GET', url: '/*/v1/persons/*/events*' }).as('eventsRequest');
+//     cy.intercept({ method: 'GET', url: '/*/v1/persons/*/tasks*' }).as('getTasksRequest');
 
-    cy.wait("@getTasksRequest");
+//     cy.wait("@getTasksRequest");
 
-    cy.contains('.task-actions .icon-button', 'Allocate Create physical case file').click();
-    cy.contains('.assigneeType', 'team').click();
-    cy.get('#assigneeTeam0').click().contains('Card Payment Team').click();
-    cy.contains('button[type=submit]', 'Assign task').click();
+//     cy.contains('.task-actions .icon-button', 'Allocate Create physical case file').click();
+//     cy.contains('.assigneeType', 'team').click();
+//     cy.get('#assigneeTeam0').click().contains('Card Payment Team').click();
+//     cy.contains('button[type=submit]', 'Assign task').click();
 
-    cy.wait('@eventsRequest');
+//     cy.wait('@eventsRequest');
 
-    cy.contains('.timeline-event', 'Task was assigned to File Creation Team now assigned to Card Payment Team');
-    cy.contains('.task-list', 'Assigned to Card Payment Team');
-  });
-});
+//     cy.contains('.timeline-event', 'Task was assigned to File Creation Team now assigned to Card Payment Team');
+//     cy.contains('.task-list', 'Assigned to Card Payment Team');
+//   });
+// });
