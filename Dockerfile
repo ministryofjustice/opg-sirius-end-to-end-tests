@@ -85,6 +85,7 @@ ENV _MITSHM=0
 
 RUN mkdir /test-results
 RUN chown node /test-results
+RUN mkdir -p -m0777 /home/node/cypress/downloads
 
 WORKDIR /home/node
 
