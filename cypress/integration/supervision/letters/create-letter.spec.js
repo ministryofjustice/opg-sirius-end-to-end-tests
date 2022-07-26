@@ -1,16 +1,3 @@
-const createOrder = () => {
-  return cy.get('@clientId').then(clientId => {
-    cy.fixture('order/minimal.json').then(order => {
-      cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
-        .its('body')
-        .then(res => {
-          cy.wrap(res.caseRecNumber).as('courtReference');
-          cy.wrap(res.id).as('orderId');
-        });
-    });
-  });
-};
-
 const getIframeBody = () => {
   return cy.get('iframe[id="editor_ifr"]', {timeout:30000})
     .its('0.contentDocument').should('exist')
@@ -21,8 +8,8 @@ const getIframeBody = () => {
 
 before(function setupAllocatedClient () {
   cy.loginAs('Allocations User');
-  cy.createAClient()
-    .then(createOrder);
+  cy.createAClient();
+  cy.get('@clientId').then((clientId) => cy.createOrderForClient(clientId));
 });
 
 beforeEach(function navigateToClient () {
