@@ -25,6 +25,7 @@ Cypress.Commands.add("loginAs", (user) => {
     'LPA Manager': 'user/lpa-manager.json',
     'Lay User': 'user/lay.json',
     'System Admin': 'user/system-admin.json',
+    'Public API': 'user/public-api.json'
   };
 
   let userFile = userFiles[user];
@@ -56,11 +57,11 @@ const getAndStoreTokens = () => {
     });
 }
 
-Cypress.Commands.add('sendToApi', (verb, url, data, retry) => {
+const sendToApi = (verb, url, data, retry) => {
   cy.then(getAndStoreTokens);
 
   const retryOptions = retry
-    ? { retryOnStatusCodeFailure: true, retryOnNetworkFailure: true }
+    ? {retryOnStatusCodeFailure: true, retryOnNetworkFailure: true}
     : {};
 
   cy.get('@jwtToken').then(jwtToken => {
@@ -80,12 +81,12 @@ Cypress.Commands.add('sendToApi', (verb, url, data, retry) => {
       });
     });
   });
-});
+};
 
 Cypress.Commands.add('postToApi', (url, data, retry) => {
-  cy.sendToApi('POST', url, data, retry);
+  sendToApi('POST', url, data, retry);
 });
 
 Cypress.Commands.add('putToApi', (url, data) => {
-  cy.sendToApi('PUT', url, data);
+  sendToApi('PUT', url, data);
 });
