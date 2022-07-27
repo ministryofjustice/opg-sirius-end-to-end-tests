@@ -53,6 +53,7 @@ jobs:
           WITH_V: true
 
       - name: Configure AWS Credentials
+        if: github.actor != 'dependabot[bot]'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_ACTIONS }}
@@ -63,6 +64,7 @@ jobs:
           role-session-name: GitHubActions
 
       - name: ECR Login
+        if: github.actor != 'dependabot[bot]'
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
         with:
@@ -85,11 +87,12 @@ jobs:
 
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
-        if: always()
+        if: always() && github.actor != 'dependabot[bot]'
         with:
           files: "artifacts/end-to-end-results/test-results/*.xml"
 
       - name: Push Container
+        if: github.actor != 'dependabot[bot]'
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           END_TO_END_TESTS_ECR_REPOSITORY: sirius/end-to-end-tests
