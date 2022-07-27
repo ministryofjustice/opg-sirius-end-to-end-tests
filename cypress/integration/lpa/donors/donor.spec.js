@@ -1,29 +1,35 @@
-describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
-  beforeEach(() => {
-    cy.loginAs("Case Manager");
-    cy.visit('/lpa/home');
-  });
+// describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
+//   beforeEach(() => {
+//     cy.loginAs("Case Manager");
+//     cy.visit("/lpa/home");
+//   });
 
-  it("should create a new donor", function () {
-    cy.intercept({ method: 'GET', url: '/*/v1/assignees/*/tasks*' }).as('tasksRequest');
-    cy.wait('@tasksRequest');
+//   it("should create a new donor", function () {
+//     cy.intercept({ method: "GET", url: "/*/v1/assignees/*/tasks*" }).as(
+//       "tasksRequest"
+//     );
+//     cy.wait("@tasksRequest");
 
-    cy.get("uib-tab-heading[id=Timeline]").contains("Timeline").click();
-    cy.contains("Create Donor").click();
+//     cy.get("uib-tab-heading[id=Timeline]").contains("Timeline").click();
+//     cy.contains("Create Donor").click();
 
-    cy.get(".action-widget-content").within(() => {
-      cy.get("#firstname0").type("Spongebob");
-      cy.get("#surname0").type("Squarepants");
-      cy.contains("Save and Exit").click();
-    });
+//     cy.frameLoaded(".action-widget-content iframe");
+//     cy.enter(".action-widget-content iframe").then((getBody) => {
+//       getBody().find("#f-firstname").type("Spongebob");
+//       getBody().find("#f-surname").type("Squarepants");
+//       getBody().find("button[type=submit]").click();
 
-    cy.contains(/Person (\d+(-|)){3} was created/).click();
+//       getBody().contains(/Person (\d+(-|)){3} was created/);
+//       getBody().contains("View donor").click();
+//     });
 
-    cy.get('.timeline .timeline-event', { timeout: 10000 });
-    cy.contains(".timeline-event", "Person (Create / Edit)")
-      .should("contain", "Spongebob Squarepants");
-  });
-});
+//     cy.get(".timeline .timeline-event", { timeout: 10000 });
+//     cy.contains(".timeline-event", "Person (Create / Edit)").should(
+//       "contain",
+//       "Spongebob Squarepants"
+//     );
+//   });
+// });
 
 describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
   before(() => {
@@ -35,9 +41,9 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it("should change the donors firstname", function () {
     cy.visit(`/lpa/#/person/${this.donorId}`);
-    cy.intercept({ method: 'GET', url: '/*/v1/persons/*' }).as('personRequest');
+    cy.intercept({ method: "GET", url: "/*/v1/persons/*" }).as("personRequest");
 
-    cy.wait('@personRequest');
+    cy.wait("@personRequest");
 
     cy.contains("Edit Donor").click();
     cy.get(".action-widget-content").within(() => {
@@ -45,9 +51,10 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
       cy.contains("Save and Exit").click();
     });
 
-    cy.wait('@personRequest');
+    cy.wait("@personRequest");
 
-    cy.get('.timeline-event').contains("First name: Bob changed to: Patrick", { timeout: 20000 }).should('be.visible');
-
+    cy.get(".timeline-event")
+      .contains("First name: Bob changed to: Patrick", { timeout: 20000 })
+      .should("be.visible");
   });
 });
