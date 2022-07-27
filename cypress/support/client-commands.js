@@ -8,3 +8,14 @@ Cypress.Commands.add("createAClient", () => {
       });
   });
 });
+
+Cypress.Commands.add("createOrderForClient", (clientId) => {
+  cy.fixture('order/minimal.json').then(order => {
+    cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
+      .its('body')
+      .then(res => {
+        cy.wrap(res.caseRecNumber).as('courtReference');
+        cy.wrap(res.id).as('orderId');
+      });
+  });
+});
