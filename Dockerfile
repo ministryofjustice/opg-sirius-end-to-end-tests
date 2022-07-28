@@ -98,7 +98,7 @@ RUN npm install
 
 ENV CYPRESS_VIDEO=false
 
-COPY cypress.json cypress.json
+COPY cypress.config.js cypress.config.js
 COPY cypress cypress
 
 ENV CYPRESS_CACHE_FOLDER=/home/node/.cache/Cypress

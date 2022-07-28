@@ -9,7 +9,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - "./cypress:/home/node/cypress"
-      - "./cypress.json:/home/node/cypress.json"
+      - "./cypress.config.js:/home/node/cypress.config.js"
       - "./test-results:/test-results"
     command: [ "--headless", "-b", "chrome"]
 
