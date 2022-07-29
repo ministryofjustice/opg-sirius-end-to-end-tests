@@ -40,30 +40,31 @@ describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 });
 
-describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
-  before(() => {
-    cy.loginAs("Case Manager");
-    cy.createDonor().then(({ id }) => {
-      cy.wrap(id).as("donorId");
-    });
-  });
+// describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
+//   before(() => {
+//     cy.loginAs("Case Manager");
+//     cy.createDonor().then(({ id }) => {
+//       cy.wrap(id).as("donorId");
+//     });
+//   });
 
-  it("should change the donors firstname", function () {
-    cy.visit(`/lpa/#/person/${this.donorId}`);
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*" }).as("personRequest");
+//   it("should change the donors firstname", function () {
+//     cy.visit(`/lpa/#/person/${this.donorId}`);
+//     cy.intercept({ method: "GET", url: "/*/v1/persons/*" }).as("personRequest");
 
-    cy.wait("@personRequest");
+//     cy.wait("@personRequest");
 
-    cy.contains("Edit Donor").click();
-    cy.get(".action-widget-content").within(() => {
-      cy.get("#firstname0").clear().type("Patrick");
-      cy.contains("Save and Exit").click();
-    });
+//     cy.contains("Edit Donor").click();
+//     cy.frameLoaded(".action-widget-content iframe");
+//     cy.enter(".action-widget-content iframe").then((getBody) => {
+//       getBody().find("#f-firstname").clear().type("Patrick");
+//       getBody().find("button[type=submit]").click();
+//     });
 
-    cy.wait("@personRequest");
+//     cy.wait("@personRequest");
 
-    cy.get(".timeline-event")
-      .contains("First name: Bob changed to: Patrick", { timeout: 20000 })
-      .should("be.visible");
-  });
-});
+//     cy.get(".timeline-event")
+//       .contains("First name: Bob changed to: Patrick", { timeout: 20000 })
+//       .should("be.visible");
+//   });
+// });
