@@ -42,6 +42,7 @@ jobs:
           docker run --rm  -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image sirius/end-to-end-tests:latest
 
       - name: Bump version
+        if: github.actor != 'dependabot[bot]'
         id: bump_version
         uses: anothrNick/github-tag-action@1.36.0
         env:
