@@ -1,7 +1,7 @@
 describe('Create a relationship', { tags: ["@lpa", "@smoke-journey"] }, () => {
   before(() => {
     cy.loginAs('LPA Manager');
-    cy.createDonor().then(({ id: donorId }) => {
+    cy.createDonor().then(({ id: donorId, uId: donorUid }) => {
       cy.createDonor().then(({ uId: otherDonorUid }) => {
         cy.createLpa(donorId).then(({ id: lpaId }) => {
           cy.waitUntil(() =>
@@ -11,17 +11,17 @@ describe('Create a relationship', { tags: ["@lpa", "@smoke-journey"] }, () => {
           );
 
           cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
+          cy.wrap(donorUid).as("donorUid");
           cy.wrap(otherDonorUid).as("otherDonorUid");
         });
       });
     });
   });
 
-  it('should show the relationship', () => {
-    cy.intercept({ method: 'GET', url: '/*/v1/persons/*' }).as('personRequest');
+  it('should show the relationship', function () {
     cy.intercept({ method: 'GET', url: '/*/v1/persons/*/references' }).as('referenceRequest');
 
-    cy.wait('@personRequest');
+    cy.get(".person-panel-details").contains(this.donorUid);
 
     cy.get("#Workflow").click();
     cy.contains("Create Relationship").click();
