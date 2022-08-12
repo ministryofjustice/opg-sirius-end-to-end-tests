@@ -1,8 +1,14 @@
 describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
   beforeEach(() => {
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*/cases" }).as("casesRequest");
-    cy.intercept({ method: "GET", url: "/*/v1/templates/lpa" }).as("templatesRequest");
-    cy.intercept({ method: "POST", url: "/*/v1/lpas/*/documents/draft" }).as("draftRequest");
+    cy.intercept({ method: "GET", url: "/*/v1/persons/*/cases" }).as(
+      "casesRequest"
+    );
+    cy.intercept({ method: "GET", url: "/*/v1/templates/lpa" }).as(
+      "templatesRequest"
+    );
+    cy.intercept({ method: "POST", url: "/*/v1/lpas/*/documents/draft" }).as(
+      "draftRequest"
+    );
 
     cy.loginAs("LPA Manager");
     cy.createDonor().then(({ id: donorId }) => {
@@ -13,7 +19,7 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
     });
   });
 
-  it("should create a draft with an insert", function() {
+  it("should create a draft with an insert", function () {
     cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
     cy.wait("@casesRequest");
 
@@ -28,9 +34,12 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.wait("@draftRequest");
 
     cy.frameLoaded(".tox-edit-area__iframe");
-    cy.enter(".tox-edit-area__iframe").then(getBody => {
+    cy.enter(".tox-edit-area__iframe").then((getBody) => {
       getBody().should("contain", "Dear Sponge");
-      getBody().should("contain", "explanations of any transactions that are not detailed in their financial records");
+      getBody().should(
+        "contain",
+        "explanations of any transactions that are not detailed in their financial records"
+      );
     });
   });
 });

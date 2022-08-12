@@ -15,7 +15,9 @@ describe(
     it("should change the LPA receipt date", function () {
       cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
 
-      cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as("eventsRequest");
+      cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as(
+        "eventsRequest"
+      );
       cy.intercept({ method: "GET", url: "/*/v1/cases/*" }).as("casesRequest");
 
       cy.get(".case-tile-status").contains("Pending");

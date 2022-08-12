@@ -2,7 +2,7 @@ describe("Searching for a case", { tags: ["@lpa", "@smoke-journey"] }, () => {
   beforeEach(() => {
     cy.loginAs("LPA Manager");
     cy.createDonor().then(({ id: donorId }) => {
-      cy.createLpa(donorId).then(({ uId: lpaUid}) => {
+      cy.createLpa(donorId).then(({ uId: lpaUid }) => {
         cy.wrap(donorId).as("donorId");
         cy.wrap(lpaUid).as("lpaUid");
       });
@@ -15,7 +15,7 @@ describe("Searching for a case", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.get("#searchKeyword").type(`${this.lpaUid}`);
     cy.get(".search-form > form").submit();
 
-    cy.get("ul[role=list]").first().contains('Bob Sponge');
+    cy.get("ul[role=list]").first().contains("Bob Sponge");
     cy.get("[role=list]").contains(`${this.lpaUid}`).click();
 
     cy.get("h1").contains("Bob Sponge");
