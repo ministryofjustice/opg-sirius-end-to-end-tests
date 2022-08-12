@@ -1,18 +1,19 @@
 describe('Complaints', { tags: ["@lpa", "@smoke-journey"] }, () => {
   before(() => {
     cy.loginAs('LPA Manager');
-    cy.createDonor().then(({ id: donorId }) => {
+    cy.createDonor().then(({ id: donorId, uId: donorUid }) => {
+      cy.wrap(donorUid).as("donorUid");
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
       });
     });
   });
 
-  it('should add and edit a complaint', () => {
-    cy.intercept({ method: 'GET', url: '/*/v1/persons/*' }).as('personRequest');
+  it('should add and edit a complaint', function () {
     cy.intercept({ method: 'GET', url: '/*/v1/lpas/*/complaints' }).as('complaintsRequest');
 
-    cy.wait(['@complaintsRequest', '@personRequest']);
+    cy.wait(['@complaintsRequest']);
+    cy.get(".person-panel-details").contains(this.donorUid);
 
     cy.get('#AddComplaint').click();
 
