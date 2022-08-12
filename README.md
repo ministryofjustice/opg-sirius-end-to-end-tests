@@ -2,7 +2,7 @@
 
 End-to-end tests for the components that make up Sirius: Managed by opg-org-infra &amp; Terraform
 
-For standards follow  https://docs.cypress.io/guides/references/best-practices unless otherwise agreed
+For standards follow https://docs.cypress.io/guides/references/best-practices unless otherwise agreed
 
 Specifics on migration from our old UI tests [here](/docs/Migration.md)
 

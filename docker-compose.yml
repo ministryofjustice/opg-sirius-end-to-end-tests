@@ -11,7 +11,7 @@ services:
       - "./cypress:/home/node/cypress"
       - "./cypress.config.js:/home/node/cypress.config.js"
       - "./test-results:/test-results"
-    command: [ "--headless", "-b", "chrome"]
+    command: ["--headless", "-b", "chrome"]
 
 networks:
   default:
