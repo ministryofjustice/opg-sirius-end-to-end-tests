@@ -10,8 +10,6 @@ describe("Create an event", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("should show the event", function () {
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*" }).as("personRequest");
-
     cy.get(".person-panel-details").contains(this.donorUid);
 
     cy.contains("New Event").click();
@@ -23,8 +21,6 @@ describe("Create an event", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().find("#f-description").type("For good reasons");
       getBody().find("button[type=submit]").click();
     });
-
-    cy.wait("@personRequest");
 
     cy.get(".timeline .timeline-event", { timeout: 10000 });
     cy.contains(".timeline-event", "Application returned")
