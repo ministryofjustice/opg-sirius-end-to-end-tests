@@ -1,7 +1,8 @@
 describe('Warnings', { tags: ["@lpa", "@smoke-journey"] }, () => {
   before(() => {
     cy.loginAs('LPA Manager');
-    cy.createDonor().then(({ id: donorId }) => {
+    cy.createDonor().then(({ id: donorId, uId: donorUid }) => {
+      cy.wrap(donorUid).as("donorUid");
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.wrap(`/lpa/#/person/${donorId}/${lpaId}`).as('url');
       });
@@ -9,13 +10,13 @@ describe('Warnings', { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   beforeEach(function () {
-    cy.intercept({ method: 'GET', url: '/*/v1/persons/*' }).as('personRequest');
     cy.intercept({ method: 'GET', url: '/*/v1/persons/*/warnings' }).as('warningsRequest');
     cy.intercept({ method: 'DELETE', url: '/*/v1/warnings/*' }).as('deleteRequest');
 
     cy.loginAs('LPA Manager');
     cy.visit(this.url);
-    cy.wait(['@personRequest', '@warningsRequest']);
+    cy.wait(['@warningsRequest']);
+    cy.get(".person-panel-details").contains(this.donorUid);
   });
 
   it('should create a warning', () => {
