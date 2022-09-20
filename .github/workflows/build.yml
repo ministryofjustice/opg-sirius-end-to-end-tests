@@ -72,6 +72,7 @@ jobs:
           registries: 311462405659
 
       - name: Run Tests against local Sirius
+        if: github.actor != 'dependabot[bot]'
         run: |
           make unpack-sirius-components
           make pull-sirius-containers
