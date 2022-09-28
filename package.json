@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/ministryofjustice/opg-sirius-end-to-end-tests#readme",
   "dependencies": {
-    "cypress": "^10.8.0",
+    "cypress": "^10.9.0",
     "cypress-failed-log": "^2.9.2",
     "cypress-grep": "^3.0.2",
     "cypress-iframe": "^1.0.1",
