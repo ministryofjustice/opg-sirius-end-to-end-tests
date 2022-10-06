@@ -83,9 +83,8 @@ ENV QT_X11_NO_MITSHM=1
 ENV _X11_NO_MITSHM=1
 ENV _MITSHM=0
 
-RUN mkdir /test-results
-RUN chown node /test-results
-RUN mkdir -p -m0777 /home/node/cypress/downloads
+RUN mkdir /test-results && chown node /test-results
+RUN mkdir -p -m0777 /home/node/cypress/downloads && chown node /home/node/cypress
 
 WORKDIR /home/node
 
@@ -98,11 +97,14 @@ RUN npm install
 
 ENV CYPRESS_VIDEO=false
 
-COPY cypress.config.js cypress.config.js
-COPY cypress cypress
+COPY --chown=node:node cypress.config.js cypress.config.js
+COPY --chown=node:node reporter-config.json reporter-config.json
+COPY --chown=node:node cypress cypress
 
 ENV CYPRESS_CACHE_FOLDER=/home/node/.cache/Cypress
 
 RUN npx cypress verify
 
-ENTRYPOINT ["npx", "cypress", "run"]
+ENTRYPOINT ["npm", "run"]
+
+CMD ["test"]
