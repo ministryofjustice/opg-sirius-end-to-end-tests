@@ -34,4 +34,7 @@ stop-sirius:
 local-run: unpack-sirius-components pull-sirius-containers start-sirius local-end-to-end-tests stop-sirius
 
 dev:
-	docker run --rm -e CYPRESS_BASE_URL="https://dev.sirius.opg.digital" sirius/end-to-end-tests:latest
+	docker run --rm -v "$(PWD)/test-results:/test-results" -e CYPRESS_BASE_URL="https://development.sirius.opg.service.justice.gov.uk/" sirius/end-to-end-tests:latest
+
+dev-parallel:
+	docker run --rm -v "$(PWD)/test-results:/test-results" -e CYPRESS_BASE_URL="https://development.sirius.opg.service.justice.gov.uk/" sirius/end-to-end-tests:latest parallel
