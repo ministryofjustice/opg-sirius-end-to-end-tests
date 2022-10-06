@@ -15,4 +15,4 @@ services:
 networks:
   default:
     external: true
-    name: opg-sirius_default
+    name: artifacts_default
