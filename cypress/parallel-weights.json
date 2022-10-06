@@ -1,0 +1,98 @@
+{
+  "cypress/e2e/common/login.cy.js": {
+    "time": 11757,
+    "weight": 9
+  },
+  "cypress/e2e/lpa/cases/administration.cy.js": {
+    "time": 12405,
+    "weight": 10
+  },
+  "cypress/e2e/lpa/cases/allocate-case.cy.js": {
+    "time": 10305,
+    "weight": 8
+  },
+  "cypress/e2e/lpa/cases/change-status.cy.js": {
+    "time": 10812,
+    "weight": 9
+  },
+  "cypress/e2e/lpa/cases/complaints.cy.js": {
+    "time": 20466,
+    "weight": 17
+  },
+  "cypress/e2e/lpa/cases/create-event.cy.js": {
+    "time": 12750,
+    "weight": 10
+  },
+  "cypress/e2e/lpa/cases/create-relationship.cy.js": {
+    "time": 12479,
+    "weight": 10
+  },
+  "cypress/e2e/lpa/cases/documents.cy.js": {
+    "time": 8861,
+    "weight": 7
+  },
+  "cypress/e2e/lpa/cases/epa.cy.js": {
+    "time": 16456,
+    "weight": 13
+  },
+  "cypress/e2e/lpa/cases/lpa.cy.js": {
+    "time": 17895,
+    "weight": 15
+  },
+  "cypress/e2e/lpa/cases/search.cy.js": {
+    "time": 7098,
+    "weight": 5
+  },
+  "cypress/e2e/lpa/cases/tasks.cy.js": {
+    "time": 28177,
+    "weight": 23
+  },
+  "cypress/e2e/lpa/cases/timeline.cy.js": {
+    "time": 6049,
+    "weight": 5
+  },
+  "cypress/e2e/lpa/cases/warnings.cy.js": {
+    "time": 16919,
+    "weight": 14
+  },
+  "cypress/e2e/lpa/donors/donor.cy.js": {
+    "time": 13984,
+    "weight": 11
+  },
+  "cypress/e2e/lpa/donors/link.cy.js": {
+    "time": 12191,
+    "weight": 10
+  },
+  "cypress/e2e/supervision/clients/add-event.cy.js": {
+    "time": 6280,
+    "weight": 5
+  },
+  "cypress/e2e/supervision/clients/add-new-client.cy.js": {
+    "time": 8817,
+    "weight": 7
+  },
+  "cypress/e2e/supervision/clients/edit-client.cy.js": {
+    "time": 28,
+    "weight": 0
+  },
+  "cypress/e2e/supervision/dashboard/client-dashboard.cy.js": {
+    "time": 7172,
+    "weight": 6
+  },
+  "cypress/e2e/supervision/dashboard/dashboard.cy.js": {
+    "time": 4147,
+    "weight": 3
+  },
+  "cypress/e2e/supervision/dashboard/reassign-client.cy.js": {
+    "time": 9905,
+    "weight": 8
+  },
+  "cypress/e2e/supervision/documents/download-multiple.cy.js": {
+    "time": 12551,
+    "weight": 10
+  },
+  "cypress/e2e/supervision/letters/create-letter.cy.js": {
+    "time": 17647,
+    "weight": 14
+  }
+}
