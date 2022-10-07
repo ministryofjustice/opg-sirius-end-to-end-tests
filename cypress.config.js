@@ -2,13 +2,13 @@ const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   defaultCommandTimeout: 60000,
-  reporter: "junit",
+  reporter: "cypress-multi-reporters",
   chromeWebSecurity: false,
   modifyObstructiveCode: false,
   viewportHeight: 1080,
   viewportWidth: 1920,
   reporterOptions: {
-    mochaFile: "/test-results/junit-[hash].xml",
+    configFile: "reporter-config.json"
   },
   e2e: {
     setupNodeEvents(on, config) {
