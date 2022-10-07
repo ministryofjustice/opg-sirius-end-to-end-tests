@@ -26,7 +26,7 @@ local-end-to-end-tests:
 	mkdir -p -m777 artifacts/end-to-end-results/logs
 	mkdir -p -m777 artifacts/end-to-end-results/screenshots
 	mkdir -p -m777 artifacts/end-to-end-results/test-results
-	cd artifacts && END_TO_END_IMAGE=sirius/end-to-end-tests:latest docker-compose run end-to-end-tests
+	docker-compose -f docker-compose.ci.yml run cypress
 
 stop-sirius:
 	cd artifacts && docker-compose down
@@ -34,4 +34,7 @@ stop-sirius:
 local-run: unpack-sirius-components pull-sirius-containers start-sirius local-end-to-end-tests stop-sirius
 
 dev:
-	docker run --rm -e CYPRESS_BASE_URL="https://dev.sirius.opg.digital" sirius/end-to-end-tests:latest
+	docker run --rm -v "$(PWD)/test-results:/test-results" -e CYPRESS_BASE_URL="https://development.sirius.opg.service.justice.gov.uk/" sirius/end-to-end-tests:latest
+
+dev-parallel:
+	docker run --rm -v "$(PWD)/test-results:/test-results" -e CYPRESS_BASE_URL="https://development.sirius.opg.service.justice.gov.uk/" sirius/end-to-end-tests:latest parallel
