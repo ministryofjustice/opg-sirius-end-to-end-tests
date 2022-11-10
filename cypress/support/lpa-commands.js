@@ -11,3 +11,15 @@ Cypress.Commands.add("createLpa", (donorId) =>
       cy.postToApi(`/api/v1/donors/${donorId}/lpas`, lpa).its("body")
     )
 );
+
+Cypress.Commands.add("createInvestigation", (lpaId) =>
+  cy
+    .fixture("investigation/create-investigation.json")
+    .then((investigation) =>
+      cy.postToApi(`/api/v1/lpas/${lpaId}/investigations`, investigation).its("body")
+    )
+);
+
+Cypress.Commands.add("putInvestigationOnHold", (investigationId) =>
+  cy.postToApi(`/api/v1/investigations/${investigationId}/hold-periods`, {reason: "Police Investigation"}).its("body")
+);
