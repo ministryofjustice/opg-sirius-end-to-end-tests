@@ -35,8 +35,7 @@ describe("Create an investigation", { tags: ["@lpa", "@smoke-journey"] }, () => 
 describe("Put investigation on hold", { tags: ["@lpa", "@smoke-journey"] }, () => {
   before(() => {
     cy.loginAs("System Admin");
-    cy.createDonor().then(({ id: donorId, uId: donorUid }) => {
-      cy.wrap(donorUid).as("donorUid");
+    cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
         cy.createInvestigation(lpaId);
@@ -46,7 +45,7 @@ describe("Put investigation on hold", { tags: ["@lpa", "@smoke-journey"] }, () =
 
   it("should put an investigation on hold", function () {
     cy.get(".investigation-item").contains("Objections").click();
-    cy.wait(3000);
+    cy.wait(2000);
 
     cy.frameLoaded(".action-widget-content iframe");
     cy.enter(".action-widget-content iframe").then((getBody) => {
@@ -66,8 +65,7 @@ describe("Put investigation on hold", { tags: ["@lpa", "@smoke-journey"] }, () =
 describe("Take investigation off hold", { tags: ["@lpa", "@smoke-journey"] }, () => {
   before(() => {
     cy.loginAs("System Admin");
-    cy.createDonor().then(({ id: donorId, uId: donorUid }) => {
-      cy.wrap(donorUid).as("donorUid");
+    cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
         cy.createInvestigation(lpaId).then(({ id: investigationId }) => {
@@ -79,7 +77,7 @@ describe("Take investigation off hold", { tags: ["@lpa", "@smoke-journey"] }, ()
 
   it("should take an investigation off hold", function () {
     cy.get(".investigation-item").contains("Objections").click();
-    cy.wait(3000);
+    cy.wait(2000);
 
     cy.frameLoaded(".action-widget-content iframe");
     cy.enter(".action-widget-content iframe").then((getBody) => {

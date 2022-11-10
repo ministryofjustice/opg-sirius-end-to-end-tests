@@ -21,9 +21,5 @@ Cypress.Commands.add("createInvestigation", (lpaId) =>
 );
 
 Cypress.Commands.add("putInvestigationOnHold", (investigationId) =>
-  cy
-    .fixture("investigation/put-investigation-on-hold.json")
-    .then((reason) =>
-      cy.postToApi(`/api/v1/investigations/${investigationId}/hold-periods`, reason).its("body")
-    )
+  cy.postToApi(`/api/v1/investigations/${investigationId}/hold-periods`, {reason: "Police Investigation"}).its("body")
 );
