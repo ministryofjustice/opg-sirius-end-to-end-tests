@@ -22,6 +22,8 @@ Cypress.Commands.add("loginAs", (user) => {
   const userFiles = {
     "Allocations User": "user/allocations.json",
     "Case Manager": "user/case-manager.json",
+    "Finance Manager": "user/finance-manager.json",
+    "Finance Reporting User": "user/finance-reporting.json",
     "LPA Manager": "user/lpa-manager.json",
     "Lay User": "user/lay.json",
     "System Admin": "user/system-admin.json",
