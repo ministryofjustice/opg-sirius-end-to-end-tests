@@ -19,3 +19,10 @@ Cypress.Commands.add("createOrderForClient", (clientId) => {
       });
   });
 });
+
+Cypress.Commands.add("assignSOPNumberToClient", (clientCourtReference) => {
+  let sopNumber = Date.now().toString(),
+    data = "Customer Account  Number,MOJ - Casrec Ref\r\n" + sopNumber + ",OPG_" + clientCourtReference;
+  cy.postToApi(`/supervision-api/v1/finance/reports/sop`, btoa(data)).its("body");
+  cy.wrap(sopNumber).as("sopNumber");
+});
