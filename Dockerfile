@@ -1,4 +1,4 @@
-FROM node:18-bullseye-slim
+FROM node:19-bullseye-slim
 
 #based on the official cypress image, but flattened to reduce duplication and
 #using -slim rather than buster to reduce size and a non-root user to run tests
