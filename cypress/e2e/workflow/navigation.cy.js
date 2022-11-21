@@ -1,7 +1,8 @@
 describe("Navigation", { tags: ["@workflow", "@smoke-journey"] }, () => {
   beforeEach(() => {
     cy.loginAs("Case Manager");
-    cy.visit("/supervision/workflow");
+    cy.visit("/supervision/#/dashboard");
+    cy.get('#hook-workflow-button').click()
   });
 
   it("supervision link is clicked", () => {
