@@ -3,6 +3,7 @@ version: "3.6"
 
 services:
   cypress:
+#    platform: linux/amd64
     image: sirius/end-to-end-tests:latest
     build:
       context: .
