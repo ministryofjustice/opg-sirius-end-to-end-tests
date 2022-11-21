@@ -60,7 +60,6 @@ describe("Complete a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.intercept({ method: "GET", url: "/*/v1/persons/*/tasks*" }).as(
       "getTasksRequest"
     );
-    cy.intercept({ method: "PUT", url: "/*/v1/tasks/*" }).as("tasksRequest");
 
     cy.wait("@getTasksRequest");
 
@@ -68,7 +67,6 @@ describe("Complete a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.contains("Yes, confirm").click();
 
     cy.wait("@eventsRequest");
-    cy.wait("@tasksRequest");
 
     cy.contains(".timeline-event", "Create physical case file Completed");
   });
