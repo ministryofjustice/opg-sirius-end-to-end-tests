@@ -73,6 +73,8 @@ jobs:
 
       - name: Run Tests against local Sirius
         if: github.actor != 'dependabot[bot]'
+        env:
+          BUILD_TAG: v9.138.0-sw-5912-adding-workflow.1
         run: |
           make unpack-sirius-components
           make pull-sirius-containers
