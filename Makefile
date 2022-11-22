@@ -1,5 +1,6 @@
 SHELL = '/bin/bash'
 export DOCKER_BUILDKIT ?= 1
+export BUILD_TAG ?= latest
 
 all: build scan local-run
 
@@ -10,8 +11,8 @@ scan:
 	trivy image sirius/end-to-end-tests:latest
 
 unpack-sirius-components:
-	docker image pull 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/build-artifacts:latest
-	docker run --rm -d -i --name build-artifacts 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/build-artifacts:latest
+	docker image pull 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/build-artifacts:${BUILD_TAG}
+	docker run --rm -d -i --name build-artifacts 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/build-artifacts:${BUILD_TAG}
 	docker cp build-artifacts:/artifacts .
 	docker kill build-artifacts
 
