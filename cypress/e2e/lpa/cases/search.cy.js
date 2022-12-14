@@ -15,8 +15,7 @@ describe("Searching for a case", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.get("#searchKeyword").type(`${this.lpaUid}`);
     cy.get(".search-form > form").submit();
 
-    cy.get("ul[role=list]").first().contains("Bob Sponge");
-    cy.get("[role=list]").contains(`${this.lpaUid}`).click();
+    cy.contains("li", "Bob Sponge").contains(`${this.lpaUid}`).click();
 
     cy.get("h1").contains("Bob Sponge");
     cy.contains(`${this.lpaUid}`);
