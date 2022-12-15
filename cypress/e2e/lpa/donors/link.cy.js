@@ -29,7 +29,7 @@ describe("Link donors", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.frameLoaded(".action-widget-content iframe");
     cy.enter(".action-widget-content iframe").then((getBody) => {
-      getBody().find("#f-uid").type(`${this.secondaryDonorUid}{enter}`);
+      getBody().find("#f-uid").type(`${this.secondaryDonorUid}`);
       getBody().contains("button", "Search").click();
     });
 
