@@ -1,10 +1,3 @@
-const getIframeBody = () => {
-  return cy
-    .get('iframe.help-and-guidance__iframe')
-    .its('0.contentDocument.body').should('not.be.empty')
-    .then(cy.wrap)
-}
-
 describe("Help and Guidance", { tags: ["@supervision", "@smoke-journey"] }, () => {
   beforeEach(() => {
     cy.loginAs("Case Manager");
@@ -13,7 +6,10 @@ describe("Help and Guidance", { tags: ["@supervision", "@smoke-journey"] }, () =
 
   it("content is accessible when expanded", () => {
     cy.get('#open-help-and-guidance-main-menu-link').click()
-    cy.wait(1000);
-    getIframeBody().find("#menu-item-2682").should("be.visible").click()
+    cy.wait(2000);
+    cy.frameLoaded(".help-and-guidance__iframe");
+    cy.enter(".help-and-guidance__iframe").then((getBody) => {
+      getBody().find("#menu-item-2682").click();
+    });
   })
 });
