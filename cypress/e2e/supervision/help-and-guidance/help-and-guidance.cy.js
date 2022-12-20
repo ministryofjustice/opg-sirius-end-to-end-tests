@@ -13,6 +13,7 @@ describe("Help and Guidance", { tags: ["@supervision", "@smoke-journey"] }, () =
 
   it("content is accessible when expanded", () => {
     cy.get('#open-help-and-guidance-main-menu-link').click()
-    getIframeBody().find("#menu-item-2682").click()
+    cy.wait(1000);
+    getIframeBody().find("#menu-item-2682").should("be.visible").click()
   })
 });
