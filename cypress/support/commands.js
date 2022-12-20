@@ -92,3 +92,7 @@ Cypress.Commands.add("postToApi", (url, data, retry) => {
 Cypress.Commands.add("putToApi", (url, data) => {
   sendToApi("PUT", url, data);
 });
+
+Cypress.Commands.add("getFromApi", (url) => {
+  sendToApi("GET", url);
+});
