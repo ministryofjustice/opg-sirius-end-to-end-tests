@@ -1,7 +1,9 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createAClient();
-  cy.addVisitForClient(cy.get("@clientId"));
+  cy.get("@clientId").then((clientId) => {
+    cy.addVisitForClient(clientId)
+  });
 });
 
 describe(
