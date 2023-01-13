@@ -1,10 +1,12 @@
 import { Visits } from "./visits-common.js";
 
 Cypress.Commands.add('addVisitForClient', (clientId) => {
+  let data = Visits.createAddVisitMinimalValues();
+
   try {
     cy.postToApi(
       `/api/v1/clients/${clientId}/visits`,
-      Visits.createAddVisitMinimalValues()
+      data
     ).its('body')
       .then((res) => {
         cy.wrap(res.visitId).as('visitId');
@@ -15,10 +17,11 @@ Cypress.Commands.add('addVisitForClient', (clientId) => {
 });
 
 Cypress.Commands.add('editVisitForClient', (clientId, visitId) => {
+  let data = Visits.createEditVisitReportDue();
   try {
     cy.postToApi(
       `/api/v1/clients/${clientId}/visits/${visitId}`,
-      Visits.createEditVisitReportDue()
+      data
     );
   } catch (e) {
     throw new Error('Unable to edit visit via API: ' + e);
