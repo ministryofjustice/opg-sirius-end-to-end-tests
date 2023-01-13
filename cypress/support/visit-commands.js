@@ -1,5 +1,7 @@
 import { Visits } from './visits';
 
+import { Visits } from "./visits-common.js";
+
 Cypress.Commands.add('addVisitForClient', (clientId) => {
   try {
     cy.postToApi(
