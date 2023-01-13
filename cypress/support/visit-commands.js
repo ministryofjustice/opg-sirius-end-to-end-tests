@@ -1,7 +1,10 @@
-import { Visits } from "./visits-common.js";
-
 Cypress.Commands.add('addVisitForClient', (clientId) => {
-  let data = Visits.createAddVisitMinimalValues();
+  let data = {
+    visitType: { handle: 'VT-SUP', label: 'Supervision' },
+    visitSubType: { handle: 'VST-PRO', label: 'Pro Visit' },
+    visitUrgency: { handle: 'VU-STAN', label: 'Standard' },
+    visitDueDate: null
+  };
 
   try {
     cy.postToApi(
@@ -13,17 +16,5 @@ Cypress.Commands.add('addVisitForClient', (clientId) => {
       });
   } catch (e) {
     throw new Error('Unable to create visit via API: ' + e);
-  }
-});
-
-Cypress.Commands.add('editVisitForClient', (clientId, visitId) => {
-  let data = Visits.createEditVisitReportDue();
-  try {
-    cy.postToApi(
-      `/api/v1/clients/${clientId}/visits/${visitId}`,
-      data
-    );
-  } catch (e) {
-    throw new Error('Unable to edit visit via API: ' + e);
   }
 });
