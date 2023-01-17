@@ -13,9 +13,11 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       require('@cypress/grep/src/plugin')(config);
+      
       on("task", {
         failed: require("cypress-failed-log/src/failed")(),
       });
+      return config;
     },
     baseUrl: "http://frontend-proxy",
   },
