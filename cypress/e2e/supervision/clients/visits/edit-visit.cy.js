@@ -19,7 +19,7 @@ describe(
       cy.get(".TABS_VISITS button").click();
 
       cy.contains("Supervision - Pro Visit - Standard");
-      cy.get(".actions-column-action-buttons").click();
+      cy.get("#actions-column-action-buttons").click();
 
       cy.contains("EDIT VISIT");
       cy.get("input[data-core-value='VPT-CLIENT']").click();
