@@ -20,7 +20,7 @@ describe(
 
       cy.contains("Supervision - Pro Visit - Standard");
       cy.get(".edit-visit-button").click();
-
+      cy.wait(30000);
       cy.get("input[data-core-value='VPT-CLIENT']").click();
       cy.get("button[type='submit']").click();
 
