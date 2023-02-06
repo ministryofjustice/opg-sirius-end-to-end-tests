@@ -41,15 +41,10 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().contains("button", "Create draft document").click();
     });
 
-    cy.wait(1000);
-
-    cy.frameLoaded(".tox-edit-area__iframe");
-    cy.enter(".tox-edit-area__iframe").then((getBody) => {
-      getBody().should("contain", "Dear Sponge");
-      getBody().should(
-        "contain",
-        "explanations of any transactions that are not detailed in their financial records"
-      );
+    cy.wait(3000);
+    cy.enter(".action-widget-content iframe").then((getBody) => {
+      getBody().contains("textarea", "Dear Sponge");
+      getBody().contains("textarea", "explanations of any transactions that are not detailed in their financial records");
     });
   });
 });
