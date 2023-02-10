@@ -16,11 +16,10 @@ describe(
       cy.get("@clientId").then((clientId) => {
         cy.visit(`/supervision/#/clients/${clientId}`);
         cy.contains("Ted Tedson");
+        cy.get(".TABS_DOCUMENTS").click();
+        cy.get(".filter-numbers > .number").should("have.text", 1);
+        cy.get("#select-all-documents-checkbox").check({ force: true });
       });
-
-      cy.get(".TABS_DOCUMENTS").click();
-      cy.get(".filter-numbers > .number").should("have.text", 1);
-      cy.get("#select-all-documents-checkbox").check({ force: true });
 
       cy.task('listContentsOfDownloadsFolder', Cypress.config("downloadsFolder")).then(beforeDownloadList => {
         cy.contains(".button", "Open").click().wait(1000);
