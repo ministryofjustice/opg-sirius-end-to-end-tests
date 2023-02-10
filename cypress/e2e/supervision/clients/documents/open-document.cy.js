@@ -42,12 +42,12 @@ describe(
       cy.get("@clientId").then((clientId) => {
         cy.visit(`/supervision/#/clients/${clientId}`);
         cy.contains("Ted Tedson");
-      });
-
-      cy.task('listContentsOfDownloadsFolder', Cypress.config("downloadsFolder")).then(() => {
         cy.get(".TABS_DOCUMENTS").click();
         cy.get(".filter-numbers > .number").should("have.text", 2);
         cy.get("#select-all-documents-checkbox").check({force: true});
+      });
+
+      cy.task('listContentsOfDownloadsFolder', Cypress.config("downloadsFolder")).then(() => {
         cy.intercept({
           method: 'GET',
           url: '/services/file-service/zip/**',
