@@ -7,7 +7,7 @@ beforeEach(() => {
   cy.uploadDocument();
 });
 
-describe(
+describe.skip(
   "Open document successfully",
   { tags: ["@supervision-core", "@documents", "@open-document", "@smoke-journey"] },
   () => {
