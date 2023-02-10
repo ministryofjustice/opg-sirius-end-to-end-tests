@@ -39,3 +39,6 @@ dev:
 
 dev-parallel:
 	docker run --rm -v "$(PWD)/test-results:/test-results" -e CYPRESS_BASE_URL="https://development.sirius.opg.service.justice.gov.uk/" sirius/end-to-end-tests:latest parallel
+
+dev-parallel-generate-weights:
+	docker run --rm -v "$(PWD)/test-results:/test-results" -v "$(PWD)/cypress:/home/node/cypress" -e CYPRESS_BASE_URL="https://development.sirius.opg.service.justice.gov.uk/" sirius/end-to-end-tests:latest parallel
