@@ -44,11 +44,10 @@ describe(
         cy.contains("Ted Tedson");
       });
 
-      cy.get(".TABS_DOCUMENTS").click();
-      cy.get(".filter-numbers > .number").should("have.text", 2);
-      cy.get("#select-all-documents-checkbox").check({force: true});
-
       cy.task('listContentsOfDownloadsFolder', Cypress.config("downloadsFolder")).then(() => {
+        cy.get(".TABS_DOCUMENTS").click();
+        cy.get(".filter-numbers > .number").should("have.text", 2);
+        cy.get("#select-all-documents-checkbox").check({force: true});
         cy.intercept({
           method: 'GET',
           url: '/services/file-service/zip/**',
@@ -60,7 +59,7 @@ describe(
           Cypress.config("downloadsFolder"),
           "download.zip"
         );
-        cy.verifyDownload("download.zip", {contains: true});
+        cy.wait(2000).verifyDownload("download.zip", {contains: true});
         cy.readFile(newFilePath);
       })
     })
