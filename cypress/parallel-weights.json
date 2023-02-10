@@ -1,98 +1,146 @@
 {
   "cypress/e2e/common/login.cy.js": {
-    "time": 11757,
-    "weight": 9
+    "time": 11480,
+    "weight": 8
   },
   "cypress/e2e/lpa/cases/administration.cy.js": {
-    "time": 12405,
+    "time": 13817,
     "weight": 10
   },
   "cypress/e2e/lpa/cases/allocate-case.cy.js": {
-    "time": 10305,
+    "time": 11068,
     "weight": 8
   },
   "cypress/e2e/lpa/cases/change-status.cy.js": {
-    "time": 10812,
+    "time": 13013,
     "weight": 9
   },
   "cypress/e2e/lpa/cases/complaints.cy.js": {
-    "time": 20466,
-    "weight": 17
+    "time": 18665,
+    "weight": 13
   },
   "cypress/e2e/lpa/cases/create-event.cy.js": {
-    "time": 12750,
-    "weight": 10
+    "time": 11313,
+    "weight": 8
   },
   "cypress/e2e/lpa/cases/create-relationship.cy.js": {
-    "time": 12479,
-    "weight": 10
+    "time": 13169,
+    "weight": 9
   },
   "cypress/e2e/lpa/cases/documents.cy.js": {
     "time": 8861,
     "weight": 7
   },
   "cypress/e2e/lpa/cases/epa.cy.js": {
-    "time": 16456,
-    "weight": 13
+    "time": 23539,
+    "weight": 17
+  },
+  "cypress/e2e/lpa/cases/investigations.cy.js": {
+    "time": 32702,
+    "weight": 24
   },
   "cypress/e2e/lpa/cases/lpa.cy.js": {
-    "time": 17895,
-    "weight": 15
+    "time": 22215,
+    "weight": 16
   },
   "cypress/e2e/lpa/cases/search.cy.js": {
-    "time": 7098,
+    "time": 6764,
     "weight": 5
   },
   "cypress/e2e/lpa/cases/tasks.cy.js": {
-    "time": 28177,
-    "weight": 23
+    "time": 29790,
+    "weight": 22
   },
   "cypress/e2e/lpa/cases/timeline.cy.js": {
-    "time": 6049,
-    "weight": 5
+    "time": 6067,
+    "weight": 4
   },
   "cypress/e2e/lpa/cases/warnings.cy.js": {
-    "time": 16919,
-    "weight": 14
+    "time": 20369,
+    "weight": 15
   },
   "cypress/e2e/lpa/donors/donor.cy.js": {
-    "time": 13984,
-    "weight": 11
+    "time": 17226,
+    "weight": 12
   },
   "cypress/e2e/lpa/donors/link.cy.js": {
-    "time": 12191,
-    "weight": 10
+    "time": 15284,
+    "weight": 11
+  },
+  "cypress/e2e/supervision-deputy-hub/navigation.cy.js": {
+    "time": 14822,
+    "weight": 11
+  },
+  "cypress/e2e/supervision-firm-deputy-hub/navigation.cy.js": {
+    "time": 12945,
+    "weight": 9
   },
   "cypress/e2e/supervision/clients/add-event.cy.js": {
-    "time": 6280,
+    "time": 7811,
     "weight": 5
   },
   "cypress/e2e/supervision/clients/add-new-client.cy.js": {
-    "time": 8817,
+    "time": 9808,
     "weight": 7
   },
+  "cypress/e2e/supervision/clients/documents/open-document.cy.js": {
+    "time": 24271,
+    "weight": 18
+  },
   "cypress/e2e/supervision/clients/edit-client.cy.js": {
-    "time": 28,
+    "time": 36,
     "weight": 0
   },
+  "cypress/e2e/supervision/clients/edit-finance-details.cy.js": {
+    "time": 13675,
+    "weight": 10
+  },
+  "cypress/e2e/supervision/clients/search.cy.js": {
+    "time": 5694,
+    "weight": 4
+  },
+  "cypress/e2e/supervision/clients/visits/edit-visit.cy.js": {
+    "time": 10813,
+    "weight": 8
+  },
   "cypress/e2e/supervision/dashboard/client-dashboard.cy.js": {
-    "time": 7172,
-    "weight": 6
+    "time": 11365,
+    "weight": 8
   },
   "cypress/e2e/supervision/dashboard/dashboard.cy.js": {
-    "time": 4147,
-    "weight": 3
+    "time": 5693,
+    "weight": 4
   },
   "cypress/e2e/supervision/dashboard/reassign-client.cy.js": {
-    "time": 9905,
+    "time": 10900,
     "weight": 8
   },
   "cypress/e2e/supervision/documents/download-multiple.cy.js": {
-    "time": 12551,
-    "weight": 10
+    "time": 12657,
+    "weight": 9
+  },
+  "cypress/e2e/supervision/help-and-guidance/help-and-guidance.cy.js": {
+    "time": 7303,
+    "weight": 5
   },
   "cypress/e2e/supervision/letters/create-letter.cy.js": {
-    "time": 17647,
+    "time": 18134,
+    "weight": 13
+  },
+  "cypress/e2e/supervision/navigation.cy.js": {
+    "time": 5803,
+    "weight": 4
+  },
+  "cypress/e2e/user-management/my-details.cy.js": {
+    "time": 2648,
+    "weight": 1
+  },
+  "cypress/e2e/user-management/navigation.cy.js": {
+    "time": 10051,
+    "weight": 7
+  },
+  "cypress/e2e/workflow/navigation.cy.js": {
+    "time": 19924,
     "weight": 14
   }
 }
