@@ -7,7 +7,7 @@ beforeEach(() => {
   cy.uploadDocument();
 });
 
-describe.skip(
+describe(
   "Open document successfully",
   { tags: ["@supervision-core", "@documents", "@open-document", "@smoke-journey"] },
   () => {
@@ -21,22 +21,22 @@ describe.skip(
         cy.get("#select-all-documents-checkbox").check({ force: true });
       });
 
-      cy.task('listContentsOfDownloadsFolder', Cypress.config("downloadsFolder")).then(beforeDownloadList => {
+      cy.task("listContentsOfDownloadsFolder", Cypress.config("downloadsFolder")).then(beforeDownloadList => {
         cy.contains(".button", "Open").click().wait(1000);
-        cy.task('listContentsOfDownloadsFolder', Cypress.config("downloadsFolder")).then(afterDownloadList => {
-          const newFilename = afterDownloadList.filter(file => !beforeDownloadList.includes(file))[0]
+        cy.task("listContentsOfDownloadsFolder", Cypress.config("downloadsFolder")).then(afterDownloadList => {
+          const newFilename = afterDownloadList.filter(file => !beforeDownloadList.includes(file))[0];
           const newFilePath = path.join(
             Cypress.config("downloadsFolder"),
             newFilename
           );
           cy.verifyDownload(newFilename, {contains: true});
-          cy.readFile(newFilePath)
-        })
-      })
-    })
+          cy.readFile(newFilePath);
+        });
+      });
+    });
 
     it("multiple document download", () => {
-      cy.uploadDocument()
+      cy.uploadDocument();
       cy.loginAs("Case Manager");
       cy.get("@clientId").then((clientId) => {
         cy.visit(`/supervision/#/clients/${clientId}`);
@@ -46,13 +46,13 @@ describe.skip(
         cy.get("#select-all-documents-checkbox").check({force: true});
       });
 
-      cy.task('listContentsOfDownloadsFolder', Cypress.config("downloadsFolder")).then(() => {
+      cy.task("listContentsOfDownloadsFolder", Cypress.config("downloadsFolder")).then(() => {
         cy.intercept({
-          method: 'GET',
-          url: '/services/file-service/zip/**',
-        }).as('fileServiceCall');
+          method: "GET",
+          url: "/services/file-service/zip/**",
+        }).as("fileServiceCall");
         cy.contains(".button", "Open").click().wait(1000);
-        cy.wait('@fileServiceCall').its('response.statusCode').should('equal', 200)
+        cy.wait("@fileServiceCall").its("response.statusCode").should("equal", 200);
 
         const newFilePath = path.join(
           Cypress.config("downloadsFolder"),
@@ -60,7 +60,7 @@ describe.skip(
         );
         cy.wait(2000).verifyDownload("download.zip", {contains: true});
         cy.readFile(newFilePath);
-      })
-    })
+      });
+    });
   });
 
