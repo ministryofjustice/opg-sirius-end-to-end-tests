@@ -1,6 +1,6 @@
 const { defineConfig } = require("cypress");
-const { verifyDownloadTasks } = require('cy-verify-downloads');
-const fs = require('fs');
+const { verifyDownloadTasks } = require("cy-verify-downloads");
+const fs = require("fs");
 
 module.exports = defineConfig({
   defaultCommandTimeout: 60000,
@@ -20,13 +20,13 @@ module.exports = defineConfig({
         failed: require("cypress-failed-log/src/failed")(),
       });
 
-      on('task', verifyDownloadTasks);
+      on("task", verifyDownloadTasks);
 
-      on('task', {
-        listContentsOfDownloadsFolder:  (downloadspath) => {
-          return fs.readdirSync(downloadspath)
+      on("task", {
+        listContentsOfDownloadsFolder: (downloadsPath) => {
+          return fs.readdirSync(downloadsPath);
         }
-      })
+      });
 
       return config;
     },
