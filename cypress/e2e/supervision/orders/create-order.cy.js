@@ -3,71 +3,17 @@ beforeEach(() => {
   cy.createAClient();
 })
 
-const createOrder = (orderType, orderSubType, orderDay, orderMonth, orderYear, optional) => {
-  cy.get("@clientId").then((clientId) => {
-    cy.visit(`/supervision/#/clients/${clientId}`);
-    cy.contains("Create order").click();
-    cy.get("#orderType")
-      .closest(".fieldset")
-      .contains(orderType)
-      .click();
-    cy.contains('Order subtype')
-      .closest(".fieldset")
-      .find("Select")
-      .select(orderSubType);
-    cy.get("@clientCourtReference").then((clientCourtReference) => {
-      cy.get('input[name="courtReference"]').clear().type(clientCourtReference);
-    });
-    cy.get('#fIELDLABELSORDERDATE_day').clear().type(orderDay);
-    cy.get('#fIELDLABELSORDERDATE_month').clear().type(orderMonth);
-    cy.get('#fIELDLABELSORDERDATE_year').clear().type(orderYear);
-    cy.get('#orderReceivedDate_day').clear().type(orderDay);
-    cy.get('#orderReceivedDate_month').clear().type(orderMonth);
-    cy.get('#orderReceivedDate_year').clear().type(orderYear);
-    if(optional) {
-      cy.get('#orderIssueDate_day').clear().type(orderDay);
-      cy.get('#orderIssueDate_month').clear().type(orderMonth);
-      cy.get('#orderIssueDate_year').clear().type(orderYear);
-      cy.get('#orderExpiryDate_day').clear().type(orderDay);
-      cy.get('#orderExpiryDate_month').clear().type(orderMonth);
-      cy.get('#orderExpiryDate_year').clear().type(orderYear);
-      cy.get('#clauseExpiryDate_day').clear().type(orderDay);
-      cy.get('#clauseExpiryDate_month').clear().type(orderMonth);
-      cy.get('#clauseExpiryDate_year').clear().type(orderYear);
-      cy.get('input[name="orderTitle"]').clear().type("Test");
-      cy.contains('How have the deputy/deputies been appointed?')
-        .closest(".fieldset")
-        .contains("Sole")
-        .click();
-      cy.window()
-        .its("tinyMCE")
-        .its("activeEditor")
-        .its("initialized", {timeout: 2000});
-      cy.window().then((win) => {
-        const pastedata =
-          '<p class="MsoNormal" style="margin: 0cm 0cm 11.25pt; font-size: 12pt; font-family: Calibri, sans-serif; text-align: justify; background: white;"><span style="font-size: 10.5pt; font-family: &quot;Open Sans&quot;, sans-serif;">Test</span></p>';
-        let editor = win.tinymce.activeEditor;
-        editor.dom.createRng();
-        editor.execCommand("mceInsertClipboardContent", false, {
-          content: pastedata,
-        });
-      });
-    }
-    cy.contains("Save & exit").click();
-  });
-};
-
 describe(
   "Create a new order",
   { tags: ["@supervision-core", "@order"] },
   () => {
-    it("creates a supervised pfa order in supervision with mandatory fields as system admin", () => {
+    it("creates a supervised pfa order in supervision with mandatory fields as a system admin", () => {
       cy.intercept({
         method: "GET",
         url: "/supervision-api/v1/bond-providers",
       }).as("bondProviderCall");
       cy.loginAs("System Admin");
-      createOrder("Property & affairs", "New deputy", "01", "01", "2022", false);
+      cy.createOrder("Property & affairs", "New deputy", "01/01/2022", false);
       cy.wait("@bondProviderCall").then(() => {
         cy.contains("Cancel").click();
       });
@@ -88,12 +34,12 @@ describe(
       cy.get(".order-received-date").contains("01/01/2022");
     });
 
-    it("creates a supervised pfa order in supervision with mandatory fields as allocations", () => {
+    it("creates a supervised pfa order in supervision with mandatory fields as an allocations user", () => {
       cy.intercept({
         method: "GET",
         url: "/supervision-api/v1/bond-providers",
       }).as("bondProviderCall");
-      createOrder("Property & affairs", "New deputy", "01", "01", "2022", false);
+      cy.createOrder("Property & affairs", "New deputy", "01/01/2022", false);
       cy.wait("@bondProviderCall").then(() => {
         cy.contains("Cancel").click();
       });
@@ -114,13 +60,13 @@ describe(
       cy.get(".order-received-date").contains("01/01/2022");
     });
 
-    it("creates a non supervised pfa order in supervision with mandatory fields as system admin", () => {
+    it("creates a non supervised pfa order in supervision with mandatory fields as a system admin", () => {
       cy.intercept({
         method: "GET",
         url: "/supervision-api/v1/bond-providers",
       }).as("bondProviderCall");
       cy.loginAs("System Admin");
-      createOrder("Property & affairs", "Guardianship", "01", "01", "2022", false);
+      cy.createOrder("Property & affairs", "Guardianship", "01/01/2022", false);
       cy.wait("@bondProviderCall").then(() => {
         cy.contains("Cancel").click();
       });
@@ -141,12 +87,12 @@ describe(
       cy.get(".order-received-date").contains("01/01/2022");
     });
 
-    it("creates a non supervised pfa order in supervision with mandatory fields as allocations", () => {
+    it("creates a non supervised pfa order in supervision with mandatory fields as an allocations user", () => {
       cy.intercept({
         method: "GET",
         url: "/supervision-api/v1/bond-providers",
       }).as("bondProviderCall");
-      createOrder("Property & affairs", "Guardianship", "01", "01", "2022", false);
+      cy.createOrder("Property & affairs", "Guardianship", "01/01/2022", false);
       cy.wait("@bondProviderCall").then(() => {
         cy.contains("Cancel").click();
       });
@@ -167,52 +113,52 @@ describe(
       cy.get(".order-received-date").contains("01/01/2022");
     });
 
-    it("creates a supervised h&w order in supervision with mandatory fields as system admin", () => {
+    it("creates a supervised h&w order in supervision with mandatory fields as a system admin", () => {
       cy.loginAs("System Admin");
-      createOrder("Health & welfare", "New deputy", "01", "01", "2022", false);
+      cy.createOrder("Health & welfare", "New deputy", "01/01/2022", false);
       cy.get(".TABS_ORDERS").click();
       cy.get("#order-table")
         .find("tr")
         .then((rows) => {
           expect(rows.length === 1);
-        })
+        });
       cy.get(".order-header-details-case-type").contains("H&W");
       cy.get(".order-header-details-case-sub-type").contains("New deputy");
       cy.get(".order-header-date").contains("01/01/2022");
       cy.get("@clientCourtReference").then((clientCourtReference) => {
         cy.get(".order-header-details-court-reference-number").contains(clientCourtReference);
       });
-      cy.contains("View full details").click()
+      cy.contains("View full details").click();
       cy.get(".order-date").contains("01/01/2022");
       cy.get(".order-received-date").contains("01/01/2022");
     });
 
-    it("creates a non supervised h&w order in supervision with mandatory fields as allocations", () => {
-      createOrder("Health & welfare", "Guardianship", "01", "01", "2022", false);
+    it("creates a non supervised h&w order in supervision with mandatory fields as an allocations user", () => {
+      cy.createOrder("Health & welfare", "Guardianship", "01/01/2022", false);
       cy.get(".TABS_ORDERS").click();
       cy.get("#order-table")
         .find("tr")
         .then((rows) => {
           expect(rows.length === 1);
-        })
+        });
       cy.get(".order-header-details-case-type").contains("H&W");
       cy.get(".order-header-details-case-sub-type").contains("Guardianship");
       cy.get(".order-header-date").contains("01/01/2022");
       cy.get("@clientCourtReference").then((clientCourtReference) => {
         cy.get(".order-header-details-court-reference-number").contains(clientCourtReference);
       });
-      cy.contains("View full details").click()
+      cy.contains("View full details").click();
       cy.get(".order-date").contains("01/01/2022");
       cy.get(".order-received-date").contains("01/01/2022");
     });
 
-    it("creates a supervised pfa order in supervision with mandatory and optional fields as system admin", () => {
+    it("creates a supervised pfa order in supervision with mandatory and optional fields as a system admin", () => {
       cy.intercept({
         method: "GET",
         url: "/supervision-api/v1/bond-providers",
       }).as("bondProviderCall");
       cy.loginAs("System Admin");
-      createOrder("Property & affairs", "New deputy", "01", "01", "2022", true);
+      cy.createOrder("Property & affairs", "New deputy", "01/01/2022", true);
       cy.wait("@bondProviderCall").then(() => {
         cy.contains("Cancel").click();
       });
@@ -221,14 +167,14 @@ describe(
         .find("tr")
         .then((rows) => {
           expect(rows.length === 1);
-        })
+        });
       cy.get(".order-header-details-case-type").contains("PFA");
       cy.get(".order-header-details-case-sub-type").contains("New deputy");
       cy.get(".order-header-date").contains("01/01/2022");
       cy.get("@clientCourtReference").then((clientCourtReference) => {
         cy.get(".order-header-details-court-reference-number").contains(clientCourtReference);
       });
-      cy.contains("View full details").click()
+      cy.contains("View full details").click();
       cy.get(".order-date").contains("01/01/2022");
       cy.get(".order-issue-date").contains("01/01/2022");
       cy.get(".order-expiry-date").contains("01/01/2022");
@@ -241,12 +187,12 @@ describe(
         .should("contain", "Order created");
     });
 
-    it("creates a supervised pfa order in supervision with mandatory and optional fields as allocations", () => {
+    it("creates a supervised pfa order in supervision with mandatory and optional fields as an allocations user", () => {
       cy.intercept({
         method: "GET",
         url: "/supervision-api/v1/bond-providers",
       }).as("bondProviderCall");
-      createOrder("Property & affairs", "New deputy", "01", "01", "2022", true);
+      cy.createOrder("Property & affairs", "New deputy", "01/01/2022", true);
       cy.wait("@bondProviderCall").then(() => {
         cy.contains("Cancel").click();
       });
@@ -255,14 +201,14 @@ describe(
         .find("tr")
         .then((rows) => {
           expect(rows.length === 1);
-        })
+        });
       cy.get(".order-header-details-case-type").contains("PFA");
       cy.get(".order-header-details-case-sub-type").contains("New deputy");
       cy.get(".order-header-date").contains("01/01/2022");
       cy.get("@clientCourtReference").then((clientCourtReference) => {
         cy.get(".order-header-details-court-reference-number").contains(clientCourtReference);
       });
-      cy.contains("View full details").click()
+      cy.contains("View full details").click();
       cy.get(".order-date").contains("01/01/2022");
       cy.get(".order-issue-date").contains("01/01/2022");
       cy.get(".order-expiry-date").contains("01/01/2022");
@@ -275,22 +221,22 @@ describe(
         .should("contain", "Order created");
     });
 
-    it("creates a supervised h&w order in supervision with mandatory and optional fields as system admin", () => {
+    it("creates a supervised h&w order in supervision with mandatory and optional fields as a system admin", () => {
       cy.loginAs("System Admin");
-      createOrder("Health & welfare", "New deputy", "01", "01", "2022", true);
+      cy.createOrder("Health & welfare", "New deputy", "01/01/2022", true);
       cy.get(".TABS_ORDERS").click();
       cy.get("#order-table")
         .find("tr")
         .then((rows) => {
           expect(rows.length === 1);
-        })
+        });
       cy.get(".order-header-details-case-type").contains("H&W");
       cy.get(".order-header-details-case-sub-type").contains("New deputy");
       cy.get(".order-header-date").contains("01/01/2022");
       cy.get("@clientCourtReference").then((clientCourtReference) => {
         cy.get(".order-header-details-court-reference-number").contains(clientCourtReference);
       });
-      cy.contains("View full details").click()
+      cy.contains("View full details").click();
       cy.get(".order-date").contains("01/01/2022");
       cy.get(".order-issue-date").contains("01/01/2022");
       cy.get(".order-expiry-date").contains("01/01/2022");
@@ -303,21 +249,21 @@ describe(
         .should("contain", "Order created");
     });
 
-    it("creates a supervised h&w order in supervision with mandatory and optional fields as allocations", () => {
-      createOrder("Health & welfare", "New deputy", "01", "01", "2022", true);
+    it("creates a supervised h&w order in supervision with mandatory and optional fields as an allocations user", () => {
+      cy.createOrder("Health & welfare", "New deputy", "01/01/2022", true);
       cy.get(".TABS_ORDERS").click();
       cy.get("#order-table")
         .find("tr")
         .then((rows) => {
           expect(rows.length === 1);
-        })
+        });
       cy.get(".order-header-details-case-type").contains("H&W");
       cy.get(".order-header-details-case-sub-type").contains("New deputy");
       cy.get(".order-header-date").contains("01/01/2022");
       cy.get("@clientCourtReference").then((clientCourtReference) => {
         cy.get(".order-header-details-court-reference-number").contains(clientCourtReference);
       });
-      cy.contains("View full details").click()
+      cy.contains("View full details").click();
       cy.get(".order-date").contains("01/01/2022");
       cy.get(".order-issue-date").contains("01/01/2022");
       cy.get(".order-expiry-date").contains("01/01/2022");
