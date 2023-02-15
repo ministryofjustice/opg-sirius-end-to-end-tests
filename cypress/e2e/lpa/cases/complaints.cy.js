@@ -24,6 +24,7 @@ describe("Complaints", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().find("#f-severity").click();
       getBody().find("#f-summary").type("Hey");
       getBody().find("#f-description").type("You know");
+      getBody().find("#f-receivedDate").type("2022-04-05");
       getBody().find("button[type=submit]").click();
     });
 
