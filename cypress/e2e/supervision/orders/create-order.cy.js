@@ -268,9 +268,9 @@ describe(
       cy.get(".order-issue-date").contains("01/01/2022");
       cy.get(".order-expiry-date").contains("01/01/2022");
       cy.get(".order-received-date").contains("01/01/2022");
-      cy.get(".order-title").contains("Test");
+      cy.get(".order-title").contains("Test Order Title");
       cy.get(".key-value-list__read-only").children().eq(19).contains("Sole");
-      cy.get(".notes-not-bold").contains("Test");
+      cy.get(".notes-not-bold").contains("Test note");
       cy.get(".TABS_TIMELINELIST").click();
       cy.get(".timeline-event-title", { timeout: 30000 })
         .should("contain", "Order created");

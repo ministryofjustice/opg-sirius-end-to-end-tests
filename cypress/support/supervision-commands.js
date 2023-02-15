@@ -32,7 +32,7 @@ Cypress.Commands.add("createOrder", (orderType, orderSubType, orderDate, optiona
       cy.get("#clauseExpiryDate_day").clear().type(orderDay);
       cy.get("#clauseExpiryDate_month").clear().type(orderMonth);
       cy.get("#clauseExpiryDate_year").clear().type(orderYear);
-      cy.get('input[name="orderTitle"]').clear().type("Test");
+      cy.get('input[name="orderTitle"]').clear().type("Test Order Title");
       cy.contains("How have the deputy/deputies been appointed?")
         .closest(".fieldset")
         .contains("Sole")
@@ -43,7 +43,7 @@ Cypress.Commands.add("createOrder", (orderType, orderSubType, orderDate, optiona
         .its("initialized", {timeout: 2000});
       cy.window().then((win) => {
         const pastedata =
-          '<p class="MsoNormal" style="margin: 0cm 0cm 11.25pt; font-size: 12pt; font-family: Calibri, sans-serif; text-align: justify; background: white;"><span style="font-size: 10.5pt; font-family: &quot;Open Sans&quot;, sans-serif;">Test</span></p>';
+          '<p class="MsoNormal" style="margin: 0cm 0cm 11.25pt; font-size: 12pt; font-family: Calibri, sans-serif; text-align: justify; background: white;"><span style="font-size: 10.5pt; font-family: &quot;Open Sans&quot;, sans-serif;">Test note</span></p>';
         let editor = win.tinymce.activeEditor;
         editor.dom.createRng();
         editor.execCommand("mceInsertClipboardContent", false, {
