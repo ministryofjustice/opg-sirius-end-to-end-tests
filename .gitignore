@@ -5,3 +5,4 @@ test-results/*.xml
 artifacts/
 multi-reporter-config.json
 runner-results
+cypress/downloads
