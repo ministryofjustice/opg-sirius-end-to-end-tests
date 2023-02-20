@@ -1,6 +1,6 @@
 SHELL = '/bin/bash'
 export DOCKER_BUILDKIT ?= 1
-export BUILD_TAG ?= latest
+export BUILD_TAG ?= v9.388.0-use-session-wrapper.1
 
 all: build scan local-run
 

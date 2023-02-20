@@ -3,7 +3,6 @@ require("cypress-wait-until");
 
 Cypress.Commands.add("login", (email) => {
   cy.visit("/auth/logout");
-  cy.clearCookies();
 
   cy.visit("/oauth/login");
 
