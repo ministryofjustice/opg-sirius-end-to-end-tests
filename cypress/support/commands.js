@@ -1,44 +1,35 @@
 require("cypress-iframe");
 require("cypress-wait-until");
 
-Cypress.Commands.add("login", (email, password) => {
+Cypress.Commands.add("login", (email) => {
   cy.visit("/auth/logout");
-  cy.clearCookies();
 
-  cy.request({
-    method: "POST",
-    url: "/",
-    form: true,
-    body: {
-      email: email,
-      password: password,
-      submit: "Sign In",
-      "OPG-Bypass-Membrane": 1,
-    },
-  });
+  cy.visit("/oauth/login");
+
+  cy.get('input[name="email"]').clear();
+  cy.get('input[name="email"]').type(email);
+  cy.get('[name="submit"]').click();
 });
 
 Cypress.Commands.add("loginAs", (user) => {
-  const userFiles = {
-    "Allocations User": "user/allocations.json",
-    "Case Manager": "user/case-manager.json",
-    "Finance Manager": "user/finance-manager.json",
-    "Finance Reporting User": "user/finance-reporting.json",
-    "LPA Manager": "user/lpa-manager.json",
-    "Lay User": "user/lay.json",
-    "System Admin": "user/system-admin.json",
-    "Public API": "user/public-api.json",
+  const emails = {
+    "Allocations User": "allocations@opgtest.com",
+    "Case Manager": "case.manager@opgtest.com",
+    "Finance Manager": "finance.manager@opgtest.com",
+    "Finance Reporting User": "finance.reporting@opgtest.com",
+    "LPA Manager": "2manager@opgtest.com",
+    "Lay User": "Lay1-14@opgtest.com",
+    "System Admin": "system.admin@opgtest.com",
+    "Public API": "publicapi@opgtest.com",
   };
 
-  let userFile = userFiles[user];
+  const email = emails[user];
 
-  if (userFile == null) {
+  if (email == null) {
     throw new Error("Could not find test login details for user " + user);
   }
 
-  return cy.fixture(userFile).then((user) => {
-    cy.login(user.email, user.password);
-  });
+  cy.login(email);
 });
 
 const getAndStoreTokens = () => {
