@@ -3,9 +3,8 @@ require("cypress-wait-until");
 
 Cypress.Commands.add("login", (email) => {
   cy.visit("/auth/logout");
-  cy.clearCookies();
 
-  cy.visit("/oauth/login");
+  cy.get('[alt="Sign in with Microsoft"]').click();
 
   cy.get('input[name="email"]').clear();
   cy.get('input[name="email"]').type(email);
