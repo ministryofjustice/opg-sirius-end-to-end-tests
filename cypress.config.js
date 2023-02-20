@@ -10,11 +10,11 @@ module.exports = defineConfig({
   viewportHeight: 1080,
   viewportWidth: 1920,
   reporterOptions: {
-    configFile: "reporter-config.json"
+    configFile: "reporter-config.json",
   },
   e2e: {
     setupNodeEvents(on, config) {
-      require('@cypress/grep/src/plugin')(config);
+      require("@cypress/grep/src/plugin")(config);
 
       on("task", {
         failed: require("cypress-failed-log/src/failed")(),
@@ -25,7 +25,14 @@ module.exports = defineConfig({
       on("task", {
         listContentsOfDownloadsFolder: (downloadsPath) => {
           return fs.readdirSync(downloadsPath);
-        }
+        },
+      });
+
+      on("task", {
+        log(message) {
+          console.log(message);
+          return null;
+        },
       });
 
       return config;
