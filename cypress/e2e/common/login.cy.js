@@ -40,7 +40,8 @@ describe("Log in page", { tags: ["@common", "@login"] }, () => {
   });
 
   it("should redirect to the Supervision dashboard when an Supervision user successfully logs in", () => {
-    cy.visit("/oauth/login");
+    cy.visit("/");
+    cy.get('[alt="Sign in with Microsoft"]').click();
 
     cy.get('input[name="email"]').clear();
     cy.get('input[name="email"]').type("lay1-1@opgtest.com");
