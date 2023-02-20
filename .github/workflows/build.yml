@@ -80,6 +80,15 @@ jobs:
           make local-end-to-end-tests
           make stop-sirius
 
+      - name: Save Logs
+        if: failure()
+        run: |
+          docker-compose logs frontend-proxy > artifacts/end-to-end-results/frontend-proxy.docker.log
+          docker-compose logs frontend > artifacts/end-to-end-results/frontend.docker.log
+          docker-compose logs frontend-app > artifacts/end-to-end-results/frontend-app.docker.log
+          docker-compose logs api > artifacts/end-to-end-results/api.docker.log
+          docker-compose logs api-app > artifacts/end-to-end-results/api-app.docker.log
+
       - name: Upload Logs & Screenshots
         uses: actions/upload-artifact@v3
         if: failure()
