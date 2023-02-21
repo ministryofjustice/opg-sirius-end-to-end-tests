@@ -12,8 +12,8 @@ describe("Create EPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.contains("Create EPA Case").click();
 
     cy.get(".action-widget-content:visible").within(() => {
-      cy.get("#epaDonorSignatureDate0").type("21/09/2007");
-      cy.get("#epaDonorNoticeGivenDate0").type("21/09/2007", { force: true });
+      cy.get("#epaDonorSignatureDate0").type("21/09/2007{esc}");
+      cy.get("#epaDonorNoticeGivenDate0").type("21/09/2007{esc}");
 
       cy.contains(
         "To your knowledge, has the donor made any other Enduring Powers of Attorney?"
