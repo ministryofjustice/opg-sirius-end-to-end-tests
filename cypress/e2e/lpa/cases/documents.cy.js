@@ -30,7 +30,7 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().contains("Select document inserts");
       getBody().find( "#f-IT-11-all").click();
-      getBody().find("button[type=submit]").click();
+      getBody().contains("button", "Continue").click();
     });
 
     cy.wait(1500);
