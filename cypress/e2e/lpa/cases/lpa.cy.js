@@ -11,7 +11,7 @@ describe("Create LPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.contains("Create LPA Case").click();
 
-    cy.get(".action-widget-content").within(() => {
+    cy.get(".action-widget-content:visible").within(() => {
       cy.contains("hw").click();
       cy.contains("Online").click();
       cy.get("#onlineLpaId0").type("A123456789");
@@ -100,7 +100,7 @@ describe("Edit LPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.contains("Edit Case").click();
 
-    cy.get(".action-widget-content").within(() => {
+    cy.get(".action-widget-content:visible").within(() => {
       cy.contains("LP2 Application Form").click();
       cy.contains("Add Correspondent").click();
 
