@@ -1,6 +1,6 @@
 SHELL = '/bin/bash'
 export DOCKER_BUILDKIT ?= 1
-export BUILD_TAG ?= latest
+export BUILD_TAG ?= v9.390.1-VEGA-1687-use-same-host-url.1
 
 all: build scan local-run
 
