@@ -4,6 +4,7 @@ describe("Create a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
+        cy.waitForStableDOM();
       });
     });
   });
@@ -49,6 +50,7 @@ describe("Complete a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
+        cy.waitForStableDOM();
       });
     });
   });
@@ -82,6 +84,7 @@ describe("Reassign a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
+        cy.waitForStableDOM();
       });
     });
   });
@@ -109,6 +112,8 @@ describe("Reassign a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().should("contain", "Create physical case file");
       getBody().contains("label", "Team").parent().find("input").check();
       getBody().find("#f-assigneeTeam").select("Card Payment Team");
+      cy.wrap(getBody);
+    }).then((getBody) => {
       getBody().find("button[type=submit]").click();
     });
 

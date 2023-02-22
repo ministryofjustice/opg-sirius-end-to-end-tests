@@ -19,6 +19,7 @@ describe("Warnings", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.loginAs("LPA Manager");
     cy.visit(this.url);
+    cy.waitForStableDOM();
     cy.wait(["@warningsRequest"]);
     cy.get(".person-panel-details").contains(this.donorUid);
   });

@@ -2,6 +2,7 @@ describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
   beforeEach(() => {
     cy.loginAs("Case Manager");
     cy.visit("/lpa/home");
+    cy.waitForStableDOM();
   });
 
   it("should create a new donor", function () {
@@ -56,6 +57,7 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it("should change the donor's firstname", function () {
     cy.visit(`/lpa/#/person/${this.donorId}`);
+    cy.waitForStableDOM();
     cy.intercept({ method: "GET", url: "/*/v1/persons/*" }).as("personRequest");
 
     cy.get(".person-panel-details").contains(this.donorUid);

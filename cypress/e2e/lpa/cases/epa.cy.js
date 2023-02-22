@@ -8,6 +8,7 @@ describe("Create EPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it("should create an EPA", function () {
     cy.visit(`/lpa/#/person/${this.donorId}`);
+    cy.waitForStableDOM();
 
     cy.contains("Create EPA Case").click();
 
@@ -43,6 +44,7 @@ describe("Create EPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
       "eventsRequest"
     );
     cy.visit(this.epaUrl);
+    cy.waitForStableDOM();
 
     cy.wait("@eventsRequest");
     cy.contains(".case-tile-status", "Pending");
@@ -70,6 +72,7 @@ describe("Create EPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.get(".timeline").contains(".timeline-event h2", "Attorney");
 
+    cy.waitForStableDOM();
     cy.get(".opg-icon").contains("CasePeople").click({ force: true });
 
     cy.get(".person-info")

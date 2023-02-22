@@ -4,6 +4,7 @@ describe("Allocate case", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
+        cy.waitForStableDOM();
       });
     });
   });

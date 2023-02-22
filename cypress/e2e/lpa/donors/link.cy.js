@@ -20,6 +20,7 @@ describe("Link donors", { tags: ["@lpa", "@smoke-journey"] }, () => {
     );
 
     cy.visit(`/lpa/#/person/${this.primaryDonorId}`);
+    cy.waitForStableDOM();
 
     cy.wait("@donorRequest");
     cy.wait("@eventsRequest");
