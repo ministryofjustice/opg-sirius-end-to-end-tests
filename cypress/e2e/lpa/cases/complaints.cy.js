@@ -42,6 +42,13 @@ describe("Complaints", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-resolution").click();
       getBody().find("#f-resolutionDate").type("2020-01-01");
+      getBody().find("#f-investigatingOfficer").type("Test Officer");
+      getBody().find("#f-complainantName").type("Test Complainant");
+      getBody().find("#f-category-01").click();
+      getBody().find("#f-subCategory-01").select("General Query");
+      getBody().find("#f-complainantCategory").select("LPA donor");
+      getBody().find("#f-origin").select("Phone call");
+      getBody().find("#f-resolutionDate").type("2020-01-01");
       getBody().find("button[type=submit]").click();
     });
 
