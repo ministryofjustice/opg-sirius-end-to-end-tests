@@ -5,7 +5,6 @@ describe("Complaints", { tags: ["@lpa", "@smoke-journey"] }, () => {
       cy.wrap(donorUid).as("donorUid");
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
-        cy.waitForStableDOM();
       });
     });
   });
@@ -18,6 +17,7 @@ describe("Complaints", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.wait(["@complaintsRequest"]);
     cy.get(".person-panel-details").contains(this.donorUid);
 
+    cy.waitForStableDOM();
     cy.get("#AddComplaint").click();
 
     cy.frameLoaded(".action-widget-content iframe");

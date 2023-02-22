@@ -15,10 +15,10 @@ describe("Timeline", { tags: ["@lpa", "@smoke-journey"] }, () => {
     );
 
     cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
-    cy.waitForStableDOM();
 
     cy.wait("@eventsRequest");
 
+    cy.waitForStableDOM();
     cy.get(".timeline-facets").contains("Task").click();
 
     cy.wait("@eventsRequest");

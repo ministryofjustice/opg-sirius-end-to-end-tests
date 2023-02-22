@@ -19,12 +19,12 @@ describe("Warnings", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.loginAs("LPA Manager");
     cy.visit(this.url);
-    cy.waitForStableDOM();
     cy.wait(["@warningsRequest"]);
     cy.get(".person-panel-details").contains(this.donorUid);
   });
 
   it("should create a warning", () => {
+    cy.waitForStableDOM();
     cy.contains("Create Warning").click();
 
     cy.frameLoaded(".action-widget-content iframe");
@@ -47,6 +47,7 @@ describe("Warnings", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("should remove a warning", () => {
+    cy.waitForStableDOM();
     cy.contains(".warnings .opg-icon", "CreateWarning").trigger("mouseover");
     cy.contains(".warnings .opg-icon", "RemoveWarning").click();
 

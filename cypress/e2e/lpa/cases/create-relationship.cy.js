@@ -16,7 +16,6 @@ describe("Create a relationship", { tags: ["@lpa", "@smoke-journey"] }, () => {
           );
 
           cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
-          cy.waitForStableDOM();
           cy.wrap(donorUid).as("donorUid");
           cy.wrap(otherDonorUid).as("otherDonorUid");
         });
@@ -31,6 +30,7 @@ describe("Create a relationship", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.get(".person-panel-details").contains(this.donorUid);
 
+    cy.waitForStableDOM();
     cy.get("#Workflow").click();
     cy.contains("Create Relationship").click();
 

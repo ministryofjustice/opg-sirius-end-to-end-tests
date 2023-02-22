@@ -14,7 +14,6 @@ describe(
 
     it("should change the LPA receipt date", function () {
       cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
-      cy.waitForStableDOM();
 
       cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as(
         "eventsRequest"
@@ -22,6 +21,8 @@ describe(
       cy.intercept({ method: "GET", url: "/*/v1/cases/*" }).as("casesRequest");
 
       cy.get(".case-tile-status").contains("Pending");
+
+      cy.waitForStableDOM();
 
       cy.get("uib-tab-heading[id=Administration]")
         .contains("Administration")

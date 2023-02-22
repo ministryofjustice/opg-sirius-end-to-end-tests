@@ -4,7 +4,6 @@ describe("Create a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
-        cy.waitForStableDOM();
       });
     });
   });
@@ -16,6 +15,7 @@ describe("Create a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.get(".case-tile-status").contains("Pending");
 
+    cy.waitForStableDOM();
     cy.contains("New Task").click();
 
     cy.frameLoaded(".action-widget-content iframe");
@@ -50,7 +50,6 @@ describe("Complete a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
-        cy.waitForStableDOM();
       });
     });
   });
@@ -65,6 +64,8 @@ describe("Complete a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.intercept({ method: "PUT", url: "/*/v1/*tasks/*" }).as("tasksRequest");
 
     cy.wait("@getTasksRequest");
+
+    cy.waitForStableDOM();
 
     cy.get(".task-list").scrollIntoView();
 
@@ -84,7 +85,6 @@ describe("Reassign a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
-        cy.waitForStableDOM();
       });
     });
   });
@@ -99,6 +99,8 @@ describe("Reassign a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.wait("@eventsRequest");
     cy.wait("@getTasksRequest");
+
+    cy.waitForStableDOM();
 
     cy.get(".task-list").scrollIntoView();
 

@@ -4,7 +4,6 @@ describe("Allocate case", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
-        cy.waitForStableDOM();
       });
     });
   });
@@ -16,6 +15,7 @@ describe("Allocate case", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.get(".case-tile-status").contains("Pending");
 
+    cy.waitForStableDOM();
     cy.get("#Workflow").click();
     cy.contains("Allocate Case").click();
 
