@@ -92,3 +92,16 @@ Cypress.Commands.add("postToApi", (url, data, retry) => {
 Cypress.Commands.add("putToApi", (url, data) => {
   sendToApi("PUT", url, data);
 });
+
+Cypress.Commands.add("enterWidgetIframe", (callback) => {
+  return cy.url().then(backTo => {
+    return cy.get(".action-widget-content iframe").then($frame => {
+      cy.visit($frame.attr('src'));
+
+      callback();
+      cy.visit(backTo)
+
+      return Promise.resolve();
+    });
+  });
+});
