@@ -10,6 +10,7 @@ describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
     );
     cy.wait("@tasksRequest");
 
+    cy.waitForStableDOM();
     cy.get("uib-tab-heading[id=Timeline]").contains("Timeline").click();
     cy.contains("Create Donor").click();
 
@@ -56,10 +57,12 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it("should change the donor's firstname", function () {
     cy.visit(`/lpa/#/person/${this.donorId}`);
+
     cy.intercept({ method: "GET", url: "/*/v1/persons/*" }).as("personRequest");
 
     cy.get(".person-panel-details").contains(this.donorUid);
 
+    cy.waitForStableDOM();
     cy.contains("Edit Donor").click();
     cy.frameLoaded(".action-widget-content iframe");
     cy.enter(".action-widget-content iframe").then((getBody) => {

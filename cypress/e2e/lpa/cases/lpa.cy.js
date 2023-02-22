@@ -9,6 +9,7 @@ describe("Create LPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
   it("should create a Health and Welfare LPA", function () {
     cy.visit(`/lpa/#/person/${this.donorId}`);
 
+    cy.waitForStableDOM();
     cy.contains("Create LPA Case").click();
 
     cy.get(".action-widget-content:visible").within(() => {
@@ -98,6 +99,7 @@ describe("Edit LPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.contains(".case-tile-status", "Pending");
 
+    cy.waitForStableDOM();
     cy.contains("Edit Case").click();
 
     cy.get(".action-widget-content:visible").within(() => {

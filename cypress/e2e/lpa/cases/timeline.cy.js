@@ -18,6 +18,7 @@ describe("Timeline", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.wait("@eventsRequest");
 
+    cy.waitForStableDOM();
     cy.get(".timeline-facets").contains("Task").click();
 
     cy.wait("@eventsRequest");

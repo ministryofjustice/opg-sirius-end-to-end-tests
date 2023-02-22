@@ -15,6 +15,7 @@ describe("Create a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.get(".case-tile-status").contains("Pending");
 
+    cy.waitForStableDOM();
     cy.contains("New Task").click();
 
     cy.frameLoaded(".action-widget-content iframe");
@@ -64,6 +65,8 @@ describe("Complete a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.wait("@getTasksRequest");
 
+    cy.waitForStableDOM();
+
     cy.get(".task-list").scrollIntoView();
 
     cy.get(".task-list").contains("Complete Create physical case file").click();
@@ -97,6 +100,8 @@ describe("Reassign a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.wait("@eventsRequest");
     cy.wait("@getTasksRequest");
 
+    cy.waitForStableDOM();
+
     cy.get(".task-list").scrollIntoView();
 
     cy.contains(
@@ -109,6 +114,8 @@ describe("Reassign a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().should("contain", "Create physical case file");
       getBody().contains("label", "Team").parent().find("input").check();
       getBody().find("#f-assigneeTeam").select("Card Payment Team");
+      cy.wrap(getBody);
+    }).then((getBody) => {
       getBody().find("button[type=submit]").click();
     });
 
