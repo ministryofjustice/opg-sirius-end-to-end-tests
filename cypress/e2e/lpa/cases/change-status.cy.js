@@ -11,6 +11,7 @@ before(() => {
 describe("Change LPA status", { tags: ["@lpa", "@smoke-journey"] }, () => {
   it("should change an LPA status", function () {
     cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
+    cy.waitForStableDOM();
 
     cy.get(".case-tile-status").contains("Pending");
 
@@ -20,14 +21,14 @@ describe("Change LPA status", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.frameLoaded(".action-widget-content iframe");
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-status").select("Perfect");
+      cy.wrap(getBody);
+    }).then((getBody) => {
       getBody().contains("button", "Submit").click();
     });
 
     cy.contains(".case-tile-status", "Perfect");
 
     cy.get(".timeline-event").first().contains("h2", "LPA (Create / Edit)");
-    cy.get(".timeline-event")
-      .first()
-      .contains("p", "Status changed from Pending to Perfect");
+    cy.get(".timeline-event").first().contains("p", "Status changed from Pending to Perfect");
   });
 });

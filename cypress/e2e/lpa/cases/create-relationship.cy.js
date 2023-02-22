@@ -16,6 +16,7 @@ describe("Create a relationship", { tags: ["@lpa", "@smoke-journey"] }, () => {
           );
 
           cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
+          cy.waitForStableDOM();
           cy.wrap(donorUid).as("donorUid");
           cy.wrap(otherDonorUid).as("otherDonorUid");
         });

@@ -6,6 +6,7 @@ describe("Create an investigation", { tags: ["@lpa", "@smoke-journey"] }, () => 
       cy.createLpa(donorId).then(({ id: lpaId, uId: lpaUid }) => {
         cy.wrap(lpaUid).as("lpaUid");
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
+        cy.waitForStableDOM();
       });
     });
   });
@@ -42,6 +43,7 @@ describe("Put investigation on hold", { tags: ["@lpa", "@smoke-journey"] }, () =
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
         cy.createInvestigation(lpaId);
+        cy.waitForStableDOM();
       });
     });
   });
@@ -56,6 +58,8 @@ describe("Put investigation on hold", { tags: ["@lpa", "@smoke-journey"] }, () =
       getBody().contains("Aspect")
       getBody().contains("10/04/2022")
       getBody().find("#f-reason").check();
+      cy.wrap(getBody);
+    }).then((getBody) => {
       getBody().find("button[type=submit]").click();
     });
 
@@ -74,6 +78,7 @@ describe("Take investigation off hold", { tags: ["@lpa", "@smoke-journey"] }, ()
         cy.createInvestigation(lpaId).then(({ id: investigationId }) => {
           cy.putInvestigationOnHold(investigationId);
         });
+        cy.waitForStableDOM();
       });
     });
   });
@@ -88,6 +93,8 @@ describe("Take investigation off hold", { tags: ["@lpa", "@smoke-journey"] }, ()
       getBody().contains("Aspect")
       getBody().contains("10/04/2022")
       getBody().contains("Police Investigation")
+      cy.wrap(getBody);
+    }).then((getBody) => {
       getBody().find("button[type=submit]").click();
     });
 

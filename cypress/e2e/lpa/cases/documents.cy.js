@@ -15,6 +15,7 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it("should create a draft with an insert", function () {
     cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
+    cy.waitForStableDOM();
     cy.wait("@casesRequest");
 
     cy.get("#CreateDocument").click();

@@ -5,6 +5,7 @@ describe("Complaints", { tags: ["@lpa", "@smoke-journey"] }, () => {
       cy.wrap(donorUid).as("donorUid");
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
+        cy.waitForStableDOM();
       });
     });
   });
