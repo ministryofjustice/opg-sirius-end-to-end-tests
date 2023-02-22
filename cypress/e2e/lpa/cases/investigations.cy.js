@@ -15,6 +15,7 @@ describe("Create an investigation", { tags: ["@lpa", "@smoke-journey"] }, () => 
     cy.get(".case-tile-container .case").contains(this.lpaUid);
 
     cy.contains("Add Investigation").click();
+    cy.wait(2000);
 
     cy.frameLoaded(".action-widget-content iframe");
     cy.enter(".action-widget-content iframe").then((getBody) => {
