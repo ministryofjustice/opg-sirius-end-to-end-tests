@@ -3,7 +3,8 @@ describe("Create an investigation", { tags: ["@lpa", "@smoke-journey"] }, () => 
     cy.loginAs("System Admin");
     cy.createDonor().then(({ id: donorId, uId: donorUid }) => {
       cy.wrap(donorUid).as("donorUid");
-      cy.createLpa(donorId).then(({ id: lpaId }) => {
+      cy.createLpa(donorId).then(({ id: lpaId, uId: lpaUid }) => {
+        cy.wrap(lpaUid).as("lpaUid");
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
       });
     });
@@ -11,6 +12,7 @@ describe("Create an investigation", { tags: ["@lpa", "@smoke-journey"] }, () => 
 
   it("should create an investigation on the LPA", function () {
     cy.get(".person-panel-details").contains(this.donorUid);
+    cy.get(".case-tile-container .case").contains(this.lpaUid);
 
     cy.contains("Add Investigation").click();
 

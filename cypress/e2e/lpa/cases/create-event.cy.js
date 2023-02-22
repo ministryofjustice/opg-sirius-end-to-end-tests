@@ -3,7 +3,8 @@ describe("Create an event", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.loginAs("LPA Manager");
     cy.createDonor().then(({ id: donorId, uId: donorUid }) => {
       cy.wrap(donorUid).as("donorUid");
-      cy.createLpa(donorId).then(({ id: lpaId }) => {
+      cy.createLpa(donorId).then(({ id: lpaId, uId: lpaUid }) => {
+        cy.wrap(lpaUid).as("lpaUid");
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
       });
     });
@@ -11,6 +12,7 @@ describe("Create an event", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it("should show the event", function () {
     cy.get(".person-panel-details").contains(this.donorUid);
+    cy.get(".case-tile-container .case").contains(this.lpaUid);
 
     cy.contains("New Event").click();
 

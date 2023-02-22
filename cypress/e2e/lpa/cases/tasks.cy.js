@@ -64,6 +64,8 @@ describe("Complete a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.wait("@getTasksRequest");
 
+    cy.get(".task-list").scrollIntoView();
+
     cy.get(".task-list").contains("Complete Create physical case file").click();
     cy.contains("Yes, confirm").click();
 
@@ -94,6 +96,8 @@ describe("Reassign a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.wait("@eventsRequest");
     cy.wait("@getTasksRequest");
+
+    cy.get(".task-list").scrollIntoView();
 
     cy.contains(
       ".task-actions .icon-button",
