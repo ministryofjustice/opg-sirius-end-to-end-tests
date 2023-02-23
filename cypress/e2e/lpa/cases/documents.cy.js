@@ -15,27 +15,27 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it("should create a draft with an insert", function () {
     cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
+    cy.waitForStableDOM();
 
     cy.wait("@casesRequest");
 
-    cy.waitForStableDOM();
     cy.get("#CreateDocument").click();
 
-    cy.frameLoaded(".action-widget-content iframe");
+    cy.waitForIframe(".action-widget-content iframe", { selector: "#f-templateId" });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-templateId").type("IT-AT-LPA");
       getBody().find(".autocomplete__menu").contains("IT-AT-LPA: Letter to attorney - LPA").click();
       getBody().find("button[type=submit]").click();
     });
 
-    cy.wait(1500);
+    cy.waitForIframe(".action-widget-content iframe", { content: "Select document inserts" });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().contains("Select document inserts");
       getBody().find( "#f-IT-11-all").click();
       getBody().contains("button", "Continue").click();
     });
 
-    cy.wait(1500);
+    cy.waitForIframe(".action-widget-content iframe", { content: "Select a recipient" });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().contains("Select a recipient");
       getBody().contains("label", "Bob Sponge");
@@ -43,7 +43,7 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().contains("button", "Create draft document").click();
     });
 
-    cy.wait(3000);
+    cy.waitForIframe(".action-widget-content iframe", { content: "explanations of any transactions" });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().contains("textarea", "Dear Sponge");
       getBody().contains("textarea", "explanations of any transactions that are not detailed in their financial records");

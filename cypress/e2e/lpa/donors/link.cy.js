@@ -28,12 +28,12 @@ describe("Link donors", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.contains("Workflow").click();
     cy.contains("Link Record").click();
 
-    cy.frameLoaded(".action-widget-content iframe");
+    cy.waitForIframe(".action-widget-content iframe", { selector: "#f-uid" });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-uid").type(`${this.secondaryDonorUid}{enter}`);
     });
 
-    cy.wait(3000);
+    cy.waitForIframe(".action-widget-content iframe", { selector: "button", content: "Link records" });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody()
         .find(`input[name="primary-id"][value="${this.primaryDonorId}"]`)

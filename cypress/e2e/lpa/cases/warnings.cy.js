@@ -27,7 +27,7 @@ describe("Warnings", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.waitForStableDOM();
     cy.contains("Create Warning").click();
 
-    cy.frameLoaded(".action-widget-content iframe");
+    cy.waitForIframe(".action-widget-content iframe", { selector: "#f-warningType" });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-warningType").select("Fee Issue");
       getBody().find("#f-warningText").type("This is a big problem");
