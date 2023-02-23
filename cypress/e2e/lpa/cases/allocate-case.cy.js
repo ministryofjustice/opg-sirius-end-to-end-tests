@@ -15,6 +15,7 @@ describe("Allocate case", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.get(".case-tile-status").contains("Pending");
 
+    cy.waitForStableDOM();
     cy.get("#Workflow").click();
     cy.contains("Allocate Case").click();
 

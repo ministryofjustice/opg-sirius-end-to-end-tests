@@ -22,6 +22,8 @@ describe(
 
       cy.get(".case-tile-status").contains("Pending");
 
+      cy.waitForStableDOM();
+
       cy.get("uib-tab-heading[id=Administration]")
         .contains("Administration")
         .click();
