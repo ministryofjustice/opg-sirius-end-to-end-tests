@@ -9,7 +9,7 @@ Cypress.Commands.add("login", (email) => {
 
   cy.get('input[name="email"]').clear();
   cy.get('input[name="email"]').type(email);
-  cy.get('[name="submit"]').click();
+  cy.get('[type="submit"]').click();
 });
 
 Cypress.Commands.add("loginAs", (user) => {
