@@ -52,3 +52,34 @@ const waitForStableDOM = (iteration = 0) => {
   })
 }
 Cypress.Commands.add("waitForStableDOM", () => waitForStableDOM());
+
+const waitForIframe = (selector, containing= { selector: null, content: null }, iteration = 0) => {
+  let pollInterval = 1000,
+    timeout = 60000;
+
+  cy.get(selector).as("iframe");
+  cy.get("@iframe").its('0.contentDocument').should('exist');
+  cy.get("@iframe").then((iframe) => {
+    let wait = (
+      'selector' in containing
+      && containing.selector
+      && iframe.contents().find(containing.selector).length === 0
+    ) || (
+      'content' in containing
+      && containing.content
+      && iframe.contents().find(":contains(" + containing.content + ")").length === 0
+    );
+
+    if (wait && iteration * pollInterval < timeout) {
+      cy.wait(pollInterval).then(() => {
+        waitForIframe(selector, containing, iteration + 1);
+      });
+    } else if (wait) {
+      throw Error('Timed out waiting for iFrame: ' + selector);
+    }
+  });
+}
+Cypress.Commands.add("waitForIframe", (selector, containing = {
+  selector: null,
+  content: null
+}) => waitForIframe(selector, containing));
