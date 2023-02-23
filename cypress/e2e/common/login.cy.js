@@ -33,7 +33,7 @@ describe("Log in page", { tags: ["@common", "@login"] }, () => {
 
     cy.get('input[name="email"]').clear();
     cy.get('input[name="email"]').type("unit.manager@opgtest.com");
-    cy.get('[name="submit"]').click();
+    cy.get('[type="submit"]').click();
 
     cy.contains("Home");
     cy.url().should("include", "/lpa/home");
@@ -44,7 +44,7 @@ describe("Log in page", { tags: ["@common", "@login"] }, () => {
 
     cy.get('input[name="email"]').clear();
     cy.get('input[name="email"]').type("lay1-1@opgtest.com");
-    cy.get('[name="submit"]').click();
+    cy.get('[type="submit"]').click();
 
     cy.contains("Welcome");
     cy.url().should("include", "/supervision/#/dashboard");
