@@ -6,6 +6,7 @@ describe("Create an event", { tags: ["@lpa", "@smoke-journey"] }, () => {
       cy.createLpa(donorId).then(({ id: lpaId, uId: lpaUid }) => {
         cy.wrap(lpaUid).as("lpaUid");
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
+        cy.waitForStableDOM();
       });
     });
   });

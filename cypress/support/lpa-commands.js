@@ -23,3 +23,32 @@ Cypress.Commands.add("createInvestigation", (lpaId) =>
 Cypress.Commands.add("putInvestigationOnHold", (investigationId) =>
   cy.postToApi(`/api/v1/investigations/${investigationId}/hold-periods`, {reason: "Police Investigation"}).its("body")
 );
+
+const waitForStableDOM = (iteration = 0) => {
+  let mutation,
+    pollInterval = 1000,
+    timeout = 60000;
+
+  const observer = new MutationObserver((m) => mutation = m);
+  observer.observe(document, {
+    subtree: true,
+    childList: true,
+    attributes: true,
+    attributeOldValue: true,
+    characterData: true,
+    characterDataOldValue: true,
+  });
+
+  cy.document().then(document => {
+    cy.wait(pollInterval).then(() => {
+      if (!mutation) {
+        return cy.wrap(document);
+      } else if (iteration * pollInterval < timeout) {
+        return waitForStableDOM(iteration + 1);
+      } else {
+        throw Error('Timed out waiting for stable DOM');
+      }
+    });
+  })
+}
+Cypress.Commands.add("waitForStableDOM", () => waitForStableDOM());

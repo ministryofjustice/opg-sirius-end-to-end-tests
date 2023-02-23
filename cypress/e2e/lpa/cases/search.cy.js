@@ -11,6 +11,7 @@ describe("Searching for a case", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it("selected search result navigates user to the correct case", function () {
     cy.visit(`/lpa/home`);
+    cy.waitForStableDOM();
 
     cy.get("#searchKeyword").type(`${this.lpaUid}`);
     cy.get(".search-form > form").submit();

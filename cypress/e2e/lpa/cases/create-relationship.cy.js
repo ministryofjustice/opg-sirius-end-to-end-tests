@@ -30,6 +30,7 @@ describe("Create a relationship", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.get(".person-panel-details").contains(this.donorUid);
 
+    cy.waitForStableDOM();
     cy.get("#Workflow").click();
     cy.contains("Create Relationship").click();
 
