@@ -57,10 +57,11 @@ describe("Complete a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it("a task completed timeline event is recorded", () => {
     cy.get(".task-list").scrollIntoView();
-    cy.get(".task-list").contains("Complete Create physical case file").click().then(() => {
-      cy.contains("Yes, confirm").click();
-      cy.contains(".timeline-event", "Create physical case file Completed");
-    });
+    cy.get(".task-list").contains("Complete Create physical case file").as("taskButton");
+    cy.get("@taskButton").click();
+    cy.contains("Yes, confirm").as("confirmButton");
+    cy.get("@confirmButton").click();
+    cy.contains(".timeline-event", "Create physical case file Completed");
   });
 });
 
