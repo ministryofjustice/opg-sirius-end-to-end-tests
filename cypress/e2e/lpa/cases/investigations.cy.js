@@ -18,7 +18,7 @@ describe("Create an investigation", { tags: ["@lpa", "@smoke-journey"] }, () => 
     cy.contains("Add Investigation").click();
     cy.wait(2000);
 
-    cy.frameLoaded(".action-widget-content iframe");
+    cy.frameLoaded(".action-widget-content iframe", { url: 'create-investigation' });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-title").type("test title");
       getBody().find("#f-information").type("some test info");
@@ -52,7 +52,7 @@ describe("Put investigation on hold", { tags: ["@lpa", "@smoke-journey"] }, () =
     cy.get(".investigation-item").contains("Objections").click();
     cy.wait(2000);
 
-    cy.frameLoaded(".action-widget-content iframe");
+    cy.frameLoaded(".action-widget-content iframe", { url: 'investigation-hold' });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().contains("testing title")
       getBody().contains("Aspect")
@@ -87,7 +87,7 @@ describe("Take investigation off hold", { tags: ["@lpa", "@smoke-journey"] }, ()
     cy.get(".investigation-item").contains("Objections").click();
     cy.wait(2000);
 
-    cy.frameLoaded(".action-widget-content iframe");
+    cy.frameLoaded(".action-widget-content iframe", { url: 'investigation-hold' });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().contains("testing title")
       getBody().contains("Aspect")
