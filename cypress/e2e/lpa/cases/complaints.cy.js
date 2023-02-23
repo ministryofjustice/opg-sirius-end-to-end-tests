@@ -20,7 +20,7 @@ describe("Complaints", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.waitForStableDOM();
     cy.get("#AddComplaint").click();
 
-    cy.frameLoaded(".action-widget-content iframe");
+    cy.waitForIframe(".action-widget-content iframe", { selector: "#f-severity" });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-severity").click();
       getBody().find("#f-summary").type("Hey");
@@ -37,9 +37,7 @@ describe("Complaints", { tags: ["@lpa", "@smoke-journey"] }, () => {
       .find("h3")
       .click();
 
-    cy.wait(3000);
-
-    cy.frameLoaded(".action-widget-content iframe");
+    cy.waitForIframe(".action-widget-content iframe", { selector: "#f-resolution" });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-resolution").click();
       getBody().find("#f-resolutionDate").type("2020-01-01");
