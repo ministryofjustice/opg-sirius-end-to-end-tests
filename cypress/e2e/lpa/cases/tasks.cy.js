@@ -50,32 +50,17 @@ describe("Complete a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
+        cy.waitForStableDOM();
       });
     });
   });
 
   it("a task completed timeline event is recorded", () => {
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as(
-      "eventsRequest"
-    );
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*/tasks*" }).as(
-      "getTasksRequest"
-    );
-    cy.intercept({ method: "PUT", url: "/*/v1/*tasks/*" }).as("tasksRequest");
-
-    cy.wait("@getTasksRequest");
-
-    cy.waitForStableDOM();
-
     cy.get(".task-list").scrollIntoView();
-
-    cy.get(".task-list").contains("Complete Create physical case file").click();
-    cy.contains("Yes, confirm").click();
-
-    cy.wait("@eventsRequest");
-    cy.wait("@tasksRequest");
-
-    cy.contains(".timeline-event", "Create physical case file Completed");
+    cy.get(".task-list").contains("Complete Create physical case file").click().then(() => {
+      cy.contains("Yes, confirm").click();
+      cy.contains(".timeline-event", "Create physical case file Completed");
+    });
   });
 });
 
@@ -85,25 +70,13 @@ describe("Reassign a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
         cy.visit(`/lpa/#/person/${donorId}/${lpaId}`);
+        cy.waitForStableDOM();
       });
     });
   });
 
   it("a task reassign timeline event is recorded", () => {
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as(
-      "eventsRequest"
-    );
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*/tasks*" }).as(
-      "getTasksRequest"
-    );
-
-    cy.wait("@eventsRequest");
-    cy.wait("@getTasksRequest");
-
-    cy.waitForStableDOM();
-
     cy.get(".task-list").scrollIntoView();
-
     cy.contains(
       ".task-actions .icon-button",
       "Allocate Create physical case file"
@@ -118,8 +91,6 @@ describe("Reassign a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     }).then((getBody) => {
       getBody().find("button[type=submit]").click();
     });
-
-    cy.wait("@eventsRequest");
 
     cy.contains(
       ".timeline-event",
