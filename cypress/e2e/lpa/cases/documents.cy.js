@@ -15,12 +15,13 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it("should create a draft with an insert", function () {
     cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
+    cy.waitForStableDOM();
 
     cy.wait("@casesRequest");
 
-    cy.waitForStableDOM();
     cy.get("#CreateDocument").click();
 
+    cy.wait(1500);
     cy.frameLoaded(".action-widget-content iframe");
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-templateId").type("IT-AT-LPA");
@@ -28,18 +29,21 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().find("button[type=submit]").click();
     });
 
-    cy.wait(1500);
+    cy.wait(3000);
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().contains("Select document inserts");
       getBody().find( "#f-IT-11-all").click();
+      cy.wrap(getBody);
+    }).then((getBody) => {
       getBody().contains("button", "Continue").click();
     });
 
-    cy.wait(1500);
+    cy.wait(3000);
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().contains("Select a recipient");
       getBody().contains("label", "Bob Sponge");
       getBody().find( "[data-module='recipient-checkbox']").click();
+    }).then((getBody) => {
       getBody().contains("button", "Create draft document").click();
     });
 

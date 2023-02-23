@@ -77,11 +77,13 @@ describe("Reassign a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("a task reassign timeline event is recorded", () => {
-    cy.get(".task-list").scrollIntoView();
-    cy.contains(
-      ".task-actions .icon-button",
-      "Allocate Create physical case file"
-    ).click();
+    cy.get(".task-list").scrollIntoView().then(() => {
+      cy.contains(
+        ".task-actions .icon-button",
+        "Allocate Create physical case file"
+      ).as("allocateButton");
+      cy.get("@allocateButton").click();
+    });
 
     cy.frameLoaded(".action-widget-content iframe");
     cy.enter(".action-widget-content iframe").then((getBody) => {
