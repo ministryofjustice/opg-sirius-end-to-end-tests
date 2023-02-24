@@ -14,14 +14,14 @@ describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.get("uib-tab-heading[id=Timeline]").contains("Timeline").click();
     cy.contains("Create Donor").click();
 
-    cy.frameLoaded(".action-widget-content iframe");
+    cy.waitForIframe(".action-widget-content iframe", { selector: "#f-firstname" });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-firstname").type("Spongebob");
       getBody().find("#f-surname").type("Squarepants");
       getBody().find("button[type=submit]").click();
     });
 
-    cy.wait(1000);
+    cy.waitForIframe(".action-widget-content iframe", { content: "View donor" });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().contains(/Person (\d+(-|)){3} was created/);
 
@@ -64,7 +64,7 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.waitForStableDOM();
     cy.contains("Edit Donor").click();
-    cy.frameLoaded(".action-widget-content iframe");
+    cy.waitForIframe(".action-widget-content iframe", { selector: "#f-firstname" });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-firstname").clear().type("Patrick");
       getBody().find("button[type=submit]").click();
