@@ -24,17 +24,13 @@ describe("Create a relationship", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("should show the relationship", function () {
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*/references" }).as(
-      "referenceRequest"
-    );
+    cy.waitForStableDOM();
 
     cy.get(".person-panel-details").contains(this.donorUid);
-
-    cy.waitForStableDOM();
     cy.get("#Workflow").click();
     cy.contains("Create Relationship").click();
 
-    cy.frameLoaded(".action-widget-content iframe");
+    cy.waitForIframe(".action-widget-content iframe", { selector: '#f-search' });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       cy.get("@otherDonorUid").then((uid) => {
         getBody().find("#f-search").type(uid);
@@ -43,8 +39,6 @@ describe("Create a relationship", { tags: ["@lpa", "@smoke-journey"] }, () => {
         getBody().find("button[type=submit]").click();
       });
     });
-
-    cy.wait("@referenceRequest");
 
     cy.contains(
       ".case-summary",

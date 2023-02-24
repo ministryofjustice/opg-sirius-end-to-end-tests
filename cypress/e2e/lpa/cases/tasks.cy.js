@@ -9,13 +9,9 @@ describe("Create a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("should show the task", () => {
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*/cases" }).as(
-      "casesRequest"
-    );
+    cy.waitForStableDOM();
 
     cy.get(".case-tile-status").contains("Pending");
-
-    cy.waitForStableDOM();
     cy.contains("New Task").click();
 
     cy.waitForIframe(".action-widget-content iframe", { selector: "#f-taskType" });
@@ -29,16 +25,12 @@ describe("Create a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().find("button[type=submit]").click();
     });
 
-    cy.wait("@casesRequest");
-
-    cy.get(".task-list", { timeout: 10000 });
-    cy.contains(".task-list-task", "Donor has moved")
+    cy.contains(".task-list .task-list-task", "Donor has moved")
       .should("contain", "Change of Address")
       .should("contain", "Assigned to Complaints Team")
       .should("contain", "To be completed by 01 January 9999");
 
-    cy.get(".timeline .timeline-event", { timeout: 10000 });
-    cy.contains(".timeline-event", "Change of Address")
+    cy.contains(".timeline .timeline-event", "Change of Address")
       .should("contain", "now assigned to Complaints Team")
       .should("contain", "Donor has moved — New address is somewhere else");
   });

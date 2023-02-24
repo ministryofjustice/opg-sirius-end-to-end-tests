@@ -18,11 +18,9 @@ describe("Change LPA status", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.contains("LPA (Create / Edit)");
 
     cy.contains("Change Status").click();
-    cy.frameLoaded(".action-widget-content iframe");
+    cy.waitForIframe(".action-widget-content iframe", { selector: '#f-status' });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-status").select("Perfect");
-      cy.wrap(getBody);
-    }).then((getBody) => {
       getBody().contains("button", "Submit").click();
     });
 
