@@ -1,9 +1,5 @@
 describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
   beforeEach(() => {
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*/cases" }).as(
-      "casesRequest"
-    );
-
     cy.loginAs("LPA Manager");
     cy.createDonor().then(({ id: donorId }) => {
       cy.createLpa(donorId).then(({ id: lpaId }) => {
@@ -16,8 +12,6 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
   it("should create a draft with an insert", function () {
     cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
     cy.waitForStableDOM();
-
-    cy.wait("@casesRequest");
 
     cy.get("#CreateDocument").click();
 

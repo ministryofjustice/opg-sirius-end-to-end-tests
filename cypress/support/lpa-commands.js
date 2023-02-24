@@ -27,7 +27,7 @@ Cypress.Commands.add("putInvestigationOnHold", (investigationId) =>
 const waitForStableDOM = () => {
   cy.document().then((document) => {
     let timeout = 60000,
-      pollInterval = 500,
+      pollInterval = 1000,
       mutations = [],
       observer = new MutationObserver((m) => mutations = m),
       sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay)),

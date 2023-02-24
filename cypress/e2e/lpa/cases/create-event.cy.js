@@ -17,7 +17,7 @@ describe("Create an event", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.contains("New Event").click();
 
-    cy.frameLoaded(".action-widget-content iframe");
+    cy.waitForIframe(".action-widget-content iframe", { selector: '#f-type' });
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-type").select("Application returned");
       getBody().find("#f-name").type("Sent back");
@@ -25,8 +25,7 @@ describe("Create an event", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().find("button[type=submit]").click();
     });
 
-    cy.get(".timeline .timeline-event", { timeout: 10000 });
-    cy.contains(".timeline-event", "Application returned")
+    cy.contains(".timeline .timeline-event", "Application returned")
       .should("contain", "Sent back")
       .should("contain", "For good reasons");
   });

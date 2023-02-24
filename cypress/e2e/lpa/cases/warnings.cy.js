@@ -10,21 +10,13 @@ describe("Warnings", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   beforeEach(function () {
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*/warnings" }).as(
-      "warningsRequest"
-    );
-    cy.intercept({ method: "DELETE", url: "/*/v1/warnings/*" }).as(
-      "deleteRequest"
-    );
-
     cy.loginAs("LPA Manager");
     cy.visit(this.url);
-    cy.wait(["@warningsRequest"]);
+    cy.waitForStableDOM();
     cy.get(".person-panel-details").contains(this.donorUid);
   });
 
   it("should create a warning", () => {
-    cy.waitForStableDOM();
     cy.contains("Create Warning").click();
 
     cy.waitForIframe(".action-widget-content iframe", { selector: "#f-warningType" });
@@ -33,8 +25,6 @@ describe("Warnings", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().find("#f-warningText").type("This is a big problem");
       getBody().find("button[type=submit]").click();
     });
-
-    cy.wait("@warningsRequest");
 
     cy.contains(".warning-item", "Fee Issue").should(
       "contain",
@@ -47,12 +37,8 @@ describe("Warnings", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("should remove a warning", () => {
-    cy.waitForStableDOM();
     cy.contains(".warnings .opg-icon", "CreateWarning").trigger("mouseover");
     cy.contains(".warnings .opg-icon", "RemoveWarning").click();
-
-    cy.wait("@deleteRequest");
-
     cy.contains(".warnings", "No warnings in place");
     cy.contains(".timeline-event", "Warning removed by atwo manager");
   });
