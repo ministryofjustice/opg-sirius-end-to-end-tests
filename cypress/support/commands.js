@@ -2,7 +2,7 @@ require("cypress-iframe");
 require("cypress-wait-until");
 
 Cypress.Commands.add("login", (email) => {
-  cy.visit("/auth/logout");
+  cy.visit("/auth/logout", { failOnStatusCode: false });
   cy.clearCookies();
 
   cy.visit("/oauth/login");
