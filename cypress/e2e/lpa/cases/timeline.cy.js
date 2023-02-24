@@ -10,15 +10,12 @@ describe("Timeline", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("should filter events", function () {
+    cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
+    cy.waitForStableDOM();
+
     cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as(
       "eventsRequest"
     );
-
-    cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
-
-    cy.wait("@eventsRequest");
-
-    cy.waitForStableDOM();
     cy.get(".timeline-facets").contains("Task").click();
 
     cy.wait("@eventsRequest");

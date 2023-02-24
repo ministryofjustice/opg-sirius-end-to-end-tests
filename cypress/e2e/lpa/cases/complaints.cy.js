@@ -10,14 +10,9 @@ describe("Complaints", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("should add and edit a complaint", function () {
-    cy.intercept({ method: "GET", url: "/*/v1/lpas/*/complaints" }).as(
-      "complaintsRequest"
-    );
-
-    cy.wait(["@complaintsRequest"]);
-    cy.get(".person-panel-details").contains(this.donorUid);
-
     cy.waitForStableDOM();
+
+    cy.get(".person-panel-details").contains(this.donorUid);
     cy.get("#AddComplaint").click();
 
     cy.waitForIframe(".action-widget-content iframe", { selector: "#f-severity" });
@@ -29,7 +24,6 @@ describe("Complaints", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().find("button[type=submit]").click();
     });
 
-    cy.wait("@complaintsRequest");
     cy.contains(".timeline-event", "Complaint").should("contain", "You know");
 
     cy.contains(".complaint-item", "Minor: Hey")
@@ -51,7 +45,6 @@ describe("Complaints", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().find("button[type=submit]").click();
     });
 
-    cy.wait("@complaintsRequest");
     cy.contains(".complaint-item", "Minor: Hey")
       .should("contain", "You know")
       .should("contain", "complaint upheld on 01/01/2020");
