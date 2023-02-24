@@ -40,15 +40,11 @@ describe("Create EPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
   });
 
   it("should add an attorney to the EPA", function () {
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as(
-      "eventsRequest"
-    );
     cy.visit(this.epaUrl);
+    cy.waitForStableDOM();
 
-    cy.wait("@eventsRequest");
     cy.contains(".case-tile-status", "Pending");
 
-    cy.waitForStableDOM();
     cy.contains("Edit Case").click();
 
     cy.get(".action-widget-content:visible").within(() => {
@@ -68,11 +64,9 @@ describe("Create EPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
       cy.contains("Save and Exit").click();
     });
 
-    cy.wait("@eventsRequest");
+    cy.contains(".timeline .timeline-event h2", "Attorney");
 
-    cy.get(".timeline").contains(".timeline-event h2", "Attorney");
-
-    cy.get(".opg-icon").contains("CasePeople").click({ force: true });
+    cy.contains(".opg-icon", "CasePeople").click({ force: true });
 
     cy.get(".person-info")
       .contains("Attorney")

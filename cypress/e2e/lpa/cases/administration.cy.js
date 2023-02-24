@@ -14,30 +14,20 @@ describe(
 
     it("should change the LPA receipt date", function () {
       cy.visit(`/lpa/#/person/${this.donorId}/${this.lpaId}`);
-
-      cy.intercept({ method: "GET", url: "/*/v1/persons/*/events*" }).as(
-        "eventsRequest"
-      );
-      cy.intercept({ method: "GET", url: "/*/v1/cases/*" }).as("casesRequest");
+      cy.waitForStableDOM();
 
       cy.get(".case-tile-status").contains("Pending");
-
-      cy.waitForStableDOM();
 
       cy.get("uib-tab-heading[id=Administration]")
         .contains("Administration")
         .click();
       cy.contains("Edit Dates").click();
 
-      cy.wait("@casesRequest");
-
-      cy.frameLoaded(".action-widget-content iframe");
+      cy.waitForIframe(".action-widget-content iframe", { selector: '#f-receiptDate' });
       cy.enter(".action-widget-content iframe").then((getBody) => {
         getBody().find("#f-receiptDate").clear().type("2019-04-13");
         getBody().find("button[type=submit]").click();
       });
-
-      cy.wait("@eventsRequest");
 
       cy.contains(
         ".timeline-event",

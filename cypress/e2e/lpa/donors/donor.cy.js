@@ -2,15 +2,10 @@ describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
   beforeEach(() => {
     cy.loginAs("Case Manager");
     cy.visit("/lpa/home");
+    cy.waitForStableDOM();
   });
 
   it("should create a new donor", function () {
-    cy.intercept({ method: "GET", url: "/*/v1/assignees/*/tasks*" }).as(
-      "tasksRequest"
-    );
-    cy.wait("@tasksRequest");
-
-    cy.waitForStableDOM();
     cy.get("uib-tab-heading[id=Timeline]").contains("Timeline").click();
     cy.contains("Create Donor").click();
 
@@ -57,12 +52,10 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
   it("should change the donor's firstname", function () {
     cy.visit(`/lpa/#/person/${this.donorId}`);
-
-    cy.intercept({ method: "GET", url: "/*/v1/persons/*" }).as("personRequest");
+    cy.waitForStableDOM();
 
     cy.get(".person-panel-details").contains(this.donorUid);
 
-    cy.waitForStableDOM();
     cy.contains("Edit Donor").click();
     cy.waitForIframe(".action-widget-content iframe", { selector: "#f-firstname" });
     cy.enter(".action-widget-content iframe").then((getBody) => {

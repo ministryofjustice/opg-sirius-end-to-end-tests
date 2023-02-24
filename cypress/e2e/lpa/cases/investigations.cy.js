@@ -11,10 +11,11 @@ describe("Create an investigation", { tags: ["@lpa", "@smoke-journey"] }, () => 
   });
 
   it("should create an investigation on the LPA", function () {
+    cy.waitForStableDOM();
+
     cy.get(".person-panel-details").contains(this.donorUid);
     cy.get(".case-tile-container .case").contains(this.lpaUid);
 
-    cy.waitForStableDOM();
     cy.contains("Add Investigation").click();
 
     cy.waitForIframe(".action-widget-content iframe", { selector: "#f-title" });
@@ -26,8 +27,7 @@ describe("Create an investigation", { tags: ["@lpa", "@smoke-journey"] }, () => 
       getBody().find("button[type=submit]").click();
     });
 
-    cy.get(".timeline .timeline-event", { timeout: 10000 });
-    cy.contains(".timeline-event", "Investigation")
+    cy.contains(".timeline .timeline-event", "Investigation")
       .should("contain", "test title")
       .should("contain", "some test info")
       .should("contain", "Aspect")
