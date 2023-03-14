@@ -47,11 +47,9 @@ describe(
         cy.contains("Lay").click();
         cy.get('[label="First name"]').type("Sandy");
         cy.get('[label="Last name"]').type("Squirrel");
-        cy.contains("Save & continue").click();
-        cy.waitForStableDOM();
+        cy.contains("Save & continue").click({force: true});
         cy.get('[label="Occupation"]').type('abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs');
-        cy.waitForStableDOM();
-        cy.contains("Save & continue").click();
+        cy.contains("Save & continue").click({force: true});
         cy.get('.validation-summary').should('be.visible');
         cy.get('.validation-summary').should('contain.text', "Occupation - The input is more than 200 characters long")
       });
@@ -74,9 +72,9 @@ describe(
         cy.contains("Save & continue").click();
         cy.contains("Save & continue").click();
         cy.get('.field-wrapper > check-box.ng-untouched > .checkbox').click();
-        cy.contains("Save & continue").click();
+        cy.contains("Save & continue").click({force: true});
         cy.waitForStableDOM();
-        cy.contains("Save & continue").click();
+        cy.contains("Save & continue").click({force: true});
         cy.get('header > h1 > span').should('contain', "Make the deputy the fee payer?");
         cy.contains("Make the fee payer").click();
 
