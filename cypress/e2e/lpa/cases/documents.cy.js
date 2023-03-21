@@ -19,11 +19,7 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().find("#f-templateId").type("IT-AT-LPA");
       getBody().find(".autocomplete__menu").contains("IT-AT-LPA: Letter to attorney - LPA").click();
-      getBody().find("button[type=submit]").click();
-    });
 
-    cy.waitForIframe(".action-widget-content iframe", { content: "Select document inserts" });
-    cy.enter(".action-widget-content iframe").then((getBody) => {
       getBody().contains("Select document inserts");
       getBody().find( "#f-IT-11-all").click();
       getBody().contains("button", "Continue").click();
