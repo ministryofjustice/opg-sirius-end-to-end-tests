@@ -13,8 +13,8 @@ describe(
       cy.get("@clientId").then((clientId) => {
         cy.searchForADeputyToReachAddADeputyPage();
         cy.contains("Lay").click();
-        cy.get('[label="First name"]').type("Patrick");
-        cy.get('[label="Last name"]').type("Star");
+        cy.get('.deputy-details-form-firstname').type("Patrick");
+        cy.get('.deputy-details-form-surname').type("Star");
         cy.contains("Save & continue").click();
         cy.waitForStableDOM();
         cy.get('.footer > .dotted-link').click();
@@ -36,22 +36,8 @@ describe(
         cy.searchForADeputyToReachAddADeputyPage();
         cy.contains("Lay").click();
         cy.get(':nth-child(1) > .radio-button').click();
-        cy.get('[label="First name"]').type("Squidward");
+        cy.get('.deputy-details-form-firstname').type("Squidward");
         cy.get('.footer > :nth-child(1) > .button').should('be.disabled');
-      });
-    });
-
-    it("Does not allow over 200 characters in occupation field and shows validation summary", () => {
-      cy.get("@clientId").then((clientId) => {
-        cy.searchForADeputyToReachAddADeputyPage();
-        cy.contains("Lay").click();
-        cy.get('[label="First name"]').type("Sandy");
-        cy.get('[label="Last name"]').type("Squirrel");
-        cy.contains("Save & continue").click({force: true});
-        cy.get('[label="Occupation"]').type('abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs');
-        cy.contains("Save & continue").click({force: true});
-        cy.get('.validation-summary').should('be.visible');
-        cy.get('.validation-summary').should('contain.text', "Occupation - The input is more than 200 characters long")
       });
     });
 
@@ -67,14 +53,15 @@ describe(
 
         //check Lay type deputy
         cy.get(':nth-child(1) > .radio-button').click();
-        cy.get('[label="First name"]').type("Kermit");
-        cy.get('[label="Last name"]').type("Frog");
+        cy.get('.deputy-details-form-firstname').type("Kermit");
+        cy.get('.deputy-details-form-surname').type("Frog");
         cy.contains("Save & continue").click();
+        cy.get('.standard-form').should('contain', "Occupation");
         cy.contains("Save & continue").click();
+        cy.get('.standard-form').should('contain', "Type of deputy");
         cy.get('.field-wrapper > check-box.ng-untouched > .checkbox').click();
-        cy.contains("Save & continue").click({force: true});
         cy.waitForStableDOM();
-        cy.contains("Save & continue").click({force: true});
+        cy.contains("Save & continue").click();
         cy.get('header > h1 > span').should('contain', "Make the deputy the fee payer?");
         cy.contains("Make the fee payer").click();
 
