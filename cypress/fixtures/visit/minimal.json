@@ -1,0 +1,14 @@
+{
+  "visitType": {
+    "handle": "VT-SUP",
+    "label": "Supervision"
+  },
+  "visitSubType": {
+    "handle": "VST-PRO",
+    "label": "Pro Visit"
+  },
+  "visitUrgency": {
+    "handle": "VU-STAN",
+    "label": "Standard"
+  }
+}
