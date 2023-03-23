@@ -1,0 +1,10 @@
+{
+  "specName": "cypress/e2e/lpa/cases/allocate-case.cy.js",
+  "title": "should allocate the LPA",
+  "suiteName": "Allocate case",
+  "testName": "Allocate case should allocate the LPA",
+  "testError": "`cy.visit()` failed trying to load:\n\nhttps://development.sirius.opg.service.justice.gov.uk/auth/logout\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: ETIMEDOUT\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `Allocate case`",
+  "testCommands": [
+    "visit /auth/logout"
+  ]
+}

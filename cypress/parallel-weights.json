@@ -1,1 +1,166 @@
-{"cypress/e2e/common/login.cy.js":{"time":8060,"weight":4},"cypress/e2e/lpa/cases/administration.cy.js":{"time":16775,"weight":9},"cypress/e2e/lpa/cases/allocate-case.cy.js":{"time":13995,"weight":7},"cypress/e2e/lpa/cases/change-status.cy.js":{"time":14712,"weight":8},"cypress/e2e/lpa/cases/complaints.cy.js":{"time":19668,"weight":10},"cypress/e2e/lpa/cases/create-event.cy.js":{"time":13704,"weight":7},"cypress/e2e/lpa/cases/create-relationship.cy.js":{"time":17493,"weight":9},"cypress/e2e/lpa/cases/documents.cy.js":{"time":14514,"weight":8},"cypress/e2e/lpa/cases/epa.cy.js":{"time":21848,"weight":12},"cypress/e2e/lpa/cases/investigations.cy.js":{"time":40244,"weight":22},"cypress/e2e/lpa/cases/lpa.cy.js":{"time":24090,"weight":13},"cypress/e2e/lpa/cases/search.cy.js":{"time":9500,"weight":5},"cypress/e2e/lpa/cases/tasks.cy.js":{"time":41017,"weight":22},"cypress/e2e/lpa/cases/timeline.cy.js":{"time":8869,"weight":4},"cypress/e2e/lpa/cases/warnings.cy.js":{"time":24223,"weight":13},"cypress/e2e/lpa/donors/donor.cy.js":{"time":23824,"weight":13},"cypress/e2e/lpa/donors/link.cy.js":{"time":15056,"weight":8},"cypress/e2e/supervision-deputy-hub/navigation.cy.js":{"time":11719,"weight":6},"cypress/e2e/supervision-firm-deputy-hub/navigation.cy.js":{"time":10328,"weight":5},"cypress/e2e/supervision/clients/add-event.cy.js":{"time":6339,"weight":3},"cypress/e2e/supervision/clients/add-new-client.cy.js":{"time":8295,"weight":4},"cypress/e2e/supervision/clients/documents/open-document.cy.js":{"time":30591,"weight":17},"cypress/e2e/supervision/clients/edit-client.cy.js":{"time":15,"weight":0},"cypress/e2e/supervision/clients/edit-finance-details.cy.js":{"time":21333,"weight":11},"cypress/e2e/supervision/clients/record-client-death-confirmation.cy.js":{"time":19789,"weight":11},"cypress/e2e/supervision/clients/search.cy.js":{"time":6058,"weight":3},"cypress/e2e/supervision/clients/visits/add-visit.cy.js":{"time":11248,"weight":6},"cypress/e2e/supervision/clients/visits/edit-visit.cy.js":{"time":10303,"weight":5},"cypress/e2e/supervision/dashboard/client-dashboard.cy.js":{"time":9075,"weight":5},"cypress/e2e/supervision/dashboard/dashboard.cy.js":{"time":5615,"weight":3},"cypress/e2e/supervision/dashboard/reassign-client.cy.js":{"time":9899,"weight":5},"cypress/e2e/supervision/deputies/add-deputy.cy.js":{"time":42776,"weight":23},"cypress/e2e/supervision/documents/download-multiple.cy.js":{"time":15991,"weight":8},"cypress/e2e/supervision/help-and-guidance/help-and-guidance.cy.js":{"time":37426,"weight":20},"cypress/e2e/supervision/letters/create-letter.cy.js":{"time":30301,"weight":16},"cypress/e2e/supervision/navigation.cy.js":{"time":5602,"weight":3},"cypress/e2e/supervision/orders/create-order.cy.js":{"time":71385,"weight":39},"cypress/e2e/user-management/my-details.cy.js":{"time":4060,"weight":2},"cypress/e2e/user-management/navigation.cy.js":{"time":9393,"weight":5},"cypress/e2e/workflow/navigation.cy.js":{"time":14235,"weight":7}}
+{
+  "cypress/e2e/common/login.cy.js": {
+    "time": 9600,
+    "weight": 3
+  },
+  "cypress/e2e/lpa/cases/administration.cy.js": {
+    "time": 23361,
+    "weight": 8
+  },
+  "cypress/e2e/lpa/cases/allocate-case.cy.js": {
+    "time": 21464,
+    "weight": 7
+  },
+  "cypress/e2e/lpa/cases/change-status.cy.js": {
+    "time": 16097,
+    "weight": 5
+  },
+  "cypress/e2e/lpa/cases/complaints.cy.js": {
+    "time": 31591,
+    "weight": 11
+  },
+  "cypress/e2e/lpa/cases/create-event.cy.js": {
+    "time": 15477,
+    "weight": 5
+  },
+  "cypress/e2e/lpa/cases/create-relationship.cy.js": {
+    "time": 22240,
+    "weight": 8
+  },
+  "cypress/e2e/lpa/cases/documents.cy.js": {
+    "time": 22902,
+    "weight": 8
+  },
+  "cypress/e2e/lpa/cases/epa.cy.js": {
+    "time": 31884,
+    "weight": 11
+  },
+  "cypress/e2e/lpa/cases/investigations.cy.js": {
+    "time": 58255,
+    "weight": 21
+  },
+  "cypress/e2e/lpa/cases/lpa.cy.js": {
+    "time": 35622,
+    "weight": 13
+  },
+  "cypress/e2e/lpa/cases/search.cy.js": {
+    "time": 15485,
+    "weight": 5
+  },
+  "cypress/e2e/lpa/cases/tasks.cy.js": {
+    "time": 56562,
+    "weight": 21
+  },
+  "cypress/e2e/lpa/cases/timeline.cy.js": {
+    "time": 23755,
+    "weight": 8
+  },
+  "cypress/e2e/lpa/cases/warnings.cy.js": {
+    "time": 27591,
+    "weight": 10
+  },
+  "cypress/e2e/lpa/donors/donor.cy.js": {
+    "time": 34891,
+    "weight": 12
+  },
+  "cypress/e2e/lpa/donors/link.cy.js": {
+    "time": 17768,
+    "weight": 6
+  },
+  "cypress/e2e/supervision-deputy-hub/navigation.cy.js": {
+    "time": 13369,
+    "weight": 4
+  },
+  "cypress/e2e/supervision-firm-deputy-hub/navigation.cy.js": {
+    "time": 35069,
+    "weight": 13
+  },
+  "cypress/e2e/supervision/clients/add-event.cy.js": {
+    "time": 19484,
+    "weight": 7
+  },
+  "cypress/e2e/supervision/clients/add-new-client.cy.js": {
+    "time": 17763,
+    "weight": 6
+  },
+  "cypress/e2e/supervision/clients/documents/open-document.cy.js": {
+    "time": 37974,
+    "weight": 14
+  },
+  "cypress/e2e/supervision/clients/edit-client.cy.js": {
+    "time": 27,
+    "weight": 0
+  },
+  "cypress/e2e/supervision/clients/edit-finance-details.cy.js": {
+    "time": 26943,
+    "weight": 10
+  },
+  "cypress/e2e/supervision/clients/record-client-death-confirmation.cy.js": {
+    "time": 25705,
+    "weight": 9
+  },
+  "cypress/e2e/supervision/clients/search.cy.js": {
+    "time": 16269,
+    "weight": 6
+  },
+  "cypress/e2e/supervision/clients/visits/add-visit.cy.js": {
+    "time": 12181,
+    "weight": 4
+  },
+  "cypress/e2e/supervision/clients/visits/edit-visit.cy.js": {
+    "time": 11465,
+    "weight": 4
+  },
+  "cypress/e2e/supervision/dashboard/client-dashboard.cy.js": {
+    "time": 9918,
+    "weight": 3
+  },
+  "cypress/e2e/supervision/dashboard/dashboard.cy.js": {
+    "time": 11239,
+    "weight": 4
+  },
+  "cypress/e2e/supervision/dashboard/reassign-client.cy.js": {
+    "time": 32453,
+    "weight": 12
+  },
+  "cypress/e2e/supervision/deputies/add-deputy-sj.cy.js": {
+    "time": 67554,
+    "weight": 25
+  },
+  "cypress/e2e/supervision/deputies/add-deputy.cy.js": {
+    "time": 65118,
+    "weight": 24
+  },
+  "cypress/e2e/supervision/documents/download-multiple.cy.js": {
+    "time": 18067,
+    "weight": 6
+  },
+  "cypress/e2e/supervision/help-and-guidance/help-and-guidance.cy.js": {
+    "time": 8982,
+    "weight": 3
+  },
+  "cypress/e2e/supervision/letters/create-letter.cy.js": {
+    "time": 45236,
+    "weight": 16
+  },
+  "cypress/e2e/supervision/navigation.cy.js": {
+    "time": 14024,
+    "weight": 5
+  },
+  "cypress/e2e/supervision/orders/create-order.cy.js": {
+    "time": 95960,
+    "weight": 35
+  },
+  "cypress/e2e/user-management/my-details.cy.js": {
+    "time": 11404,
+    "weight": 4
+  },
+  "cypress/e2e/user-management/navigation.cy.js": {
+    "time": 23437,
+    "weight": 8
+  },
+  "cypress/e2e/workflow/navigation.cy.js": {
+    "time": 16535,
+    "weight": 6
+  }
+}

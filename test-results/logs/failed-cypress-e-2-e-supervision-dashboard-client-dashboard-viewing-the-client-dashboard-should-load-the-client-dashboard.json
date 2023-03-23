@@ -1,0 +1,10 @@
+{
+  "specName": "cypress/e2e/supervision/dashboard/client-dashboard.cy.js",
+  "title": "should load the client dashboard",
+  "suiteName": "Viewing the client dashboard",
+  "testName": "Viewing the client dashboard should load the client dashboard",
+  "testError": "`cy.visit()` failed trying to load:\n\nhttps://development.sirius.opg.service.justice.gov.uk/auth/logout\n\nWe attempted to make an http request to this URL but the request failed without a response.\n\nWe received this error at the network level:\n\n  > Error: ETIMEDOUT\n\nCommon situations why this would fail:\n  - you don't have internet access\n  - you forgot to run / boot your web server\n  - your web server isn't accessible\n  - you have weird network configuration settings on your computer\n\nBecause this error occurred during a `before each` hook we are skipping all of the remaining tests.",
+  "testCommands": [
+    "visit /auth/logout"
+  ]
+}
