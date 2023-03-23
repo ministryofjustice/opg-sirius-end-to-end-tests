@@ -39,7 +39,7 @@ describe(
         .should("contain", "Visit added");
       cy.get('.changeset-visittype').contains("Supervision");
       cy.get('.changeset-visitsubtype').contains("Pro Visit");
-      cy.get('.changeset-visiturgency').contains("Standard")
+      cy.get('.changeset-visiturgency').contains("Standard");
 
     }
   );

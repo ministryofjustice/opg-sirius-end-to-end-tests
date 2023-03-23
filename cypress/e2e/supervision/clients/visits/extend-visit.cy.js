@@ -12,8 +12,8 @@ beforeEach(() => {
           "handle": "VPT-CLIENT",
           "label": "Client"
         }
-      }
-      cy.editVisitForClient(visitId, clientId, data)
+      };
+      cy.editVisitForClient(visitId, clientId, data);
     });
   });
 });
@@ -30,7 +30,7 @@ describe(
         cy.get(".visit-type-field").contains("Supervision");
         cy.get(".visit-sub-type-field").contains("Pro Visit");
         cy.get(".visit-urgency-field").contains("Standard");
-        cy.get(".visit-report-due-date-field").contains("22/03/2023")
+        cy.get(".visit-report-due-date-field").contains("22/03/2023");
         cy.get("visit-list-item-view").then(() => {
           cy.contains("Who to visit: Client")
           cy.contains("Supervision - Pro Visit - Standard");
@@ -61,7 +61,7 @@ describe(
         }).as("getVisitsCall");
         cy.contains("Save & exit").click();
         cy.wait("@getVisitsCall").its("response.statusCode").should("equal", 200);
-        cy.get(".visit-report-due-date-field").contains("01/04/2023")
+        cy.get(".visit-report-due-date-field").contains("01/04/2023");
         cy.get("visit-list-item-view").then(() => {
           cy.contains("Visit report due by: 01/04/2023")
         });
