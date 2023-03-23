@@ -8,7 +8,7 @@ beforeEach(() => {
 
 describe(
   "Edit client visit",
-  { tags: ["@supervision", "client", "@smoke-journey", "supervision-notes"] },
+  { tags: ["@supervision", "@client", "@smoke-journey", "@supervision-notes"] },
   () => {
     it("Given I'm a Case Manager on Supervision, I edit an existing visit", () => {
       cy.get("@clientId").then((clientId) => {
