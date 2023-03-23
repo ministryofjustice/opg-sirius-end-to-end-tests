@@ -9,8 +9,9 @@ Cypress.Commands.add("createAClient", () => {
   });
 });
 
-Cypress.Commands.add("createOrderForClient", (clientId) => {
+Cypress.Commands.add("createOrderForClient", (clientId, overrides = {}) => {
   cy.fixture("order/minimal.json").then((order) => {
+    order = {...order, ...overrides};
     cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
       .its("body")
       .then((res) => {
