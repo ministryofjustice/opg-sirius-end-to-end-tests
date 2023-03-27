@@ -20,8 +20,9 @@ Cypress.Commands.add("createAFirm", (overrides = {}) => {
   });
 });
 
-Cypress.Commands.add("createADeputyAndAssignToExistingOrder", (orderId) => {
+Cypress.Commands.add("createADeputyAndAssignToExistingOrder", (orderId, overrides = {}) => {
   cy.fixture("deputy/minimal.json").then((deputy) => {
+    deputy = {...deputy, ...overrides};
     cy.postToApi("/api/v1/deputies", deputy)
       .its("body")
       .then((res) => {

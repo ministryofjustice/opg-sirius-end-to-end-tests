@@ -54,3 +54,27 @@ Cypress.Commands.add("createOrder", (orderType, orderSubType, orderDate, optiona
     cy.contains("Save & exit").click();
   });
 });
+
+Cypress.Commands.add("setSupervisionLevel", (orderId, overrides = {}) => {
+  let supervisionLevelBody = {
+    "appliesFrom": "23/03/2023",
+    "newAssetLevel": "LOW",
+    "newLevel": "GENERAL",
+    "notes": ""
+  }
+  supervisionLevelBody = {...supervisionLevelBody, ...overrides};
+  cy.postToApi(`/supervision-api/v1/orders/${orderId}/supervision-level`, supervisionLevelBody);
+});
+
+Cypress.Commands.add("changeOrderStatus", (orderId, overrides = {}) => {
+  let orderStatusBody = {
+    "orderStatus": {
+      "handle": "ACTIVE",
+      "label": "Active"
+    },
+    "statusDate": "23/03/2023",
+    "statusNotes": ""
+  }
+  orderStatusBody = {...orderStatusBody, ...overrides};
+  cy.putToApi(`/supervision-api/v1/orders/${orderId}/status`, orderStatusBody)
+});
