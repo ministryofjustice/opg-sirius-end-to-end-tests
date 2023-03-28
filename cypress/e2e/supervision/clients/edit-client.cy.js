@@ -46,6 +46,7 @@ describe(
         editClient(false)
         cy.get(".title-person-name").contains(`${firstName} ${lastName}`);
         cy.get(".TABS_CLIENT_SUMMARY").click();
+        cy.get(".client-summary-full-name-value").contains(`${firstName} ${lastName}`);
         cy.get(".client-summary-memorable-phrase-value").contains(memorablePhrase);
       }
     );
