@@ -1,174 +1,174 @@
 {
   "cypress/e2e/common/login.cy.js": {
-    "time": 8913,
+    "time": 10876,
     "weight": 4
   },
   "cypress/e2e/lpa/cases/administration.cy.js": {
-    "time": 19114,
+    "time": 22124,
     "weight": 9
   },
   "cypress/e2e/lpa/cases/allocate-case.cy.js": {
-    "time": 16391,
-    "weight": 8
+    "time": 17734,
+    "weight": 7
   },
   "cypress/e2e/lpa/cases/change-status.cy.js": {
-    "time": 20208,
-    "weight": 10
+    "time": 18921,
+    "weight": 8
   },
   "cypress/e2e/lpa/cases/complaints.cy.js": {
-    "time": 23851,
-    "weight": 11
+    "time": 30084,
+    "weight": 13
   },
   "cypress/e2e/lpa/cases/create-event.cy.js": {
-    "time": 15482,
+    "time": 16845,
     "weight": 7
   },
   "cypress/e2e/lpa/cases/create-relationship.cy.js": {
-    "time": 17741,
-    "weight": 8
+    "time": 17716,
+    "weight": 7
   },
   "cypress/e2e/lpa/cases/documents.cy.js": {
-    "time": 17287,
-    "weight": 8
+    "time": 16507,
+    "weight": 7
   },
   "cypress/e2e/lpa/cases/epa.cy.js": {
-    "time": 24783,
-    "weight": 12
+    "time": 24417,
+    "weight": 10
   },
   "cypress/e2e/lpa/cases/investigations.cy.js": {
-    "time": 36628,
-    "weight": 18
+    "time": 49401,
+    "weight": 22
   },
   "cypress/e2e/lpa/cases/lpa.cy.js": {
-    "time": 29343,
-    "weight": 14
+    "time": 30851,
+    "weight": 13
   },
   "cypress/e2e/lpa/cases/search.cy.js": {
-    "time": 13264,
-    "weight": 6
-  },
-  "cypress/e2e/lpa/cases/tasks.cy.js": {
-    "time": 36344,
-    "weight": 18
-  },
-  "cypress/e2e/lpa/cases/timeline.cy.js": {
-    "time": 8792,
+    "time": 10896,
     "weight": 4
   },
+  "cypress/e2e/lpa/cases/tasks.cy.js": {
+    "time": 51739,
+    "weight": 23
+  },
+  "cypress/e2e/lpa/cases/timeline.cy.js": {
+    "time": 13078,
+    "weight": 5
+  },
   "cypress/e2e/lpa/cases/warnings.cy.js": {
-    "time": 31682,
-    "weight": 15
+    "time": 29410,
+    "weight": 13
   },
   "cypress/e2e/lpa/donors/donor.cy.js": {
-    "time": 26289,
+    "time": 30663,
     "weight": 13
   },
   "cypress/e2e/lpa/donors/link.cy.js": {
-    "time": 17786,
+    "time": 18530,
     "weight": 8
   },
   "cypress/e2e/supervision-deputy-hub/navigation.cy.js": {
-    "time": 12285,
-    "weight": 6
+    "time": 15976,
+    "weight": 7
   },
   "cypress/e2e/supervision-firm-deputy-hub/navigation.cy.js": {
-    "time": 11441,
-    "weight": 5
+    "time": 17379,
+    "weight": 7
   },
   "cypress/e2e/supervision/clients/add-event.cy.js": {
-    "time": 7408,
+    "time": 8132,
     "weight": 3
   },
   "cypress/e2e/supervision/clients/add-new-client.cy.js": {
-    "time": 8602,
+    "time": 9404,
     "weight": 4
   },
   "cypress/e2e/supervision/clients/allocate-client.cy.js": {
-    "time": 9868,
-    "weight": 4
+    "time": 11693,
+    "weight": 5
   },
   "cypress/e2e/supervision/clients/documents/open-document.cy.js": {
-    "time": 34002,
-    "weight": 16
+    "time": 45505,
+    "weight": 20
   },
   "cypress/e2e/supervision/clients/edit-client.cy.js": {
-    "time": 21904,
+    "time": 23937,
     "weight": 10
   },
   "cypress/e2e/supervision/clients/edit-finance-details.cy.js": {
-    "time": 24518,
-    "weight": 12
+    "time": 22608,
+    "weight": 10
   },
   "cypress/e2e/supervision/clients/record-client-death-confirmation.cy.js": {
-    "time": 23739,
-    "weight": 11
+    "time": 23205,
+    "weight": 10
   },
   "cypress/e2e/supervision/clients/search.cy.js": {
-    "time": 6502,
-    "weight": 3
+    "time": 5971,
+    "weight": 2
   },
   "cypress/e2e/supervision/clients/visits/add-visit.cy.js": {
-    "time": 12305,
-    "weight": 6
+    "time": 17937,
+    "weight": 7
   },
   "cypress/e2e/supervision/clients/visits/edit-visit.cy.js": {
-    "time": 11810,
+    "time": 11858,
     "weight": 5
   },
   "cypress/e2e/supervision/clients/visits/extend-visit.cy.js": {
-    "time": 17965,
-    "weight": 8
+    "time": 15804,
+    "weight": 7
   },
   "cypress/e2e/supervision/dashboard/client-dashboard.cy.js": {
-    "time": 9837,
+    "time": 10653,
     "weight": 4
   },
   "cypress/e2e/supervision/dashboard/dashboard.cy.js": {
-    "time": 6253,
-    "weight": 3
-  },
-  "cypress/e2e/supervision/dashboard/reassign-client.cy.js": {
-    "time": 12130,
-    "weight": 6
-  },
-  "cypress/e2e/supervision/deputies/add-deputy-sj.cy.js": {
-    "time": 46211,
-    "weight": 22
-  },
-  "cypress/e2e/supervision/deputies/add-deputy.cy.js": {
-    "time": 54010,
-    "weight": 26
-  },
-  "cypress/e2e/supervision/documents/download-multiple.cy.js": {
-    "time": 15293,
-    "weight": 7
-  },
-  "cypress/e2e/supervision/help-and-guidance/help-and-guidance.cy.js": {
-    "time": 6154,
-    "weight": 3
-  },
-  "cypress/e2e/supervision/letters/create-letter.cy.js": {
-    "time": 33021,
-    "weight": 16
-  },
-  "cypress/e2e/supervision/navigation.cy.js": {
-    "time": 5817,
+    "time": 6601,
     "weight": 2
   },
+  "cypress/e2e/supervision/dashboard/reassign-client.cy.js": {
+    "time": 12394,
+    "weight": 5
+  },
+  "cypress/e2e/supervision/deputies/add-deputy-sj.cy.js": {
+    "time": 48477,
+    "weight": 21
+  },
+  "cypress/e2e/supervision/deputies/add-deputy.cy.js": {
+    "time": 56064,
+    "weight": 24
+  },
+  "cypress/e2e/supervision/documents/download-multiple.cy.js": {
+    "time": 18671,
+    "weight": 8
+  },
+  "cypress/e2e/supervision/help-and-guidance/help-and-guidance.cy.js": {
+    "time": 11549,
+    "weight": 5
+  },
+  "cypress/e2e/supervision/letters/create-letter.cy.js": {
+    "time": 39467,
+    "weight": 17
+  },
+  "cypress/e2e/supervision/navigation.cy.js": {
+    "time": 7372,
+    "weight": 3
+  },
   "cypress/e2e/supervision/orders/create-order.cy.js": {
-    "time": 80696,
-    "weight": 40
+    "time": 81147,
+    "weight": 36
   },
   "cypress/e2e/user-management/my-details.cy.js": {
-    "time": 4809,
+    "time": 4747,
     "weight": 2
   },
   "cypress/e2e/user-management/navigation.cy.js": {
-    "time": 10463,
+    "time": 12686,
     "weight": 5
   },
   "cypress/e2e/workflow/navigation.cy.js": {
-    "time": 16256,
-    "weight": 8
+    "time": 16199,
+    "weight": 7
   }
 }
