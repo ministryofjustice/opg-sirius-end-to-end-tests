@@ -11,14 +11,18 @@ const editClient = (isCourtReferenceChanged) => {
       url: `/supervision-api/v1/clients/${clientId}`,
     }).as("getClientCall");
     cy.get("@edit-panel").find('input[name="firstName"]').clear();
-    cy.get("@edit-panel").find('input[name="firstName"]').type(firstName).blur();
+    cy.get("@edit-panel").find('input[name="firstName"]').should('not.be.disabled');
+    cy.get("@edit-panel").find('input[name="firstName"]').type(firstName);
     cy.get("@edit-panel").find('input[name="lastName"]').clear();
-    cy.get("@edit-panel").find('input[name="lastName"]').type(lastName).blur();
+    cy.get("@edit-panel").find('input[name="lastName"]').should('not.be.disabled');
+    cy.get("@edit-panel").find('input[name="lastName"]').type(lastName);
     cy.get("@edit-panel").find('input[name="memorablePhrase"]').clear();
-    cy.get("@edit-panel").find('input[name="memorablePhrase"]').type(memorablePhrase).blur();
+    cy.get("@edit-panel").find('input[name="memorablePhrase"]').should('not.be.disabled');
+    cy.get("@edit-panel").find('input[name="memorablePhrase"]').type(memorablePhrase);
     if (isCourtReferenceChanged) {
       cy.get("@edit-panel").find('input[name="courtReference"]').clear();
-      cy.get("@edit-panel").find('input[name="courtReference"]').type("00000000").blur();
+      cy.get("@edit-panel").find('input[name="courtReference"]').should('not.be.disabled');
+      cy.get("@edit-panel").find('input[name="courtReference"]').type("00000000");
     }
     cy.contains("Save & Exit").click();
     cy.wait("@getClientCall").then(({response}) => {
