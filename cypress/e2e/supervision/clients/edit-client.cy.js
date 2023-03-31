@@ -41,19 +41,17 @@ describe(
   "Edit a client",
   { tags: ["@supervision", "@client", "@smoke-journey"] },
   () => {
-    Cypress._.times(50, (k) => {
-      it(
-        "Given I'm a Case Manager on Supervision and on the client dashboard page" +
-        "Then the Client Dashboard page loads as expected",
-        () => {
-          editClient(false)
-          cy.get(".title-person-name").contains(`${firstName} ${lastName}`);
-          cy.get(".TABS_CLIENT_SUMMARY").click();
-          cy.get(".client-summary-full-name-value").contains(`${firstName} ${lastName}`);
-          cy.get(".client-summary-memorable-phrase-value").contains(memorablePhrase);
-        }
-      );
-    });
+    it(
+      "Given I'm a Case Manager on Supervision and on the client dashboard page" +
+      "Then the Client Dashboard page loads as expected",
+      () => {
+        editClient(false)
+        cy.get(".title-person-name").contains(`${firstName} ${lastName}`);
+        cy.get(".TABS_CLIENT_SUMMARY").click();
+        cy.get(".client-summary-full-name-value").contains(`${firstName} ${lastName}`);
+        cy.get(".client-summary-memorable-phrase-value").contains(memorablePhrase);
+      }
+    );
   }
 );
 
