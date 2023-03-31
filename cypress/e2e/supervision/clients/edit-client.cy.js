@@ -11,11 +11,15 @@ const editClient = (isCourtReferenceChanged) => {
         method: "GET",
         url: `/supervision-api/v1/clients/${clientId}`,
       }).as("getClientCall");
-      cy.get('input[name="firstName"]').clear().type(firstName);
-      cy.get('input[name="lastName"]').clear().type(lastName);
-      cy.get('input[name="memorablePhrase"]').clear().type(memorablePhrase);
+      cy.get('input[name="firstName"]').clear();
+      cy.get('input[name="firstName"]').type(firstName);
+      cy.get('input[name="lastName"]').clear();
+      cy.get('input[name="lastName"]').type(lastName);
+      cy.get('input[name="memorablePhrase"]').clear();
+      cy.get('input[name="memorablePhrase"]').type(memorablePhrase);
       if (isCourtReferenceChanged) {
-        cy.get('input[name="courtReference"]').clear().type("00000000");
+        cy.get('input[name="courtReference"]').clear();
+        cy.get('input[name="courtReference"]').type("00000000");
       }
       cy.contains("Save & Exit").click();
       cy.wait("@getClientCall").then(({response}) => {

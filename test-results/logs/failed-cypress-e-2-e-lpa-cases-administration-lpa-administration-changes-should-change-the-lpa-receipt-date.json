@@ -1,0 +1,10 @@
+{
+  "specName": "cypress/e2e/lpa/cases/administration.cy.js",
+  "title": "should change the LPA receipt date",
+  "suiteName": "LPA administration changes",
+  "testName": "LPA administration changes should change the LPA receipt date",
+  "testError": "Timed out after waiting `60000ms` for your remote page to load.\n\nYour page did not fire its `load` event within `60000ms`.\n\nYou can try increasing the `pageLoadTimeout` value in `home/node/cypress.config.js` to wait longer.\n\nBrowsers will not fire the `load` event until all stylesheets and scripts are done downloading.\n\nWhen this `load` event occurs, Cypress will continue running commands.\n\nBecause this error occurred during a `before each` hook we are skipping the remaining tests in the current suite: `LPA administration changes`",
+  "testCommands": [
+    "visit /auth/logout"
+  ]
+}
