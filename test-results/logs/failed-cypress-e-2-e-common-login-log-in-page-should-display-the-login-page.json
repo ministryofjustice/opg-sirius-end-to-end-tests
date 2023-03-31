@@ -1,0 +1,10 @@
+{
+  "specName": "cypress/e2e/common/login.cy.js",
+  "title": "should display the login page",
+  "suiteName": "Log in page",
+  "testName": "Log in page should display the login page",
+  "testError": "Timed out after waiting `60000ms` for your remote page to load.\n\nYour page did not fire its `load` event within `60000ms`.\n\nYou can try increasing the `pageLoadTimeout` value in `home/node/cypress.config.js` to wait longer.\n\nBrowsers will not fire the `load` event until all stylesheets and scripts are done downloading.\n\nWhen this `load` event occurs, Cypress will continue running commands.",
+  "testCommands": [
+    "visit /old-login"
+  ]
+}
