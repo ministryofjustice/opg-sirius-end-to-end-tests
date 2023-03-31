@@ -11,14 +11,14 @@ const editClient = (isCourtReferenceChanged) => {
       url: `/supervision-api/v1/clients/${clientId}`,
     }).as("getClientCall");
     cy.get("@edit-panel").find('input[name="firstName"]').clear();
-    cy.get("@edit-panel").find('input[name="firstName"]').type(firstName, {force: true});
+    cy.get("@edit-panel").find('input[name="firstName"]').type(firstName).blur();
     cy.get("@edit-panel").find('input[name="lastName"]').clear();
-    cy.get("@edit-panel").find('input[name="lastName"]').type(lastName, {force: true});
+    cy.get("@edit-panel").find('input[name="lastName"]').type(lastName).blur();
     cy.get("@edit-panel").find('input[name="memorablePhrase"]').clear();
-    cy.get("@edit-panel").find('input[name="memorablePhrase"]').type(memorablePhrase, {force: true});
+    cy.get("@edit-panel").find('input[name="memorablePhrase"]').type(memorablePhrase).blur();
     if (isCourtReferenceChanged) {
       cy.get("@edit-panel").find('input[name="courtReference"]').clear();
-      cy.get("@edit-panel").find('input[name="courtReference"]').type("00000000", {force: true});
+      cy.get("@edit-panel").find('input[name="courtReference"]').type("00000000").blur();
     }
     cy.contains("Save & Exit").click();
     cy.wait("@getClientCall").then(({response}) => {
