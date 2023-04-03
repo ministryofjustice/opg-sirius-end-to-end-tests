@@ -140,49 +140,52 @@ describe(
           .should("contain", "Set fee payer");
       }
     );
-    it(
-      "is unable to add a deputy already on the case",
-      () => {
-        const suffix = Math.floor(Math.random() * 10000);
-        const organisationName = "Test Organisation" + suffix;
-        cy.createADeputy({
-          'firstname': "",
-          "surname": "",
-          'organisationName': organisationName,
-          'deputyType': {'handle': 'PA', 'label': 'Public Authority'}
-        });
-        cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId, {
-          'caseSubtype': "HW"
-        }));
-        cy.get("@orderId").then((orderId) => {
-          cy.get("@clientId").then((clientId) => {
-            cy.visit(
-              `/supervision/#/clients/${clientId}/orders/${orderId}/deputies/add`
-            );
+    Cypress._.times(50, () => {
+      it(
+        "is unable to add a deputy already on the case",
+        () => {
+          const suffix = Math.floor(Math.random() * 10000);
+          const organisationName = "Test Organisation" + suffix;
+          cy.createADeputy({
+            'firstname': "",
+            "surname": "",
+            'organisationName': organisationName,
+            'deputyType': { 'handle': 'PA', 'label': 'Public Authority' }
           });
-        });
-        cy.get('.deputy-search__input').type(organisationName);
-        cy.get('.deputy-search__search-button').click();
-        cy.get('.deputy-search__use-button').first().click();
-        cy.get(".TABS_DEPUTIES").click();
-        cy.get("#deputies-table")
-          .find("tr")
-          .then((rows) => {
-            expect(rows.length === 1);
+          cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId, {
+            'caseSubtype': "HW"
+          }));
+          cy.get("@orderId").then((orderId) => {
+            cy.get("@clientId").then((clientId) => {
+              cy.visit(
+                `/supervision/#/clients/${clientId}/orders/${orderId}/deputies/add`
+              );
+            });
           });
-        cy.get("@orderId").then((orderId) => {
-          cy.get("@clientId").then((clientId) => {
-            cy.visit(
-              `/supervision/#/clients/${clientId}/orders/${orderId}/deputies/add`
-            );
+          cy.get('.deputy-search__input').type(organisationName);
+          cy.get('.deputy-search__search-button').click();
+          cy.get('.deputy-search__use-button').first().click();
+          cy.get(".TABS_DEPUTIES").click();
+          cy.get("#deputies-table")
+            .find("tr")
+            .then((rows) => {
+              expect(rows.length === 1);
+            });
+          cy.get("@orderId").then((orderId) => {
+            cy.get("@clientId").then((clientId) => {
+              cy.visit(
+                `/supervision/#/clients/${clientId}/orders/${orderId}/deputies/add`
+              );
+            });
           });
-        });
-        cy.get('.deputy-search__input').type(organisationName);
-        cy.get('.deputy-search__search-button').click();
-        cy.get('.deputy-search__use-button')
-          .contains("Deputy already on case")
-          .should("be.disabled");
-      }
-    );
+          cy.get('.deputy-search__input').should('be.visible');
+          cy.get('.deputy-search__input').type(organisationName);
+          cy.get('.deputy-search__search-button').click();
+          cy.get('.deputy-search__use-button')
+            .contains("Deputy already on case")
+            .should("be.disabled");
+        }
+      );
+    });
   }
 );
