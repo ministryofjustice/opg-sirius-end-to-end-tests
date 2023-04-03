@@ -31,13 +31,16 @@ describe(
       });
     });
 
-    it("Greys out save and continue button when mandatory form fields not filled", () => {
-      cy.get("@clientId").then((clientId) => {
-        cy.searchForADeputyToReachAddADeputyPage();
-        cy.contains("Lay").click();
-        cy.get(':nth-child(1) > .radio-button').click();
-        cy.get('.deputy-details-form-firstname').type("Squidward");
-        cy.get('.footer > :nth-child(1) > .button').should('be.disabled');
+    Cypress._.times(50, () => {
+      it("Greys out save and continue button when mandatory form fields not filled", () => {
+        cy.get("@clientId").then((clientId) => {
+          cy.searchForADeputyToReachAddADeputyPage();
+          cy.contains("Lay").should('not.be.disabled');
+          cy.contains("Lay").click();
+          cy.get(':nth-child(1) > .radio-button').click();
+          cy.get('.deputy-details-form-firstname').type("Squidward");
+          cy.get('.footer > :nth-child(1) > .button').should('be.disabled');
+        });
       });
     });
 
