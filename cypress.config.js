@@ -12,6 +12,7 @@ module.exports = defineConfig({
   reporterOptions: {
     configFile: "reporter-config.json"
   },
+  scrollBehavior: 'center',
   e2e: {
     setupNodeEvents(on, config) {
       require('@cypress/grep/src/plugin')(config);
