@@ -31,17 +31,19 @@ describe(
       });
     });
 
-    it("Greys out save and continue button when mandatory form fields not filled", () => {
-      cy.get("@clientId").then((clientId) => {
-        cy.searchForADeputyToReachAddADeputyPage();
-        cy.contains("Lay").should('not.be.disabled');
-        cy.contains("Lay").click();
-        cy.get(':nth-child(1) > .radio-button').click();
-        cy.get('.deputy-details-form-firstname').type("Squidward");
-        cy.get('.footer > :nth-child(1) > .button').should('be.disabled');
+    Cypress._.times(50, () => {
+      it("Greys out save and continue button when mandatory form fields not filled", () => {
+        cy.get("@clientId").then((clientId) => {
+          cy.searchForADeputyToReachAddADeputyPage();
+          cy.contains('Professional').should('be.visible');
+          cy.get(':nth-child(2) > .radio-button').click();
+          cy.get('.deputy-details-form-firstname').type("Squidward");
+          cy.get('.footer > :nth-child(1) > .button').should('be.disabled');
+        });
       });
     });
 
+    Cypress._.times(50, () => {
     it("Allows a new fee payer to be set for an order", () => {
       cy.get("@clientId").then((clientId) => {
         cy.get('.TABS_DEPUTIES').click();
@@ -53,7 +55,8 @@ describe(
         cy.searchForADeputyToReachAddADeputyPage();
 
         //check Lay type deputy
-        cy.get(':nth-child(1) > .radio-button').click();
+        cy.contains('Professional').should('be.visible');
+        cy.get(':nth-child(2) > .radio-button').click();
         cy.get('.deputy-details-form-firstname').type("Kermit");
         cy.get('.deputy-details-form-surname').type("Frog");
         cy.contains("Save & continue").click();
@@ -63,11 +66,14 @@ describe(
         cy.get('.field-wrapper > check-box.ng-untouched > .checkbox').click();
         cy.waitForStableDOM();
         cy.contains("Save & continue").click();
+        cy.contains('Make the deputy the fee payer?').should('be.visible');
         cy.get('header > h1 > span').should('contain', "Make the deputy the fee payer?");
         cy.contains("Make the fee payer").click();
 
         cy.get('.TABS_DEPUTIES').click();
+        cy.contains('Mr Abc Def').should('be.visible');
         cy.get(':nth-child(1) > :nth-child(1) > .summary-row-heading').should('contain.text', "Mr Abc Def");
+        cy.contains('Kermit Frog').should('be.visible');
         cy.get(':nth-child(3) > :nth-child(1) > .summary-row-heading').should('contain.text', "Kermit Frog");
 
         //make sure fee payer and main contact symbols visible under 2nd deputy
@@ -77,5 +83,6 @@ describe(
         cy.get(':nth-child(1) > :nth-child(6) > .fee-payer').should('not.to.exist');
       });
     });
+  });
   }
 );
