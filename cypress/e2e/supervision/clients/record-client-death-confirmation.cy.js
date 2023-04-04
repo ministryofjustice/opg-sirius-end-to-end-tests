@@ -26,9 +26,12 @@ describe(
             .closest(".fieldset")
             .contains("Yes")
             .click();
-          cy.get('input[name="dateOfDeath"]').clear().type(dateOfDeath);
-          cy.get('input[name="dateDeathCertificateReceived"]').clear().type(dateDeathCetificateReceived);
-          cy.get('input[name="dateNotified"]').clear().type(dateNotified);
+          cy.get('input[name="dateOfDeath"]').clear();
+          cy.get('input[name="dateOfDeath"]').type(dateOfDeath);
+          cy.get('input[name="dateDeathCertificateReceived"]').clear();
+          cy.get('input[name="dateDeathCertificateReceived"]').type(dateDeathCetificateReceived);
+          cy.get('input[name="dateNotified"]').clear();
+          cy.get('input[name="dateNotified"]').type(dateNotified);
           cy.get('[name="notifiedBy"]').select(notifiedBy);
           cy.contains("How was the OPG notified?")
             .closest(".fieldset")
@@ -76,9 +79,12 @@ describe(
             .closest(".fieldset")
             .contains("Yes")
             .click();
-          cy.get('input[name="dateOfDeath"]').clear().type(dateOfDeathIncorrect);
-          cy.get('input[name="dateDeathCertificateReceived"]').clear().type(dateDeathCetificateReceived);
-          cy.get('input[name="dateNotified"]').clear().type(dateNotified);
+          cy.get('input[name="dateOfDeath"]').clear();
+          cy.get('input[name="dateOfDeath"]').type(dateOfDeathIncorrect);
+          cy.get('input[name="dateDeathCertificateReceived"]').clear();
+          cy.get('input[name="dateDeathCertificateReceived"]').type(dateDeathCetificateReceived);
+          cy.get('input[name="dateNotified"]').clear();
+          cy.get('input[name="dateNotified"]').type(dateNotified);
           cy.get('[name="notifiedBy"]').select(notifiedBy);
           cy.contains("How was the OPG notified?")
             .closest(".fieldset")
