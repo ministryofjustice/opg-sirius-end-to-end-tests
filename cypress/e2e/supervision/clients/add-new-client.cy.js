@@ -12,11 +12,9 @@ describe(
       cy.get("main")
         .find('input[placeholder="Search by Order Number, SIRIUS ID or Name"]')
         .type("DoNotFindMe");
-      cy.get('button[class="button client-search__search-button"]')
-        .should("be.visible")
-        .click();
+      cy.get('button[class="button client-search__search-button"]').should("be.visible")
+      cy.get('button[class="button client-search__search-button"]').click();
       cy.contains("No results could be found");
-
       cy.contains("Create a new client").click();
 
       cy.fixture("client/minimal.json").then((client) => {
