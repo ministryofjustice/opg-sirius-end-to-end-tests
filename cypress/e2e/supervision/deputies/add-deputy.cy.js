@@ -34,47 +34,51 @@ describe(
     it("Greys out save and continue button when mandatory form fields not filled", () => {
       cy.get("@clientId").then((clientId) => {
         cy.searchForADeputyToReachAddADeputyPage();
-        cy.contains("Lay").click();
-        cy.get(':nth-child(1) > .radio-button').click();
+        cy.contains('Professional').should('be.visible');
+        cy.get(':nth-child(2) > .radio-button').click();
         cy.get('.deputy-details-form-firstname').type("Squidward");
         cy.get('.footer > :nth-child(1) > .button').should('be.disabled');
       });
     });
 
-    it("Allows a new fee payer to be set for an order", () => {
-      cy.get("@clientId").then((clientId) => {
-        cy.get('.TABS_DEPUTIES').click();
-        cy.get("@orderId").then((orderId) => {
-          cy.createADeputyAndAssignToExistingOrder(orderId);
-        });
-
-        // I can create a second deputy to set them as feepayer
-        cy.searchForADeputyToReachAddADeputyPage();
-
-        //check Lay type deputy
-        cy.get(':nth-child(1) > .radio-button').click();
-        cy.get('.deputy-details-form-firstname').type("Kermit");
-        cy.get('.deputy-details-form-surname').type("Frog");
-        cy.contains("Save & continue").click();
-        cy.get('.standard-form').should('contain', "Occupation");
-        cy.contains("Save & continue").click();
-        cy.get('.standard-form').should('contain', "Type of deputy");
-        cy.get('.field-wrapper > check-box.ng-untouched > .checkbox').click();
-        cy.waitForStableDOM();
-        cy.contains("Save & continue").click();
-        cy.get('header > h1 > span').should('contain', "Make the deputy the fee payer?");
-        cy.contains("Make the fee payer").click();
-
-        cy.get('.TABS_DEPUTIES').click();
-        cy.get(':nth-child(1) > :nth-child(1) > .summary-row-heading').should('contain.text', "Mr Abc Def");
-        cy.get(':nth-child(3) > :nth-child(1) > .summary-row-heading').should('contain.text', "Kermit Frog");
-
-        //make sure fee payer and main contact symbols visible under 2nd deputy
-        cy.get(':nth-child(3) > :nth-child(6) > .fee-payer').should('be.visible');
-        cy.get(':nth-child(3) > :nth-child(6) > .main-contact').should('be.visible');
-        //make sure fee payer symbols not visible under 1st deputy
-        cy.get(':nth-child(1) > :nth-child(6) > .fee-payer').should('not.to.exist');
+  it("Allows a new fee payer to be set for an order", () => {
+    cy.get("@clientId").then((clientId) => {
+      cy.get('.TABS_DEPUTIES').click();
+      cy.get("@orderId").then((orderId) => {
+        cy.createADeputyAndAssignToExistingOrder(orderId);
       });
+
+      // I can create a second deputy to set them as feepayer
+      cy.searchForADeputyToReachAddADeputyPage();
+
+      //check Lay type deputy
+      cy.contains('Professional').should('be.visible');
+      cy.get(':nth-child(2) > .radio-button').click();
+      cy.get('.deputy-details-form-firstname').type("Kermit");
+      cy.get('.deputy-details-form-surname').type("Frog");
+      cy.contains("Save & continue").click();
+      cy.get('.standard-form').should('contain', "Occupation");
+      cy.contains("Save & continue").click();
+      cy.get('.standard-form').should('contain', "Type of deputy");
+      cy.get('.field-wrapper > check-box.ng-untouched > .checkbox').click();
+      cy.waitForStableDOM();
+      cy.contains("Save & continue").click();
+      cy.contains('Make the deputy the fee payer?').should('be.visible');
+      cy.get('header > h1 > span').should('contain', "Make the deputy the fee payer?");
+      cy.contains("Make the fee payer").click();
+
+      cy.get('.TABS_DEPUTIES').click();
+      cy.contains('Mr Abc Def').should('be.visible');
+      cy.get(':nth-child(1) > :nth-child(1) > .summary-row-heading').should('contain.text', "Mr Abc Def");
+      cy.contains('Kermit Frog').should('be.visible');
+      cy.get(':nth-child(3) > :nth-child(1) > .summary-row-heading').should('contain.text', "Kermit Frog");
+
+      //make sure fee payer and main contact symbols visible under 2nd deputy
+      cy.get(':nth-child(3) > :nth-child(6) > .fee-payer').should('be.visible');
+      cy.get(':nth-child(3) > :nth-child(6) > .main-contact').should('be.visible');
+      //make sure fee payer symbols not visible under 1st deputy
+      cy.get(':nth-child(1) > :nth-child(6) > .fee-payer').should('not.to.exist');
     });
+  });
   }
 );
