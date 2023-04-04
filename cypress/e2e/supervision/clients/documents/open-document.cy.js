@@ -22,7 +22,8 @@ describe(
       });
 
       cy.task("listContentsOfDownloadsFolder", Cypress.config("downloadsFolder")).then(beforeDownloadList => {
-        cy.contains(".button", "Open").click().wait(1000);
+        cy.contains(".button", "Open").click();
+        cy.wait(1000);
         cy.task("listContentsOfDownloadsFolder", Cypress.config("downloadsFolder")).then(afterDownloadList => {
           const newFilename = afterDownloadList.filter(file => !beforeDownloadList.includes(file))[0];
           const newFilePath = path.join(
@@ -51,7 +52,8 @@ describe(
           method: "GET",
           url: "/services/file-service/zip/**",
         }).as("fileServiceCall");
-        cy.contains(".button", "Open").click().wait(1000);
+        cy.contains(".button", "Open").click();
+        cy.wait(1000);
         cy.wait("@fileServiceCall").its("response.statusCode").should("equal", 200);
 
         const newFilePath = path.join(
