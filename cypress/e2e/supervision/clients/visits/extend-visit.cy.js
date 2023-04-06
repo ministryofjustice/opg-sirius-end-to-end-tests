@@ -40,9 +40,12 @@ describe(
 
         cy.get("#extend-visit-report-due-date").as("extend-visit-report-due-date-panel");
         cy.get("@extend-visit-report-due-date-panel").within(() => {
-          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_day").clear().type("01");
-          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_month").clear().type("04");
-          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_year").clear().type("2023");
+          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_day").clear();
+          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_day").type("01");
+          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_month").clear();
+          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_month").type("04");
+          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_year").clear();
+          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_year").type("2023");
           cy.window()
             .its("tinyMCE")
             .its("activeEditor")

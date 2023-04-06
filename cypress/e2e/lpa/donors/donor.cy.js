@@ -59,7 +59,8 @@ describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.contains("Edit Donor").click();
     cy.waitForIframe(".action-widget-content iframe", { selector: "#f-firstname" });
     cy.enter(".action-widget-content iframe").then((getBody) => {
-      getBody().find("#f-firstname").clear().type("Patrick");
+      getBody().find("#f-firstname").clear();
+      getBody().find("#f-firstname").type("Patrick");
       getBody().find("button[type=submit]").click();
     });
 
