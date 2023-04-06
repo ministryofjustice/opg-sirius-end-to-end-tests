@@ -14,25 +14,42 @@ Cypress.Commands.add("createOrder", (orderType, orderSubType, orderDate, optiona
       .find("Select")
       .select(orderSubType);
     cy.get("@clientCourtReference").then((clientCourtReference) => {
-      cy.get('input[name="courtReference"]').clear().type(clientCourtReference);
+      cy.get('input[name="courtReference"]').clear();
+      cy.get('input[name="courtReference"]').type(clientCourtReference);
     });
-    cy.get("#fIELDLABELSORDERDATE_day").clear().type(orderDay);
-    cy.get("#fIELDLABELSORDERDATE_month").clear().type(orderMonth);
-    cy.get("#fIELDLABELSORDERDATE_year").clear().type(orderYear);
-    cy.get("#orderReceivedDate_day").clear().type(orderDay);
-    cy.get("#orderReceivedDate_month").clear().type(orderMonth);
-    cy.get("#orderReceivedDate_year").clear().type(orderYear);
+    cy.get("#fIELDLABELSORDERDATE_day").clear();
+    cy.get("#fIELDLABELSORDERDATE_day").type(orderDay);
+    cy.get("#fIELDLABELSORDERDATE_month").clear();
+    cy.get("#fIELDLABELSORDERDATE_month").type(orderMonth);
+    cy.get("#fIELDLABELSORDERDATE_year").clear();
+    cy.get("#fIELDLABELSORDERDATE_year").type(orderYear);
+    cy.get("#orderReceivedDate_day").clear();
+    cy.get("#orderReceivedDate_day").type(orderDay);
+    cy.get("#orderReceivedDate_month").clear();
+    cy.get("#orderReceivedDate_month").type(orderMonth);
+    cy.get("#orderReceivedDate_year").clear();
+    cy.get("#orderReceivedDate_year").type(orderYear);
     if(optional) {
-      cy.get("#orderIssueDate_day").clear().type(orderDay);
-      cy.get("#orderIssueDate_month").clear().type(orderMonth);
-      cy.get("#orderIssueDate_year").clear().type(orderYear);
-      cy.get("#orderExpiryDate_day").clear().type(orderDay);
-      cy.get("#orderExpiryDate_month").clear().type(orderMonth);
-      cy.get("#orderExpiryDate_year").clear().type(orderYear);
-      cy.get("#clauseExpiryDate_day").clear().type(orderDay);
-      cy.get("#clauseExpiryDate_month").clear().type(orderMonth);
-      cy.get("#clauseExpiryDate_year").clear().type(orderYear);
-      cy.get('input[name="orderTitle"]').clear().type("Test Order Title");
+      cy.get("#orderIssueDate_day").clear();
+      cy.get("#orderIssueDate_day").type(orderDay);
+      cy.get("#orderIssueDate_month").clear();
+      cy.get("#orderIssueDate_month").type(orderMonth);
+      cy.get("#orderIssueDate_year").clear();
+      cy.get("#orderIssueDate_year").type(orderYear);
+      cy.get("#orderExpiryDate_day").clear();
+      cy.get("#orderExpiryDate_day").type(orderDay);
+      cy.get("#orderExpiryDate_month").clear();
+      cy.get("#orderExpiryDate_month").type(orderMonth);
+      cy.get("#orderExpiryDate_year").clear();
+      cy.get("#orderExpiryDate_year").type(orderYear);
+      cy.get("#clauseExpiryDate_day").clear();
+      cy.get("#clauseExpiryDate_day").type(orderDay);
+      cy.get("#clauseExpiryDate_month").clear();
+      cy.get("#clauseExpiryDate_month").type(orderMonth);
+      cy.get("#clauseExpiryDate_year").clear();
+      cy.get("#clauseExpiryDate_year").type(orderYear);
+      cy.get('input[name="orderTitle"]').clear();
+      cy.get('input[name="orderTitle"]').type("Test Order Title");
       cy.contains("How have the deputy/deputies been appointed?")
         .closest(".fieldset")
         .contains("Sole")

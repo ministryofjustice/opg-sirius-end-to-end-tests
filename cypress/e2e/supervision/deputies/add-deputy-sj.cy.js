@@ -31,8 +31,10 @@ describe(
             .closest(".fieldset")
             .contains("Lay")
             .click();
-          cy.get('input[name="firstName"]').clear().type(firstName);
-          cy.get('input[name="lastName"]').clear().type(lastName);
+          cy.get('input[name="firstName"]').clear();
+          cy.get('input[name="firstName"]').type(firstName);
+          cy.get('input[name="lastName"]').clear();
+          cy.get('input[name="lastName"]').type(lastName);
         });
         cy.contains("Save & continue").click();
         cy.contains("Exit").click();
