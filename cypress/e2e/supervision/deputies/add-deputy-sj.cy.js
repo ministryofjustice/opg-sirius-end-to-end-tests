@@ -149,7 +149,7 @@ describe(
           'firstname': "",
           "surname": "",
           'organisationName': organisationName,
-          'deputyType': {'handle': 'PA', 'label': 'Public Authority'}
+          'deputyType': { 'handle': 'PA', 'label': 'Public Authority' }
         });
         cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId, {
           'caseSubtype': "HW"
@@ -177,6 +177,7 @@ describe(
             );
           });
         });
+        cy.get('.deputy-search__input').should('be.visible');
         cy.get('.deputy-search__input').type(organisationName);
         cy.get('.deputy-search__search-button').click();
         cy.get('.deputy-search__use-button')
