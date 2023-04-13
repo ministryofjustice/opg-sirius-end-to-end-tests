@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "cypress run --headless --browser chrome",
-    "parallel": "cypress-parallel --reporter cypress-multi-reporters --reporterOptions configFile=reporter-config.json -s test -t 3 -d cypress/e2e"
+    "parallel": "cypress-parallel --reporter cypress-multi-reporters --reporterOptions configFile=reporter-config.json -s test -t 1 -d cypress/e2e"
   },
   "repository": {
     "type": "git",
