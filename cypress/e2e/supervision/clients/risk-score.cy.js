@@ -51,12 +51,9 @@ describe(
             .within(() => {
               cy.get("li")
                 .first()
-                .should(
-                  "include.text",
-                  "Previous client risk score\u00a0Not Set"
-                )
+                .should("match", /Previous client risk score\s+Not Set/)
                 .next()
-                .should("include.text", "New client risk score\u00a02");
+                .should("match", /New client risk score\s+2/);
               cy.contains(
                 ".client-risk-score-recorded-notes",
                 "Risk score added"
