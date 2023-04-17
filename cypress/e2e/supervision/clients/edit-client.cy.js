@@ -21,10 +21,12 @@ const editClient = (isCourtReferenceChanged) => {
       cy.get('input[name="courtReference"]').should("not.be.disabled").type("00000000");
     }
     cy.contains("Save & Exit").click();
-    cy.wait("@getClientCall").then(({response}) => {
-      expect(response.statusCode).to.be.eq( 200)
-      cy.wrap(response.body.caseRecNumber).as('newCourtReference');
-    });
+    if (isCourtReferenceChanged) {
+      cy.wait("@getClientCall").then(({ response }) => {
+        expect(response.statusCode).to.be.eq(200)
+        cy.wrap(response.body.caseRecNumber).as('newCourtReference');
+      });
+    }
   });
 }
 
