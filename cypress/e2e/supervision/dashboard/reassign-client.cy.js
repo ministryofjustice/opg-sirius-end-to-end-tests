@@ -1,4 +1,4 @@
-const allocateTheClientToHWTeam = () => {
+const allocateTheClientToLayTeam = () => {
   cy.request({
     url: "/supervision-api/v1/teams",
     headers: {
@@ -9,7 +9,7 @@ const allocateTheClientToHWTeam = () => {
     .its("body")
     .then((teams) => {
       for (let i in teams) {
-        if (teams[i].name === "Health & Welfare - (Supervision)") {
+        if (teams[i].name === "Lay Team 1 - (Supervision)") {
           cy.wrap(teams[i].id).as("hwTeamId");
           break;
         }
@@ -32,7 +32,7 @@ before(function setupAllocatedClient() {
   cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId));
   cy.get("@orderId").then((orderId) => cy.setSupervisionLevel(orderId));
   cy.get("@orderId").then((orderId) => cy.changeOrderStatus(orderId));
-  allocateTheClientToHWTeam();
+  allocateTheClientToLayTeam();
 });
 
 describe(
@@ -55,11 +55,11 @@ describe(
 
       cy.get('[data-role="main-filter-base-dropdown"]')
         .find("select")
-        .select("AnotherTeam");
+        .select("MyTeamsClients");
 
-      cy.get('[data-role="main-filter-team-dropdown"]')
+      cy.get('[data-role="main-filter-user-dropdown"]')
         .find("select")
-        .select("Health & Welfare - (Supervision)");
+        .select("Team unallocated");
 
       cy.get('[data-role="main-filter-apply-button"]').click({ force: true });
 
@@ -72,11 +72,15 @@ describe(
 
       cy.get('[data-role="reassign-filter-base-dropdown"]')
         .find("select")
-        .select("MyTeam");
+        .select("AnotherTeam");
 
-      cy.get('[data-role="reassign-filter-user-dropdown"]')
+      cy.get('[data-role="reassign-filter-other-team-dropdown"]')
         .find("select")
-        .select("LayTeam1 User14");
+        .select("Lay Team 2 - (Supervision)");
+
+      cy.get('[data-role="reassign-filter-other-team-user-dropdown"]')
+        .find("select")
+        .select("LayTeam2 User1");
 
       cy.get('[data-role="reassign-filter-reassign-button"]').click({
         force: true,
