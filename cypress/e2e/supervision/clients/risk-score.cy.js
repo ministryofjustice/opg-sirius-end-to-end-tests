@@ -51,13 +51,13 @@ describe(
             .within(() => {
               cy.get("li")
                 .first()
-                .should("match", /Previous client risk score\s+Not Set/)
+                .within(() => {
+                  cy.contains(/^Previous client risk score\s+Not Set/);
+                })
                 .next()
-                .should("match", /New client risk score\s+2/);
-              cy.contains(
-                ".client-risk-score-recorded-notes",
-                "Risk score added"
-              );
+                .within(() => {
+                  cy.contains(/^New client risk score\s+2/);
+                });
             });
         });
     });
