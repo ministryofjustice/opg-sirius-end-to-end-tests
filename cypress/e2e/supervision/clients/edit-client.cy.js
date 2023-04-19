@@ -6,9 +6,9 @@ const memorablePhrase = "Memorable" + suffix;
 const editClient = (isCourtReferenceChanged) => {
   return cy.get("@clientId").then((clientId) => {
     cy.intercept({
-      method: "GET",
+      method: "PUT",
       url: `/supervision-api/v1/clients/${clientId}`,
-    }).as("getClientCall");
+    }).as("editClientCall");
     cy.get('input[name="firstName"]').should("have.value", "Ted");
     cy.get('input[name="firstName"]').clear();
     cy.get('input[name="firstName"]').should("not.be.disabled").type(firstName);
@@ -26,7 +26,7 @@ const editClient = (isCourtReferenceChanged) => {
     }
     cy.contains("Save & Exit").click();
     if (isCourtReferenceChanged) {
-      cy.wait("@getClientCall").then(({ response }) => {
+      cy.wait("@editClientCall").then(({ response }) => {
         expect(response.statusCode).to.be.eq(200);
         cy.wrap(response.body.caseRecNumber).as("newCourtReference");
       });
