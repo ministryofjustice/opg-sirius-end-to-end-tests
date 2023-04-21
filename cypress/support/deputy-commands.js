@@ -34,11 +34,3 @@ Cypress.Commands.add("createADeputyAndAssignToExistingOrder", (orderId, override
       })
   });
 });
-
-Cypress.Commands.add("searchForADeputyToReachAddADeputyPage", () => {
-  cy.get('#add-deputy-button').click();
-  // type in name to search field
-  cy.get('.deputy-search__input').type("deputy");
-  cy.get('.deputy-search__form > .button').click();
-  cy.contains('Add a new deputy').click();
-});
