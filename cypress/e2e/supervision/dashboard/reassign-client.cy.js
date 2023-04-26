@@ -61,14 +61,12 @@ describe(
         .find("select")
         .select("Team unallocated");
 
-      cy.get('[data-role="main-filter-apply-button"]').click({ force: true });
+      cy.get('[data-role="main-filter-apply-button"] button').should('be.visible').click();
 
-      cy.get("@clientCourtReference").then((courtRef) => {
-        cy.contains(courtRef)
-          .parents()
-          .find('[type="checkbox"]')
-          .check({ force: true });
-      });
+      cy.contains("Loading clients...").should('be.visible');
+      cy.contains("Loading clients...").should('not.exist');
+
+      cy.get('.clients-table tbody tr:nth-child(1) .checkbox').click();
 
       cy.get('[data-role="reassign-filter-base-dropdown"]')
         .find("select")
