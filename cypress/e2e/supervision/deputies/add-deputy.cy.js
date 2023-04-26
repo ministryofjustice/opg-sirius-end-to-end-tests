@@ -184,7 +184,7 @@ describe(
       cy.get("@clientId").then((clientId) => {
         searchForADeputyToReachAddADeputyPage();
         cy.get("#typeOfDeputy .radio-button").contains("Lay").should("be.visible").click();
-        cy.get(".deputy-details-form-firstname").type("Squidward");
+        cy.get(".deputy-details-form-firstname").should("be.visible").type("Squidward");
         cy.get(".footer > :nth-child(1) > .button").should("be.disabled");
       });
     });
@@ -200,15 +200,16 @@ describe(
           cy.get("#typeOfDeputy .radio-button").contains("Professional").should("be.visible").click();
           cy.get(".deputy-details-form-firstname").type("Kermit");
           cy.get(".deputy-details-form-surname").type("Frog");
-          cy.contains("Save & continue").click();
+          cy.get("footer button[type=submit]").as("submitButton");
+          cy.get("@submitButton").should("have.text", " Save & continue ").should("be.visible").click();
           cy.get(".standard-form").should("contain", "Occupation");
-          cy.contains("Save & continue").click();
+          cy.get("@submitButton").should("have.text", " Save & continue ").should("be.visible").click();
           cy.get(".money + check-box > label").as("feePayerCheckbox");
           cy.get("@feePayerCheckbox").should("be.visible").click();
-          cy.get("label:contains(Type of deputy) + select").select("Professional");
-          cy.get("footer button").contains("Save & continue").as("submitButton");
-          cy.get("@submitButton").should("be.visible");
-          cy.get("@submitButton").click({scrollBehavior: false});
+          cy.get('check-box > label:contains("Correspondent") input[type=checkbox]').should("be.disabled");
+          cy.get("label:contains(Type of deputy) + select").should("have.value", "1");
+          cy.wait(1000);
+          cy.get("@submitButton").should("have.text", " Save & continue ").should("be.visible").click();
           cy.contains("Make the deputy the fee payer?").should("be.visible");
           cy.get("header > h1 > span").should(
             "contain",
