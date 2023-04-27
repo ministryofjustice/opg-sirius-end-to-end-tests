@@ -23,7 +23,7 @@ describe(
   "Search for a client",
   { tags: ["@supervision", "@client", "@smoke-journey"] },
   () => {
-    it("Search for client that does not exist and create a new one", () => {
+    it("Searches for client and uses the search dropdown to navigate to them", () => {
       cy.visit("/supervision/#/dashboard");
       searchUntilClientFound(3);
       cy.get(".search-bar__result-link").contains("Ted Tedson").click();
