@@ -11,8 +11,15 @@ describe(
   "Checking deputy can be found by case number filtering",
   {tags: ["@supervision", "@search", "supervision-core"]},
   () => {
+<<<<<<< Updated upstream
     it("Given I'm a Case Manager on Supervision and a client has been created, with a deputy on the order I can search for both", () => {
       cy.visit("/supervision/#/dashboard");
+=======
+    it("finds the order by court reference and can filter full search results by client and deputy", () => {
+      cy.get('@clientId').then(clientId => {
+        cy.visit(`/supervision/#/clients/${clientId}`);
+      });
+>>>>>>> Stashed changes
       cy.get('@courtReference').then((orderId) => {
         cy.get(".search-bar__input").type(orderId);
       })
