@@ -1,10 +1,10 @@
-before(() => {
+beforeEach(() => {
   cy.loginAs("Case Manager");
 });
 
 describe(
-  "Create a new client",
-  { tags: ["@supervision", "@client", "@smoke-journey"] },
+  "Add Client page",
+  {tags: ["@supervision", "@client", "@smoke-journey"]},
   () => {
     it("Search for client that does not exist and create a new one", () => {
       cy.visit("/supervision/#/clients/search-for-client");
@@ -25,7 +25,7 @@ describe(
 
         cy.contains("Save & exit").click();
 
-        cy.get('span[class="title-person-name"]', { timeout: 30000 })
+        cy.get('span[class="title-person-name"]', {timeout: 30000})
           .should("be.visible")
           .contains(`${client.firstname} ${client.surname}`);
         cy.get(
