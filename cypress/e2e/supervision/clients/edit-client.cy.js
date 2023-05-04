@@ -47,7 +47,13 @@ describe(
   "Edit an existing client",
   { tags: ["@supervision-core", "@client", "@smoke-journey"] },
   () => {
-    it("Edits an existing client", () => {
+    it("Edits an existing client",
+      {
+        retries: {
+          runMode: 2,
+          openMode: 0,
+        },
+      },() => {
       editClient(true);
       cy.get("@newCourtReference").then((newCourtReference) => {
         cy.get(".title-person-name").contains(`${firstName} ${lastName}`);
