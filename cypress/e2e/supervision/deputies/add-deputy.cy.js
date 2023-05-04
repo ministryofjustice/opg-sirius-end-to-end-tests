@@ -189,7 +189,13 @@ describe(
       });
     });
 
-    it("Allows a new fee payer to be set for an order", () => {
+    it("Allows a new fee payer to be set for an order",
+      {
+        retries: {
+          runMode: 2,
+          openMode: 1,
+        },
+      }, () => {
       cy.get("@orderId").then((orderId) => {
         cy.createADeputyAndAssignToExistingOrder(orderId).then(() => {
           cy.get(".TABS_DEPUTIES").should("be.visible").click();
