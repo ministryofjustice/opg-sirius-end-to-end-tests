@@ -1,4 +1,4 @@
-beforeEach(() => {
+before(() => {
   cy.loginAs("Case Manager");
   cy.createAClient();
   cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId));
@@ -34,12 +34,12 @@ describe(
             cy.get(".search-bar__input").clear();
             cy.get(".search-bar__input").type(surname);
 
-            cy.get('.search-bar__results').within(() => {
+            cy.get(".search-bar__results").within(() => {
               cy.contains(`${salutation} ${firstname} ${surname} [Deputy]`)
                 .click();
             });
 
-            cy.get('.banner__deputy-wrap--name').contains(`${salutation} ${firstname} ${surname}`, {matchCase: false});
+            cy.get(".banner__deputy-wrap--name").contains(`${salutation} ${firstname} ${surname}`, {matchCase: false});
           })
         });
       }
