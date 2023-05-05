@@ -8,10 +8,10 @@ before(() => {
 });
 
 describe(
-  "Checking deputy can be found by case number filtering",
+  "Full search",
   {tags: ["@supervision", "@search", "supervision-core"]},
   () => {
-    it("Given I'm a Case Manager on Supervision and a client has been created, with a deputy on the order I can search for both", () => {
+    it("finds the order by court reference and can filter full search results by client and deputy", () => {
       cy.visit("/supervision/#/dashboard");
       cy.get('@courtReference').then((orderId) => {
         cy.get(".search-bar__input").type(orderId);

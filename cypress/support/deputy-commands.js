@@ -26,10 +26,9 @@ Cypress.Commands.add("createADeputyAndAssignToExistingOrder", (orderId, override
     cy.postToApi("/api/v1/deputies", deputy)
       .its("body")
       .then((res) => {
-        cy.wrap(res.id).as("deputyId")
-          .then((deputyId) => {
-            let data = { id: deputyId };
-            cy.postToApi(`/api/v1/orders/${orderId}/deputies`, data)
+        cy.wrap(res).as("deputy")
+          .then(({id}) => {
+            cy.postToApi(`/api/v1/orders/${orderId}/deputies`, { id })
           });
       })
   });
