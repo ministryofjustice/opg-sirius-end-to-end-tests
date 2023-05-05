@@ -1,9 +1,11 @@
+import {faker} from "@faker-js/faker";
+
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createAClient();
   cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId));
   cy.get("@orderId").then((orderId) => {
-    cy.createADeputyAndAssignToExistingOrder(orderId);
+    cy.createADeputyAndAssignToExistingOrder(orderId, {surname: faker.name.lastName()});
   });
 });
 
@@ -29,7 +31,7 @@ describe(
 
     it("finds the deputy by surname", () => {
         cy.visit("/supervision/#/dashboard");
-        cy.fixture("deputy/minimal.json").then(({firstname, salutation, surname}) => {
+        cy.get("@deputy").then(({firstname, salutation, surname}) => {
           cy.waitForSearchService(surname, ["Deputy"]).then(() => {
             cy.get(".search-bar__input").clear();
             cy.get(".search-bar__input").type(surname);
