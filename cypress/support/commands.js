@@ -84,3 +84,16 @@ Cypress.Commands.add("postToApi", (url, data, retry) => {
 Cypress.Commands.add("putToApi", (url, data) => {
   sendToApi("PUT", url, data);
 });
+
+Cypress.Commands.add("waitForSearchService", (searchTerm = "", personTypes = [], minimumExpected = 1) => {
+  cy.waitUntil(
+    () =>
+      cy
+        .postToApi("/api/v1/search/searchAll", {
+          personTypes: personTypes,
+          term: searchTerm,
+        })
+        .then((resp) => resp.body.total.count >= minimumExpected),
+    {timeout: 10000, interval: 500}
+  );
+})
