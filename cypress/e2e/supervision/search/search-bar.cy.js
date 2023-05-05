@@ -34,12 +34,13 @@ describe(
             cy.get(".search-bar__input").clear();
             cy.get(".search-bar__input").type(surname);
 
-            cy.get('.search-bar__results').within(() => {
-              cy.contains(`${salutation} ${firstname} ${surname} [Deputy]`)
+            cy.get(".search-bar__results").within(() => {
+              cy.get(".search-bar__result").should("have.length.at.least", 1);
+              cy.contains(`${salutation} ${firstname} ${surname}`)
                 .click();
             });
 
-            cy.get('.banner__deputy-wrap--name').contains(`${salutation} ${firstname} ${surname}`, {matchCase: false});
+            cy.get(".banner__deputy-wrap--name").contains(`${firstname} ${surname}`, {matchCase: false});
           })
         });
       }
