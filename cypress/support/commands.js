@@ -93,7 +93,7 @@ Cypress.Commands.add("waitForSearchService", (searchTerm = "", personTypes = [],
           personTypes: personTypes,
           term: searchTerm,
         })
-        .then((resp) => resp.body.total.count >= 1),
+        .then((resp) => resp.body.total.count >= minimumExpected),
     {timeout: 10000, interval: 500}
   );
 })
