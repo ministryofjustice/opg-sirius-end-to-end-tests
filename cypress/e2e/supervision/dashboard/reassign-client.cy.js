@@ -17,9 +17,9 @@ const allocateTheClientToLayTeam = () => {
     });
 
   cy.get("@hwTeamId").then((hwTeamId) => {
-    cy.get("@clientId").then((clientId) => {
+    cy.get("@client").then(({id}) => {
       return cy.putToApi(
-        `/supervision-api/v1/clients/${clientId}/edit/allocate`,
+        `/supervision-api/v1/clients/${{id}}/edit/allocate`,
         `{"teamId":"${hwTeamId}"}`
       );
     });
@@ -29,7 +29,7 @@ const allocateTheClientToLayTeam = () => {
 before(function setupAllocatedClient() {
   cy.loginAs("Allocations User");
   cy.createAClient();
-  cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId));
+  cy.get("@client").then(({id}) => cy.createOrderForClient({id}));
   cy.get("@orderId").then((orderId) => cy.setSupervisionLevel(orderId));
   cy.get("@orderId").then((orderId) => cy.changeOrderStatus(orderId));
   allocateTheClientToLayTeam();

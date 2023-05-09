@@ -4,10 +4,10 @@ const lastName = "Client" + suffix;
 const memorablePhrase = "Memorable" + suffix;
 
 const editClient = (isCourtReferenceChanged) => {
-  return cy.get("@clientId").then((clientId) => {
+  return cy.get("@client").then(({id}) => {
     cy.intercept({
       method: "PUT",
-      url: `/supervision-api/v1/clients/${clientId}`,
+      url: `/supervision-api/v1/clients/${id}`,
     }).as("editClientCall");
     cy.get('input[name="firstName"]').should("have.value", "Ted");
     cy.get('input[name="firstName"]').clear();
@@ -37,10 +37,10 @@ const editClient = (isCourtReferenceChanged) => {
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createAClient();
-  cy.get("@clientId").then((clientId) => {
-    cy.visit(`/supervision/#/clients/${clientId}/edit`);
+  cy.get("@client").then(({id, firstname, lastName}) => {
+    cy.visit(`/supervision/#/clients/${id}/edit`);
+    cy.contains(`Edit Client: ${firstname} ${lastName}`);
   });
-  cy.contains("Edit Client: Ted Tedson");
 });
 
 describe(
@@ -85,10 +85,10 @@ describe(
             cy.contains("First name changed from Ted to " + `${firstName}`);
             cy.contains("Last name changed from Tedson to " + `${lastName}`);
             cy.contains("Memorable phrase set to " + `${memorablePhrase}`);
-            cy.get("@clientCourtReference").then((courtreference) => {
+            cy.get("@client").then(({caseRecNumber}) => {
               cy.contains(
                 "Court reference changed from " +
-                  courtreference +
+                  caseRecNumber +
                   " to " +
                   newCourtReference
               );

@@ -3,8 +3,7 @@ Cypress.Commands.add("createAClient", () => {
     cy.postToApi("/api/v1/clients", client)
       .its("body")
       .then((res) => {
-        cy.wrap(res.caseRecNumber).as("clientCourtReference");
-        cy.wrap(res.id).as("clientId");
+        cy.wrap(res).as("client");
       });
   });
 });

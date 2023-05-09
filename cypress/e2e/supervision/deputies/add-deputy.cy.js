@@ -1,9 +1,9 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createAClient();
-  cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId));
-  cy.get("@clientId").then((clientId) => {
-    cy.visit(`/supervision/#/clients/${clientId}`);
+  cy.get("@client").then(({id}) => {
+    cy.createOrderForClient(id);
+    cy.visit(`/supervision/#/clients/${id}`);
   });
 });
 
@@ -151,42 +151,38 @@ describe(
     });
 
     it("Sets the deputy as the main fee payer and correspondent when added to a client", () => {
-      cy.get("@clientId").then((clientId) => {
-        searchForADeputyToReachAddADeputyPage();
-        cy.get("#typeOfDeputy .radio-button").contains("Professional").should("be.visible").click();
-        cy.get(".deputy-details-form-firstname").type("Patrick");
-        cy.get(".deputy-details-form-surname").type("Star");
-        cy.contains("Save & continue").should("be.visible").click();
-        cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
-        cy.get(".TABS_DEPUTIES").click();
-        cy.contains("Loading deputies...").as("loadingDeputies").should("be.visible");
-        cy.get("@loadingDeputies").should("not.exist");
-        cy.get("tr.summary-row > :nth-child(1) > .dotted-link").click();
-        cy.get(".person-name").should("be.visible");
-        cy.get(".person-name").should("contain.text", "Patrick Star");
-        cy.get(".summary-row.open > :nth-child(1)").should(
-          "contain.text",
-          "Patrick Star"
-        );
-        cy.get(".deputy-details-type").should("contain.text", "Professional");
-        cy.get(".deputy-relation-type").should("contain.text", "Professional");
-        cy.get(".fee-payer").should("be.visible");
-        cy.get(".main-contact").should("be.visible");
-        cy.get(".order-details-main-correspondent").should(
-          "contain.text",
-          "Yes"
-        );
-        cy.get(".order-details-fee-payer").should("contain.text", "Yes");
-      });
+      searchForADeputyToReachAddADeputyPage();
+      cy.get("#typeOfDeputy .radio-button").contains("Professional").should("be.visible").click();
+      cy.get(".deputy-details-form-firstname").type("Patrick");
+      cy.get(".deputy-details-form-surname").type("Star");
+      cy.contains("Save & continue").should("be.visible").click();
+      cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
+      cy.get(".TABS_DEPUTIES").click();
+      cy.contains("Loading deputies...").as("loadingDeputies").should("be.visible");
+      cy.get("@loadingDeputies").should("not.exist");
+      cy.get("tr.summary-row > :nth-child(1) > .dotted-link").click();
+      cy.get(".person-name").should("be.visible");
+      cy.get(".person-name").should("contain.text", "Patrick Star");
+      cy.get(".summary-row.open > :nth-child(1)").should(
+        "contain.text",
+        "Patrick Star"
+      );
+      cy.get(".deputy-details-type").should("contain.text", "Professional");
+      cy.get(".deputy-relation-type").should("contain.text", "Professional");
+      cy.get(".fee-payer").should("be.visible");
+      cy.get(".main-contact").should("be.visible");
+      cy.get(".order-details-main-correspondent").should(
+        "contain.text",
+        "Yes"
+      );
+      cy.get(".order-details-fee-payer").should("contain.text", "Yes");
     });
 
     it("Greys out save and continue button when mandatory form fields not filled", () => {
-      cy.get("@clientId").then((clientId) => {
-        searchForADeputyToReachAddADeputyPage();
-        cy.get("#typeOfDeputy .radio-button").contains("Lay").should("be.visible").click();
-        cy.get(".deputy-details-form-firstname").should("be.visible").type("Squidward");
-        cy.get(".footer > :nth-child(1) > .button").should("be.disabled");
-      });
+      searchForADeputyToReachAddADeputyPage();
+      cy.get("#typeOfDeputy .radio-button").contains("Lay").should("be.visible").click();
+      cy.get(".deputy-details-form-firstname").should("be.visible").type("Squidward");
+      cy.get(".footer > :nth-child(1) > .button").should("be.disabled");
     });
 
     it("Allows a new fee payer to be set for an order",

@@ -16,8 +16,8 @@ describe(
     it(
       "Records a client's death confirmation successfully when populating all fields",
       () => {
-        cy.get("@clientId").then((clientId) => {
-          cy.visit(`/supervision/#/clients/${clientId}/record-death`);
+        cy.get("@client").then(({id}) => {
+          cy.visit(`/supervision/#/clients/${{id}}/record-death`);
         });
 
         cy.get("#record-death").as("record-death-panel");
@@ -70,8 +70,8 @@ describe(
     it(
       "Displays a validation error when confirming a client's death with an invalid date of death",
       () => {
-        cy.get("@clientId").then((clientId) => {
-          cy.visit(`/supervision/#/clients/${clientId}/record-death`);
+        cy.get("@client").then(({id}) => {
+          cy.visit(`/supervision/#/clients/${{id}}/record-death`);
         });
         cy.get("#record-death").as("record-death-panel");
         cy.get("@record-death-panel").within(() => {

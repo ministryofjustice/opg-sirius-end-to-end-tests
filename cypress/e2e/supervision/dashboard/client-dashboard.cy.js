@@ -2,8 +2,8 @@ beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createAClient();
 
-  cy.get("@clientId").then((clientId) => {
-    cy.visit(`/supervision/#/clients/${clientId}`);
+  cy.get("@client").then(({id}) => {
+    cy.visit(`/supervision/#/clients/${{id}}`);
   });
 });
 
