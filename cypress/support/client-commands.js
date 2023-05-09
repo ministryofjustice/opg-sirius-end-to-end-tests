@@ -1,5 +1,11 @@
-Cypress.Commands.add("createAClient", () => {
+Cypress.Commands.add("createAClient", (overrides = {}) => {
   cy.fixture("client/minimal.json").then((client) => {
+    client = {
+      ...client,
+      firstname: Math.random().toString(36).slice(2),
+      surname: Math.random().toString(36).slice(2),
+      ...overrides
+    };
     cy.postToApi("/api/v1/clients", client)
       .its("body")
       .then((res) => {
