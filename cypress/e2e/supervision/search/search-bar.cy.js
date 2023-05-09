@@ -1,11 +1,9 @@
-import cypress from "cypress";
-
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createAClient();
   cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId));
   cy.get("@orderId").then((orderId) => {
-    cy.createADeputyAndAssignToExistingOrder(orderId, {surname: cypress._.randomUUID()});
+    cy.createADeputyAndAssignToExistingOrder(orderId, {surname: Math.random().toString(36).slice(2)});
   });
 });
 
