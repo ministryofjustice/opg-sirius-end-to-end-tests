@@ -10,8 +10,8 @@ describe(
   },
   () => {
     it("Records a client risk score", () => {
-      cy.get("@clientId").then((clientId) => {
-        cy.visit(`/supervision/#/clients/${clientId}`);
+      cy.get("@client").then(({id}) => {
+        cy.visit(`/supervision/#/clients/${{id}}`);
       });
 
       cy.get("button").contains("Record client risk score").click();

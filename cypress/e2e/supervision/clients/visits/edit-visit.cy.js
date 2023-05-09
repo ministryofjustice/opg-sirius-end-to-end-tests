@@ -1,8 +1,8 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createAClient();
-  cy.get("@clientId").then((clientId) => {
-    cy.addVisitForClient(clientId)
+  cy.get("@client").then(({id}) => {
+    cy.addVisitForClient(id)
   });
 });
 
@@ -11,8 +11,8 @@ describe(
   { tags: ["@supervision", "@client", "@smoke-journey", "@supervision-notes"] },
   () => {
     it("Given I'm a Case Manager on Supervision, I edit an existing visit", () => {
-      cy.get("@clientId").then((clientId) => {
-          cy.visit(`/supervision/#/clients/${clientId}`)
+      cy.get("@client").then(({id}) => {
+          cy.visit(`/supervision/#/clients/${id}`)
         }
       );
 

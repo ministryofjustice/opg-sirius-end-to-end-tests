@@ -11,8 +11,8 @@ const getIframeBody = () => {
 beforeEach(function navigateToClient() {
   cy.loginAs("Allocations User");
   cy.createAClient();
-  cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId));
-  cy.get("@clientId").then((clientId) => {
+  cy.get("@client").then(({id}) => {
+    cy.createOrderForClient(id);
     cy.visit(`/supervision/#/clients/${clientId}`);
   });
 });
@@ -28,7 +28,7 @@ describe(
         cy.get(".title-person-name").contains("Ted Tedson");
 
         cy.get("@orderId").then((orderId) => {
-          cy.get("@clientId").then((clientId) => {
+          cy.get("@client").then(({id: clientId}) => {
             cy.visit(
               `/supervision/#/clients/${clientId}/orders/${orderId}/drafts/create/template`
             );
@@ -85,7 +85,7 @@ describe(
         cy.get(".title-person-name").contains("Ted Tedson");
 
         cy.get("@orderId").then((orderId) => {
-          cy.get("@clientId").then((clientId) => {
+          cy.get("@client").then(({id: clientId}) => {
             cy.visit(
               `/supervision/#/clients/${clientId}/orders/${orderId}/drafts/create/template`
             );

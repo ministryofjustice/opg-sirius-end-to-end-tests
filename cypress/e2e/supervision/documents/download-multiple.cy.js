@@ -25,8 +25,8 @@ describe(
     it("can download multiple files at once", () => {
       cy.loginAs("Allocations User");
 
-      cy.get("@clientId").then((clientId) => {
-        cy.visit(`/supervision/#/clients/${clientId}`);
+      cy.get("@client").then(({id}) => {
+        cy.visit(`/supervision/#/clients/${id}`);
       });
 
       cy.get(".TABS_DOCUMENTS").click();

@@ -1,7 +1,7 @@
 beforeEach(() => {
   cy.loginAs("Allocations User");
   cy.createAClient();
-  cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId));
+  cy.get("@client").then(({id}) => cy.createOrderForClient(id));
   cy.get("@orderId").then((orderId) => cy.setSupervisionLevel(orderId));
   cy.get("@orderId").then((orderId) => cy.changeOrderStatus(orderId));
 });
@@ -12,9 +12,9 @@ describe(
   () => {
     it("allocates a client to casework team when order is active", () => {
       cy.get("@orderId").then((orderId) => {
-        cy.get("@clientId").then((clientId) => {
+        cy.get("@client").then(({id}) => {
           cy.visit(
-            `/supervision/#/clients/${clientId}?order=${orderId}`
+            `/supervision/#/clients/${{id}}?order=${orderId}`
           );
         });
       });

@@ -1,11 +1,11 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createAClient();
-  cy.get("@clientId").then((clientId) => {
-    cy.addVisitForClient(clientId)
+  cy.get("@client").then(({id}) => {
+    cy.addVisitForClient(id)
   });
   cy.get("@visitId").then((visitId) => {
-    cy.get("@clientId").then((clientId) => {
+    cy.get("@client").then(({id}) => {
       let data = {
         "visitReportDueDate": "22/03/2023",
         "whoToVisit": {
@@ -13,7 +13,7 @@ beforeEach(() => {
           "label": "Client"
         }
       };
-      cy.editVisitForClient(visitId, clientId, data);
+      cy.editVisitForClient(visitId, ud, data);
     });
   });
 });
@@ -23,8 +23,8 @@ describe(
   { tags: ["@supervision-core", "@visit", "@smoke-journey", "@extend-visit-report-due-date"] },
   () => {
     it("can extend a visit's report due date for an existing visit", () => {
-      cy.get("@clientId").then((clientId) => {
-        cy.visit(`/supervision/#/clients/${clientId}`);
+      cy.get("@client").then(({id}) => {
+        cy.visit(`/supervision/#/clients/${id}`);
         cy.get(".TABS_VISITS button").click();
 
         cy.get(".visit-type-field").contains("Supervision");
