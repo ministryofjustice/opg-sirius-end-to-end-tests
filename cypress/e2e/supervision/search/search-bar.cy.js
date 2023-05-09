@@ -1,11 +1,11 @@
-import {faker} from "@faker-js/faker";
+import cypress from "cypress";
 
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createAClient();
   cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId));
   cy.get("@orderId").then((orderId) => {
-    cy.createADeputyAndAssignToExistingOrder(orderId, {surname: faker.name.lastName()});
+    cy.createADeputyAndAssignToExistingOrder(orderId, {surname: cypress._.randomUUID()});
   });
 });
 
