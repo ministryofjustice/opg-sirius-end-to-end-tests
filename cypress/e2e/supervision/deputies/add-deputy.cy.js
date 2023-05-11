@@ -1,8 +1,9 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
-  cy.createAClient();
+  cy.createClient()
+    .withOrder();
+
   cy.get("@client").then(({id}) => {
-    cy.createOrderForClient(id);
     cy.visit(`/supervision/#/clients/${id}`);
   });
 });

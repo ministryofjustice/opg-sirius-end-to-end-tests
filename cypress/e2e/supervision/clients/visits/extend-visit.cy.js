@@ -1,6 +1,6 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
-  cy.createAClient();
+  cy.createClient();
   cy.get("@client").then(({id}) => {
     cy.addVisitForClient(id)
   });
@@ -13,7 +13,7 @@ beforeEach(() => {
           "label": "Client"
         }
       };
-      cy.editVisitForClient(visitId, ud, data);
+      cy.editVisitForClient(visitId, id, data);
     });
   });
 });
@@ -60,7 +60,7 @@ describe(
         });
         cy.intercept({
           method: "GET",
-          url: `/supervision-api/v1/clients/${clientId}/visits`,
+          url: `/supervision-api/v1/clients/${id}/visits`,
         }).as("getVisitsCall");
         cy.contains("Save & exit").click();
         cy.wait("@getVisitsCall").its("response.statusCode").should("equal", 200);

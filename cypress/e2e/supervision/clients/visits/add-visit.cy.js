@@ -1,7 +1,7 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
-  cy.createAClient();
-  cy.get("@client").then(({id}) => cy.createOrderForClient(id));
+  cy.createClient()
+    .withOrder();
 });
 
 describe(

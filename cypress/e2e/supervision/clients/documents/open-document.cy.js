@@ -2,7 +2,7 @@ import path from "path";
 
 beforeEach(() => {
   cy.loginAs("Allocations User");
-  cy.createAClient();
+  cy.createClient();
   cy.loginAs("Public API");
   cy.uploadDocument();
 });

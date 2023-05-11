@@ -1,6 +1,6 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
-  cy.createAClient();
+  cy.createClient();
 });
 
 describe(

@@ -1,6 +1,6 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
-  cy.createAClient();
+  cy.createClient();
 });
 
 describe(
@@ -17,7 +17,7 @@ describe(
       "Records a client's death confirmation successfully when populating all fields",
       () => {
         cy.get("@client").then(({id}) => {
-          cy.visit(`/supervision/#/clients/${{id}}/record-death`);
+          cy.visit(`/supervision/#/clients/${id}/record-death`);
         });
 
         cy.get("#record-death").as("record-death-panel");
@@ -71,7 +71,7 @@ describe(
       "Displays a validation error when confirming a client's death with an invalid date of death",
       () => {
         cy.get("@client").then(({id}) => {
-          cy.visit(`/supervision/#/clients/${{id}}/record-death`);
+          cy.visit(`/supervision/#/clients/${id}/record-death`);
         });
         cy.get("#record-death").as("record-death-panel");
         cy.get("@record-death-panel").within(() => {
