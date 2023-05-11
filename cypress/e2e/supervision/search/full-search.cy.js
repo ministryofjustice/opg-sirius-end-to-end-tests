@@ -1,7 +1,8 @@
 before(() => {
   cy.loginAs("Case Manager");
-  cy.createAClient();
-  cy.get("@client").then(({id}) => cy.createOrderForClient(id));
+  cy.createClient()
+    .withOrder();
+
   cy.get("@orderId").then((orderId) => {
     cy.createADeputyAndAssignToExistingOrder(orderId);
   });

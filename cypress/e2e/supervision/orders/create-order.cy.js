@@ -1,6 +1,6 @@
 beforeEach(() => {
   cy.loginAs("Allocations User");
-  cy.createAClient();
+  cy.createClient();
 });
 
 describe(

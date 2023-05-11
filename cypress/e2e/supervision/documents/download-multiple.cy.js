@@ -2,8 +2,8 @@ import * as path from "path";
 
 const uploadDocument = () => {
   cy.fixture("document/minimal.json").then((document) => {
-    cy.get("@clientCourtReference").then((courtRef) => {
-      document.caseRecNumber = courtRef;
+    cy.get("@client").then(({caseRecNumber}) => {
+      document.caseRecNumber = caseRecNumber;
     });
     cy.postToApi(`/api/public/v1/documents`, document);
   });
@@ -15,7 +15,7 @@ describe(
   () => {
     before(() => {
       cy.loginAs("Allocations User");
-      cy.createAClient();
+      cy.createClient();
 
       cy.loginAs("Public API");
       uploadDocument();
