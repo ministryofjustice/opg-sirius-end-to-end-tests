@@ -36,7 +36,7 @@ const editClient = (isCourtReferenceChanged) => {
 
 beforeEach(() => {
   cy.loginAs("Case Manager");
-  cy.createAClient();
+  cy.createClient();
   cy.get("@client").then(({id, firstname, surname}) => {
     cy.visit(`/supervision/#/clients/${id}/edit`);
     cy.contains(`Edit Client: ${firstname} ${surname}`);

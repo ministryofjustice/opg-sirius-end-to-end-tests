@@ -1,6 +1,6 @@
 before(function setupClient() {
   cy.loginAs("Allocations User");
-  cy.createAClient();
+  cy.createClient();
   cy.loginAs("Finance Reporting User");
   cy.get("@client").then(({caseRecNumber}) => {
     cy.assignSOPNumberToClient(caseRecNumber)
@@ -10,7 +10,7 @@ before(function setupClient() {
 
 beforeEach(function navigateToClient() {
   cy.get("@client").then(({id}) => {
-    cy.visit(`/supervision/#/clients/${{id}}`);
+    cy.visit(`/supervision/#/clients/${id}`);
   });
 });
 
