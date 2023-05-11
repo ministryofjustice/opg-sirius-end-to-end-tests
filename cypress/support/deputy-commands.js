@@ -1,10 +1,15 @@
 Cypress.Commands.add("createADeputy", (overrides = {}) => {
   cy.fixture("deputy/minimal.json").then((deputy) => {
-    deputy = {...deputy, ...overrides};
+    deputy = {
+      ...deputy,
+      firstname: Math.random().toString(36).slice(2),
+      surname: Math.random().toString(36).slice(2),
+      ...overrides
+    };
     cy.postToApi("/api/v1/deputies", deputy)
       .its("body")
       .then((res) => {
-        cy.wrap(res.id).as("deputyId");
+        cy.wrap(res).as("deputy");
       });
   });
 });

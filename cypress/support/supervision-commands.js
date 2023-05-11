@@ -2,8 +2,8 @@ Cypress.Commands.add("createOrder", (orderType, orderSubType, orderDate, optiona
   let orderDay = orderDate.split("/")[0];
   let orderMonth = orderDate.split("/")[1];
   let orderYear = orderDate.split("/")[2];
-  cy.get("@clientId").then((clientId) => {
-    cy.visit(`/supervision/#/clients/${clientId}`);
+  cy.get("@client").then(({id, caseRecNumber}) => {
+    cy.visit(`/supervision/#/clients/${id}`);
     cy.contains("Create order").click();
     cy.get("#orderType")
       .closest(".fieldset")
@@ -13,10 +13,8 @@ Cypress.Commands.add("createOrder", (orderType, orderSubType, orderDate, optiona
       .closest(".fieldset")
       .find("Select")
       .select(orderSubType);
-    cy.get("@clientCourtReference").then((clientCourtReference) => {
-      cy.get('input[name="courtReference"]').clear();
-      cy.get('input[name="courtReference"]').type(clientCourtReference);
-    });
+    cy.get('input[name="courtReference"]').clear();
+    cy.get('input[name="courtReference"]').type(caseRecNumber);
     cy.get("#fIELDLABELSORDERDATE_day").clear();
     cy.get("#fIELDLABELSORDERDATE_day").type(orderDay);
     cy.get("#fIELDLABELSORDERDATE_month").clear();
