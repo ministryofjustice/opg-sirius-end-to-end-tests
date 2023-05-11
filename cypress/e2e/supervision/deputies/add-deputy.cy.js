@@ -68,19 +68,13 @@ describe(
     });
 
     it("Adds an existing deputy to a case", () => {
-      const suffix = Math.floor(Math.random() * 10000);
-      const firstName = "Test" + suffix;
-      const lastName = "Deputy" + suffix;
-      const fullName = firstName + " " + lastName;
       cy.createADeputy({
-        firstname: firstName,
-        surname: lastName,
         deputyType: { handle: "PRO", label: "Professional" },
         deputySubType: { handle: "PERSON", label: "Person" },
       });
-      cy.get("@deputyId").then(() => {
+      cy.get("@deputy").then(({firstname, surname}) => {
         cy.get('#add-deputy-button').should("be.visible").click();
-        cy.get(".deputy-search__input").should("be.visible").type(fullName);
+        cy.get(".deputy-search__input").should("be.visible").type(`${firstname} ${surname}`);
         cy.get(".deputy-search__search-button").click();
         cy.get(".deputy-search__use-button").first().click();
         cy.get(".TABS_DEPUTIES").click();
@@ -91,13 +85,13 @@ describe(
           .then((rows) => {
             expect(rows.length === 1);
           });
-        cy.get(".deputy-name").contains(fullName).should("be.visible");
+        cy.get(".deputy-name").contains(`${firstname} ${surname}`).should("be.visible");
         cy.get(".deputy-type").contains("Professional");
         cy.get(".deputy-status-on-case").contains("Open");
         cy.get(".deputy-relationship-to-client").should("have.value", "");
         cy.get(".full-details").last().click();
         cy.get(".deputy-details-type").contains("Professional");
-        cy.get(".deputy-details-deputy-name").contains(fullName);
+        cy.get(".deputy-details-deputy-name").contains(`${firstname} ${surname}`);
         cy.get(".deputy-details-is-airmail-required").contains("No");
         cy.get(".deputy-additional-details-newsletter").contains("No");
         cy.get(".order-details-deputy-type").contains("Professional");
@@ -128,7 +122,7 @@ describe(
         organisationName: organisationName,
         deputyType: { handle: "PA", label: "Public Authority" },
       });
-      cy.get("@deputyId").then(() => {
+      cy.get("@deputy").then(() => {
         cy.get('#add-deputy-button').should("be.visible").click();
         cy.get(".deputy-search__input").should("be.visible").type(organisationName);
         cy.get(".deputy-search__search-button").click();

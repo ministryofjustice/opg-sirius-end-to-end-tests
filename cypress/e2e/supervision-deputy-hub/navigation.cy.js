@@ -16,7 +16,7 @@ describe("Navigation", { tags: ["@supervision-deputy-hub", "@smoke-journey"] }, 
       5: '/auth/login?loggedout=1'
     }
     for (let key in navigationLinks) {
-      cy.get("@deputyId").then((deputyId) => cy.visit("/supervision/deputies/" + deputyId));
+      cy.get("@deputy").then(({id}) => cy.visit("/supervision/deputies/" + id));
       cy.get(':nth-child(' + key + ') > .moj-header__navigation-link').click()
       cy.url().should('include', navigationLinks[key])
     }
