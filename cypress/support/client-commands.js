@@ -16,12 +16,12 @@ Cypress.Commands.add("createClient", (overrides = {}) => {
 
 Cypress.Commands.add("withOrder", {prevSubject: true}, (client, overrides = {}) => {
   cy.fixture("order/minimal.json").then((order) => {
+    console.log(client.firstname);
     order = {...order, ...overrides};
     cy.postToApi(`/supervision-api/v1/clients/${client.id}/orders`, order)
       .its("body")
       .then((res) => {
-        cy.wrap(res.caseRecNumber).as("courtReference");
-        cy.wrap(res.id).as("orderId");
+        cy.wrap(res).as("order");
       });
   });
 });

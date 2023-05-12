@@ -1,12 +1,9 @@
 beforeEach(() => {
   cy.loginAs("Allocations User");
   cy.createClient()
-    .withOrder();
-
-  cy.get("@orderId").then((orderId) => {
-    cy.setSupervisionLevel(orderId);
-    cy.changeOrderStatus(orderId);
-  });
+    .withOrder()
+    .withSupervisionLevel()
+    .withOrderStatus()
 });
 
 describe(
@@ -14,10 +11,10 @@ describe(
   { tags: ["@supervision-core", "@allocate-client", "@smoke-journey"] },
   () => {
     it("allocates a client to casework team when order is active", () => {
-      cy.get("@orderId").then((orderId) => {
-        cy.get("@client").then(({id, firstname, surname}) => {
+      cy.get("@order").then(({id: orderId}) => {
+        cy.get("@client").then(({id: clientId, firstname, surname}) => {
           cy.visit(
-            `/supervision/#/clients/${id}?order=${orderId}`
+            `/supervision/#/clients/${clientId}?order=${orderId}`
           );
           cy.get("#allocate-button").click();
           cy.get(".required")

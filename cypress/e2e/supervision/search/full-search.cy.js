@@ -14,8 +14,8 @@ describe(
   () => {
     it("finds the order by court reference and can filter full search results by client and deputy", () => {
       cy.visit("/supervision/#/dashboard");
-      cy.get('@courtReference').then((orderId) => {
-        cy.get(".search-bar__input").type(orderId);
+      cy.get('@client').then(({caseRecNumber}) => {
+        cy.get(".search-bar__input").type(caseRecNumber);
       })
       cy.get('.search-bar__show-all').should('contain.text', 'Show All')
       cy.get('.search-bar__show-all').click()
