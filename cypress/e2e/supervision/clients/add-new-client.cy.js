@@ -18,16 +18,16 @@ describe(
 
       cy.contains("Create a new client").click();
 
-      cy.fixture("client/minimal.json").then((client) => {
-        cy.get('input[name="courtReference"]').type(client.caseRecNumber);
-        cy.get('input[name="firstName"]').type(client.firstname);
-        cy.get('input[name="lastName"]').type(client.surname);
+      cy.fixture("client/minimal.json").then(({caseRecNumber, firstname, surname}) => {
+        cy.get('input[name="courtReference"]').type(caseRecNumber);
+        cy.get('input[name="firstName"]').type(firstname);
+        cy.get('input[name="lastName"]').type(surname);
 
         cy.contains("Save & exit").click();
 
         cy.get('span[class="title-person-name"]', {timeout: 30000})
           .should("be.visible")
-          .contains(`${client.firstname} ${client.surname}`);
+          .contains(`${firstname} ${surname}`);
         cy.get(
           'div[class="client-summary__cell client-summary__cell--value court-reference-value-in-client-summary"]'
         ).should("not.have.value", "00000000");

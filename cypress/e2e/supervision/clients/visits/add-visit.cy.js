@@ -1,7 +1,7 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
-  cy.createAClient();
-  cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId));
+  cy.createClient()
+    .withOrder();
 });
 
 describe(
@@ -10,7 +10,7 @@ describe(
   () => {
     it("can add a new visit", () => {
       cy.get("@orderId").then((orderId) => {
-        cy.get("@clientId").then((clientId) => {
+        cy.get("@client").then(({id: clientId}) => {
           cy.visit(
             `/supervision/#/clients/${clientId}/visits/add?order=${orderId}`
           );
