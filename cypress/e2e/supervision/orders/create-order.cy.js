@@ -1,6 +1,6 @@
 beforeEach(() => {
   cy.loginAs("Allocations User");
-  cy.createAClient();
+  cy.createClient();
 });
 
 describe(
@@ -26,9 +26,9 @@ describe(
       cy.get(".order-header-details-case-type").contains("PFA");
       cy.get(".order-header-details-case-sub-type").contains("New deputy");
       cy.get(".order-header-date").contains("01/01/2022");
-      cy.get("@clientCourtReference").then((clientCourtReference) => {
+      cy.get("@client").then(({caseRecNumber}) => {
         cy.get(".order-header-details-court-reference-number").contains(
-          clientCourtReference
+          caseRecNumber
         );
       });
       cy.contains("View full details").click();
@@ -47,9 +47,9 @@ describe(
       cy.get(".order-header-details-case-type").contains("H&W");
       cy.get(".order-header-details-case-sub-type").contains("New deputy");
       cy.get(".order-header-date").contains("01/01/2022");
-      cy.get("@clientCourtReference").then((clientCourtReference) => {
+      cy.get("@client").then(({caseRecNumber}) => {
         cy.get(".order-header-details-court-reference-number").contains(
-          clientCourtReference
+          caseRecNumber
         );
       });
       cy.contains("View full details").click();
@@ -76,9 +76,9 @@ describe(
       cy.get(".order-header-details-case-type").contains("PFA");
       cy.get(".order-header-details-case-sub-type").contains("New deputy");
       cy.get(".order-header-date").contains("01/01/2022");
-      cy.get("@clientCourtReference").then((clientCourtReference) => {
+      cy.get("@client").then(({caseRecNumber}) => {
         cy.get(".order-header-details-court-reference-number").contains(
-          clientCourtReference
+          caseRecNumber
         );
       });
       cy.contains("View full details").click();
@@ -107,9 +107,9 @@ describe(
       cy.get(".order-header-details-case-type").contains("H&W");
       cy.get(".order-header-details-case-sub-type").contains("Guardianship");
       cy.get(".order-header-date").contains("01/01/2022");
-      cy.get("@clientCourtReference").then((clientCourtReference) => {
+      cy.get("@client").then(({caseRecNumber}) => {
         cy.get(".order-header-details-court-reference-number").contains(
-          clientCourtReference
+          caseRecNumber
         );
       });
       cy.contains("View full details").click();

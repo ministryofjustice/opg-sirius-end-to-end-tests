@@ -1,18 +1,23 @@
-Cypress.Commands.add("createAClient", () => {
+Cypress.Commands.add("createClient", (overrides = {}) => {
   cy.fixture("client/minimal.json").then((client) => {
+    client = {
+      ...client,
+      firstname: Math.random().toString(36).slice(2),
+      surname: Math.random().toString(36).slice(2),
+      ...overrides
+    };
     cy.postToApi("/api/v1/clients", client)
       .its("body")
       .then((res) => {
-        cy.wrap(res.caseRecNumber).as("clientCourtReference");
-        cy.wrap(res.id).as("clientId");
+        cy.wrap(res).as("client");
       });
   });
 });
 
-Cypress.Commands.add("createOrderForClient", (clientId, overrides = {}) => {
+Cypress.Commands.add("withOrder", {prevSubject: true}, (client, overrides = {}) => {
   cy.fixture("order/minimal.json").then((order) => {
     order = {...order, ...overrides};
-    cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
+    cy.postToApi(`/supervision-api/v1/clients/${client.id}/orders`, order)
       .its("body")
       .then((res) => {
         cy.wrap(res.caseRecNumber).as("courtReference");

@@ -1,11 +1,11 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
-  cy.createAClient();
-  cy.get("@clientId").then((clientId) => {
-    cy.addVisitForClient(clientId)
+  cy.createClient();
+  cy.get("@client").then(({id}) => {
+    cy.addVisitForClient(id)
   });
   cy.get("@visitId").then((visitId) => {
-    cy.get("@clientId").then((clientId) => {
+    cy.get("@client").then(({id}) => {
       let data = {
         "visitReportDueDate": "22/03/2023",
         "whoToVisit": {
@@ -13,7 +13,7 @@ beforeEach(() => {
           "label": "Client"
         }
       };
-      cy.editVisitForClient(visitId, clientId, data);
+      cy.editVisitForClient(visitId, id, data);
     });
   });
 });
@@ -23,8 +23,8 @@ describe(
   { tags: ["@supervision-core", "@visit", "@smoke-journey", "@extend-visit-report-due-date"] },
   () => {
     it("can extend a visit's report due date for an existing visit", () => {
-      cy.get("@clientId").then((clientId) => {
-        cy.visit(`/supervision/#/clients/${clientId}`);
+      cy.get("@client").then(({id}) => {
+        cy.visit(`/supervision/#/clients/${id}`);
         cy.get(".TABS_VISITS button").click();
 
         cy.get(".visit-type-field").contains("Supervision");
@@ -60,7 +60,7 @@ describe(
         });
         cy.intercept({
           method: "GET",
-          url: `/supervision-api/v1/clients/${clientId}/visits`,
+          url: `/supervision-api/v1/clients/${id}/visits`,
         }).as("getVisitsCall");
         cy.contains("Save & exit").click();
         cy.wait("@getVisitsCall").its("response.statusCode").should("equal", 200);
