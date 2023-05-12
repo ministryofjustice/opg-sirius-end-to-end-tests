@@ -1,9 +1,11 @@
+import randomText from "./random-text";
+
 Cypress.Commands.add("createClient", (overrides = {}) => {
   cy.fixture("client/minimal.json").then((client) => {
     client = {
       ...client,
-      firstname: Math.random().toString(36).slice(2),
-      surname: Math.random().toString(36).slice(2),
+      firstname: randomText(),
+      surname: randomText(),
       ...overrides
     };
     cy.postToApi("/api/v1/clients", client)
