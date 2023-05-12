@@ -21,7 +21,7 @@ describe(
     it(
       "creates, edits, previews, and publishes a draft",
       () => {
-        cy.get("@orderId").then((orderId) => {
+        cy.get("@order").then(({id: orderId}) => {
           cy.get("@client").then(({id: clientId}) => {
             cy.visit(
               `/supervision/#/clients/${clientId}/orders/${orderId}/drafts/create/template`

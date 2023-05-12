@@ -29,9 +29,9 @@ const allocateTheClientToLayTeam = () => {
 before(function setupAllocatedClient() {
   cy.loginAs("Allocations User");
   cy.createClient()
-    .withOrder();
-  cy.get("@orderId").then((orderId) => cy.withSupervisionLevel(orderId));
-  cy.get("@orderId").then((orderId) => cy.withOrderStatus(orderId));
+    .withOrder()
+    .withSupervisionLevel()
+    .withOrderStatus();
   allocateTheClientToLayTeam();
 });
 

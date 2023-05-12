@@ -3,8 +3,8 @@ beforeEach(() => {
   cy.createClient()
     .withOrder();
 
-  cy.get("@orderId").then((orderId) => {
-    cy.createADeputyAndAssignToExistingOrder(orderId, {surname: Math.random().toString(36).slice(2)});
+  cy.get("@order").then(({id}) => {
+    cy.createADeputyAndAssignToExistingOrder(id, {surname: Math.random().toString(36).slice(2)});
   });
 });
 

@@ -9,7 +9,7 @@ describe(
   { tags: ["@supervision-core", "@visit", "@smoke-journey"] },
   () => {
     it("can add a new visit", () => {
-      cy.get("@orderId").then((orderId) => {
+      cy.get("@order").then(({id: orderId}) => {
         cy.get("@client").then(({id: clientId}) => {
           cy.visit(
             `/supervision/#/clients/${clientId}/visits/add?order=${orderId}`

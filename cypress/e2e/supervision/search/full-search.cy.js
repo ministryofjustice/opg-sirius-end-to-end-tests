@@ -3,8 +3,8 @@ before(() => {
   cy.createClient()
     .withOrder();
 
-  cy.get("@orderId").then((orderId) => {
-    cy.createADeputyAndAssignToExistingOrder(orderId);
+  cy.get("@order").then(({id}) => {
+    cy.createADeputyAndAssignToExistingOrder(id);
   });
 });
 
