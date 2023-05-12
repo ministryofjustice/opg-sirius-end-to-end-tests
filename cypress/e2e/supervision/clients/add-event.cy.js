@@ -1,6 +1,6 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
-  cy.createAClient();
+  cy.createClient();
 });
 
 describe(
@@ -8,9 +8,9 @@ describe(
   { tags: ["@supervision", "client", "@smoke-journey", "supervision-notes"] },
   () => {
     it("Given I'm a Case Manager on Supervision, when I add an event, then Word formatting is cleaned", () => {
-      cy.get("@clientId").then((clientId) => {
-        cy.visit("/supervision/#/clients/" + clientId);
-        cy.contains("Ted Tedson");
+      cy.get("@client").then(({id, firstname, surname}) => {
+        cy.visit("/supervision/#/clients/" + id);
+        cy.contains(`${firstname} ${surname}`);
         cy.get('[id="create-event-button"]').click();
         cy.get(".tox-edit-area__iframe", { timeout: 10000 })
           .should("be.visible")

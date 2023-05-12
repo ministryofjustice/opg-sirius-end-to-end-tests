@@ -2,7 +2,7 @@ import path from "path";
 
 beforeEach(() => {
   cy.loginAs("Allocations User");
-  cy.createAClient();
+  cy.createClient();
   cy.loginAs("Public API");
   cy.uploadDocument();
 });
@@ -13,9 +13,9 @@ describe(
   () => {
     it("opens a document successfully", () => {
       cy.loginAs("Case Manager");
-      cy.get("@clientId").then((clientId) => {
-        cy.visit(`/supervision/#/clients/${clientId}`);
-        cy.contains("Ted Tedson");
+      cy.get("@client").then(({id, firstname, surname}) => {
+        cy.visit(`/supervision/#/clients/${id}`);
+        cy.contains(`${firstname} ${surname}`);
         cy.get(".TABS_DOCUMENTS").click();
         cy.get(".filter-numbers > .number").should("have.text", 1);
         cy.get("#select-all-documents-checkbox").check({ force: true });
@@ -39,9 +39,9 @@ describe(
     it("multiple document download", () => {
       cy.uploadDocument();
       cy.loginAs("Case Manager");
-      cy.get("@clientId").then((clientId) => {
-        cy.visit(`/supervision/#/clients/${clientId}`);
-        cy.contains("Ted Tedson");
+      cy.get("@client").then(({id, firstname, surname}) => {
+        cy.visit(`/supervision/#/clients/${id}`);
+        cy.contains(`${firstname} ${surname}`);
         cy.get(".TABS_DOCUMENTS").click();
         cy.get(".filter-numbers > .number").should("have.text", 2);
         cy.get("#select-all-documents-checkbox").check({force: true});
