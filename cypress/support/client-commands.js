@@ -1,9 +1,11 @@
+import randomText from "./random-text";
+
 Cypress.Commands.add("createClient", (overrides = {}) => {
   cy.fixture("client/minimal.json").then((client) => {
     client = {
       ...client,
-      firstname: Math.random().toString(36).slice(2),
-      surname: Math.random().toString(36).slice(2),
+      firstname: randomText(),
+      surname: randomText(),
       ...overrides
     };
     cy.postToApi("/api/v1/clients", client)
@@ -14,11 +16,10 @@ Cypress.Commands.add("createClient", (overrides = {}) => {
   });
 });
 
-Cypress.Commands.add("withOrder", {prevSubject: true}, (client, overrides = {}) => {
+Cypress.Commands.add("withOrder", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
   cy.fixture("order/minimal.json").then((order) => {
-    console.log(client.firstname);
     order = {...order, ...overrides};
-    cy.postToApi(`/supervision-api/v1/clients/${client.id}/orders`, order)
+    cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
       .its("body")
       .then((res) => {
         cy.wrap(res).as("order");

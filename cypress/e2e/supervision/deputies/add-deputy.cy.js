@@ -1,3 +1,5 @@
+import randomText from "../../../support/random-text";
+
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createClient()
@@ -23,10 +25,9 @@ describe(
   { tags: ["@supervision", "@deputy", "supervision-core", "@smoke-journey"] },
   () => {
     it("Adds a new deputy to a case", () => {
-      const suffix = Math.floor(Math.random() * 10000);
-      const firstName = "Test" + suffix;
-      const lastName = "Deputy" + suffix;
-      const fullName = firstName + " " + lastName;
+      const firstName = randomText();
+      const lastName = randomText();
+      const fullName = `${firstName} ${lastName}`;
       searchForADeputyToReachAddADeputyPage();
       cy.get("#typeOfDeputy .radio-button").contains("Lay").should("be.visible").click();
       cy.get(".deputy-details-form-firstname").type(firstName);
@@ -74,8 +75,9 @@ describe(
         deputySubType: { handle: "PERSON", label: "Person" },
       });
       cy.get("@deputy").then(({firstname, surname}) => {
+        const fullName = `${firstname} ${surname}`;
         cy.get('#add-deputy-button').should("be.visible").click();
-        cy.get(".deputy-search__input").should("be.visible").type(`${firstname} ${surname}`);
+        cy.get(".deputy-search__input").should("be.visible").type(fullName);
         cy.get(".deputy-search__search-button").click();
         cy.get(".deputy-search__use-button").first().click();
         cy.get(".TABS_DEPUTIES").click();
@@ -86,13 +88,13 @@ describe(
           .then((rows) => {
             expect(rows.length === 1);
           });
-        cy.get(".deputy-name").contains(`${firstname} ${surname}`).should("be.visible");
+        cy.get(".deputy-name").contains(fullName).should("be.visible");
         cy.get(".deputy-type").contains("Professional");
         cy.get(".deputy-status-on-case").contains("Open");
         cy.get(".deputy-relationship-to-client").should("have.value", "");
         cy.get(".full-details").last().click();
         cy.get(".deputy-details-type").contains("Professional");
-        cy.get(".deputy-details-deputy-name").contains(`${firstname} ${surname}`);
+        cy.get(".deputy-details-deputy-name").contains(fullName);
         cy.get(".deputy-details-is-airmail-required").contains("No");
         cy.get(".deputy-additional-details-newsletter").contains("No");
         cy.get(".order-details-deputy-type").contains("Professional");
@@ -115,8 +117,7 @@ describe(
     });
 
     it("is unable to add a deputy already on the case", () => {
-      const suffix = Math.floor(Math.random() * 10000);
-      const organisationName = "Test Organisation" + suffix;
+      const organisationName = randomText();
       cy.createADeputy({
         firstname: "",
         surname: "",
