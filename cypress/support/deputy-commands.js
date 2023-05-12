@@ -1,9 +1,11 @@
+import randomText from "./random-text";
+
 Cypress.Commands.add("createADeputy", (overrides = {}) => {
   cy.fixture("deputy/minimal.json").then((deputy) => {
     deputy = {
       ...deputy,
-      firstname: Math.random().toString(36).slice(2),
-      surname: Math.random().toString(36).slice(2),
+      firstname: randomText(),
+      surname: randomText(),
       ...overrides
     };
     cy.postToApi("/api/v1/deputies", deputy)
