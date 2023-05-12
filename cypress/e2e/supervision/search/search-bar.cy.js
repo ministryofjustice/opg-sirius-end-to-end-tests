@@ -1,9 +1,10 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
-  cy.createAClient();
-  cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId));
-  cy.get("@orderId").then((orderId) => {
-    cy.createADeputyAndAssignToExistingOrder(orderId, {surname: Math.random().toString(36).slice(2)});
+  cy.createClient()
+    .withOrder();
+
+  cy.get("@order").then(({id}) => {
+    cy.createADeputyAndAssignToExistingOrder(id, {surname: Math.random().toString(36).slice(2)});
   });
 });
 
@@ -13,16 +14,15 @@ describe(
   () => {
     it("Search for client", () => {
       cy.visit("/supervision/#/dashboard");
-      cy.get('@clientCourtReference').then(courtRef => {
-        cy.waitForSearchService(courtRef, ["Client"]).then(() => {
+      cy.get('@client').then(({caseRecNumber, firstname, surname}) => {
+        cy.waitForSearchService(caseRecNumber, ["Client"]).then(() => {
           cy.get(".search-bar__input").clear();
-          cy.get(".search-bar__input").type(courtRef);
-          cy.get(".search-bar__result-link").contains("Ted Tedson").click();
-          cy.get('@clientCourtReference').then((clientCourtRef) => {
-            cy.get(
-              'div[class="client-summary__cell client-summary__cell--value court-reference-value-in-client-summary"]'
-            ).should("be.visible", clientCourtRef);
-          })
+          cy.get(".search-bar__input").type(caseRecNumber);
+          cy.get(".search-bar__result-link").contains(`${firstname} ${surname}`).click();
+
+          cy.get(
+            'div[class="client-summary__cell client-summary__cell--value court-reference-value-in-client-summary"]'
+          ).should("be.visible", caseRecNumber);
         })
       })
     });

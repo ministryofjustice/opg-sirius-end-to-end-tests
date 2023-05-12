@@ -1,10 +1,17 @@
+import randomText from "./random-text";
+
 Cypress.Commands.add("createADeputy", (overrides = {}) => {
   cy.fixture("deputy/minimal.json").then((deputy) => {
-    deputy = {...deputy, ...overrides};
+    deputy = {
+      ...deputy,
+      firstname: randomText(),
+      surname: randomText(),
+      ...overrides
+    };
     cy.postToApi("/api/v1/deputies", deputy)
       .its("body")
       .then((res) => {
-        cy.wrap(res.id).as("deputyId");
+        cy.wrap(res).as("deputy");
       });
   });
 });
