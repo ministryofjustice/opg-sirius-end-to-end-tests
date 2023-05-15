@@ -1,13 +1,11 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
-  cy.createAClient();
-  cy.get("@clientId").then((clientId) => cy.createOrderForClient(clientId));
-  cy.get("@orderId").then((orderId) => {
-    cy.createADeputyAndAssignToExistingOrder(orderId);
-  });
+  cy.createClient()
+    .withOrder()
+    .withDeputy();
 });
 it("Loads the lay deputy hub", () => {
-  cy.get("@clientId").then((clientId) => cy.visit(`/supervision/#/clients/${clientId}`));
+  cy.get("@client").then(({id}) => cy.visit(`/supervision/#/clients/${id}`));
   cy.get('.TABS_DEPUTIES').click();
   cy.get('.record').click();
   cy.url().should('include', 'supervision/#/deputy-hub');
