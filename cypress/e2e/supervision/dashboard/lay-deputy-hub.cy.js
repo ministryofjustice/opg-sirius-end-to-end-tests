@@ -1,10 +1,8 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createClient()
-    .withOrder();
-  cy.get("@order").then(({id}) => {
-    cy.createADeputyAndAssignToExistingOrder(id);
-  });
+    .withOrder()
+    .withDeputy();
 });
 it("Loads the lay deputy hub", () => {
   cy.get("@client").then(({id}) => cy.visit(`/supervision/#/clients/${id}`));

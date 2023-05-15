@@ -1,11 +1,8 @@
 before(() => {
   cy.loginAs("Case Manager");
   cy.createClient()
-    .withOrder();
-
-  cy.get("@order").then(({id}) => {
-    cy.createADeputyAndAssignToExistingOrder(id);
-  });
+    .withOrder()
+    .withDeputy();
 });
 
 describe(
@@ -14,7 +11,7 @@ describe(
   () => {
     it("finds the order by court reference and can filter full search results by client and deputy", () => {
       cy.visit("/supervision/#/dashboard");
-      cy.get('@client').then(({caseRecNumber}) => {
+      cy.get('@order').then(({caseRecNumber}) => {
         cy.get(".search-bar__input").type(caseRecNumber);
       })
       cy.get('.search-bar__show-all').should('contain.text', 'Show All')
