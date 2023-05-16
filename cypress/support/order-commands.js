@@ -1,3 +1,5 @@
+import randomText from "./random-text";
+
 Cypress.Commands.add("withSupervisionLevel", {prevSubject: true}, (order, overrides = {}) => {
   let supervisionLevelBody = {
     "appliesFrom": "23/03/2023",
@@ -26,7 +28,12 @@ Cypress.Commands.add("withOrderStatus", {prevSubject: true}, (order, overrides =
 
 Cypress.Commands.add("withDeputy", {prevSubject: true}, (order, overrides = {}) => {
   cy.fixture("deputy/minimal.json").then((deputy) => {
-    deputy = {...deputy, ...overrides};
+    deputy = {
+      ...deputy,
+      firstname: randomText(),
+      surname: randomText(),
+      ...overrides
+    };
     cy.postToApi("/api/v1/deputies", deputy)
       .its("body")
       .then((res) => {
