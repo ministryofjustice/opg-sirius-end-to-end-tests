@@ -1,9 +1,9 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
-  cy.createAClient();
-  cy.get("@clientId").then((clientId) => {
+  cy.createClient();
+  cy.get("@client").then(({id}) => {
     cy.visit(
-      `/supervision/#/clients/${clientId}`
+      `/supervision/#/clients/${id}`
     );
   });
   cy.get(".TABS_CONTACTS button").click();
