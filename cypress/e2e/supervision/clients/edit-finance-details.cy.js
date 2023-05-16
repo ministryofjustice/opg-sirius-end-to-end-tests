@@ -1,16 +1,16 @@
 before(function setupClient() {
   cy.loginAs("Allocations User");
-  cy.createAClient();
+  cy.createClient();
   cy.loginAs("Finance Reporting User");
-  cy.get("@clientCourtReference").then((clientCourtReference) => {
-    cy.assignSOPNumberToClient(clientCourtReference)
+  cy.get("@client").then(({caseRecNumber}) => {
+    cy.assignSOPNumberToClient(caseRecNumber)
   });
   cy.loginAs("Finance Manager");
 });
 
 beforeEach(function navigateToClient() {
-  cy.get("@clientId").then((clientId) => {
-    cy.visit(`/supervision/#/clients/${clientId}`);
+  cy.get("@client").then(({id}) => {
+    cy.visit(`/supervision/#/clients/${id}`);
   });
 });
 
@@ -29,8 +29,8 @@ describe(
           cy.get(".finance-summary-finance-billing-reference").contains(sopNumber);
         });
 
-        cy.get("@clientId").then((clientId) => {
-          cy.visit(`/supervision/#/clients/${clientId}/finance/edit`);
+        cy.get("@client").then(({id}) => {
+          cy.visit(`/supervision/#/clients/${id}/finance/edit`);
         });
 
         cy.contains(".title.section-title", "Edit Finance Person");
