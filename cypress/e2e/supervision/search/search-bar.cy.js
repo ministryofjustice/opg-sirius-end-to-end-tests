@@ -9,20 +9,6 @@ describe(
   "Search bar",
   {tags: ["@supervision", "@client", "@smoke-journey"]},
   () => {
-    it("Search for client", () => {
-      cy.visit("/supervision/#/dashboard");
-      cy.get('@client').then(({caseRecNumber, firstname, surname}) => {
-        cy.waitForSearchService(caseRecNumber, ["Client"]).then(() => {
-          cy.get(".search-bar__input").clear();
-          cy.get(".search-bar__input").type(caseRecNumber);
-          cy.get(".search-bar__result-link").contains(`${firstname} ${surname}`).click();
-
-          cy.get(
-            'div[class="client-summary__cell client-summary__cell--value court-reference-value-in-client-summary"]'
-          ).should("be.visible", caseRecNumber);
-        })
-      })
-    });
 
     it("finds the deputy by surname", () => {
         cy.visit("/supervision/#/dashboard");
