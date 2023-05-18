@@ -27,6 +27,17 @@ Cypress.Commands.add("withOrder", {prevSubject: true}, ({id: clientId}, override
   });
 });
 
+Cypress.Commands.add("withContact", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
+  cy.fixture("contact/minimal.json").then((contact) => {
+    contact = {...contact, ...overrides};
+    cy.postToApi(`/supervision-api/v1/clients/${clientId}/contacts`, contact)
+      .its("body")
+      .then((res) => {
+        cy.wrap({...contact, ...res}).as("contact");
+      });
+  });
+});
+
 Cypress.Commands.add("assignSOPNumberToClient", (clientCourtReference) => {
   let sopNumber = Date.now().toString(),
     data = "Customer Account  Number,MOJ - Casrec Ref\r\n" + sopNumber + ",OPG_" + clientCourtReference;
