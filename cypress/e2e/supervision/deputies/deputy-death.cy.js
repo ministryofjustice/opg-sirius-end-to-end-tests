@@ -11,7 +11,7 @@ beforeEach(() => {
 
 describe(
   "Deputy Death Notification & Confirmation",
-  { tags: ["@supervision", "@deputy", "@supervision-core", "@deputy-hub", "@deputy-record-death-notification", "@deputy-record-death-confirmation"] },
+  {tags: ["@supervision", "@deputy", "@supervision-core", "@deputy-hub", "@deputy-record-death-notification", "@deputy-record-death-confirmation"]},
   () => {
     it("records a death notification for a deputy and confirms it", () => {
       cy.get(".TABS_DEPUTIES").click();
@@ -24,10 +24,25 @@ describe(
       cy.get('input[name="dateNotified"]').type(today);
       cy.get('select[name="notifiedBy"]').select(1);
       cy.get('radio-button[name="notificationMethod"]').contains("Email").click();
+
       cy.get("@confirm-button").should("be.enabled").click();
       cy.contains(".hook-modal-confirm", "Deputy death notified").click();
 
       cy.contains('.banner', "Deputy's Death Notified");
+
+      cy.get(".TABS_TIMELINELIST").click();
+      cy.contains(".timeline-event-title", "Death", {timeout: 30000})
+        .parents(".wrapper")
+        .within(() => {
+          cy.contains("The death of the deputy has been notified");
+          cy.contains(`Notified by Deputy on ${today} by Email`);
+        });
+      cy.get(".timeline-event-title")
+        .contains("Order details")
+        .parents(".wrapper")
+        .within(() => {
+          cy.contains("Status on case changed from Open to Deceased");
+        });
 
       cy.get(".actions-menu").contains("Confirm death").should("be.enabled").click();
       cy.get('radio-button[name="proofOfDeathReceived"]').contains("Yes").click();
@@ -38,6 +53,17 @@ describe(
       cy.contains(".hook-modal-confirm", "The deputy is deceased").click();
 
       cy.contains('.banner', "Deputy is Deceased");
+
+      cy.get(".TABS_TIMELINELIST").click();
+      cy.contains(".timeline-event-title", "Death", {timeout: 30000})
+        .parents(".wrapper")
+        .within(() => {
+          cy.contains("The death of the deputy has been confirmed");
+          cy.contains(`Notified by Deputy on ${today} by Email`);
+          cy.contains(`Date of death ${today}`);
+          cy.contains(`Certificate received ${today}`);
+          cy.contains(`Notified by Deputy on ${today} by Email`);
+        });
     });
   }
 );
