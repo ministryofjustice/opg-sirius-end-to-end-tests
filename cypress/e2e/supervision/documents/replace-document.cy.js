@@ -21,7 +21,6 @@ Cypress._.times(50, () => {
 
         cy.readFile('cypress/fixtures/document/niceFile.txt').should('contain', 'This is a new file with some text.');
 
-        // gets flaky here
         cy.get('[name="fIELDLABELSNOTETYPE"]').should('be.visible');
         cy.get('[name="fIELDLABELSNOTETYPE"]').select('Call', { force: true });
         cy.get("input[type=radio][data-core-value=OUTGOING]").check({ force: true }).should('be.checked')
@@ -57,7 +56,17 @@ Cypress._.times(50, () => {
         cy.get('[name="fIELDLABELSREPLACEDOCUMENTFILE"]').selectFile('cypress/fixtures/document/replacedFile.txt');
         cy.readFile('cypress/fixtures/document/replacedFile.txt').should('contain', 'This is a new file which has replaced the other file.');
 
+        cy.get("input[name=fIELDLABELSDOCUMENTNAME]").should("be.visible").type("A".repeat(256))
+
         cy.contains("Save & exit").click();
+
+        cy.get(".validation-summary").should("be.visible")
+          .and("contain.text", "There is a problem")
+          .and("contain.text", "Document name - The input is more than 255 characters long")
+        cy.get("input[name=fIELDLABELSDOCUMENTNAME]").clear()
+
+        cy.contains("Save & exit").click();
+
         cy.get('.TABS_DOCUMENTS').click();
 
         cy.get('.summary-row > :nth-child(2)').should('contain.text', 'niceFile.txt');
