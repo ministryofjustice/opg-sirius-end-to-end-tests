@@ -1,3 +1,4 @@
+
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createClient()
@@ -19,7 +20,7 @@ describe(
         });
       });
       cy.get('.TABS_REPORTS').click();
-      cy.get(':nth-child(1) > report-summary > .report-summary-container > .report-summary-action-panel > .lodge-report-container-parent > .extend-report-due-date-link').click();
+      cy.get('.extend-report-due-date-link').first().click();
       cy.get('#begin-extend-report-due-date-button > span').click();
       cy.get('.date-input').click().type("24 January 2023");
       cy.window()
@@ -39,4 +40,3 @@ describe(
       }
     );
   });
-
