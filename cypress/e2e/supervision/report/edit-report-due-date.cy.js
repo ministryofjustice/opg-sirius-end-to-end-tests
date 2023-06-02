@@ -36,7 +36,7 @@ describe(
       });
       cy.get('[type="submit"]').click();
       cy.get('.button > span').click();
-      cy.get(':nth-child(1) > report-summary > .report-summary-container > .report-summary-content-panel > .report-summary-content-details > .report-date-details > :nth-child(2) > .date-item-detail').contains('24 Jan 2023');
+      cy.get('.report-date-details > :nth-child(2) > .date-item-detail').first().contains('24 Jan 2023');
       }
     );
   });
