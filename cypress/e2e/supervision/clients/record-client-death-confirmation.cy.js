@@ -37,18 +37,10 @@ describe(
             .closest(".fieldset")
             .contains(howNotified)
             .click();
-          cy.window()
-            .its("tinyMCE")
-            .its("activeEditor")
-            .its("initialized", {timeout: 2000});
-          cy.window().then((win) => {
-            const data =
-              '<p>Gurps</p>';
-            let editor = win.tinymce.activeEditor;
-            editor.dom.createRng();
-            editor.execCommand("mceSetContent", false, data);
-          });
+          cy.waitForTinyMCE()
+            .enterText('<p>Gurps</p>');
         });
+
         cy.contains("Confirm client is deceased").click();
         cy.contains("The client is deceased").click();
         cy.get('.client-priority-info').contains('Client deceased');

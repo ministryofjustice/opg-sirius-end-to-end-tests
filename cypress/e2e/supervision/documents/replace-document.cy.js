@@ -32,20 +32,8 @@ describe(
       cy.get('.replace-document-title').should('be.visible');
       cy.get('text-field.disabled > .fieldset > label').should('contain.text', 'File being replaced');
 
-      cy.window()
-        .its("tinyMCE")
-        .its("activeEditor")
-        .its("initialized", { timeout: 2000 });
-      cy.window().then((win) => {
-        const pastedata =
-          'A good reason to change the document.';
-
-        let editor = win.tinymce.activeEditor;
-        editor.dom.createRng();
-        editor.execCommand("mceInsertClipboardContent", false, {
-          content: pastedata,
-        });
-      });
+      cy.waitForTinyMCE()
+        .enterText('A good reason to change the document.');
 
       cy.get('[name="fIELDLABELSREPLACEDOCUMENTFILE"]').selectFile('cypress/fixtures/document/replacedFile.txt');
       cy.get("input[name=fIELDLABELSDOCUMENTNAME]").should("be.visible").type("A".repeat(256))
