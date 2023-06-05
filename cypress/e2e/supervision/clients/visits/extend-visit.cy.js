@@ -46,17 +46,8 @@ describe(
           cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_month").type("04");
           cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_year").clear();
           cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_year").type("2023");
-          cy.window()
-            .its("tinyMCE")
-            .its("activeEditor")
-            .its("initialized", {timeout: 2000});
-          cy.window().then((win) => {
-            const data =
-              '<p>Because I said so</p>';
-            let editor = win.tinymce.activeEditor;
-            editor.dom.createRng();
-            editor.execCommand("mceSetContent", false, data);
-          });
+          cy.waitForTinyMCE()
+            .enterText('<p>Because I said so</p>');
         });
         cy.intercept({
           method: "GET",

@@ -22,16 +22,8 @@ describe(
           .find("select")
           .select("1"); // the values are indexed from zero so this actually selects "2"...
 
-        cy.window()
-          .its("tinyMCE")
-          .its("activeEditor")
-          .its("initialized", { timeout: 2000 });
-        cy.window().then((win) => {
-          const data = "<p>Risk score added</p>";
-          const editor = win.tinymce.activeEditor;
-          editor.dom.createRng();
-          editor.execCommand("mceSetContent", false, data);
-        });
+        cy.waitForTinyMCE()
+          .enterText('<p>Risk score added</p>');
       });
 
       cy.contains("Save & exit")

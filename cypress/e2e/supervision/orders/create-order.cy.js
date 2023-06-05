@@ -52,19 +52,10 @@ const createOrder = (orderType, orderSubType, orderDate, optional) => {
         .closest(".fieldset")
         .contains("Sole")
         .click();
-      cy.window()
-        .its("tinyMCE")
-        .its("activeEditor")
-        .its("initialized", {timeout: 2000});
-      cy.window().then((win) => {
-        const pastedata =
-          '<p class="MsoNormal" style="margin: 0cm 0cm 11.25pt; font-size: 12pt; font-family: Calibri, sans-serif; text-align: justify; background: white;"><span style="font-size: 10.5pt; font-family: &quot;Open Sans&quot;, sans-serif;">Test note</span></p>';
-        let editor = win.tinymce.activeEditor;
-        editor.dom.createRng();
-        editor.execCommand("mceInsertClipboardContent", false, {
-          content: pastedata,
-        });
-      });
+      const text =
+        '<p class="MsoNormal" style="margin: 0cm 0cm 11.25pt; font-size: 12pt; font-family: Calibri, sans-serif; text-align: justify; background: white;"><span style="font-size: 10.5pt; font-family: &quot;Open Sans&quot;, sans-serif;">Test note</span></p>';
+      cy.waitForTinyMCE()
+        .enterText(text);
     }
     cy.contains("Save & exit").click();
   });
@@ -77,7 +68,7 @@ beforeEach(() => {
 
 describe(
   "Create a new order",
-  { tags: ["@supervision-core", "@order", "@smoke-journey"] },
+  {tags: ["@supervision-core", "@order", "@smoke-journey"]},
   () => {
     it("creates a supervised pfa order in supervision with mandatory fields as a system admin", () => {
       cy.intercept({
@@ -162,7 +153,7 @@ describe(
       cy.get(".key-value-list__read-only").children().eq(19).contains("Sole");
       cy.get(".notes-not-bold").contains("Test");
       cy.get(".TABS_TIMELINELIST").click();
-      cy.get(".timeline-event-title", { timeout: 30000 }).should(
+      cy.get(".timeline-event-title", {timeout: 30000}).should(
         "contain",
         "Order created"
       );
@@ -193,7 +184,7 @@ describe(
       cy.get(".key-value-list__read-only").children().eq(19).contains("Sole");
       cy.get(".notes-not-bold").contains("Test");
       cy.get(".TABS_TIMELINELIST").click();
-      cy.get(".timeline-event-title", { timeout: 30000 }).should(
+      cy.get(".timeline-event-title", {timeout: 30000}).should(
         "contain",
         "Order created"
       );
