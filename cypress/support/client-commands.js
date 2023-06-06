@@ -44,3 +44,30 @@ Cypress.Commands.add("assignSOPNumberToClient", (clientCourtReference) => {
   cy.postToApi(`/supervision-api/v1/finance/reports/sop`, btoa(data)).its("body");
   cy.wrap(sopNumber).as("sopNumber");
 });
+
+Cypress.Commands.add("lodgeReport", (clientId, overrides = {}) => {
+  cy.get("@jwtToken").then((jwtToken) => {
+    cy.request({
+      method: "GET",
+      url: `/supervision-api/v1/clients/${clientId}/annual-reports`,
+      headers: {
+        accept: "application/json",
+        authorization: jwtToken,
+        "content-type": "application/json",
+        "opg-bypass-membrane": 1,
+      }
+    }).its("body")
+      .then((reports) => {
+        const latestReportId = reports.filter(r => r.status.handle !== 'PENDING')[0].id;
+        cy.fixture("report/minimal.json").then((contact) => {
+          contact = {...contact, ...overrides};
+          cy.putToApi(`/supervision-api/v1/clients/${clientId}/annual-reports/${latestReportId}/lodge`, contact)
+            .its("body")
+            .then((res) => {
+              cy.wrap(res).as("lodgedReport");
+            });
+        });
+      });
+  });
+});
+
