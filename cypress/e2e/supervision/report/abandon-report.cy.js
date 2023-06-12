@@ -23,8 +23,7 @@ Cypress._.times(50, () => {
           cy.get('#abandoned-date').should('contain.text', 'Abandoned date');
           cy.get('.smart__action').should('contain.text', 'Reason');
           cy.get('.input-group').click();
-          cy.get('.myDpPrevBtn > .myDpHeaderBtn').click()
-          cy.get('#d_0_3').click();
+          cy.get('#d_0_1').click();
           cy.waitForTinyMCE()
             .enterText('<p>A reason to abandon the report</p>');
           cy.get('.footer > :nth-child(1) > .button').should('contain.text', 'Abandon report').click();
