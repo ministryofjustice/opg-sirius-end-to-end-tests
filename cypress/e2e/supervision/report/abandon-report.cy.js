@@ -11,7 +11,7 @@ beforeEach(() => {
   });
   cy.get(".TABS_REPORTS").click();
 });
-Cypress._.times(25, () => {
+Cypress._.times(50, () => {
   describe(
     "Abandon report",
     { tags: ["@supervision", "@reports", "@abandon-report"] },
