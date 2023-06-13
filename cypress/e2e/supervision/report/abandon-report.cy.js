@@ -22,7 +22,8 @@ Cypress._.times(25, () => {
           cy.get('.head > .title').should('contain.text', 'Abandon report');
           cy.get('#abandoned-date').should('contain.text', 'Abandoned date');
           cy.get('.smart__action').should('contain.text', 'Reason');
-          cy.get('.input-group').click();
+          cy.get('.fa-calendar-days').should('be.visible');
+          cy.get('.fa-calendar-days').click();
           cy.get('#d_0_3').click();
           cy.waitForTinyMCE()
             .enterText('<p>A reason to abandon the report</p>');
