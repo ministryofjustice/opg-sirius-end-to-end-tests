@@ -11,7 +11,6 @@ beforeEach(() => {
   });
   cy.get(".TABS_REPORTS").click();
 });
-Cypress._.times(50, () => {
   describe(
     "Abandon report",
     { tags: ["@supervision", "@reports", "@abandon-report"] },
@@ -35,6 +34,5 @@ Cypress._.times(50, () => {
           cy.get('.report-abandoned-details > :nth-child(1)').should('contain.text', 'Abandoned date');
           cy.get('.report-abandoned-details > :nth-child(2)').should('contain.text', 'A reason to abandon the report');
         }
-      );
-    })
+    );
 });
