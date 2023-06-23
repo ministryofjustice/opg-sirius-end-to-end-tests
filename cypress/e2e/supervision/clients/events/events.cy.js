@@ -15,7 +15,7 @@ describe(
     it("Successfully create a client event in Supervision", () => {
       cy.get('#create-event-button').click();
       cy.get('*[id^="FIELDLABELSN_"]').first().select(1);
-      cy.get('.footer > :nth-child(1) > .button').click();
+      cy.get('.footer .button').click();
       cy.get('.TABS_TIMELINELIST').click();
       cy.get('.event-note > .section-content > .wrapper')
         .should("contain", "event has been recorded")
