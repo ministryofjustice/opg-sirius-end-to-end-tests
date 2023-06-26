@@ -1,5 +1,3 @@
-import randomText from "../../../support/random-text";
-
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createClient()
@@ -13,7 +11,7 @@ beforeEach(() => {
 
 describe(
   "Edit deputy for client",
-  { tags: ["@supervision", "@deputy", "supervision-core", "@smoke-journey"] },
+  { tags: ["@supervision", "@deputy", "@supervision-core", "@smoke-journey"] },
   () => {
     it("Editing deputy details via the deputy hub", () => {
       cy.get(".TABS_DEPUTIES").click();

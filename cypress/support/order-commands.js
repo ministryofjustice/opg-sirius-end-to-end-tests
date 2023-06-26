@@ -43,4 +43,5 @@ Cypress.Commands.add("withDeputy", {prevSubject: true}, (order, overrides = {}) 
           });
       })
   });
+  cy.get("@deputy")
 });
