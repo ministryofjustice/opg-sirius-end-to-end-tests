@@ -40,3 +40,29 @@ Cypress.Commands.add("createADeputyAndAssignToExistingOrder", (orderId, override
       })
   });
 });
+
+Cypress.Commands.add("withErrorStatusOnCase", {prevSubject: true}, (deputy, orderId, overrides = {}) => {
+  let body = {
+    "statusOnCase": {
+      "handle": "OPEN",
+      "label": "Open"
+    },
+    "statusOnCaseOverride": {
+      "handle": "ERROR",
+      "label": "Error"
+    },
+    "statusChangeDate": "26/03/2023",
+    "statusNotes": "",
+    "deputyType": {
+      "handle": "LAY",
+      "label": "Lay"
+    },
+    "relationshipToClient": "",
+    "relationshipOther": "",
+    "mainCorrespondent": false,
+    "feePayer": false
+  }
+  body = {...body, ...overrides};
+  cy.putToApi(`/supervision-api/v1/orders/${orderId}/deputies/${deputy.id}`, body);
+  cy.get("@deputy");
+});
