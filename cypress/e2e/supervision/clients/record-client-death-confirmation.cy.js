@@ -4,7 +4,7 @@ beforeEach(() => {
 });
 
 describe(
-  "Successfully record client death notification",
+  "Successfully record client death confirmation",
   { tags: ["@supervision-core", "@client", "@client-record-death-confirmation", "@smoke-journey"] },
   () => {
     const dateOfDeath = "16/03/2023";
@@ -26,11 +26,8 @@ describe(
             .closest(".fieldset")
             .contains("Yes")
             .click();
-          cy.get('input[name="dateOfDeath"]').clear();
           cy.get('input[name="dateOfDeath"]').type(dateOfDeath);
-          cy.get('input[name="dateDeathCertificateReceived"]').clear();
           cy.get('input[name="dateDeathCertificateReceived"]').type(dateDeathCetificateReceived);
-          cy.get('input[name="dateNotified"]').clear();
           cy.get('input[name="dateNotified"]').type(dateNotified);
           cy.get('[name="notifiedBy"]').select(notifiedBy);
           cy.contains("How was the OPG notified?")
@@ -45,17 +42,14 @@ describe(
         cy.contains("The client is deceased").click();
         cy.get('.client-priority-info').contains('Client deceased');
         cy.get(".TABS_TIMELINELIST").click();
-        cy.get(".timeline-event-title", { timeout: 30000 })
+        cy.get(".timeline-event-title", { timeout: 3000 })
           .should("contain", "Death")
           .should("contain", "Client status");
-        cy.get('p.meta').contains('The death of the client has been confirmed')
-        cy.get('.death-record-type').contains('confirmed');
-        cy.get('.date-of-death').contains(dateOfDeath);
-        cy.get('.date-death-certificate-received').contains(dateDeathCetificateReceived);
-        cy.get('.notified-by').contains(notifiedBy);
-        cy.get('.date-notified').contains(dateNotified);
-        cy.get('.notification-method').contains(howNotified);
-        cy.get('.death-record-notes').contains('Gurps');
+        cy.get('.event-death-record > .section-content > .wrapper')
+          .should("contain", "The death of the client has been confirmed")
+          .should("contain", "Date of death " + dateOfDeath)
+          .should("contain", "Certificate received " + dateDeathCetificateReceived)
+          .should("contain", "Notified by " + notifiedBy + " on " + dateNotified + " by " + howNotified)
         cy.get('.client-status-current').contains('Death confirmed');
       }
     );
