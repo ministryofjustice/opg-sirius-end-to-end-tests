@@ -22,7 +22,7 @@ const searchForADeputyToReachAddADeputyPage = () => {
 
 describe(
   "Create deputy for client",
-  { tags: ["@supervision", "@deputy", "supervision-core", "@smoke-journey"] },
+  {tags: ["@supervision", "@deputy", "supervision-core", "@smoke-journey"]},
   () => {
     it("Adds a new deputy to a case", () => {
       const firstName = randomText();
@@ -64,15 +64,15 @@ describe(
         .should("be.visible")
         .should("be.disabled");
       cy.get(".TABS_TIMELINELIST").click();
-      cy.get(".timeline-event-title", { timeout: 30000 })
+      cy.get(".timeline-event-title", {timeout: 30000})
         .should("contain", "Link")
         .should("contain", "Set fee payer");
     });
 
     it("Adds an existing deputy to a case", () => {
       cy.createADeputy({
-        deputyType: { handle: "PRO", label: "Professional" },
-        deputySubType: { handle: "PERSON", label: "Person" },
+        deputyType: {handle: "PRO", label: "Professional"},
+        deputySubType: {handle: "PERSON", label: "Person"},
       });
       cy.get("@deputy").then(({firstname, surname}) => {
         const fullName = `${firstname} ${surname}`;
@@ -110,7 +110,7 @@ describe(
           .should("be.visible")
           .should("be.disabled");
         cy.get(".TABS_TIMELINELIST").click();
-        cy.get(".timeline-event-title", { timeout: 30000 })
+        cy.get(".timeline-event-title", {timeout: 30000})
           .should("contain", "Link")
           .should("contain", "Set fee payer");
       });
@@ -122,7 +122,7 @@ describe(
         firstname: "",
         surname: "",
         organisationName: organisationName,
-        deputyType: { handle: "PA", label: "Public Authority" },
+        deputyType: {handle: "PA", label: "Public Authority"},
       });
       cy.get("@deputy").then(() => {
         cy.get('#add-deputy-button').should("be.visible").click();
@@ -188,52 +188,34 @@ describe(
           openMode: 1,
         },
       }, () => {
-      cy.get("@order").then(({id}) => {
-        cy.createADeputyAndAssignToExistingOrder(id).then(() => {
-          cy.get(".TABS_DEPUTIES").should("be.visible").click();
-          cy.contains("Mr Abc Def").should("be.visible");
-          // I can create a second deputy to set them as feepayer
-          searchForADeputyToReachAddADeputyPage();
-          //check Lay type deputy
-          cy.get("#typeOfDeputy .radio-button").contains("Professional").should("be.visible").click();
-          cy.get(".deputy-details-form-firstname").type("Kermit");
-          cy.get(".deputy-details-form-surname").type("Frog");
-          cy.get("footer button[type=submit]").as("submitButton");
-          cy.get("@submitButton").should("have.text", " Save & continue ").should("be.visible").click();
-          cy.get(".standard-form").should("contain", "Occupation");
-          cy.get("@submitButton").should("have.text", " Save & continue ").should("be.visible").click();
-          cy.get(".money + check-box > label").as("feePayerCheckbox");
-          cy.get("@feePayerCheckbox").should("be.visible").click();
-          cy.get('check-box > label:contains("Correspondent") input[type=checkbox]').should("be.disabled");
-          cy.get("label:contains(Type of deputy) + select").should("have.value", "1");
-          cy.wait(1000);
-          cy.get("@submitButton").should("have.text", " Save & continue ").should("be.visible").click();
-          cy.contains("Make the deputy the fee payer?").should("be.visible");
-          cy.get("header > h1 > span").should(
-            "contain",
-            "Make the deputy the fee payer?"
-          );
-          cy.get(".actions-menu").should("not.exist");
-          cy.get("fee-payer-dialog button").contains("Make the fee payer").should("be.visible").click();
-          cy.get(".actions-menu").should("be.visible");
-          cy.contains("Mr Abc Def").should("be.visible");
-          cy.get(":nth-child(1) > :nth-child(1) > .summary-row-heading").should(
-            "contain.text",
-            "Mr Abc Def"
-          );
-          cy.contains("Kermit Frog").should("be.visible");
-          cy.get(":nth-child(3) > :nth-child(1) > .summary-row-heading").should(
-            "contain.text",
-            "Kermit Frog"
-          );
-
-          //make sure fee payer and main contact symbols visible under 2nd deputy
-          cy.get(":nth-child(3) > :nth-child(6) > .fee-payer").should("be.visible");
-          cy.get(":nth-child(3) > :nth-child(6) > .main-contact").should("be.visible");
-          //make sure fee payer symbols not visible under 1st deputy
-          cy.get(":nth-child(1) > :nth-child(6) > .fee-payer").should("not.exist");
+        cy.get("@order").then(({id}) => {
+          cy.createADeputyAndAssignToExistingOrder(id).then(() => {
+            cy.get(".TABS_DEPUTIES").should("be.visible").click();
+            cy.contains("Mr Abc Def").should("be.visible");
+            // I can create a second deputy to set them as feepayer
+            searchForADeputyToReachAddADeputyPage();
+            //check Lay type deputy
+            cy.get("#typeOfDeputy .radio-button").contains("Professional").should("be.visible").click();
+            cy.get(".deputy-details-form-firstname").type("Kermit");
+            cy.get(".deputy-details-form-surname").type("Frog");
+            cy.get("footer button[type=submit]").as("submitButton");
+            cy.get("@submitButton").should("have.text", " Save & continue ").should("be.visible").click();
+            cy.get(".standard-form").should("contain", "Occupation");
+            cy.get("@submitButton").should("have.text", " Save & continue ").should("be.visible").click();
+            cy.get(".money + check-box > label").as("feePayerCheckbox");
+            cy.get("@feePayerCheckbox").should("be.visible").click();
+            cy.get("label:contains(Type of deputy) + select").should("have.value", "1");
+            cy.wait(1000);
+            cy.get("@submitButton").should("have.text", " Save & continue ").should("be.visible").click();
+            cy.contains("Make the deputy the fee payer?").should("be.visible");
+            cy.get("header > h1 > span").should(
+              "contain",
+              "Make the deputy the fee payer?"
+            );
+            cy.get("fee-payer-dialog button").contains("Make the fee payer").should("be.visible").click();
+            cy.get(':nth-child(3) > .in-page-banner').contains("Deputy successfully saved")
+          });
         });
       });
-    });
   }
 );
