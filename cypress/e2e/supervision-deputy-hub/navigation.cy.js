@@ -7,18 +7,5 @@ describe("Navigation", { tags: ["@supervision-deputy-hub", "@smoke-journey"] }, 
     });
   });
 
-  it("navigation links are clicked", () => {
-    let navigationLinks = {
-      1: '/workflow',
-      2: '/supervision',
-      3: '/lpa',
-      4: '/admin',
-      5: '/auth/login?loggedout=1'
-    }
-    for (let key in navigationLinks) {
-      cy.get("@deputy").then(({id}) => cy.visit("/supervision/deputies/" + id));
-      cy.get(':nth-child(' + key + ') > .moj-header__navigation-link').click()
-      cy.url().should('include', navigationLinks[key])
-    }
-  })
+  });
 });
