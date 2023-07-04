@@ -6,6 +6,4 @@ describe("Navigation", { tags: ["@supervision-deputy-hub", "@smoke-journey"] }, 
       'deputySubType': {'handle': 'PERSON', 'label': 'Person'},
     });
   });
-
-  });
 });
