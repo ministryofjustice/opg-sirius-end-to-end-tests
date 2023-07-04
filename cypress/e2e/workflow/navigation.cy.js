@@ -5,18 +5,18 @@ describe("Navigation", { tags: ["@workflow", "@smoke-journey"] }, () => {
     cy.get('#hook-workflow-button').click()
   });
 
-  it("supervision link is clicked", () => {
-    cy.get(':nth-child(1) > .moj-header__navigation-link').click()
-    cy.url().should('include', '/supervision')
-  })
-
   it("lpa link is clicked", () => {
-    cy.get(':nth-child(2) > .moj-header__navigation-link').click()
+    cy.get(':nth-child(1) > .govuk-header__link').click()
     cy.url().should('include', '/lpa')
   })
 
+  it("admin link is clicked", () => {
+    cy.get(':nth-child(3) > .govuk-header__link').click()
+    cy.url().should('include', '/admin')
+  })
+
   it("log out link is clicked", () => {
-    cy.get(':nth-child(3) > .moj-header__navigation-link').click()
+    cy.get(':nth-child(4) > .govuk-header__link').click()
     cy.url().should('include', '/auth/login?loggedout=1')
   })
 });
