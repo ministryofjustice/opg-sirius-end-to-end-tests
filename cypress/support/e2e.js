@@ -6,6 +6,7 @@ require("./visit-commands.js");
 require("./document-commands");
 require("./order-commands");
 require("./forms");
+require("./navigation-commands");
 
 require("cypress-failed-log");
 require("cy-verify-downloads").addCustomCommand();
