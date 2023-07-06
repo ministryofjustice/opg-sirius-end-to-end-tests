@@ -1,60 +1,83 @@
-Cypress.Commands.add("testHeaderNavigation", (microservice) => {
-       cy.loginAs("Lay User");
-
-   cy.goToMicroserviceHomepage(microservice);
-
-  cy.get(':nth-child(1) > .govuk-header__link').click()
-  cy.url().should('include', '/lpa');
-
-  cy.goToMicroserviceHomepage(microservice);
-
-  //supervision link is hidden on supervision side
-  cy.get(':nth-child(2) > .govuk-header__link').should('not.be.visible')
-
-  cy.get(':nth-child(3) > .govuk-header__link').click()
-  cy.url().should('include', '/admin')
-
-  cy.goToMicroserviceHomepage(microservice);
-
-  cy.get(':nth-child(4) > .govuk-header__link').click()
-  cy.url().should('include', '/auth/login?loggedout=1')
-
-  if (microservice == 'workflow') {
-    cy.loginAs("Lay User");
-  } else {
-    cy.loginAs("Case Manager");
+const headerLinks = {
+  poaUrl: {
+    title: "Power of Attorney",
+    url: "/lpa",
+    position: 1,
+  },
+  supervisionUrl: {
+    title: "Supervision",
+    url: "/supervision",
+    position: 2
+  },
+  adminUrl: {
+    title: "Admin",
+    url: '/admin',
+    position: 3
+  },
+  signOutUrl: {
+    title: "Sign out",
+    url: '/auth/login?loggedout=1',
+    position: 4
   }
-  cy.goToMicroserviceHomepage(microservice);
+}
 
-  cy.get(':nth-child(1) > .moj-primary-navigation__link').click()
-  cy.url().should('include', '/supervision/#/clients/search-for-client')
+const navigationLinks = {
+  createClientUrl: {
+    title: "Create client",
+    url: '/supervision/#/clients/search-for-client',
+    position: 1,
+  },
+  workflowUrl: {
+    title: "Workflow",
+    url: '/supervision/workflow',
+    position: 2,
+  },
+  financeUrl: {
+    title: "Finance",
+    url: '/supervision/#/finance-hub/reporting',
+    position: 3,
+  }
+}
 
-  cy.goToMicroserviceHomepage(microservice);
-
-  cy.get(':nth-child(2) > .moj-primary-navigation__link').click()
-  cy.url().should('include', '/supervision/workflow')
-
-  cy.goToMicroserviceHomepage(microservice);
-
-  cy.get(':nth-child(3) > .moj-primary-navigation__link').click()
-  cy.url().should('include', '/supervision/#/finance-hub/reporting')
-
-  cy.goToMicroserviceHomepage(microservice);
-
-   if(microservice == 'workflow') {
-       cy.get(':nth-child(2) > .moj-primary-navigation__link').should('have.attr', 'aria-current', 'page');
-   } else {
-       cy.get(':nth-child(2) > .moj-primary-navigation__link').should('not.have.attr', 'aria-current', 'page');
-   }
-});
-
-Cypress.Commands.add("goToMicroserviceHomepage", (microservice) => {
-    if (microservice == 'workflow') {
-       cy.visit("/supervision/#/dashboard");
-       cy.get('#hook-workflow-button').click()
-    } else if (microservice == 'deputy-hub') {
-      cy.get("@deputy").then(({id}) => cy.visit("/supervision/deputies/" + id));
-    } else if (microservice == 'firm-hub') {
-      cy.get("@firmId").then((firmId) => cy.visit("/supervision/deputies/firm/" + firmId));
+Cypress.Commands.add("assertHeaderWorks", (microserviceName, expectedHeaderLinks, expectedNavigationLinks) => {
+  let checkLink = function(microserviceName, className, link) {
+    cy.returnToMicroserviceHome(microserviceName)
+    let linkIdentifier = ':nth-child('+ link.position +') > '+ className;
+    cy.get(linkIdentifier).should("exist")
+    cy.get(linkIdentifier).should(link.visible ? "be.visible" : "not.be.visible")
+    cy.get(linkIdentifier).should(link.current ? "have.attr" : "not.have.attr", "aria-current", 'page')
+    cy.get(linkIdentifier).should("contain.text", link.title)
+    if (link.visible) {
+      cy.get(linkIdentifier).click()
+      cy.url().should('include', link.url)
     }
+  }
+
+  for (let [name, link] of Object.entries(expectedNavigationLinks)) {
+    link = {...link, ...navigationLinks[name]}
+    checkLink(microserviceName,'.moj-primary-navigation__link', link)
+  }
+
+  for (let [name, link] of Object.entries(expectedHeaderLinks)) {
+    link = {...link, ...headerLinks[name]}
+    checkLink(microserviceName,'.govuk-header__link', link)
+  }
+
 });
+
+Cypress.Commands.add("returnToMicroserviceHome", (microserviceName) => {
+  switch(microserviceName) {
+    case 'workflow' :
+      cy.visit("/supervision/#/dashboard");
+      cy.get('#hook-workflow-button').click();
+      break;
+    case 'deputy-hub':
+      cy.get("@deputy").then(({ id }) => cy.visit("/supervision/deputies/" + id));
+      break;
+    case 'firm-hub':
+      cy.get("@firmId").then((firmId) => cy.visit("/supervision/deputies/firm/" + firmId));
+      break;
+    default:
+      break;
+  }
+})
