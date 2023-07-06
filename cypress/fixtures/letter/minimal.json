@@ -1,0 +1,32 @@
+{
+  "id": 20,
+  "uuid": "eb147122-a8cc-44b7-aa22-fa61ecd1250b",
+  "type": "Correspondence",
+  "friendlyDescription": "Mr test649d2fcbdbafc One - __BLANKONSCREENSUMMARY__",
+  "createdDate": "04/07/2023 07:04:27",
+  "publishedDate": "04/07/2023 07:05:58",
+  "direction": "Outgoing",
+  "filename": "blank.pdf",
+  "mimeType": "application/pdf",
+  "correspondent": {
+    "id": 43,
+    "salutation": "Mr",
+    "firstname": "test649d2fcbdbafc",
+    "surname": "One"
+  },
+  "createdBy": {
+    "id": 76,
+    "name": "Allocations",
+    "displayName": "Allocations User1"
+  },
+  "publishedBy": {
+    "id": 76,
+    "name": "Allocations",
+    "displayName": "Allocations User1"
+  },
+  "documentSource": "CORRESPONDENCE",
+  "pageCount": 1,
+  "childCount": 0,
+  "systemType": "blank",
+  "content": "<article>\n<section id=\"content\">\n<p><span class=\"bold-text\">Further information<br /></span> If you have any questions or need any help, please contact us.</p>\n<ul>\n<li>Email: LayTeam1.team@opgtest.com</li>\n<li>Telephone: 0123456789</li>\n</ul>\n<p>When you contact us, please quote your case number: <strong>96927261</strong>.</p>\n</section>\n</article>"
+}

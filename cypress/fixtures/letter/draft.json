@@ -1,0 +1,11 @@
+{
+  "templateId": "blank",
+  "correspondents": [
+    {
+      "id": 42,
+      "personType": "Client"
+    }
+  ],
+  "inserts": [],
+  "secondaryRecipients": []
+}
