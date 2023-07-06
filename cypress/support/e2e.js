@@ -1,12 +1,13 @@
-require("./commands");
 require("./client-commands");
+require("./commands");
 require("./deputy-commands");
-require("./lpa-commands");
-require("./visit-commands.js");
 require("./document-commands");
-require("./order-commands");
 require("./forms");
 require("./navigation-commands");
+require("./letter-commands")
+require("./lpa-commands");
+require("./order-commands");
+require("./visit-commands.js");
 
 require("cypress-failed-log");
 require("cy-verify-downloads").addCustomCommand();
