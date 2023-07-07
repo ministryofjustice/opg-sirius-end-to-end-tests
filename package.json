@@ -24,7 +24,7 @@
   "dependencies": {
     "@cypress/grep": "^3.1.4",
     "cy-verify-downloads": "^0.1.11",
-    "cypress": "^12.6.0",
+    "cypress": "^12.17.0",
     "cypress-failed-log": "^2.9.2",
     "cypress-iframe": "^1.0.1",
     "cypress-multi-reporters": "^1.6.1",
