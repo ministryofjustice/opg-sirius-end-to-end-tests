@@ -45,3 +45,16 @@ Cypress.Commands.add("withDeputy", {prevSubject: true}, (order, overrides = {}) 
   });
   cy.get("@deputy")
 });
+
+Cypress.Commands.add("withBond", {prevSubject: true}, (order, overrides = {}) => {
+  cy.fixture("order/bond/minimal.json").then((bond) => {
+    bond = {
+      ...bond,
+      referenceNumber: randomText(),
+      ...overrides
+    };
+    cy.postToApi(`/supervision-api/v1/orders/${order.id}/bonds`, bond);
+
+  });
+  cy.get("@order")
+});
