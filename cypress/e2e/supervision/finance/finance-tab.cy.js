@@ -1,6 +1,6 @@
  describe(
   "Finance tab",
-  { tags: ["@supervision", "@supervision-regression", "@finance-tab"] },
+  { tags: ["@supervision", "@supervision-regression", "@finance-tab", "@finance"] },
   () => {
 
     beforeEach(() => {
@@ -158,7 +158,7 @@
   });
 describe(
   "Finance tab user permissions",
-  { tags: ["@supervision", "@finance-tab"] },
+  { tags: ["@supervision", "@finance-tab", "@finance"] },
   () => {
 
     beforeEach(() => {
