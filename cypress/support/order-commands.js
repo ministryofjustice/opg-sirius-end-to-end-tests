@@ -85,4 +85,17 @@ Cypress.Commands.add("setOrderAsExpired", (orderId, overrides = {}) => {
   orderStatusBody = {...orderStatusBody, ...overrides};
   cy.putToApi(`/supervision-api/v1/orders/${orderId}/status`, orderStatusBody);
   cy.get('@order');
+
+  Cypress.Commands.add("withBond", {prevSubject: true}, (order, overrides = {}) => {
+  cy.fixture("order/bond/minimal.json").then((bond) => {
+    bond = {
+      ...bond,
+      referenceNumber: randomText(),
+      ...overrides
+    };
+    cy.postToApi(`/supervision-api/v1/orders/${order.id}/bonds`, bond);
+
+  });
+  cy.get("@order")
+
 });
