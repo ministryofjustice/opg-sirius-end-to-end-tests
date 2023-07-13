@@ -18,6 +18,7 @@ Cypress.Commands.add("loginAs", (user) => {
     "Case Manager": "case.manager@opgtest.com",
     "Finance Manager": "finance.manager@opgtest.com",
     "Finance Reporting User": "finance.reporting@opgtest.com",
+    "Finance User Testing": "finance.user.testing@opgtest.com",
     "LPA Manager": "2manager@opgtest.com",
     "Lay User": "Lay1-14@opgtest.com",
     "System Admin": "system.admin@opgtest.com",

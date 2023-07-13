@@ -7,7 +7,7 @@ require("./navigation-commands");
 require("./letter-commands")
 require("./lpa-commands");
 require("./order-commands");
-require("./visit-commands.js");
+require("./visit-commands");
 
 require("cypress-failed-log");
 require("cy-verify-downloads").addCustomCommand();

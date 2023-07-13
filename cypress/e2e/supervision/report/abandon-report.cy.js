@@ -3,7 +3,7 @@ beforeEach(() => {
   cy.createClient()
     .withOrder()
     .withSupervisionLevel()
-    .withOrderStatus()
+    .withActiveOrderStatus()
   cy.get("@order").then(({id: orderId}) => {
     cy.get("@client").then(({id: clientId}) => {
       cy.visit(`/supervision/#/clients/${clientId}?order=${orderId}`);
