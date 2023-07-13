@@ -13,8 +13,6 @@ Cypress.Commands.add("withSupervisionLevel", {prevSubject: true}, (order, overri
 });
 
 Cypress.Commands.add("withActiveOrderStatus", {prevSubject: true}, (order, overrides = {}) => {
-  console.log("with order status id")
-  console.log(order.id)
   let orderStatusBody = {
     "orderStatus": {
       "handle": "ACTIVE",
@@ -49,8 +47,6 @@ Cypress.Commands.add("withDeputy", {prevSubject: true}, (order, overrides = {}) 
 });
 
 Cypress.Commands.add("withOrderExpiryDate", {prevSubject: true}, (order, overrides = {}) => {
-  console.log("with order status id2")
-  console.log(order.id)
   let orderBody = {
     orderExpiryDate: "12/07/2023",
     caseSubtype: order.caseSubtype,
