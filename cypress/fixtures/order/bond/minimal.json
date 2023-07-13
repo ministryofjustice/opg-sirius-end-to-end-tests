@@ -1,0 +1,10 @@
+{
+  "bond": {
+    "requiredBondAmount": "10000",
+    "amountTaken": "100",
+    "bondProviderId": "1",
+    "companyName": "",
+    "referenceNumber": ""
+  },
+  "securityBond": true
+}
