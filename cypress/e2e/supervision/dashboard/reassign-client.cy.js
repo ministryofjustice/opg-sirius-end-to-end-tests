@@ -31,7 +31,7 @@ before(function setupAllocatedClient() {
   cy.createClient()
     .withOrder()
     .withSupervisionLevel()
-    .withOrderStatus();
+    .withActiveOrderStatus();
   allocateTheClientToLayTeam();
 });
 

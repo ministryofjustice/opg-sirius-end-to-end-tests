@@ -17,7 +17,7 @@ beforeEach(function navigateToClient() {
 describe(
   "Given I'm a Finance Manager on Supervision updating finance personal details" +
   "Then the finance personal details are updated as expected",
-  { tags: ["@supervision", "@supervision-regression", "@finance"] },
+  { tags: ["@supervision", "@supervision-regression", "@finance", "@finance-tab"] },
   () => {
     it(
       "Finance person details can be updated",
