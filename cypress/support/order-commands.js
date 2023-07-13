@@ -12,7 +12,9 @@ Cypress.Commands.add("withSupervisionLevel", {prevSubject: true}, (order, overri
   cy.get('@order');
 });
 
-Cypress.Commands.add("withOrderStatus", {prevSubject: true}, (order, overrides = {}) => {
+Cypress.Commands.add("withActiveOrderStatus", {prevSubject: true}, (order, overrides = {}) => {
+  console.log("with order status id")
+  console.log(order.id)
   let orderStatusBody = {
     "orderStatus": {
       "handle": "ACTIVE",
@@ -44,4 +46,43 @@ Cypress.Commands.add("withDeputy", {prevSubject: true}, (order, overrides = {}) 
       })
   });
   cy.get("@deputy")
+});
+
+Cypress.Commands.add("withOrderExpiryDate", {prevSubject: true}, (order, overrides = {}) => {
+  console.log("with order status id2")
+  console.log(order.id)
+  let orderBody = {
+    orderExpiryDate: "12/07/2023",
+    caseSubtype: order.caseSubtype,
+    caseRecNumber: order.caseRecNumber,
+    orderDate: order.orderDate,
+    title: order.title,
+    bondReferenceNumber: order.bondReferenceNumber,
+    bondValue: order.bondValue,
+    orderSubtype: order.orderSubtype,
+    orderIssueDate: order.orderIssueDate
+  }
+  orderBody = {...orderBody, ...overrides};
+  cy.putToApi(`/supervision-api/v1/orders/${order.id}`, orderBody)
+  cy.get('@order');
+});
+
+Cypress.Commands.add("setOrderAsExpired", (orderId, overrides = {}) => {
+  let orderStatusBody = {
+    "orderStatus": {
+    "handle": "CLOSED",
+      "label": "Closed",
+      "deprecated": false
+  },
+    "orderClosureReason": {
+    "handle": "FULL ORDER EXPIRED",
+      "label": "Full order expired",
+      "isSupervised": "1"
+  },
+    "statusDate": "12/07/2023",
+    "statusNotes": ""
+  }
+  orderStatusBody = {...orderStatusBody, ...overrides};
+  cy.putToApi(`/supervision-api/v1/orders/${orderId}/status`, orderStatusBody);
+  cy.get('@order');
 });
