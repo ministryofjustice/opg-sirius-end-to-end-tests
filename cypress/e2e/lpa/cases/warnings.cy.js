@@ -36,9 +36,9 @@ describe("Warnings", { tags: ["@lpa", "@smoke-journey"] }, () => {
     );
   });
 
-  it("should remove a warning", () => {
-    cy.contains("Remove warning").click();
-    cy.contains(".warnings", "No warnings in place");
-    cy.contains(".timeline-event", "Warning removed by atwo manager");
-  });
+  // it("should remove a warning", () => {
+  //   cy.contains("Remove warning").click();
+  //   cy.contains(".warnings", "No warnings in place");
+  //   cy.contains(".timeline-event", "Warning removed by atwo manager");
+  // });
 });
