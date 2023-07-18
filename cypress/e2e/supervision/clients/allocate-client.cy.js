@@ -3,7 +3,7 @@ beforeEach(() => {
   cy.createClient()
     .withOrder()
     .withSupervisionLevel()
-    .withOrderStatus()
+    .withActiveOrderStatus()
 });
 
 describe(
