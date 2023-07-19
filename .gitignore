@@ -1,7 +1,7 @@
 .idea
 .vscode
 node_modules
-test-results/*.xml
+test-results/**
 artifacts/
 multi-reporter-config.json
 runner-results
