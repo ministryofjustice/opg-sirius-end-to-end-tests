@@ -66,3 +66,10 @@ Cypress.Commands.add("withErrorStatusOnCase", {prevSubject: true}, (deputy, orde
   cy.putToApi(`/supervision-api/v1/orders/${orderId}/deputies/${deputy.id}`, body);
   cy.get("@deputy");
 });
+
+Cypress.Commands.add("withDeputyContact", {prevSubject: true}, (deputy, overrides = {}) => {
+  cy.fixture("deputy-contact/minimal.json").then((deputyContact) => {
+    deputyContact = {...deputyContact, ...overrides};
+    cy.postToApi(`/api/v1/deputies/${deputy.id}/contacts`, deputyContact);
+  });
+});
