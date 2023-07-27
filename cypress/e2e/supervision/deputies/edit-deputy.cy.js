@@ -15,6 +15,12 @@ describe(
   () => {
     it("Editing deputy details via the deputy hub", () => {
       cy.get(".TABS_DEPUTIES").click();
+
+      cy.get('@deputy').then(({firstname, surname}) => {
+          cy.get('.summary-row-heading').contains(`${firstname} ${surname}`)
+      })
+      cy.get('.deputy-type').contains('Lay')
+      cy.get('.deputy-status-on-case').contains('Open')
       cy.get("#deputies-table").contains("Deputy record").should("be.visible").click();
       cy.get('#edit-deputy-button').click();
       cy.get('#deputy-hub-view-deputy-edit-deputy-details').click();
