@@ -26,7 +26,6 @@ Cypress.Commands.add("withOrder", {prevSubject: true}, ({id: clientId}, override
       });
   });
 });
-
 Cypress.Commands.add("withContact", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
   cy.fixture("contact/minimal.json").then((contact) => {
     contact = {...contact, ...overrides};
@@ -71,3 +70,14 @@ Cypress.Commands.add("lodgeReport", (clientId, overrides = {}) => {
   });
 });
 
+Cypress.Commands.add("withTask", {prevSubject: true}, ({id: orderId}, overrides = {}) => {
+  let task = {
+    "caseId": `${orderId}`,
+    "type": "CWRD",
+    "name": "Optional Task Name",
+    "description": "Mandatory description",
+    "dueDate": "29/03/2025",
+    "assigneeId": 3
+  }
+  cy.postToApi(`/supervision-api/v1/tasks`, task);
+});

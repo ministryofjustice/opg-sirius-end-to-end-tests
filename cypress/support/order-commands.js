@@ -95,3 +95,16 @@ Cypress.Commands.add("withBond", {prevSubject: true}, (order, overrides = {}) =>
   });
   cy.get("@order")
 });
+
+Cypress.Commands.add("AddTask", (orderId) => {
+  let task = {
+    "caseId": `${orderId}`,
+    "type": "CWRD",
+    "name": "Optional Task Name",
+    "description": "Mandatory description",
+    "dueDate": "29/03/2025",
+    "assigneeId": 3
+  }
+  cy.postToApi(`/supervision-api/v1/tasks`, task);
+});
+
