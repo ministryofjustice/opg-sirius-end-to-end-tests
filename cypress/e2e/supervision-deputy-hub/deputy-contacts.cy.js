@@ -12,12 +12,10 @@ describe("Create deputy contact for deputy", () => {
 
     cy.get('[data-cy="contact-added-event"]').should("exist");
 
-    cy.get('[data-cy="contact-added-event"] > .moj-timeline__header > .moj-timeline__title').should("contain", "added as a contact");
+    cy.get('[data-cy="contact-added-event"] > .moj-timeline__header > .moj-timeline__title').should("contain", "Test Contact added as a contact");
 
-    cy.get('[data-cy="contact-added-event"] > .moj-timeline__description').should("contain", "Name: ")
-    cy.get('[data-cy="contact-added-event"] > .moj-timeline__description').should("contain", "Email: ")
-    cy.get('[data-cy="contact-added-event"] > .moj-timeline__description').should("contain", "Telephone: ")
+    cy.get('[data-cy="contact-added-event"] > .moj-timeline__description').should("contain", "Name: Test Contact")
+    cy.get('[data-cy="contact-added-event"] > .moj-timeline__description').should("contain", "Email: test@email.com")
+    cy.get('[data-cy="contact-added-event"] > .moj-timeline__description').should("contain", "Telephone: (0121) 071 5088")
   });
 });
-
-
