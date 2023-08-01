@@ -33,7 +33,8 @@ describe(
       });
       cy.contains("Save & exit").click();
       cy.get(".TABS_VISITS button").click();
-      cy.contains("Supervision - Pro Visit - Standard");
+      cy.get(".hook-visits-tab .hook-tab-item")
+        .should("contain.text", "Supervision - Pro Visit - Standard");
       cy.get(".TABS_TIMELINELIST").click();
       cy.get(".timeline-event-title", { timeout: 30000 })
         .should("contain", "Visit added");
