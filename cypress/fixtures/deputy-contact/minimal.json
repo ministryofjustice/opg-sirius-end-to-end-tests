@@ -2,6 +2,6 @@
   "contactName": "Test Contact",
   "phoneNumber": "(0121) 071 5088",
   "email": "test@email.com",
-  "isMainContact": false,
-  "isNamedDeputy": false
+  "isMainContact": "false",
+  "isNamedDeputy": "false"
 }
