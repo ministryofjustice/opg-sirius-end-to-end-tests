@@ -5,6 +5,6 @@
   "otherPhoneNumber": "",
   "contactNotes": "",
   "email": "test@email.com",
-  "isMainContact": false,
-  "isNamedDeputy": false
+  "isMainContact": "false",
+  "isNamedDeputy": "false"
 }
