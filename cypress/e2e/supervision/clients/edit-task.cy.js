@@ -20,11 +20,13 @@ describe(
       cy.contains("Assign to")
         .closest(".fieldset")
         .find("select")
-        .select("2");
+        .select("2")
+        .contains("Other team");
       cy.contains("Select team")
         .closest(".fieldset")
         .find("select")
-        .select("5");
+        .select("25")
+        .contains("Allocations - (Supervision)");
       cy.contains("Due Date")
         .closest(".fieldset")
         .find("input")

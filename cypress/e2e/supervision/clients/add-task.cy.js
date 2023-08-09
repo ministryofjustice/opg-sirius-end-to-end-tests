@@ -17,11 +17,13 @@ describe(
       cy.contains("Task type")
         .closest(".fieldset")
         .find("select")
-        .select("1");
+        .select("1")
+        .contains("Casework - Complaint review");
       cy.contains("Assign to")
         .closest(".fieldset")
         .find("select")
-        .select("0");
+        .select("0")
+        .contains("Myself");
       cy.contains("Due Date")
         .closest(".fieldset")
         .find("input")
