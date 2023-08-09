@@ -32,10 +32,15 @@ const navigationLinks = {
     url: '/supervision/workflow',
     position: 2,
   },
+  guidanceUrl: {
+    title: "Guidance",
+    url: 'https://wordpress.sirius.opg.service.justice.gov.uk',
+    position: 3,
+  },
   financeUrl: {
     title: "Finance",
     url: '/supervision/#/finance-hub/reporting',
-    position: 3,
+    position: 4,
   }
 }
 
