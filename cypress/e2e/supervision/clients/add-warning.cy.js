@@ -13,9 +13,11 @@ describe(
       });
       cy.get('#add-warning-button').click();
       cy.contains("Save & exit").should('be.disabled');
+
       cy.waitForTinyMCE()
         .enterText('<p>Warning has been added</p>');
       cy.contains("Save & exit").should('be.disabled');
+
       cy.contains("Warning type")
         .closest(".fieldset")
         .find("select")
@@ -24,9 +26,11 @@ describe(
       cy.waitForTinyMCE()
         .enterText('');
       cy.contains("Save & exit").should('be.disabled');
+
       cy.waitForTinyMCE()
         .enterText('<p>Warning has been added</p>');
       cy.contains("Save & exit").click();
+
       cy.get('div.panel > in-page-notification > .in-page-banner').contains('Warning created, redirecting...')
       cy.get(".TABS_CLIENT_SUMMARY").click();
       cy.get('.warnings-list').contains('Compensation Claim Pending');
