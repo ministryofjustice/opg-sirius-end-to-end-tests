@@ -25,8 +25,8 @@ describe("Edit deputy contact", () => {
     cy.get("@deputy").then(({ id }) => cy.visit("/supervision/deputies/" + id + "/contacts"));
     cy.get(':nth-child(4) > .govuk-button--secondary').click();
 
-    cy.get("#f-contactName").type("{selectAll}{backspace}John Smith");
-    cy.get("#f-email").type("{selectAll}{backspace}john.smith@email.com");
+    cy.get("#f-contactName").clear().type("John Smith");
+    cy.get("#f-email").clear().type("john.smith@email.com");
     cy.get('[type="submit"]').click();
 
     cy.get(':nth-child(3) > .moj-sub-navigation__link').contains("Timeline").click();
