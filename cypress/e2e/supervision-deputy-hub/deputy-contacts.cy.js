@@ -29,7 +29,7 @@ describe("Edit deputy contact", () => {
     cy.get("#f-email").clear().type("john.smith@email.com");
     cy.get('[type="submit"]').click();
 
-    cy.get(':nth-child(3) > .moj-sub-navigation__link').contains("Timeline").click();
+    cy.get(':nth-child(4) > .moj-sub-navigation__link').contains("Timeline").click();
 
     cy.get('[data-cy="contact-edited-event"]').should("exist");
 
