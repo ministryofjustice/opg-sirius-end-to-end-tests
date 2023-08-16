@@ -19,7 +19,7 @@ describe(
     it("allows adding credit and shows this correctly in the finance invoice list", () => {
       cy.get('.finance-personal-summary').should('be.visible');
       cy.get('.write-off').should('be.visible');
-      cy.wait(300);
+      cy.wait(500);
       cy.get('.add-credit').should('contain.text', 'Add credit').click();
       cy.get('.head > .title').should('contain.text', 'Apply credit');
       cy.get('input[name="amount"]').type('50');
