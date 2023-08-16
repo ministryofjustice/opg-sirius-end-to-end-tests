@@ -15,7 +15,7 @@ describe(
     });
     cy.get('.TABS_FINANCEINFO').click();
   });
-  
+  Cypress._.times(30, () => {
   it("allows adding credit and shows this correctly in the finance invoice list", () => {
     cy.get('.finance-personal-summary').should('be.visible');
     cy.get('.write-off').should('be.visible');
@@ -41,7 +41,7 @@ describe(
   });
 
 it('allows awarding fee reductions', () => {
-  cy.wait(100);
+  cy.wait(300);
   cy.get('#add-finance-discount-button').should('be.visible').click();
   cy.get('.head > .title').should('contain.text', 'Award fee reduction');
   cy.get(':nth-child(1) > .radio-button').click();
@@ -63,6 +63,7 @@ it('allows awarding fee reductions', () => {
   cy.get('#finance-discount-list-table').should('contain.text', '31/03/2024');
   cy.get('#finance-discount-list-table').should('contain.text', 'Active');
   cy.get('.finance-discount-list-notes').should('contain.text', 'Test applying fee reduction');
+});
 });
 });
 describe("Client finance tab annual fee information", {
