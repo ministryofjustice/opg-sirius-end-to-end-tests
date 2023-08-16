@@ -1,21 +1,21 @@
 describe(
-"Finance tab",
+"Finance actions tab",
 { tags: ["@supervision", "@supervision-regression", "@finance-tab", "@finance"] },
 () => {
 
   beforeEach(() => {
     cy.loginAs("Finance User Testing");
     cy.createClient()
-      .withOrder()
-      .withSupervisionLevel()
-      .withActiveOrderStatus();
-    cy.get("@client").then(({ id, caseRecNumber }) => {
-      cy.assignSOPNumberToClient(caseRecNumber)
-      cy.visit(`/supervision/#/clients/${id}`);
+      .withInvoice();
+    cy.get('@invoiceId').then((invoiceId) => {
+      cy.get("@client").then(({id}) => {
+        cy.createCredit(id, invoiceId);
+      });
     });
-    cy.get('.TABS_FINANCEINFO').click();
+    cy.visit(`/supervision/#/finance-hub`);
   });
 
+<<<<<<< Updated upstream:cypress/e2e/supervision/finance/finance-tab.cy.js
   it("allows adding credit and shows this correctly in the finance invoice list", () => {
     cy.get('.finance-personal-summary').should('be.visible');
     cy.get('.write-off').should('be.visible');
@@ -53,89 +53,30 @@ describe(
       .enterText(data);
     cy.get('[type="submit"]').should('not.be.disabled');
     cy.get('[type="submit"]').click();
+=======
+  it('allows pending invoice adjustments to be approved', () => {
+    cy.get('#finance-reporting-main-menu-link').should('be.visible').click();
+    cy.get('#finance-pending-ledger-entries-button').should('be.visible').click();
+    cy.get('.section-title').should('contain.text', 'Pending invoice adjustments');
+    cy.get('#pending-adjustments-summary > :nth-child(1)').should('contain', 8);
+    cy.get('#pending-adjustments-summary > :nth-child(2)').should('contain', 8);
+    cy.get('#pending-adjustments-summary > :nth-child(3)').should('contain', 0);
+    cy.get(':nth-child(1) > .ledger-entries-list-item-amount').should('contain', '£50.00');
+    cy.get(':nth-child(1) > .ledger-entries-list-item-outstanding').should('contain', '£100.00');
+    cy.get(':nth-child(1) > .ledger-entries-list-item-type').should('contain.text', 'Credit memo');
+    cy.get(':nth-child(1) > .ledger-entries-list-item-invref').should('contain.text', 'AD000001/22');
+    // check link goes to client
+    // cy.get(':nth-child(1) > .ledger-entries-list-item-name > a').should('contain.text', 'AD000001/22');
+    cy.get(':nth-child(1) > .ledger-entries-list-item-notes').should('contain.text', 'Test applying credit');
 
-    cy.get('.TABS_FINANCEINFO').click();
-    cy.get('#list-finance-discounts').should('contain.text', 'Fee reductions');
-    cy.get('.finance-discount-list-discount').should('contain.text', 'Remission');
-    cy.get('#finance-discount-list-table').should('contain.text', '01/04/2023');
-    cy.get('#finance-discount-list-table').should('contain.text', '31/03/2024');
-    cy.get('#finance-discount-list-table').should('contain.text', 'Active');
-    cy.get('.finance-discount-list-notes').should('contain.text', 'Test applying fee reduction');
+    cy.get('#approve-selected-adjustments').should('be.disabled');
+    cy.get('#decline-selected-adjustments').should('be.disabled');
+    cy.get(':nth-child(1) > .ledger-entries-list-item-selected').click();
+    cy.get('#approve-selected-adjustments').should('not.be.disabled');
+    cy.get('#decline-selected-adjustments').should('not.be.disabled');
+>>>>>>> Stashed changes:cypress/e2e/supervision/finance/finance-actions-tab.cy.js
+
+  //    cy.get('#approve-selected-adjustments').click();
+  //
   });
 });
-describe("Finance tab annual fee information", {
-  tags: ["@supervision", "@supervision-regression", "@finance-tab", "@finance"]
-}, () => {
-  before(() => {
-    cy.loginAs("Finance User Testing");
-    cy.createClient()
-      .withOrder()
-      .withSupervisionLevel()
-      .withActiveOrderStatus()
-      .withOrderExpiryDate();
-    cy.get("@client").then(({ id, caseRecNumber }) => {
-      cy.assignSOPNumberToClient(caseRecNumber)
-      cy.visit(`/supervision/#/clients/${id}`);
-    });
-    cy.get('.TABS_FINANCEINFO').click();
-  });
-
-  it('shows annual fee information', () => {
-    cy.get("@order").then(({ id: orderId }) => {
-      cy.setOrderAsExpired(orderId)
-    });
-    cy.reload();
-    cy.get('.TABS_FINANCEINFO').click();
-    cy.get('span > .full-details').should('be.visible');
-    cy.get('span > .full-details').should('have.length', 2);
-    cy.get(':nth-child(1) > .invoice-list-item-action').click();
-    cy.get('.invoice-fee-range-item-supervision-level').should('contain.text', 'General');
-    cy.get('.invoice-fee-range-item-amount').should('contain.text', '£90.05');
-    cy.get('.invoice-fee-range-item-from-date').should('contain.text', '01/04/2023');
-    cy.get('.invoice-fee-range-item-to-date').should('contain.text', '12/07/2023');
-  });
-});
-
-describe(
-"Finance tab user permissions",
-{ tags: ["@supervision", "@finance-tab", "@finance"] },
-() => {
-
-  beforeEach(() => {
-    cy.loginAs("Finance User Testing");
-    cy.createClient()
-      .withOrder()
-      .withSupervisionLevel()
-      .withActiveOrderStatus();
-    cy.get("@client").then(({ caseRecNumber }) => {
-      cy.assignSOPNumberToClient(caseRecNumber)
-    });
-  });
-
-  it('will show correct content for a non finance user', () => {
-    cy.loginAs("Case Manager");
-    cy.get("@client").then(({ id }) => {
-      cy.visit(`/supervision/#/clients/${id}`);
-    });
-    cy.get('.TABS_FINANCEINFO').click();
-
-    cy.get('.add-credit').should('not.exist');
-    cy.get('.write-off').should('not.exist');
-    cy.get('#add-finance-discount-button').should('not.exist');
-    cy.get('#edit-finance-person-button').should('not.exist');
-  });
-
-  it('will show correct content for a finance manager', () => {
-    cy.loginAs("Finance Manager");
-    cy.get("@client").then(({ id }) => {
-      cy.visit(`/supervision/#/clients/${id}`);
-    });
-    cy.get('.TABS_FINANCEINFO').click();
-
-    cy.get('.add-credit').should('not.exist');
-    cy.get('.write-off').should('not.exist');
-    cy.get('#add-finance-discount-button').should('not.exist');
-    cy.get('#edit-finance-person-button').should('be.visible');
-  });
-});
-

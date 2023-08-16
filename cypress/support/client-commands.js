@@ -26,6 +26,7 @@ Cypress.Commands.add("withOrder", {prevSubject: true}, ({id: clientId}, override
       });
   });
 });
+
 Cypress.Commands.add("withContact", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
   cy.fixture("contact/minimal.json").then((contact) => {
     contact = {...contact, ...overrides};
