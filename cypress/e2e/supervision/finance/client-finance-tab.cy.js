@@ -1,5 +1,5 @@
 describe(
-"Finance tab",
+"Client finance tab",
 { tags: ["@supervision", "@supervision-regression", "@finance-tab", "@finance"] },
 () => {
 
@@ -15,31 +15,33 @@ describe(
     });
     cy.get('.TABS_FINANCEINFO').click();
   });
+  Cypress._.times(30, () => {
+    it("allows adding credit and shows this correctly in the finance invoice list", () => {
+      cy.get('.finance-personal-summary').should('be.visible');
+      cy.get('.write-off').should('be.visible');
+      cy.wait(300);
+      cy.get('.add-credit').should('contain.text', 'Add credit').click();
+      cy.get('.head > .title').should('contain.text', 'Apply credit');
+      cy.get('input[name="amount"]').type('50');
+      const data = '<p>Test applying credit</p>';
+      cy.waitForTinyMCE()
+        .enterText(data);
+      cy.get('[type="submit"]').should('not.be.disabled');
+      cy.get('[type="submit"]').click();
 
-  it("allows adding credit and shows this correctly in the finance invoice list", () => {
-    cy.get('.finance-personal-summary').should('be.visible');
-    cy.get('.write-off').should('be.visible');
-    cy.get('.add-credit').should('contain.text', 'Add credit').click();
-    cy.get('.head > .title').should('contain.text', 'Apply credit');
-    cy.get('input[name="amount"]').type('50');
-    const data = '<p>Test applying credit</p>';
-    cy.waitForTinyMCE()
-      .enterText(data);
-    cy.get('[type="submit"]').should('not.be.disabled');
-    cy.get('[type="submit"]').click();
+      cy.get('.TABS_FINANCEINFO').click();
+      cy.get('td > h2').should('contain.text', 'Invoice ledger allocations');
+      cy.get('.invoice-list-item-amount').should('contain.text', '£100.00');
+      cy.get('.invoice-list-item-outstanding').should('contain.text', '£100.00');
 
-    cy.get('.TABS_FINANCEINFO').click();
-    cy.get('td > h2').should('contain.text', 'Invoice ledger allocations');
-    cy.get('.invoice-list-item-amount').should('contain.text', '£100.00');
-    cy.get('.invoice-list-item-outstanding').should('contain.text', '£100.00');
-
-    cy.get('span > .full-details').should('be.visible').click();
-    cy.get('.invoice-ledger-entry-allocation-item-amount').should('contain.text', '£50.00');
-    cy.get('.invoice-list-item-expanded').should('contain.text', 'Pending');
-    cy.get('.invoice-list-item-expanded').should('contain.text', 'Credit memo');
-  });
+      cy.get('span > .full-details').should('be.visible').click();
+      cy.get('.invoice-ledger-entry-allocation-item-amount').should('contain.text', '£50.00');
+      cy.get('.invoice-list-item-expanded').should('contain.text', 'Pending');
+      cy.get('.invoice-list-item-expanded').should('contain.text', 'Credit memo');
+    });
 
   it('allows awarding fee reductions', () => {
+    cy.wait(100);
     cy.get('#add-finance-discount-button').should('be.visible').click();
     cy.get('.head > .title').should('contain.text', 'Award fee reduction');
     cy.get(':nth-child(1) > .radio-button').click();
@@ -62,8 +64,9 @@ describe(
     cy.get('#finance-discount-list-table').should('contain.text', 'Active');
     cy.get('.finance-discount-list-notes').should('contain.text', 'Test applying fee reduction');
   });
+  });
 });
-describe("Finance tab annual fee information", {
+describe("Client finance tab annual fee information", {
   tags: ["@supervision", "@supervision-regression", "@finance-tab", "@finance"]
 }, () => {
   before(() => {
@@ -97,7 +100,7 @@ describe("Finance tab annual fee information", {
 });
 
 describe(
-"Finance tab user permissions",
+"Client finance tab user permissions",
 { tags: ["@supervision", "@finance-tab", "@finance"] },
 () => {
 
