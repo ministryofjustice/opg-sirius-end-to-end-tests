@@ -3,6 +3,7 @@ require("./commands");
 require("./deputy-commands");
 require("./document-commands");
 require("./forms");
+require("./finance-commands");
 require("./navigation-commands");
 require("./letter-commands")
 require("./lpa-commands");
