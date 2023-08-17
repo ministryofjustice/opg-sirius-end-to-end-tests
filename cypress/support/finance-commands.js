@@ -9,7 +9,7 @@ Cypress.Commands.add("withInvoice", {prevSubject: true}, ({id: clientId}, overri
   });
 });
 
-Cypress.Commands.add("createCredit", (clientId, invoiceId, overrides = {}) => {
+Cypress.Commands.add("createInvoiceCredit", (clientId, invoiceId, overrides = {}) => {
   const credit = {
     "type": "CREDIT MEMO",
     "amount": "195",
@@ -20,4 +20,3 @@ Cypress.Commands.add("createCredit", (clientId, invoiceId, overrides = {}) => {
     .its("body")
 });
 
-// /finance/118/invoice/9/ledger-entries
