@@ -86,10 +86,6 @@ Cypress.Commands.add("putToApi", (url, data) => {
   sendToApi("PUT", url, data);
 });
 
-Cypress.Commands.add("getToApi", (url, data, retry) => {
-  sendToApi("GET", url, data, retry);
-});
-
 Cypress.Commands.add("waitForSearchService", (searchTerm = "", personTypes = [], minimumExpected = 1) => {
   cy.waitUntil(
     () =>
