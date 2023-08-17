@@ -51,6 +51,10 @@ describe(
   })
 
   it("Download Historic Reports", () => {
+    cy.get('#finance-admin-reporting-button').click();
+    cy.get(`finance-download-reports-form label:contains(New Cases Report)`).click();
+    cy.get("footer button:contains(Download)").click();
+    cy.get(".in-page-success-banner:contains(Downloaded successfully)").should("be.visible")
     cy.get('#finance-historic-reports-button').click();
     cy.get('finance-report-search-form text-field input').type("1");
     cy.get('.finance-historic-reports button:contains(Search)').click();
