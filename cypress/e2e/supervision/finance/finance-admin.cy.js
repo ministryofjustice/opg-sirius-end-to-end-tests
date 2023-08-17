@@ -53,22 +53,26 @@ describe(
   it("Download Historic Reports", () => {
     cy.get('#finance-admin-reporting-button').click();
     cy.get(`finance-download-reports-form label:contains(New Cases Report)`).click();
+    cy.intercept("GET", "supervision-api/v1/finance/reports/cases").as("datFile");
     cy.get("footer button:contains(Download)").click();
-    cy.get(".in-page-success-banner:contains(Downloaded successfully)").should("be.visible")
-    cy.get('#finance-historic-reports-button').click();
-    cy.get('finance-report-search-form text-field input').type("1");
-    cy.get('.finance-historic-reports button:contains(Search)').click();
-    cy.get('.finance-historic-reports-link a.download-document').as("downloadLink").should('be.visible')
-    cy.intercept("GET", "/api/v1/finance/reports/*?batchNumber=1").as("fileDownload")
-    cy.window().then((win) => {
-      win.document.addEventListener('click', () => {
-        setTimeout(() => {
-          win.document.location.reload();
-        }, 1000);
+    cy.wait("@datFile").then(({response}) => {
+      let regex = /attachment; filename=daily_newcases_.*_(?<batchNumber>\d+).xlsx/,
+        batchNumber = regex.exec(response.headers['content-disposition'].toString()).groups.batchNumber
+      cy.get('#finance-historic-reports-button').click();
+      cy.get('finance-report-search-form text-field input').type(batchNumber);
+      cy.get('.finance-historic-reports button:contains(Search)').click();
+      cy.get('.finance-historic-reports-link a.download-document').as("downloadLink").should('be.visible')
+      cy.intercept("GET", "/api/v1/finance/reports/*?batchNumber="+batchNumber).as("fileDownload")
+      cy.window().then((win) => {
+        win.document.addEventListener('click', () => {
+          setTimeout(() => {
+            win.document.location.reload();
+          }, 1000);
+        });
+        cy.get("@downloadLink").click();
       });
-      cy.get("@downloadLink").click();
+      cy.wait('@fileDownload').its('response.statusCode').should('equal', 200)
     });
-    cy.wait('@fileDownload').its('response.statusCode').should('equal', 200)
   });
 
   it("Upload card payment data", () => {
