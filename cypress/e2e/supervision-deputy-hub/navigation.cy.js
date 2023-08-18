@@ -13,7 +13,7 @@ describe(
     it("tests header navigation", () => {
       let expectedHeaderLinks = {
         poaUrl: { visible: true, current: false },
-        supervisionUrl: { visible: false, current: true },
+        supervisionUrl: { visible: false, current: false },
         adminUrl: { visible: true, current: false },
         signOutUrl: { visible: true, current: false },
       };
