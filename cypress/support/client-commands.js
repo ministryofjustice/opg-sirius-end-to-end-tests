@@ -26,6 +26,18 @@ Cypress.Commands.add("withOrder", {prevSubject: true}, ({id: clientId}, override
       });
   });
 });
+
+Cypress.Commands.add("withGuardianshipOrder", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
+  cy.fixture("order/guardianship-minimal.json").then((order) => {
+    order = {...order, ...overrides};
+    cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
+      .its("body")
+      .then((res) => {
+        cy.wrap(res).as("order");
+      });
+  });
+});
+
 Cypress.Commands.add("withContact", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
   cy.fixture("contact/minimal.json").then((contact) => {
     contact = {...contact, ...overrides};
