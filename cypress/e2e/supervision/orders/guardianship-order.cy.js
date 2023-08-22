@@ -1,11 +1,14 @@
-beforeEach(() => {
+before(() => {
   cy.loginAs("Allocations User");
   cy.createClient()
     .withGuardianshipOrder();
+  cy.get("@client").then(({id}) => {
+    cy.visit("/supervision/#/clients/" + id);
+  });
 });
 
 describe(
-  "Create a new order",
+  "Guardianship order",
   {tags: ["@guardianship-order", "@order"]},
   () => {
     it("does not show reports and finance tabs for guardianship orders", () => {
@@ -16,16 +19,9 @@ describe(
           expect(rows.length === 1);
         });
       cy.get(".order-header-details-case-type").contains("PFA");
-      cy.get(".order-header-details-case-sub-type").contains("New deputy");
-      cy.get(".order-header-date").contains("01/01/2022");
-      cy.get("@client").then(({caseRecNumber}) => {
-        cy.get(".order-header-details-court-reference-number").contains(
-          caseRecNumber
-        );
-      });
-      cy.contains("View full details").click();
-      cy.get(".order-date").contains("01/01/2022");
-      cy.get(".order-received-date").contains("01/01/2022");
+      cy.get(".order-header-details-case-sub-type").contains("Guardianship");
+      cy.get(".TABS_REPORTS").should('not.be.visible');
+      cy.get(".TABS_FINANCEINFO").should('not.be.visible');
     });
   }
 );
