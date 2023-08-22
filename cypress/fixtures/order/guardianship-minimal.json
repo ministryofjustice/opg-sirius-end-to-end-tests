@@ -1,0 +1,31 @@
+{
+  "caseSubtype": "PFA",
+  "orderSubtype": {
+    "handle": "GUARDIANSHIP",
+    "label": "Guardianship"
+  },
+  "caseRecNumber": "00000000",
+  "orderDate": "01/01/2021",
+  "orderIssueDate": "",
+  "orderStatus": "",
+  "statusDate": "",
+  "orderExpiryDate": "",
+  "receiptDate": "01/01/2021",
+  "title": "",
+  "fileLocationDescription": "",
+  "fileLocationAddress": {
+    "addressLine1": "",
+    "addressLine2": "",
+    "addressLine3": "",
+    "town": "",
+    "postcode": "",
+    "county": "",
+    "country": "",
+    "isAirmailRequired": false
+  },
+  "howDeputyAppointed": "Sole",
+  "orderNotes": "",
+  "clauseExpiryDate": "",
+  "bondReferenceNumber": "",
+  "bondValue": 0
+}
