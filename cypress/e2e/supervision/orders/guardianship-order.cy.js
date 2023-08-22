@@ -12,6 +12,7 @@ Cypress._.times(30, () => {
     { tags: ["@guardianship-order", "@order"] },
     () => {
       it("does not show reports and finance tabs for guardianship orders", () => {
+        cy.wait(1000);
         cy.get(".TABS_ORDERS").click();
         cy.get("#order-table")
           .find("tr")
