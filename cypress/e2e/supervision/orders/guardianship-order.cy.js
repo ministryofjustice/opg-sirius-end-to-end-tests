@@ -1,18 +1,21 @@
-before(() => {
-  cy.loginAs("Allocations User");
-  cy.createClient()
-    .withOrder("Guardianship");
-  cy.get("@client").then(({id}) => {
-    cy.visit("/supervision/#/clients/" + id);
-  });
-});
+
 Cypress._.times(30, () => {
   describe(
     "Guardianship order",
     { tags: ["@guardianship-order", "@order"] },
     () => {
+
+      before(() => {
+        cy.loginAs("Allocations User");
+        cy.createClient()
+          .withOrder("Guardianship");
+        cy.get("@client").then(({id}) => {
+          cy.visit("/supervision/#/clients/" + id);
+        });
+      });
+
       it("does not show reports and finance tabs for guardianship orders", () => {
-        cy.wait(1000);
+        cy.wait(1)
         cy.get(".TABS_ORDERS").click();
         cy.get("#order-table")
           .find("tr")
