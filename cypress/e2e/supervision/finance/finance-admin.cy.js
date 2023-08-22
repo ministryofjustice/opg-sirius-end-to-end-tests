@@ -1,4 +1,5 @@
 import randomInt from "../../../support/random-int";
+const dayjs = require('dayjs')
 
 describe(
 "Finance hub",
@@ -175,22 +176,6 @@ describe(
         .withCreditMemo()
     })
 
-    it("pending invoice adjustment approve and decline", () => {
-      cy.get('#finance-pending-ledger-entries-button').click();
-      cy.get("@invoice").then(({ reference }) => {
-        cy.get(`.ledger-entries-list-item:contains(${reference}) .ledger-entries-list-item-selected`).click()
-      });
-      cy.get('#decline-selected-adjustments').click();
-      cy.get('.dialog-footer > .button').click();
-      cy.get("@client").then(({ id }) => {
-        cy.visit(`/supervision/#/clients/${id}`);
-      });
-      cy.get('.TABS_FINANCEINFO').click();
-      cy.get('.ledger-entry-details').within(() => {
-        cy.get('dt:contains(Transaction Status) + dd:contains(Rejected)').should('be.visible')
-      });
-    });
-
     it("Upload BACS transfer data", () => {
       cy.get('#finance-upload-BACS-transfer-data-button').click();
       cy.get("finance-upload-bacs-transfer-data h2")
@@ -206,6 +191,95 @@ describe(
       });
       cy.get(".in-page-success-banner").should("be.visible")
         .and("contain.text", "The file has been uploaded. We’ll email the Supervision Billing Teams inbox to let you know if the file has been processed or if there were any issues.")
+    });
+  });
+  describe("Pending invoice adjustments", () => {
+    beforeEach(() => {
+      cy.loginAs("Finance User Testing");
+      cy.createClient()
+        .withSOPNumber()
+        .withInvoice()
+        .withCreditMemo();
+
+      cy.visit(`/supervision/#/finance-hub`);
+      cy.get('#finance-reporting-main-menu-link').should('be.visible').click();
+      cy.get('#finance-pending-ledger-entries-button').should('be.visible').click();
+      cy.get('.section-title').should('contain.text', 'Pending invoice adjustments');
+      cy.get("@client").then(({ id }) => {
+        cy.wrap(id).as('clientId')
+      });
+    });
+
+    it('allows pending invoice adjustments to be approved', () => {
+      cy.get('#approve-selected-adjustments').scrollIntoView()
+      cy.get('#approve-selected-adjustments').should('be.disabled');
+      cy.get('#decline-selected-adjustments').should('be.disabled');
+
+      cy.get('@clientId').then(clientId => {
+        cy.get(`a[href="#/clients/${clientId}"]`).click();
+      });
+
+      cy.get('.TABS_FINANCEINFO').click();
+      cy.get("@invoice").then(({ reference }) => {
+        let dateToday = dayjs().format('DD/MM/YYYY')
+
+        cy.get('.ledger-entry-details .key-value-list__read-only > :nth-child(2)').contains('£20.00');
+        cy.get('.ledger-entry-details .key-value-list__read-only > :nth-child(4)').contains(dateToday);
+        cy.get('.ledger-entry-details .key-value-list__read-only > :nth-child(6)').contains(reference);
+        cy.get('.ledger-entry-details .key-value-list__read-only > :nth-child(6)').contains("Credit memo");
+        cy.get('.ledger-entry-details .key-value-list__read-only > :nth-child(10)').contains('Pending');
+
+        cy.visit(`/supervision/#/finance-hub`);
+        cy.get('#finance-pending-ledger-entries-button').should('be.visible').click();
+        cy.contains('td', reference).parent('tr').within(() => {
+          cy.contains('td', '£20.00').should('have.class', 'ledger-entries-list-item-amount');
+          cy.contains('td', '£100.00').should('have.class', 'ledger-entries-list-item-outstanding');
+          cy.contains('td', "Credit memo").should('have.class', 'ledger-entries-list-item-type');
+          cy.contains('td', reference).should('have.class', 'ledger-entries-list-item-invref');
+          cy.contains('td', "Writing of part of the invoice something").should('have.class', 'ledger-entries-list-item-notes');
+          cy.get(':nth-child(1) > [type="checkbox"]').check();
+        })
+
+        cy.get('#approve-selected-adjustments').should('not.be.disabled');
+        cy.get('#decline-selected-adjustments').should('not.be.disabled');
+        cy.get('#approve-selected-adjustments').click();
+        cy.get('dialog-box').should('be.visible');
+        cy.get('.header-text').should('contain.text', 'Confirm Invoice Adjustments');
+        cy.get('.dialog-body').should('contain.text', reference);
+        cy.get('.dialog-footer > .button').contains('Confirm').click();
+        cy.contains('td', reference).should("not.exist");
+      })
+
+      cy.get('@clientId').then(clientId => {
+        cy.visit(`/supervision/#/clients/` + clientId);
+      })
+
+      cy.get('.TABS_FINANCEINFO').click();
+      cy.get('@invoice').then(({ reference }) => {
+        cy.get('.ledger-entry-details .key-value-list__read-only > :nth-child(6)').contains(reference);
+        cy.get('.ledger-entry-details .key-value-list__read-only > :nth-child(10)').contains('Approved');
+      });
+    });
+
+    it('allows pending invoice adjustments to be rejected', () => {
+      cy.get('@invoice').then(({ reference }) => {
+        cy.contains('td', reference).parent('tr').within(() => {
+          cy.contains('td', reference).should('exist');
+          cy.get(':nth-child(1) > [type="checkbox"]').check();
+        });
+        cy.get('#decline-selected-adjustments').click();
+        cy.get('.dialog-body').should('contain.text', reference);
+        cy.get('.dialog-footer > .button').contains('Confirm').click();
+        cy.contains('td', reference).should("not.exist");
+      });
+      cy.get('@clientId').then(clientId => {
+        cy.visit(`/supervision/#/clients/` + clientId);
+      })
+      cy.get('.TABS_FINANCEINFO').click();
+      cy.get('@invoice').then(({ reference }) => {
+        cy.get('.ledger-entry-details .key-value-list__read-only > :nth-child(6)').contains(reference);
+        cy.get('.ledger-entry-details .key-value-list__read-only > :nth-child(10)').contains('Rejected');
+      });
     });
   });
 });
