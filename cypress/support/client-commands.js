@@ -16,25 +16,26 @@ Cypress.Commands.add("createClient", (overrides = {}) => {
   });
 });
 
-Cypress.Commands.add("withOrder", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
-  cy.fixture("order/minimal.json").then((order) => {
-    order = {...order, ...overrides};
-    cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
-      .its("body")
-      .then((res) => {
-        cy.wrap(res).as("order");
-      });
-  });
-});
+Cypress.Commands.add("withOrder", (orderSubType, overrides = {}) => {
+  let jsonFile = "";
+  switch (orderSubType) {
+    case 'Guardianship':
+      jsonFile = "order/guardianship-minimal.json"
+      break;
+    default:
+      jsonFile = "order/minimal.json"
+      break;
+  }
 
-Cypress.Commands.add("withGuardianshipOrder", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
-  cy.fixture("order/guardianship-minimal.json").then((order) => {
-    order = {...order, ...overrides};
-    cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
-      .its("body")
-      .then((res) => {
-        cy.wrap(res).as("order");
-      });
+  cy.get("@client").then(({id}) => {
+    cy.fixture(jsonFile).then((order) => {
+      order = {...order, ...overrides};
+      cy.postToApi(`/supervision-api/v1/clients/${id}/orders`, order)
+        .its("body")
+        .then((res) => {
+          cy.wrap(res).as("order");
+        });
+    });
   });
 });
 
