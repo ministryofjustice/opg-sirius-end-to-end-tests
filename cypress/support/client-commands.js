@@ -26,6 +26,21 @@ Cypress.Commands.add("withOrder", {prevSubject: true}, ({id: clientId}, override
       });
   });
 });
+
+Cypress.Commands.add("withNonSupervisedOrder", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
+  cy.fixture("order/minimal.json").then((order) => {
+    order = {...order, "orderSubtype": {
+          "handle": "TENANCY",
+          "label": "Tenancy"
+        }};
+    cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
+      .its("body")
+      .then((res) => {
+        cy.wrap(res).as("order");
+      });
+  });
+});
+
 Cypress.Commands.add("withContact", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
   cy.fixture("contact/minimal.json").then((contact) => {
     contact = {...contact, ...overrides};

@@ -70,10 +70,7 @@ describe(
     });
 
     it("successfully edits the order status for a non-supervised order and creates a timeline event", () => {
-      cy.get("@client").withOrder({"orderSubtype": {
-        "handle": "TENANCY",
-        "label": "Tenancy"
-      }});
+      cy.get("@client").withNonSupervisedOrder();
 
       cy.get("@order").then(({ id: orderId }) => {
         cy.get("@client").then(({ id: clientId }) => {
