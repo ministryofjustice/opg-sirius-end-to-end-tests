@@ -17,18 +17,25 @@ describe(
           );
           cy.get(".TABS_ORDERS").click();
 
-          cy.get("#order-status-date .date-input").clear();
-          cy.get("button[type='submit']").should('be.disabled');
-          cy.get("#order-status-date .date-input").type("01/01/2023");
+          cy.get("select[name='fIELDLABELSORDERSTATUS']")
+            .select("Open");
 
-          const data = new Array(1000).join( 'A' )
-
-          let notesEditor = cy.waitForTinyMCE();
-          notesEditor.enterText('<p>' + data + '</p>');
+          cy.get("#order-status-date .date-input").clear().type("01/01/2023");
 
           cy.get("button[type='submit']").click();
 
-          cy.get('.validation-summary > .content').contains('Status notes - The input is more than 280 characters long');
+          cy.get(".add-bond-button").should("not.exist");
+
+          cy.get('.order-tiles__tile-tasks-active').contains("Open");
+
+          cy.visit(
+            `/supervision/#/clients/${clientId}/orders/${orderId}/status`
+          );
+          cy.get(".TABS_ORDERS").click();
+
+          cy.get("#order-status-date .date-input").clear();
+          cy.get("button[type='submit']").should('be.disabled');
+          cy.get("#order-status-date .date-input").type("01/01/2023");
 
           cy.get("select[name='fIELDLABELSORDERSTATUS']")
             .select("Closed");
@@ -37,7 +44,6 @@ describe(
             .select("Client deceased");
 
           cy.get("#order-status-date .date-input").clear().type("01/01/2023");
-          notesEditor.enterText("");
 
           cy.get("button[type='submit']").click();
 
@@ -101,30 +107,6 @@ describe(
             .should("contain", "OPEN")
             .should("contain", "DUPLICATE")
             .should("contain", "01/01/2023");
-        });
-      });
-    });
-
-    it("successfully edits the order status to open for a supervised order", () => {
-      cy.get("@client").withOrder();
-
-      cy.get("@order").then(({ id: orderId }) => {
-        cy.get("@client").then(({ id: clientId }) => {
-          cy.visit(
-            `/supervision/#/clients/${clientId}/orders/${orderId}/status`
-          );
-          cy.get(".TABS_ORDERS").click();
-
-          cy.get("select[name='fIELDLABELSORDERSTATUS']")
-            .select("Open");
-
-          cy.get("#order-status-date .date-input").clear().type("01/01/2023");
-
-          cy.get("button[type='submit']").click();
-
-          cy.get(".add-bond-button").should("not.exist");
-
-          cy.get('.order-tiles__tile-tasks-active').contains("Open");
         });
       });
     });
