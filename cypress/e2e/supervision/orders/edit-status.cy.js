@@ -15,7 +15,6 @@ describe(
           cy.visit(
             `/supervision/#/clients/${clientId}/orders/${orderId}/status`
           );
-          cy.get(".TABS_ORDERS").click();
 
           cy.get("select[name='fIELDLABELSORDERSTATUS']")
             .select("Open");
@@ -31,7 +30,6 @@ describe(
           cy.visit(
             `/supervision/#/clients/${clientId}/orders/${orderId}/status`
           );
-          cy.get(".TABS_ORDERS").click();
 
           cy.get("#order-status-date .date-input").clear();
           cy.get("button[type='submit']").should('be.disabled');
@@ -82,7 +80,6 @@ describe(
           cy.visit(
             `/supervision/#/clients/${clientId}/orders/${orderId}/status`
           );
-          cy.get(".TABS_ORDERS").click();
 
           cy.get('#fIELDLABELSORDERSTATUS fieldset > :nth-child(3) > label').click();
 
