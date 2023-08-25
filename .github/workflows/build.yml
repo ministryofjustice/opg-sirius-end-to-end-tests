@@ -39,7 +39,6 @@ jobs:
           make build
 
       - name: Bump version
-        if: github.actor != 'dependabot[bot]'
         id: bump_version
         uses: anothrNick/github-tag-action@1.36.0
         env:
@@ -49,9 +48,9 @@ jobs:
           PRERELEASE_SUFFIX: ${{ env.BRANCH_NAME }}
           RELEASE_BRANCHES: main
           WITH_V: true
+          DRY_RUN: ${{ github.actor == 'renovate[bot]' }}
 
       - name: Configure AWS Credentials
-        if: github.actor != 'dependabot[bot]'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_ACTIONS }}
@@ -62,14 +61,12 @@ jobs:
           role-session-name: GitHubActions
 
       - name: ECR Login
-        if: github.actor != 'dependabot[bot]'
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
         with:
           registries: 311462405659
 
       - name: Push Container
-        if: github.actor != 'dependabot[bot]'
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           END_TO_END_TESTS_ECR_REPOSITORY: sirius/end-to-end-tests
@@ -85,7 +82,6 @@ jobs:
           fi
 
       - name: Trigger remote testing
-        if: github.actor != 'dependabot[bot]'
         shell: bash
         run: curl -XPOST -u ${{ secrets.JENKINS_API_USER }}:${{ secrets.JENKINS_API_TOKEN }} "https://${{ secrets.JENKINS_URL }}/job/Sirius/job/End-to-End%20test/buildWithParameters?token=${{ secrets.JENKINS_API_TOKEN_NAME }}&e2e_tag=${{ steps.bump_version.outputs.tag }}&e2e_commit=${{ github.event.pull_request.head.sha }}"
 
