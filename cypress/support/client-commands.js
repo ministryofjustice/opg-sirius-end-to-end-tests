@@ -18,7 +18,7 @@ Cypress.Commands.add("createClient", (overrides = {}) => {
 
 Cypress.Commands.add("withOrder", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
   cy.fixture("order/minimal.json").then((order) => {
-    order = Object.assign(order, overrides);
+    order = {...order, ...overrides};
     cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
       .its("body")
       .then((res) => {
