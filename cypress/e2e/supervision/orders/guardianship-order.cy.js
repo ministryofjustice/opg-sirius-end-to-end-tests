@@ -6,7 +6,10 @@ describe(
     before(() => {
       cy.loginAs("Allocations User");
       cy.createClient()
-        .withOrder("Guardianship");
+        .withOrder({"orderSubtype": {
+            "handle": "GUARDIANSHIP",
+            "label": "Guardianship"
+          }});
       cy.get("@client").then(({id}) => {
         cy.visit("/supervision/#/clients/" + id);
       });
