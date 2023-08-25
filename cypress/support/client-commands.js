@@ -18,21 +18,7 @@ Cypress.Commands.add("createClient", (overrides = {}) => {
 
 Cypress.Commands.add("withOrder", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
   cy.fixture("order/minimal.json").then((order) => {
-    order = {...order, ...overrides};
-    cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
-      .its("body")
-      .then((res) => {
-        cy.wrap(res).as("order");
-      });
-  });
-});
-
-Cypress.Commands.add("withNonSupervisedOrder", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
-  cy.fixture("order/minimal.json").then((order) => {
-    order = {...order, "orderSubtype": {
-          "handle": "TENANCY",
-          "label": "Tenancy"
-        }};
+    order = Object.assign(order, overrides);
     cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
       .its("body")
       .then((res) => {
