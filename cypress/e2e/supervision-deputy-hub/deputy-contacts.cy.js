@@ -19,3 +19,18 @@ describe("Create deputy contact for deputy", () => {
     cy.get('[data-cy="contact-added-event"] > .moj-timeline__description').should("contain", "Telephone: (0121) 071 5088")
   });
 });
+
+describe("Delete deputy contact", () => {
+  it("Adds a new timeline event to the deputy timeline", () => {
+    cy.get("@deputy").then(({ id }) => cy.visit("/supervision/deputies/" + id + "/contacts"));
+    cy.get('.govuk-button--warning').click();
+
+    cy.get('.govuk-button').contains('Delete contact').click();
+
+    cy.get(':nth-child(4) > .moj-sub-navigation__link').contains("Timeline").click();
+
+    cy.get('[data-cy="contact-deleted-event"]').should("exist");
+
+    cy.get('[data-cy="contact-deleted-event"] > .moj-timeline__header > .moj-timeline__title').should("contain", "Test Contact removed as a contact");
+  });
+});
