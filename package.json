@@ -29,7 +29,7 @@
     "cypress-iframe": "^1.0.1",
     "cypress-multi-reporters": "^1.6.1",
     "cypress-parallel": "0.12.0",
-    "cypress-wait-until": "^1.7.2",
+    "cypress-wait-until": "^2.0.0",
     "mocha-junit-reporter": "^2.2.0"
   }
 }
