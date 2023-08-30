@@ -27,7 +27,7 @@ describe("Delete deputy contact", () => {
 
     cy.get('.govuk-button').contains('Delete contact').click();
 
-    cy.get(':nth-child(4) > .moj-sub-navigation__link').contains("Timeline").click();
+    cy.get("@deputy").then(({ id }) => cy.visit("/supervision/deputies/" + id + "/timeline"));
 
     cy.get('[data-cy="contact-deleted-event"]').should("exist");
 
