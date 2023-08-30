@@ -26,6 +26,7 @@ Cypress.Commands.add("withOrder", {prevSubject: true}, ({id: clientId}, override
       });
   });
 });
+
 Cypress.Commands.add("withContact", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
   cy.fixture("contact/minimal.json").then((contact) => {
     contact = {...contact, ...overrides};
@@ -42,6 +43,13 @@ Cypress.Commands.add("assignSOPNumberToClient", (clientCourtReference) => {
     data = "Customer Account  Number,MOJ - Casrec Ref\r\n" + sopNumber + ",OPG_" + clientCourtReference;
   cy.postToApi(`/supervision-api/v1/finance/reports/sop`, btoa(data)).its("body");
   cy.wrap(sopNumber).as("sopNumber");
+});
+
+Cypress.Commands.add("withSOPNumber", {prevSubject: true}, (client) => {
+  let sopNumber = Date.now().toString(),
+    data = "Customer Account  Number,MOJ - Casrec Ref\r\n" + sopNumber + ",OPG_" + client.caseRecNumber;
+  cy.postToApi(`/supervision-api/v1/finance/reports/sop`, btoa(data)).its("body");
+  cy.get("@client");
 });
 
 Cypress.Commands.add("lodgeReport", (clientId, overrides = {}) => {

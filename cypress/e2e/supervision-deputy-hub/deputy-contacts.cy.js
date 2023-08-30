@@ -20,6 +20,26 @@ describe("Create deputy contact for deputy", () => {
   });
 });
 
+describe("Edit deputy contact", () => {
+  it("Adds a new timeline event to the deputy timeline", () => {
+    cy.get("@deputy").then(({ id }) => cy.visit("/supervision/deputies/" + id + "/contacts"));
+    cy.get(':nth-child(4) > .govuk-button--secondary').click();
+
+    cy.get("#f-contactName").clear().type("John Smith");
+    cy.get("#f-email").clear().type("john.smith@email.com");
+    cy.get('[type="submit"]').click();
+
+    cy.get("@deputy").then(({ id }) => cy.visit("/supervision/deputies/" + id + "/timeline"));
+
+    cy.get('[data-cy="contact-edited-event"]').should("exist");
+
+    cy.get('[data-cy="contact-edited-event"] > .moj-timeline__header > .moj-timeline__title').should("contain", "John Smith's details updated");
+
+    cy.get('[data-cy="contact-edited-event"] > .moj-timeline__description').should("contain", "John Smith");
+    cy.get('[data-cy="contact-edited-event"] > .moj-timeline__description').should("contain", "john.smith@email.com");
+  });
+});
+    
 describe("Delete deputy contact", () => {
   it("Adds a new timeline event to the deputy timeline", () => {
     cy.get("@deputy").then(({ id }) => cy.visit("/supervision/deputies/" + id + "/contacts"));

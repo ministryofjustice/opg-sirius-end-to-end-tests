@@ -1,5 +1,5 @@
 describe(
-"Finance tab",
+"Client finance tab",
 { tags: ["@supervision", "@supervision-regression", "@finance-tab", "@finance"] },
 () => {
 
@@ -19,6 +19,7 @@ describe(
   it("allows adding credit and shows this correctly in the finance invoice list", () => {
     cy.get('.finance-personal-summary').should('be.visible');
     cy.get('.write-off').should('be.visible');
+    cy.wait(300);
     cy.get('.add-credit').should('contain.text', 'Add credit').click();
     cy.get('.head > .title').should('contain.text', 'Apply credit');
     cy.get('input[name="amount"]').type('50');
@@ -40,6 +41,7 @@ describe(
   });
 
   it('allows awarding fee reductions', () => {
+    cy.wait(300);
     cy.get('#add-finance-discount-button').should('be.visible').click();
     cy.get('.head > .title').should('contain.text', 'Award fee reduction');
     cy.get(':nth-child(1) > .radio-button').click();
@@ -63,7 +65,7 @@ describe(
     cy.get('.finance-discount-list-notes').should('contain.text', 'Test applying fee reduction');
   });
 });
-describe("Finance tab annual fee information", {
+describe("Client finance tab annual fee information", {
   tags: ["@supervision", "@supervision-regression", "@finance-tab", "@finance"]
 }, () => {
   before(() => {
@@ -97,7 +99,7 @@ describe("Finance tab annual fee information", {
 });
 
 describe(
-"Finance tab user permissions",
+"Client finance tab user permissions",
 { tags: ["@supervision", "@finance-tab", "@finance"] },
 () => {
 
