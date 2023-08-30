@@ -10,19 +10,17 @@ const editClient = (isCourtReferenceChanged) => {
       url: `/supervision-api/v1/clients/${id}`,
     }).as("editClientCall");
     cy.get('input[name="firstName"]').should("have.value", firstname);
-    cy.get('input[name="firstName"]').clear();
-    cy.get('input[name="firstName"]').should("not.be.disabled").type(newFirstName);
-    cy.get('input[name="lastName"]').clear();
-    cy.get('input[name="lastName"]').should("not.be.disabled").type(newLastName);
+    cy.get('input[name="firstName"]').should("not.be.disabled").clear();
+    cy.get('input[name="firstName"]').type(newFirstName);
+    cy.get('input[name="lastName"]').should("not.be.disabled").clear();
+    cy.get('input[name="lastName"]').type(newLastName);
     cy.get('input[name="memorablePhrase"]').clear();
     cy.get('input[name="memorablePhrase"]')
       .should("not.be.disabled")
       .type(memorablePhrase);
     if (isCourtReferenceChanged) {
-      cy.get('input[name="courtReference"]').clear();
-      cy.get('input[name="courtReference"]')
-        .should("not.be.disabled")
-        .type("00000000");
+      cy.get('input[name="courtReference"]').should("not.be.disabled").clear();
+      cy.get('input[name="courtReference"]').type("00000000");
     }
     cy.contains("Save & Exit").click();
     if (isCourtReferenceChanged) {
