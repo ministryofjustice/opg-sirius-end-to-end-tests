@@ -1,6 +1,9 @@
 {
   "contactName": "Test Contact",
+  "jobTitle": "",
   "phoneNumber": "(0121) 071 5088",
+  "otherPhoneNumber": "",
+  "contactNotes": "",
   "email": "test@email.com",
   "isMainContact": "false",
   "isNamedDeputy": "false"
