@@ -39,3 +39,18 @@ describe("Edit deputy contact", () => {
     cy.get('[data-cy="contact-edited-event"] > .moj-timeline__description').should("contain", "john.smith@email.com");
   });
 });
+    
+describe("Delete deputy contact", () => {
+  it("Adds a new timeline event to the deputy timeline", () => {
+    cy.get("@deputy").then(({ id }) => cy.visit("/supervision/deputies/" + id + "/contacts"));
+    cy.get('.govuk-button--warning').click();
+
+    cy.get('.govuk-button').contains('Delete contact').click();
+
+    cy.get("@deputy").then(({ id }) => cy.visit("/supervision/deputies/" + id + "/timeline"));
+
+    cy.get('[data-cy="contact-deleted-event"]').should("exist");
+
+    cy.get('[data-cy="contact-deleted-event"] > .moj-timeline__header > .moj-timeline__title').should("contain", "Test Contact removed as a contact");
+  });
+});
