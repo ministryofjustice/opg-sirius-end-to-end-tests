@@ -9,7 +9,7 @@ const editClient = (isCourtReferenceChanged) => {
       method: "PUT",
       url: `/supervision-api/v1/clients/${id}`,
     }).as("editClientCall");
-    cy.wait(2000);
+    cy.get('input[name="firstName"]', { timeout: 2000 }).should('be.visible');
     cy.get('input[name="firstName"]').should("have.value", firstname);
     cy.get('input[name="firstName"]').should("not.be.disabled");
     cy.get('input[name="firstName"]').clear();
@@ -43,54 +43,56 @@ beforeEach(() => {
     cy.contains(`Edit Client: ${firstname} ${surname}`);
   });
 });
+Cypress._.times(30, () => {
 
-describe(
-  "Edit an existing client",
-  { tags: ["@supervision-core", "@client", "@smoke-journey"] },
-  () => {
-    it("Edits an existing client",
-      {
-        retries: {
-          runMode: 2,
-          openMode: 0,
-        },
-      }, () => {
-        editClient(true);
-        cy.get("@newCourtReference").then((newCourtReference) => {
-          cy.get(".title-person-name").contains(`${newFirstName} ${newLastName}`);
-          cy.get(".court-reference-value-in-client-summary").contains(
-            newCourtReference
-          );
+  describe(
+    "Edit an existing client",
+    { tags: ["@supervision-core", "@client", "@smoke-journey"] },
+    () => {
+      it("Edits an existing client",
+        {
+          retries: {
+            runMode: 2,
+            openMode: 0,
+          },
+        }, () => {
+          editClient(true);
+          cy.get("@newCourtReference").then((newCourtReference) => {
+            cy.get(".title-person-name").contains(`${newFirstName} ${newLastName}`);
+            cy.get(".court-reference-value-in-client-summary").contains(
+              newCourtReference
+            );
 
-          cy.get(".TABS_CLIENT_SUMMARY").click();
-          cy.get(".client-summary-full-name-value").contains(
-            `${newFirstName} ${newLastName}`
-          );
-          cy.get(".client-summary-court-reference-value").contains(
-            newCourtReference
-          );
-          cy.get(".client-summary-memorable-phrase-value").contains(
-            memorablePhrase
-          );
+            cy.get(".TABS_CLIENT_SUMMARY").click();
+            cy.get(".client-summary-full-name-value").contains(
+              `${newFirstName} ${newLastName}`
+            );
+            cy.get(".client-summary-court-reference-value").contains(
+              newCourtReference
+            );
+            cy.get(".client-summary-memorable-phrase-value").contains(
+              memorablePhrase
+            );
 
-          cy.get(".TABS_TIMELINELIST").click();
+            cy.get(".TABS_TIMELINELIST").click();
 
-          cy.get(".timeline-event-title", { timeout: 30000 }).should(
-            "contain",
-            "Client edited"
-          );
+            cy.get(".timeline-event-title", { timeout: 30000 }).should(
+              "contain",
+              "Client edited"
+            );
 
-          cy.get("timeline-generic-changeset")
-            .first()
-            .within(() => {
-              cy.get("@client").then(({ caseRecNumber, firstname, surname }) => {
-                cy.contains(`First name changed from ${firstname} to ${newFirstName}`);
-                cy.contains(`Last name changed from ${surname} to ${newLastName}`);
-                cy.contains(`Memorable phrase set to ${memorablePhrase}`);
-                cy.contains(`Court reference changed from ${caseRecNumber} to ${newCourtReference}`);
+            cy.get("timeline-generic-changeset")
+              .first()
+              .within(() => {
+                cy.get("@client").then(({ caseRecNumber, firstname, surname }) => {
+                  cy.contains(`First name changed from ${firstname} to ${newFirstName}`);
+                  cy.contains(`Last name changed from ${surname} to ${newLastName}`);
+                  cy.contains(`Memorable phrase set to ${memorablePhrase}`);
+                  cy.contains(`Court reference changed from ${caseRecNumber} to ${newCourtReference}`);
+                });
               });
-            });
-        });
-    }
-  );
+          });
+        }
+      );
+    });
 });
