@@ -9,17 +9,20 @@ const editClient = (isCourtReferenceChanged) => {
       method: "PUT",
       url: `/supervision-api/v1/clients/${id}`,
     }).as("editClientCall");
+    cy.wait(2000);
     cy.get('input[name="firstName"]').should("have.value", firstname);
-    cy.get('input[name="firstName"]').should("not.be.disabled").clear();
+    cy.get('input[name="firstName"]').should("not.be.disabled");
+    cy.get('input[name="firstName"]').clear();
     cy.get('input[name="firstName"]').type(newFirstName);
-    cy.get('input[name="lastName"]').should("not.be.disabled").clear();
+    cy.get('input[name="lastName"]').should("not.be.disabled");
+    cy.get('input[name="lastName"]').clear();
     cy.get('input[name="lastName"]').type(newLastName);
     cy.get('input[name="memorablePhrase"]').clear();
-    cy.get('input[name="memorablePhrase"]')
-      .should("not.be.disabled")
-      .type(memorablePhrase);
+    cy.get('input[name="memorablePhrase"]').should("not.be.disabled");
+    cy.get('input[name="memorablePhrase"]').type(memorablePhrase);
     if (isCourtReferenceChanged) {
-      cy.get('input[name="courtReference"]').should("not.be.disabled").clear();
+      cy.get('input[name="courtReference"]').should("not.be.disabled");
+      cy.get('input[name="courtReference"]').clear();
       cy.get('input[name="courtReference"]').type("00000000");
     }
     cy.contains("Save & Exit").click();
@@ -43,7 +46,7 @@ beforeEach(() => {
 
 describe(
   "Edit an existing client",
-  {tags: ["@supervision-core", "@client", "@smoke-journey"]},
+  { tags: ["@supervision-core", "@client", "@smoke-journey"] },
   () => {
     it("Edits an existing client",
       {
@@ -72,7 +75,7 @@ describe(
 
           cy.get(".TABS_TIMELINELIST").click();
 
-          cy.get(".timeline-event-title", {timeout: 30000}).should(
+          cy.get(".timeline-event-title", { timeout: 30000 }).should(
             "contain",
             "Client edited"
           );
@@ -80,7 +83,7 @@ describe(
           cy.get("timeline-generic-changeset")
             .first()
             .within(() => {
-              cy.get("@client").then(({caseRecNumber, firstname, surname}) => {
+              cy.get("@client").then(({ caseRecNumber, firstname, surname }) => {
                 cy.contains(`First name changed from ${firstname} to ${newFirstName}`);
                 cy.contains(`Last name changed from ${surname} to ${newLastName}`);
                 cy.contains(`Memorable phrase set to ${memorablePhrase}`);
@@ -88,6 +91,6 @@ describe(
               });
             });
         });
-      });
-  }
-);
+    }
+  );
+});
