@@ -9,7 +9,7 @@ const editClient = (isCourtReferenceChanged) => {
       method: "PUT",
       url: `/supervision-api/v1/clients/${id}`,
     }).as("editClientCall");
-    cy.wait(4000);
+    cy.wait(2000);
     cy.get('input[name="firstName"]').should("have.value", firstname);
     cy.get('input[name="firstName"]').should("not.be.disabled");
     cy.get('input[name="firstName"]').clear();
