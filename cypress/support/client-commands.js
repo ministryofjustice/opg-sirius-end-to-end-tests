@@ -1,6 +1,6 @@
 import randomText from "./random-text";
 
-Cypress.Commands.add("createClient", (overrides = {}) => {
+Cypress.Commands.add("createClient", (overrides = {}, alias = "client") => {
   cy.fixture("client/minimal.json").then((client) => {
     client = {
       ...client,
@@ -11,18 +11,18 @@ Cypress.Commands.add("createClient", (overrides = {}) => {
     cy.postToApi("/api/v1/clients", client)
       .its("body")
       .then((res) => {
-        cy.wrap(res).as("client");
+        cy.wrap(res).as(alias);
       });
   });
 });
 
-Cypress.Commands.add("withOrder", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
+Cypress.Commands.add("withOrder", {prevSubject: true}, ({id: clientId}, overrides = {}, alias = "order") => {
   cy.fixture("order/minimal.json").then((order) => {
     order = {...order, ...overrides};
     cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
       .its("body")
       .then((res) => {
-        cy.wrap(res).as("order");
+        cy.wrap(res).as(alias);
       });
   });
 });
