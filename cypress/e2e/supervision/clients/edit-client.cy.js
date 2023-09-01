@@ -61,36 +61,36 @@ describe(
             newCourtReference
           );
 
-          cy.get(".TABS_CLIENT_SUMMARY").click();
-          cy.get(".client-summary-full-name-value").contains(
-            `${newFirstName} ${newLastName}`
-          );
-          cy.get(".client-summary-court-reference-value").contains(
-            newCourtReference
-          );
-          cy.get(".client-summary-memorable-phrase-value").contains(
-            memorablePhrase
-          );
+            cy.get(".TABS_CLIENT_SUMMARY").click();
+            cy.get(".client-summary-full-name-value").contains(
+              `${newFirstName} ${newLastName}`
+            );
+            cy.get(".client-summary-court-reference-value").contains(
+              newCourtReference
+            );
+            cy.get(".client-summary-memorable-phrase-value").contains(
+              memorablePhrase
+            );
 
-          cy.get(".TABS_TIMELINELIST").click();
+            cy.get(".TABS_TIMELINELIST").click();
 
-          cy.get(".timeline-event-title", { timeout: 30000 }).should(
-            "contain",
-            "Client edited"
-          );
+            cy.get(".timeline-event-title", { timeout: 30000 }).should(
+              "contain",
+              "Client edited"
+            );
 
-          cy.get("timeline-generic-changeset")
-            .first()
-            .within(() => {
-              cy.get("@client").then(({ caseRecNumber, firstname, surname }) => {
-                cy.contains(`First name changed from ${firstname} to ${newFirstName}`);
-                cy.contains(`Last name changed from ${surname} to ${newLastName}`);
-                cy.contains(`Memorable phrase set to ${memorablePhrase}`);
-                cy.contains(`Court reference changed from ${caseRecNumber} to ${newCourtReference}`);
+            cy.get("timeline-generic-changeset")
+              .first()
+              .within(() => {
+                cy.get("@client").then(({ caseRecNumber, firstname, surname }) => {
+                  cy.contains(`First name changed from ${firstname} to ${newFirstName}`);
+                  cy.contains(`Last name changed from ${surname} to ${newLastName}`);
+                  cy.contains(`Memorable phrase set to ${memorablePhrase}`);
+                  cy.contains(`Court reference changed from ${caseRecNumber} to ${newCourtReference}`);
+                });
               });
-            });
-        });
-      }
-    );
-  });
-
+          });
+        }
+      );
+    });
+});
