@@ -1,6 +1,11 @@
 let today = new Date();
 today.setDate(today.getDate() + 1);
-const tomorrowsDate = today.toLocaleDateString();
+
+const tomorrowsDate = today.toLocaleDateString(undefined, {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit'
+});
 
 beforeEach(() => {
   cy.loginAs("Case Manager");
