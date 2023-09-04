@@ -9,17 +9,20 @@ const editClient = (isCourtReferenceChanged) => {
       method: "PUT",
       url: `/supervision-api/v1/clients/${id}`,
     }).as("editClientCall");
+    cy.get('input[name="firstName"]', { timeout: 2000 }).should('be.visible');
     cy.get('input[name="firstName"]').should("have.value", firstname);
-    cy.get('input[name="firstName"]').should("not.be.disabled").clear();
+    cy.get('input[name="firstName"]').should("not.be.disabled");
+    cy.get('input[name="firstName"]').clear();
     cy.get('input[name="firstName"]').type(newFirstName);
-    cy.get('input[name="lastName"]').should("not.be.disabled").clear();
+    cy.get('input[name="lastName"]').should("not.be.disabled");
+    cy.get('input[name="lastName"]').clear();
     cy.get('input[name="lastName"]').type(newLastName);
     cy.get('input[name="memorablePhrase"]').clear();
-    cy.get('input[name="memorablePhrase"]')
-      .should("not.be.disabled")
-      .type(memorablePhrase);
+    cy.get('input[name="memorablePhrase"]').should("not.be.disabled");
+    cy.get('input[name="memorablePhrase"]').type(memorablePhrase);
     if (isCourtReferenceChanged) {
-      cy.get('input[name="courtReference"]').should("not.be.disabled").clear();
+      cy.get('input[name="courtReference"]').should("not.be.disabled");
+      cy.get('input[name="courtReference"]').clear();
       cy.get('input[name="courtReference"]').type("00000000");
     }
     cy.contains("Save & Exit").click();
@@ -40,10 +43,9 @@ beforeEach(() => {
     cy.contains(`Edit Client: ${firstname} ${surname}`);
   });
 });
-
 describe(
   "Edit an existing client",
-  {tags: ["@supervision-core", "@client", "@smoke-journey"]},
+  { tags: ["@supervision-core", "@client", "@smoke-journey"] },
   () => {
     it("Edits an existing client",
       {
@@ -59,35 +61,35 @@ describe(
             newCourtReference
           );
 
-          cy.get(".TABS_CLIENT_SUMMARY").click();
-          cy.get(".client-summary-full-name-value").contains(
-            `${newFirstName} ${newLastName}`
-          );
-          cy.get(".client-summary-court-reference-value").contains(
-            newCourtReference
-          );
-          cy.get(".client-summary-memorable-phrase-value").contains(
-            memorablePhrase
-          );
+            cy.get(".TABS_CLIENT_SUMMARY").click();
+            cy.get(".client-summary-full-name-value").contains(
+              `${newFirstName} ${newLastName}`
+            );
+            cy.get(".client-summary-court-reference-value").contains(
+              newCourtReference
+            );
+            cy.get(".client-summary-memorable-phrase-value").contains(
+              memorablePhrase
+            );
 
-          cy.get(".TABS_TIMELINELIST").click();
+            cy.get(".TABS_TIMELINELIST").click();
 
-          cy.get(".timeline-event-title", {timeout: 30000}).should(
-            "contain",
-            "Client edited"
-          );
+            cy.get(".timeline-event-title", { timeout: 30000 }).should(
+              "contain",
+              "Client edited"
+            );
 
-          cy.get("timeline-generic-changeset")
-            .first()
-            .within(() => {
-              cy.get("@client").then(({caseRecNumber, firstname, surname}) => {
-                cy.contains(`First name changed from ${firstname} to ${newFirstName}`);
-                cy.contains(`Last name changed from ${surname} to ${newLastName}`);
-                cy.contains(`Memorable phrase set to ${memorablePhrase}`);
-                cy.contains(`Court reference changed from ${caseRecNumber} to ${newCourtReference}`);
+            cy.get("timeline-generic-changeset")
+              .first()
+              .within(() => {
+                cy.get("@client").then(({ caseRecNumber, firstname, surname }) => {
+                  cy.contains(`First name changed from ${firstname} to ${newFirstName}`);
+                  cy.contains(`Last name changed from ${surname} to ${newLastName}`);
+                  cy.contains(`Memorable phrase set to ${memorablePhrase}`);
+                  cy.contains(`Court reference changed from ${caseRecNumber} to ${newCourtReference}`);
+                });
               });
-            });
-        });
-      });
-  }
-);
+          });
+        }
+      );
+    });
