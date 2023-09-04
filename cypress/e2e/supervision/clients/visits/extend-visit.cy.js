@@ -1,3 +1,12 @@
+let today = new Date();
+today.setDate(today.getDate() + 1);
+
+const tomorrowsDate = today.toLocaleDateString(undefined, {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit'
+});
+
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createClient();
@@ -7,7 +16,7 @@ beforeEach(() => {
   cy.get("@visitId").then((visitId) => {
     cy.get("@client").then(({id}) => {
       let data = {
-        "visitReportDueDate": "22/03/2023",
+        "visitReportDueDate": tomorrowsDate,
         "whoToVisit": {
           "handle": "VPT-CLIENT",
           "label": "Client"
@@ -30,11 +39,11 @@ describe(
         cy.get(".visit-type-field").contains("Supervision");
         cy.get(".visit-sub-type-field").contains("Pro Visit");
         cy.get(".visit-urgency-field").contains("Standard");
-        cy.get(".visit-report-due-date-field").contains("22/03/2023");
+        cy.get(".visit-report-due-date-field").contains(tomorrowsDate);
         cy.get("visit-list-item-view").then(() => {
           cy.contains("Who to visit: Client")
           cy.contains("Supervision - Pro Visit - Standard");
-          cy.contains("Visit report due by: 22/03/2023")
+          cy.contains("Visit report due by: " + tomorrowsDate)
         });
         cy.get(".extend-visit-report-due-date-button").click();
 
