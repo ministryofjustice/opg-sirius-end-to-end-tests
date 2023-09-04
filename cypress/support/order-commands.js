@@ -26,7 +26,7 @@ Cypress.Commands.add("withActiveOrderStatus", {prevSubject: true}, (order, overr
   cy.get('@order');
 });
 
-Cypress.Commands.add("withDeputy", {prevSubject: true}, (order, overrides = {}) => {
+Cypress.Commands.add("withDeputy", {prevSubject: true}, (order, overrides = {}, alias = "deputy") => {
   cy.fixture("deputy/minimal.json").then((deputy) => {
     deputy = {
       ...deputy,
@@ -37,13 +37,17 @@ Cypress.Commands.add("withDeputy", {prevSubject: true}, (order, overrides = {}) 
     cy.postToApi("/api/v1/deputies", deputy)
       .its("body")
       .then((res) => {
-        cy.wrap(res).as("deputy")
+        cy.wrap(res).as(alias)
           .then(({id}) => {
             cy.postToApi(`/api/v1/orders/${order.id}/deputies`, {id})
           });
       })
   });
-  cy.get("@deputy")
+  cy.get("@"+alias)
+});
+
+Cypress.Commands.add("addDeputy", {prevSubject: true}, (order, deputyId, overrides = {}) => {
+  cy.postToApi(`/api/v1/orders/${order.id}/deputies`, {id: deputyId})
 });
 
 Cypress.Commands.add("withOrderExpiryDate", {prevSubject: true}, (order, overrides = {}) => {
