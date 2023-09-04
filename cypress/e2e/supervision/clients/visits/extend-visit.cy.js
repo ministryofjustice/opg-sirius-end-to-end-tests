@@ -1,7 +1,7 @@
 let today = new Date();
 today.setDate(today.getDate() + 1);
 
-const tomorrowsDate = today.toLocaleDateString(undefined, {
+const tomorrowsDate = today.toLocaleDateString('en-GB', {
   year: 'numeric',
   month: '2-digit',
   day: '2-digit'
