@@ -34,6 +34,14 @@ If you want to run it against the dev environment (instead of localhost) run
 npx cypress open -c baseUrl=https://development.sirius.opg.service.justice.gov.uk/
 ```
 
+If you want to re-run a test multiple times, wrap it in
+
+```
+Cypress._.times(10, () => {
+    ...
+}
+```
+
 If you want to run a subset of tests extra options can be passed to run by tag or by text in the test name
 
 E.g.
