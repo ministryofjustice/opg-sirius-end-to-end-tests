@@ -17,9 +17,10 @@ beforeEach(() => {
   () => {
     it("Successfully override a report type", () => {
       cy.get('report-summary .report-type').should('not.contain.text', 'OPG102')
-      cy.get('.override-report-type-link').first().as('actionLink')
-      cy.get('@actionLink').should('be.visible').and('contain.text', 'Request OPG102 report')
-        .click();
+      cy.get('.report-item:first-child .override-report-type-link').as('actionLink')
+      cy.get('@actionLink').should('be.visible')
+      cy.get('@actionLink').should('contain.text', 'Request OPG102 report')
+      cy.get('@actionLink').click();
       cy.get('.head > .title').should('contain.text', 'Request an OPG102 report');
       cy.get('footer .button.primary')
         .should('contain.text', 'Save & exit')
@@ -32,6 +33,5 @@ beforeEach(() => {
       cy.get(".TABS_REPORTS").click();
       cy.get('@actionLink').should('be.visible').and('contain.text', 'Cancel OPG102 request')
       cy.get('report-summary .report-type').should('contain.text', 'OPG102')
-    }
-  );
+    });
 });
