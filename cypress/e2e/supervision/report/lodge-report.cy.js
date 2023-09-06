@@ -16,9 +16,8 @@ beforeEach(() => {
   { tags: ["@supervision", "@reports", "@lodge-report"] },
   () => {
     it("Successfully lodge a report", () => {
-      cy.get('.lodge-report-button').first()
-        .should('be.visible')
-        .click();
+      cy.get('.report-item:first-child .lodge-report-button').should('be.visible')
+      cy.get('.report-item:first-child .lodge-report-button').click();
       cy.get('.head > .title').should('contain.text', 'Lodge report');
       cy.get('input[name=digidepsReport]')
         .should('be.visible')
