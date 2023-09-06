@@ -30,14 +30,16 @@ describe(
       cy.get(".TABS_DEPUTIES").click();
       cy.get("#deputies-table tr.summary-row").should("have.length", 2)
 
-      cy.get("@deputy").then(({salutation, firstname, surname}) => {
+      cy.get("@deputy").then(({ salutation, firstname, surname }) => {
+        cy.intercept({ method: "DELETE" }).as("unlinkDeputyCall");
         cy.get("tr.summary-row")
           .filter(':contains("' + salutation + ' ' + firstname + ' ' + surname + '")')
           .find("a.unlink-deputy").click()
-
         cy.get("unlink-deputy-dialog").contains("Unlink deputy").click()
-        cy.reload()
-        cy.get("#deputies-table tr.summary-row").should("have.length", 1)
+        cy.wait("@unlinkDeputyCall").then(() => {
+          cy.reload()
+          cy.get("#deputies-table tr.summary-row").should("have.length", 1)
+        })
       })
     });
   }
