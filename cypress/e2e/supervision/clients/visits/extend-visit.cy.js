@@ -1,7 +1,15 @@
-let today = new Date();
-today.setDate(today.getDate() + 1);
+let reportDueDate = new Date();
+reportDueDate.setDate(reportDueDate.getDate() + 1);
 
-const tomorrowsDate = today.toLocaleDateString('en-GB', {
+const tomorrowsDate = reportDueDate.toLocaleDateString('en-GB', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit'
+});
+
+reportDueDate.setDate(reportDueDate.getDate() + 7);
+
+const nextWeekDate = reportDueDate.toLocaleDateString('en-GB', {
   year: 'numeric',
   month: '2-digit',
   day: '2-digit'
@@ -50,11 +58,11 @@ describe(
         cy.get("#extend-visit-report-due-date").as("extend-visit-report-due-date-panel");
         cy.get("@extend-visit-report-due-date-panel").within(() => {
           cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_day").clear();
-          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_day").type("01");
+          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_day").type(reportDueDate.getDate());
           cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_month").clear();
-          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_month").type("04");
+          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_month").type(reportDueDate.getMonth() + 1);
           cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_year").clear();
-          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_year").type("2023");
+          cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_year").type(reportDueDate.getFullYear());
           cy.waitForTinyMCE()
             .enterText('<p>Because I said so</p>');
         });
@@ -64,15 +72,17 @@ describe(
         }).as("getVisitsCall");
         cy.contains("Save & exit").click();
         cy.wait("@getVisitsCall").its("response.statusCode").should("equal", 200);
-        cy.get(".visit-report-due-date-field").contains("01/04/2023");
+
+        cy.get(".visit-report-due-date-field").contains(nextWeekDate);
+
         cy.get("visit-list-item-view").then(() => {
-          cy.contains("Visit report due by: 01/04/2023")
+          cy.contains("Visit report due by: " + nextWeekDate)
         });
       });
       cy.get(".TABS_TIMELINELIST").click();
       cy.get(".timeline-event-title", { timeout: 30000 })
         .should("contain", "Visit report due date extended");
-      cy.get(".timeline-extended-visit-report-due-date").contains("01/04/2023");
+      cy.get(".timeline-extended-visit-report-due-date").contains(nextWeekDate);
       cy.get(".timeline-reason-for-visit-report-due-date-extension").contains("Because I said so");
     }
   );
