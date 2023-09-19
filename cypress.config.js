@@ -32,5 +32,7 @@ module.exports = defineConfig({
       return config;
     },
     baseUrl: "http://frontend-proxy",
-  }
+  },
+  waitForAnimations: false,
+  animationDistanceThreshold: 50,
 });
