@@ -3,29 +3,23 @@ beforeEach(() => {
   cy.createClient();
 });
 
+
 describe(
   "Edit order status successfully and timeline is created",
   {tags: ["@supervision-core", "@order-status"]},
   () => {
     it("successfully edits the order status for a supervised order and creates a timeline event", () => {
-      cy.get("@client").withOrder();
+      cy.get("@client").withOrder()
+        .withSupervisionLevel()
+        .withActiveOrderStatus();
 
       cy.get("@order").then(({ id: orderId }) => {
         cy.get("@client").then(({ id: clientId }) => {
           cy.visit(
-            `/supervision/#/clients/${clientId}/orders/${orderId}/status`
+            `/supervision/#/clients/${clientId}`
           );
 
-          cy.get("select[name='fIELDLABELSORDERSTATUS']")
-            .select("Open");
-
-          cy.get("#order-status-date .date-input").clear().type("01/01/2023");
-
-          cy.get("button[type='submit']").click();
-
-          cy.get(".add-bond-button").should("not.exist");
-
-          cy.get('.order-tiles__tile-tasks-active').contains("Open");
+          cy.get('.order-tiles__tile-tasks-active').contains("Active");
 
           cy.visit(
             `/supervision/#/clients/${clientId}/orders/${orderId}/status`
@@ -35,8 +29,8 @@ describe(
           cy.get("button[type='submit']").should('be.disabled');
           cy.get("#order-status-date .date-input").type("01/01/2023");
 
-          cy.get("select[name='fIELDLABELSORDERSTATUS']")
-            .select("Closed");
+          cy.get('[name="fIELDLABELSORDERSTATUS"][data-core-value=CLOSED]').check({ force: true }).should('be.checked')
+
 
           cy.get("select[name='fIELDLABELSORDERCLOSUREREASON']")
             .select("Client deceased");
