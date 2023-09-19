@@ -15,7 +15,7 @@ Cypress.Commands.add("withInvoice", {prevSubject: true}, (client = {}) => {
         .withOrder()
         .withSupervisionLevel()
         .withActiveOrderStatus()
-    
+
     cy.request({
         url: `/supervision-api/v1/finance/${client.id}/invoices`,
         headers: {

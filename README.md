@@ -39,7 +39,7 @@ If you want to re-run a test multiple times, wrap it in
 ```
 Cypress._.times(10, () => {
     ...
-}
+});
 ```
 
 If you want to run a subset of tests extra options can be passed to run by tag or by text in the test name

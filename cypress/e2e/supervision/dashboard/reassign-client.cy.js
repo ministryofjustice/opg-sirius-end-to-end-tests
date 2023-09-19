@@ -49,7 +49,6 @@ describe(
   () => {
     it("reassigns the client via the Dashboard", () => {
       cy.loginAs("Lay User");
-      cy.visit("/supervision/#/dashboard");
 
       cy.get('li[class="tab-container__tab TABS_CLIENTS"]').click();
 
