@@ -18,6 +18,8 @@ describe(
             cy.get('button[class="button client-search__search-button"]').should("be.visible");
             cy.get('button[class="button client-search__search-button"]').click();
 
+            cy.get('.search-results__term').should('be.visible')
+
             cy.get('.search-results__list').children().should('have.length', 1)
               .contains(`${firstname} ${surname}`)
               .click();
