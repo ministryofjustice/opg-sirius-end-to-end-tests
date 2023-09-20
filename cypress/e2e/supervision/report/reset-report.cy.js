@@ -41,5 +41,4 @@ describe(
         cy.get('.report-summary-container').first().contains('.report-status', 'non-compliant');
       }
     );
-  })
-;
+  });

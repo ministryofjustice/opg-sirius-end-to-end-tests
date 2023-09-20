@@ -35,7 +35,7 @@ describe(
       cy.get('.details-row > td').should('contain.text', 'A client has been created');
 
       cy.get('.order-number').should('contain.text', 'PFA');
-
+      cy.wait(500);
       cy.get('.mark').first().click();
       cy.get('.head > .title').should('contain.text', 'Complete task');
       cy.get('.footer > :nth-child(1) > .button').should('contain.text', 'Complete the task')

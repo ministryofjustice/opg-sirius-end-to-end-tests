@@ -4,7 +4,7 @@ const newLastName = "Client" + suffix;
 const memorablePhrase = "Memorable" + suffix;
 
 const editClient = (isCourtReferenceChanged) => {
-  return cy.get("@client").then(({id, firstname}) => {
+  return cy.get("@client").then(({id, firstname, surname}) => {
     cy.intercept({
       method: "PUT",
       url: `/supervision-api/v1/clients/${id}`,
@@ -12,13 +12,15 @@ const editClient = (isCourtReferenceChanged) => {
     cy.get('input[name="firstName"]', { timeout: 2000 }).should('be.visible');
     cy.get('input[name="firstName"]').should("have.value", firstname);
     cy.get('input[name="firstName"]').should("not.be.disabled");
+    cy.get('input[name="lastName"]').should("have.value", surname);
+    cy.get('input[name="lastName"]').should("not.be.disabled");
+    cy.get('input[name="memorablePhrase"]').should("not.be.disabled");
+
     cy.get('input[name="firstName"]').clear();
     cy.get('input[name="firstName"]').type(newFirstName);
-    cy.get('input[name="lastName"]').should("not.be.disabled");
     cy.get('input[name="lastName"]').clear();
     cy.get('input[name="lastName"]').type(newLastName);
     cy.get('input[name="memorablePhrase"]').clear();
-    cy.get('input[name="memorablePhrase"]').should("not.be.disabled");
     cy.get('input[name="memorablePhrase"]').type(memorablePhrase);
     if (isCourtReferenceChanged) {
       cy.get('input[name="courtReference"]').should("not.be.disabled");
