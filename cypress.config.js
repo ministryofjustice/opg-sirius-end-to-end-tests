@@ -32,5 +32,5 @@ module.exports = defineConfig({
       return config;
     },
     baseUrl: "http://frontend-proxy",
-  }
+  },
 });

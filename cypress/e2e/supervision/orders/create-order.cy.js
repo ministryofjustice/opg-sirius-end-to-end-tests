@@ -13,40 +13,40 @@ const createOrder = (orderType, orderSubType, orderDate, optional) => {
       .closest(".fieldset")
       .find("Select")
       .select(orderSubType);
-    cy.get('input[name="courtReference"]').should("not.be.disabled").clear();
+    cy.get('input[name="courtReference"]').should("not.be.disabled").clear({ force: true });
     cy.get('input[name="courtReference"]').type(caseRecNumber);
-    cy.get("#fIELDLABELSORDERDATE_day").should("not.be.disabled").clear();
+    cy.get("#fIELDLABELSORDERDATE_day").should("not.be.disabled").clear({ force: true });
     cy.get("#fIELDLABELSORDERDATE_day").type(orderDay);
-    cy.get("#fIELDLABELSORDERDATE_month").should("not.be.disabled").clear();
+    cy.get("#fIELDLABELSORDERDATE_month").should("not.be.disabled").clear({ force: true });
     cy.get("#fIELDLABELSORDERDATE_month").type(orderMonth);
-    cy.get("#fIELDLABELSORDERDATE_year").should("not.be.disabled").clear();
+    cy.get("#fIELDLABELSORDERDATE_year").should("not.be.disabled").clear({ force: true });
     cy.get("#fIELDLABELSORDERDATE_year").type(orderYear);
-    cy.get("#orderReceivedDate_day").should("not.be.disabled").clear();
+    cy.get("#orderReceivedDate_day").should("not.be.disabled").clear({ force: true });
     cy.get("#orderReceivedDate_day").type(orderDay);
-    cy.get("#orderReceivedDate_month").should("not.be.disabled").clear();
+    cy.get("#orderReceivedDate_month").should("not.be.disabled").clear({ force: true });
     cy.get("#orderReceivedDate_month").type(orderMonth);
-    cy.get("#orderReceivedDate_year").should("not.be.disabled").clear();
+    cy.get("#orderReceivedDate_year").should("not.be.disabled").clear({ force: true });
     cy.get("#orderReceivedDate_year").type(orderYear);
     if (optional) {
-      cy.get("#orderIssueDate_day").should("not.be.disabled").clear();
+      cy.get("#orderIssueDate_day").should("not.be.disabled").clear({ force: true });
       cy.get("#orderIssueDate_day").type(orderDay);
-      cy.get("#orderIssueDate_month").should("not.be.disabled").clear();
+      cy.get("#orderIssueDate_month").should("not.be.disabled").clear({ force: true });
       cy.get("#orderIssueDate_month").type(orderMonth);
-      cy.get("#orderIssueDate_year").should("not.be.disabled").clear();
+      cy.get("#orderIssueDate_year").should("not.be.disabled").clear({ force: true });
       cy.get("#orderIssueDate_year").type(orderYear);
-      cy.get("#orderExpiryDate_day").should("not.be.disabled").clear();
+      cy.get("#orderExpiryDate_day").should("not.be.disabled").clear({ force: true });
       cy.get("#orderExpiryDate_day").type(orderDay);
-      cy.get("#orderExpiryDate_month").should("not.be.disabled").clear();
+      cy.get("#orderExpiryDate_month").should("not.be.disabled").clear({ force: true });
       cy.get("#orderExpiryDate_month").type(orderMonth);
-      cy.get("#orderExpiryDate_year").should("not.be.disabled").clear();
+      cy.get("#orderExpiryDate_year").should("not.be.disabled").clear({ force: true });
       cy.get("#orderExpiryDate_year").type(orderYear);
-      cy.get("#clauseExpiryDate_day").should("not.be.disabled").clear();
+      cy.get("#clauseExpiryDate_day").should("not.be.disabled").clear({ force: true });
       cy.get("#clauseExpiryDate_day").type(orderDay);
-      cy.get("#clauseExpiryDate_month").should("not.be.disabled").clear();
+      cy.get("#clauseExpiryDate_month").should("not.be.disabled").clear({ force: true });
       cy.get("#clauseExpiryDate_month").type(orderMonth);
-      cy.get("#clauseExpiryDate_year").should("not.be.disabled").clear();
+      cy.get("#clauseExpiryDate_year").should("not.be.disabled").clear({ force: true });
       cy.get("#clauseExpiryDate_year").type(orderYear);
-      cy.get('input[name="orderTitle"]').should("not.be.disabled").clear();
+      cy.get('input[name="orderTitle"]').should("not.be.disabled").clear({ force: true });
       cy.get('input[name="orderTitle"]').type("Test Order Title");
       cy.contains("How have the deputy/deputies been appointed?")
         .closest(".fieldset")
