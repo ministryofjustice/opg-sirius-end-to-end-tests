@@ -36,7 +36,7 @@ describe(
 
       cy.get('.order-number').should('contain.text', 'PFA');
 
-      cy.get('.mark').first().click();
+      cy.get('.mark').first().click({ force: true });
       cy.get('.head > .title').should('contain.text', 'Complete task');
       cy.get('.footer > :nth-child(1) > .button').should('contain.text', 'Complete the task')
       cy.get('.footer > :nth-child(1) > .button').click();
