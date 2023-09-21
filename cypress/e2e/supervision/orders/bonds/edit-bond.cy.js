@@ -5,9 +5,7 @@ beforeEach(() => {
     .withBond();
 
 });
-
-Cypress._.times(30, () => {
-  describe(
+ describe(
     "Edit bond",
     () => {
       it("Triggering the validation summary when editing a bond in supervision", () => {
@@ -39,4 +37,3 @@ Cypress._.times(30, () => {
       });
     }
   );
-});

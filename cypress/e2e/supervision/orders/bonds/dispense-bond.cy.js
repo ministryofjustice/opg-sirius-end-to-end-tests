@@ -23,10 +23,10 @@ describe(
       cy.get("#tab-order-list-in-page-notification").should("contain", "Please wait...");
       cy.get("#tab-order-list-in-page-notification").should("not.contain", "Please wait...");
 
-      cy.get(".edit-bond-button").click();
+      cy.get(".edit-bond-button", {timeout: 30000}).click();
       cy.contains("button", "Dispense with the bond", {timeout: 30000}).click();
 
-      cy.get("dispense-bond-dialog").contains("button", "Dispense with the bond").click();
+      cy.get("dispense-bond-dialog").contains("button", "Dispense with the bond", {timeout: 30000}).click();
 
       const today = new Date();
 
