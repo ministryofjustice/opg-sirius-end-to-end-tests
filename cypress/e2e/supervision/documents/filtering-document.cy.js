@@ -1,16 +1,11 @@
-import * as path from "path";
 describe(
   "Viewing the documents tab for the client",
   { tags: ["@supervision", "@replace-document"] },
   () => {
-    before(() => {
+    it("filtering the documents tab for the client", () => {
       cy.loginAs("Allocations User");
       cy.createClient();
-    });
-
-    it("filtering the documents tab for the client", () => {
       cy.loginAs("Case Manager");
-
       cy.get("@client").then(({ id }) => {
         cy.visit(`/supervision/#/clients/${id}`);
       });
