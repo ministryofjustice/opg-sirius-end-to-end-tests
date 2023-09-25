@@ -12,7 +12,7 @@ beforeEach(() => {
 
 const searchForADeputyToReachAddADeputyPage = () => {
   return cy.then(() => {
-    cy.get('#add-deputy-button').should("be.visible").click();
+    cy.get('#add-deputy-button').should("be.visible","be.enabled").click();
     // type in name to search field
     cy.get('.deputy-search__input').type("deputy");
     cy.get('.deputy-search__form > .button').click();
