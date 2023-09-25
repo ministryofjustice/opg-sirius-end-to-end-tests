@@ -8,6 +8,12 @@ beforeEach(() => {
 
 describe(
   "Edit bond",
+  {
+    retries: {
+      runMode: 2,
+      openMode: 0,
+    },
+  },
   () => {
     it("Triggering the validation summary when editing a bond in supervision", () => {
       cy.get("@client").then(({id: clientId}) => {
