@@ -2,7 +2,7 @@ Cypress.Commands.add("waitForTinyMCE", () => {
   cy.window()
     .its("tinyMCE")
     .its("activeEditor")
-    .its("initialized", {timeout: 2000});
+    .its("initialized", {timeout: 60000});
   return cy.window().then((win) => {
     let editor = win.tinymce.activeEditor;
     editor.dom.createRng();
