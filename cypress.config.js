@@ -4,6 +4,8 @@ const fs = require("fs");
 
 module.exports = defineConfig({
   defaultCommandTimeout: 60000,
+  requestTimeout: 60000,
+  responseTimeout: 60000,
   reporter: "cypress-multi-reporters",
   chromeWebSecurity: false,
   modifyObstructiveCode: false,
