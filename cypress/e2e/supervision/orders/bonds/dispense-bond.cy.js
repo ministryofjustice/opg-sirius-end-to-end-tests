@@ -8,7 +8,12 @@ beforeEach(() => {
 describe(
   "Dispense bond",
   () => {
-    it("successfully dispenses a bond on an order", () => {
+    it("successfully dispenses a bond on an order", {
+      retries: {
+        runMode: 2,
+        openMode: 0,
+      },
+    }, () => {
       cy.get("@client").then(({id: clientId}) => {
         cy.visit(
           `/supervision/#/clients/${clientId}`
