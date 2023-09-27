@@ -66,7 +66,6 @@ beforeEach(() => {
   cy.loginAs("Allocations User");
   cy.createClient();
 });
-Cypress._.times(25, () => {
 
   describe(
     "Create a new order",
@@ -192,5 +191,3 @@ Cypress._.times(25, () => {
         "Order created"
       );
     });
-  }
-);
