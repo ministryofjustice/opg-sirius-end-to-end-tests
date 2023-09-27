@@ -156,6 +156,7 @@ describe(
         cy.get(".TABS_DEPUTIES").click();
         cy.contains("Loading deputies...").as("loadingDeputies").should("be.visible");
         cy.get("@loadingDeputies").should("not.exist");
+        cy.get("tr.summary-row > :nth-child(1) > .dotted-link").should("be.visible", { timeout: 30000 });
         cy.get("tr.summary-row > :nth-child(1) > .dotted-link").click();
         cy.get(".person-name").should("be.visible", { timeout: 60000, interval: 500 });
         cy.get(".person-name").should("contain.text", "Patrick Star");
