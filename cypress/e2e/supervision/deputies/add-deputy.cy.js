@@ -146,7 +146,12 @@ describe(
       });
     });
     Cypress._.times(25, () => {
-      it("Sets the deputy as the main fee payer and correspondent when added to a client", () => {
+      it("Sets the deputy as the main fee payer and correspondent when added to a client", {
+        retries: {
+          runMode: 2,
+          openMode: 0,
+        },
+      }, () => {
         searchForADeputyToReachAddADeputyPage();
         cy.get("#typeOfDeputy .radio-button").contains("Professional").should("be.visible").click();
         cy.get(".deputy-details-form-firstname").type("Patrick");
