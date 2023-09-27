@@ -24,4 +24,8 @@ describe("Navigation", { tags: ["@workflow", "@smoke-journey"] }, () => {
       expectedNavigationLinks
     );
   });
+
+  it("tests pagination", () => {
+    cy.visit('/supervision/workflow/client-tasks')
+  });
 });
