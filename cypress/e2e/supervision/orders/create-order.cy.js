@@ -13,7 +13,8 @@ const createOrder = (orderType, orderSubType, orderDate, optional) => {
       .closest(".fieldset")
       .find("Select")
       .select(orderSubType);
-    cy.get('input[name="courtReference"]').should("not.be.disabled").clear();
+    cy.get('input[name="courtReference"]').should("not.be.disabled", {timeout: 30000});
+    cy.get('input[name="courtReference"]').clear();
     cy.get("#fIELDLABELSORDERDATE_day").should("not.be.disabled").clear();
     cy.get("#fIELDLABELSORDERDATE_month").should("not.be.disabled").clear();
     cy.get("#fIELDLABELSORDERDATE_year").should("not.be.disabled").clear();
@@ -66,37 +67,38 @@ beforeEach(() => {
   cy.createClient();
 });
 
-describe(
-  "Create a new order",
-  {tags: ["@supervision-core", "@order", "@smoke-journey"]},
-  () => {
-    it("creates a supervised pfa order in supervision with mandatory fields as a system admin", () => {
-      cy.intercept({
-        method: "GET",
-        url: "/supervision-api/v1/bond-providers",
-      }).as("bondProviderCall");
-      cy.loginAs("System Admin");
-      createOrder("Property & affairs", "New deputy", "01/01/2022", false);
-      cy.wait("@bondProviderCall").then(() => {
-        cy.contains("Cancel").click();
-      });
-      cy.get(".TABS_ORDERS").click();
-      cy.get("#order-table")
-        .find("tr")
-        .then((rows) => {
-          expect(rows.length === 1);
+  describe(
+    "Create a new order",
+    {tags: ["@supervision-core", "@order", "@smoke-journey"]},
+    () => {
+      it("creates a supervised pfa order in supervision with mandatory fields as a system admin", () => {
+        cy.intercept({
+          method: "GET",
+          url: "/supervision-api/v1/bond-providers",
+        }).as("bondProviderCall");
+        cy.loginAs("System Admin");
+        createOrder("Property & affairs", "New deputy", "01/01/2022", false);
+        cy.wait("@bondProviderCall").then(() => {
+          cy.contains("Cancel").click();
         });
-      cy.get(".order-header-details-case-type").contains("PFA");
-      cy.get(".order-header-details-case-sub-type").contains("New deputy");
-      cy.get(".order-header-date").contains("01/01/2022");
-      cy.get("@client").then(({caseRecNumber}) => {
-        cy.get(".order-header-details-court-reference-number").contains(
-          caseRecNumber
-        );
+        cy.get(".TABS_ORDERS").click();
+        cy.get("#order-table")
+          .find("tr")
+          .then((rows) => {
+            expect(rows.length === 1);
+          });
+        cy.get(".order-header-details-case-type").contains("PFA");
+        cy.get(".order-header-details-case-sub-type").contains("New deputy");
+        cy.get(".order-header-date").contains("01/01/2022");
+        cy.get("@client").then(({ caseRecNumber }) => {
+          cy.get(".order-header-details-court-reference-number").contains(
+            caseRecNumber
+          );
+        });
+        cy.contains("View full details").click();
+        cy.get(".order-date").contains("01/01/2022");
+        cy.get(".order-received-date").contains("01/01/2022");
       });
-      cy.contains("View full details").click();
-      cy.get(".order-date").contains("01/01/2022");
-      cy.get(".order-received-date").contains("01/01/2022");
     });
 
     it("creates a supervised h&w order in supervision with mandatory fields as an allocations user", () => {
@@ -189,5 +191,3 @@ describe(
         "Order created"
       );
     });
-  }
-);

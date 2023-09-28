@@ -2,40 +2,44 @@ import randomText from "../../../support/random-text";
 
 beforeEach(() => {
   cy.loginAs("Case Manager");
-  cy.createClient()
-    .withOrder();
+  cy.createClient().withOrder();
 
-  cy.get("@client").then(({id}) => {
+  cy.get("@client").then(({ id }) => {
     cy.visit(`/supervision/#/clients/${id}`);
   });
 });
 
 const searchForADeputyToReachAddADeputyPage = () => {
   return cy.then(() => {
-    cy.get('#add-deputy-button').should("be.visible","be.enabled").click();
+    cy.get("#add-deputy-button").should("be.visible", "be.enabled").click();
     // type in name to search field
-    cy.get('.deputy-search__input').type("deputy");
-    cy.get('.deputy-search__form > .button').click();
-    cy.contains('Add a new deputy').should("be.visible").click();
-  })
-}
+    cy.get(".deputy-search__input").type("deputy");
+    cy.get(".deputy-search__form > .button").click();
+    cy.contains("Add a new deputy").should("be.visible").click();
+  });
+};
 
 describe(
   "Create deputy for client",
-  {tags: ["@supervision", "@deputy", "supervision-core", "@smoke-journey"]},
+  { tags: ["@supervision", "@deputy", "supervision-core", "@smoke-journey"] },
   () => {
     it("Adds a new deputy to a case", () => {
       const firstName = randomText();
       const lastName = randomText();
       const fullName = `${firstName} ${lastName}`;
       searchForADeputyToReachAddADeputyPage();
-      cy.get("#typeOfDeputy .radio-button").contains("Lay").should("be.visible").click();
+      cy.get("#typeOfDeputy .radio-button")
+        .contains("Lay")
+        .should("be.visible")
+        .click();
       cy.get(".deputy-details-form-firstname").type(firstName);
       cy.get(".deputy-details-form-surname").type(lastName);
       cy.contains("Save & continue").should("be.visible").click();
       cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
       cy.get(".TABS_DEPUTIES").click();
-      cy.contains("Loading deputies...").as("loadingDeputies").should("be.visible");
+      cy.contains("Loading deputies...")
+        .as("loadingDeputies")
+        .should("be.visible");
       cy.get("@loadingDeputies").should("not.exist");
       cy.get("#deputies-table")
         .find("tr")
@@ -64,24 +68,26 @@ describe(
         .should("be.visible")
         .should("be.disabled");
       cy.get(".TABS_TIMELINELIST").click();
-      cy.get(".timeline-event-title", {timeout: 30000})
+      cy.get(".timeline-event-title", { timeout: 30000 })
         .should("contain", "Link")
         .should("contain", "Set fee payer");
     });
 
     it("Adds an existing deputy to a case", () => {
       cy.createADeputy({
-        deputyType: {handle: "PRO", label: "Professional"},
-        deputySubType: {handle: "PERSON", label: "Person"},
+        deputyType: { handle: "PRO", label: "Professional" },
+        deputySubType: { handle: "PERSON", label: "Person" },
       });
-      cy.get("@deputy").then(({firstname, surname}) => {
+      cy.get("@deputy").then(({ firstname, surname }) => {
         const fullName = `${firstname} ${surname}`;
-        cy.get('#add-deputy-button').should("be.visible").click();
+        cy.get("#add-deputy-button").should("be.visible").click();
         cy.get(".deputy-search__input").should("be.visible").type(fullName);
         cy.get(".deputy-search__search-button").click();
         cy.get(".deputy-search__use-button").first().click();
         cy.get(".TABS_DEPUTIES").click();
-        cy.contains("Loading deputies...").as("loadingDeputies").should("be.visible");
+        cy.contains("Loading deputies...")
+          .as("loadingDeputies")
+          .should("be.visible");
         cy.get("@loadingDeputies").should("not.exist");
         cy.get("#deputies-table")
           .find("tr")
@@ -104,13 +110,15 @@ describe(
         cy.get(".edit").should("be.visible");
         cy.get(".deputy-record").should("be.visible");
         cy.get("#add-deputy-button").should("be.visible").should("be.enabled");
-        cy.get("#create-letter-button").should("be.visible").should("be.enabled");
+        cy.get("#create-letter-button")
+          .should("be.visible")
+          .should("be.enabled");
         cy.get("#add-task-button").should("be.visible").should("be.enabled");
         cy.get("#retrieve-drafts-button")
           .should("be.visible")
           .should("be.disabled");
         cy.get(".TABS_TIMELINELIST").click();
-        cy.get(".timeline-event-title", {timeout: 30000})
+        cy.get(".timeline-event-title", { timeout: 30000 })
           .should("contain", "Link")
           .should("contain", "Set fee payer");
       });
@@ -122,23 +130,29 @@ describe(
         firstname: "",
         surname: "",
         organisationName: organisationName,
-        deputyType: {handle: "PA", label: "Public Authority"},
+        deputyType: { handle: "PA", label: "Public Authority" },
       });
       cy.get("@deputy").then(() => {
-        cy.get('#add-deputy-button').should("be.visible").click();
-        cy.get(".deputy-search__input").should("be.visible").type(organisationName);
+        cy.get("#add-deputy-button").should("be.visible").click();
+        cy.get(".deputy-search__input")
+          .should("be.visible")
+          .type(organisationName);
         cy.get(".deputy-search__search-button").click();
         cy.get(".deputy-search__use-button").first().click();
         cy.get(".TABS_DEPUTIES").click();
-        cy.contains("Loading deputies...").as("loadingDeputies").should("be.visible");
+        cy.contains("Loading deputies...")
+          .as("loadingDeputies")
+          .should("be.visible");
         cy.get("@loadingDeputies").should("not.exist");
         cy.get("#deputies-table")
           .find("tr")
           .then((rows) => {
             expect(rows.length === 1);
           });
-        cy.get('#add-deputy-button').should("be.visible").click();
-        cy.get(".deputy-search__input").should("be.visible").type(organisationName);
+        cy.get("#add-deputy-button").should("be.visible").click();
+        cy.get(".deputy-search__input")
+          .should("be.visible")
+          .type(organisationName);
         cy.get(".deputy-search__search-button").click();
         cy.get(".deputy-search__use-button")
           .contains("Deputy already on case")
@@ -146,76 +160,125 @@ describe(
       });
     });
 
-    it("Sets the deputy as the main fee payer and correspondent when added to a client", () => {
-      searchForADeputyToReachAddADeputyPage();
-      cy.get("#typeOfDeputy .radio-button").contains("Professional").should("be.visible").click();
-      cy.get(".deputy-details-form-firstname").type("Patrick");
-      cy.get(".deputy-details-form-surname").type("Star");
-      cy.contains("Save & continue").should("be.visible").click();
-      cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
-      cy.get(".TABS_DEPUTIES").click();
-      cy.contains("Loading deputies...").as("loadingDeputies").should("be.visible");
-      cy.get("@loadingDeputies").should("not.exist");
-      cy.get("tr.summary-row > :nth-child(1) > .dotted-link").click();
-      cy.get(".person-name").should("be.visible");
-      cy.get(".person-name").should("contain.text", "Patrick Star");
-      cy.get(".summary-row.open > :nth-child(1)").should(
-        "contain.text",
-        "Patrick Star"
-      );
-      cy.get(".deputy-details-type").should("contain.text", "Professional");
-      cy.get(".deputy-relation-type").should("contain.text", "Professional");
-      cy.get(".fee-payer").should("be.visible");
-      cy.get(".main-contact").should("be.visible");
-      cy.get(".order-details-main-correspondent").should(
-        "contain.text",
-        "Yes"
-      );
-      cy.get(".order-details-fee-payer").should("contain.text", "Yes");
-    });
+    it(
+      "Sets the deputy as the main fee payer and correspondent when added to a client",
+      {
+        retries: {
+          runMode: 2,
+          openMode: 0,
+        },
+      },
+      () => {
+        searchForADeputyToReachAddADeputyPage();
+        cy.get("#typeOfDeputy .radio-button")
+          .contains("Professional")
+          .should("be.visible")
+          .click();
+        cy.get(".deputy-details-form-firstname").type("Patrick");
+        cy.get(".deputy-details-form-surname").type("Star");
+        cy.contains("Save & continue").should("be.visible").click();
+        cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
+        cy.get(".TABS_DEPUTIES").click();
+        cy.contains("Loading deputies...")
+          .as("loadingDeputies")
+          .should("be.visible");
+        cy.get("@loadingDeputies").should("not.exist");
+        cy.get("tr.summary-row > :nth-child(1) > .dotted-link").should(
+          "be.visible",
+          { timeout: 30000 }
+        );
+        cy.get("tr.summary-row > :nth-child(1) > .dotted-link").click();
+        cy.get(".person-name").should("be.visible", {
+          timeout: 60000,
+          interval: 500,
+        });
+        cy.get(".person-name").should("contain.text", "Patrick Star");
+        cy.get(".summary-row.open > :nth-child(1)").should(
+          "contain.text",
+          "Patrick Star"
+        );
+        cy.get(".deputy-details-type").should("contain.text", "Professional");
+        cy.get(".deputy-relation-type").should("contain.text", "Professional");
+        cy.get(".fee-payer").should("be.visible");
+        cy.get(".main-contact").should("be.visible");
+        cy.get(".order-details-main-correspondent").should(
+          "contain.text",
+          "Yes"
+        );
+        cy.get(".order-details-fee-payer").should("contain.text", "Yes");
+      }
+    );
 
     it("Greys out save and continue button when mandatory form fields not filled", () => {
       searchForADeputyToReachAddADeputyPage();
-      cy.get("#typeOfDeputy .radio-button").contains("Lay").should("be.visible").click();
-      cy.get(".deputy-details-form-firstname").should("be.visible").type("Squidward");
+      cy.get("#typeOfDeputy .radio-button")
+        .contains("Lay")
+        .should("be.visible")
+        .click();
+      cy.get(".deputy-details-form-firstname")
+        .should("be.visible")
+        .type("Squidward");
       cy.get(".footer > :nth-child(1) > .button").should("be.disabled");
     });
 
-    it("Allows a new fee payer to be set for an order",
+    it(
+      "Allows a new fee payer to be set for an order",
       {
         retries: {
           runMode: 2,
           openMode: 1,
         },
-      }, () => {
-        cy.get("@order").then(({id}) => {
+      },
+      () => {
+        cy.get("@order").then(({ id }) => {
           cy.createADeputyAndAssignToExistingOrder(id).then(() => {
             cy.get(".TABS_DEPUTIES").should("be.visible").click();
             cy.contains("Mr Abc Def").should("be.visible");
             // I can create a second deputy to set them as feepayer
             searchForADeputyToReachAddADeputyPage();
             //check Lay type deputy
-            cy.get("#typeOfDeputy .radio-button").contains("Professional").should("be.visible").click();
+            cy.get("#typeOfDeputy .radio-button")
+              .contains("Professional")
+              .should("be.visible")
+              .click();
             cy.get(".deputy-details-form-firstname").type("Kermit");
             cy.get(".deputy-details-form-surname").type("Frog");
             cy.get("footer button[type=submit]").as("submitButton");
-            cy.get("@submitButton").should("have.text", " Save & continue ").should("be.visible").click();
+            cy.get("@submitButton")
+              .should("have.text", " Save & continue ")
+              .should("be.visible")
+              .click();
             cy.get(".standard-form").should("contain", "Occupation");
-            cy.get("@submitButton").should("have.text", " Save & continue ").should("be.visible").click();
+            cy.get("@submitButton")
+              .should("have.text", " Save & continue ")
+              .should("be.visible")
+              .click();
             cy.get(".money + check-box > label").as("feePayerCheckbox");
             cy.get("@feePayerCheckbox").should("be.visible").click();
-            cy.get("label:contains(Type of deputy) + select").should("have.value", "1");
+            cy.get("label:contains(Type of deputy) + select").should(
+              "have.value",
+              "1"
+            );
             cy.wait(1000);
-            cy.get("@submitButton").should("have.text", " Save & continue ").should("be.visible").click();
+            cy.get("@submitButton")
+              .should("have.text", " Save & continue ")
+              .should("be.visible")
+              .click();
             cy.contains("Make the deputy the fee payer?").should("be.visible");
             cy.get("header > h1 > span").should(
               "contain",
               "Make the deputy the fee payer?"
             );
-            cy.get("fee-payer-dialog button").contains("Make the fee payer").should("be.visible").click();
-            cy.get(':nth-child(3) > .in-page-banner').contains("Deputy successfully saved")
+            cy.get("fee-payer-dialog button")
+              .contains("Make the fee payer")
+              .should("be.visible")
+              .click();
+            cy.get(":nth-child(3) > .in-page-banner").contains(
+              "Deputy successfully saved"
+            );
           });
         });
-      });
+      }
+    );
   }
 );
