@@ -16,12 +16,7 @@ describe(
   () => {
     Cypress._.times(25, () => {
 
-      it("can not be deleted due to having a document associated to them", {
-        retries: {
-          runMode: 2,
-          openMode: 0,
-        },
-      }, () => {
+      it("can not be deleted due to having a document associated to them", () => {
       cy.loginAs("Allocations User");
       cy.get("@client").then(({ id }) => {
         cy.visit(
