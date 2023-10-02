@@ -21,7 +21,14 @@ describe(
         cy.get('.TABS_REPORTS').click();
         cy.get('.extend-report-due-date-link').first().click();
         cy.get('#begin-extend-report-due-date-button > span').click();
-        cy.get('.date-input').click().type("24 January 2023");
+        cy.getDatePickerInputByLabel("Report due date").then(($el) => {
+          if ($el.hasClass("date-input")) {
+            // temporary fix while changing datepicker implementation
+            cy.get($el).type("24 January 2023");
+          } else {
+            cy.get($el).type("24/012023");
+          }
+        });
         cy.waitForTinyMCE()
           .enterText('<p>I am extending the annual report</p>');
         cy.get('[type="submit"]').click();
@@ -41,7 +48,14 @@ describe(
         cy.get('.TABS_REPORTS').click();
         cy.get('.extend-report-due-date-link').first().click();
         cy.get('#begin-extend-report-due-date-button > span').click();
-        cy.get('.date-input').click().type("24 January 2023");
+        cy.getDatePickerInputByLabel("Report due date").then(($el) => {
+          if ($el.hasClass("date-input")) {
+            // temporary fix while changing datepicker implementation
+            cy.get($el).type("24 January 2023");
+          } else {
+            cy.get($el).type("24/012023");
+          }
+        });
         const data =
           '<p>I am extending the annual report to over the limit of 1001 characters in the note field as there is no need for the user to extend pass this limit. If there is in the future than we will change the limit of course to ensure that they can do their jobs and we are not the blockers. I will have to repeat this paragraph three times to even get to the limit.\n' +
           'I am extending the annual report to over the limit of 1001 characters in the note field as there is no need for the user to extend pass this limit. If there is in the future than we will change the limit of course to ensure that they can do their jobs and we are not the blockers. I will have to repeat this paragraph three times to even get to the limit.\n' +

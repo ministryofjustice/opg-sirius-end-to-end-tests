@@ -25,9 +25,9 @@ describe(
             `/supervision/#/clients/${clientId}/orders/${orderId}/status`
           );
 
-          cy.get("#order-status-date .date-input").clear();
+          cy.getDatePickerInputByLabel("Status date").clear();
           cy.get("button[type='submit']").should('be.disabled');
-          cy.get("#order-status-date .date-input").type("01/01/2023");
+          cy.getDatePickerInputByLabel("Status date").type("01/01/2023");
 
           cy.get('[name="fIELDLABELSORDERSTATUS"][data-core-value=CLOSED]').check({ force: true }).should('be.checked')
 
@@ -35,7 +35,8 @@ describe(
           cy.get("select[name='fIELDLABELSORDERCLOSUREREASON']")
             .select("Client deceased");
 
-          cy.get("#order-status-date .date-input").clear().type("01/01/2023");
+          cy.getDatePickerInputByLabel("Status date").clear();
+          cy.getDatePickerInputByLabel("Status date").type("01/01/2023");
 
           cy.get("button[type='submit']").click();
 
@@ -77,7 +78,8 @@ describe(
 
           cy.get('#fIELDLABELSORDERSTATUS fieldset > :nth-child(3) > label').click();
 
-          cy.get("#order-status-date .date-input").clear().type("01/01/2023");
+          cy.getDatePickerInputByLabel("Status date").clear();
+          cy.getDatePickerInputByLabel("Status date").type("01/01/2023");
 
           cy.get("button[type='submit']").click();
 
