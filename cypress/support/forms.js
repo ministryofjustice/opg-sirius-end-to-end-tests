@@ -2,7 +2,7 @@ Cypress.Commands.add("waitForTinyMCE", () => {
   cy.window()
     .its("tinyMCE")
     .its("activeEditor")
-    .its("initialized", {timeout: 60000});
+    .its("initialized", { timeout: 60000 });
   return cy.window().then((win) => {
     let editor = win.tinymce.activeEditor;
     editor.dom.createRng();
@@ -10,18 +10,22 @@ Cypress.Commands.add("waitForTinyMCE", () => {
   });
 });
 
-Cypress.Commands.add("enterText",{prevSubject: true}, (editor, data) => {
+Cypress.Commands.add("enterText", { prevSubject: true }, (editor, data) => {
   editor.execCommand("mceSetContent", false, data);
   return editor;
 });
 
-Cypress.Commands.add("pasteText", {prevSubject: true}, (editor, data) => {
+Cypress.Commands.add("pasteText", { prevSubject: true }, (editor, data) => {
   editor.execCommand("mceInsertClipboardContent", false, {
     content: data,
   });
   return editor;
 });
 
-Cypress.Commands.add("getContent", {prevSubject: true}, (editor) => {
+Cypress.Commands.add("getContent", { prevSubject: true }, (editor) => {
   return cy.wrap(editor.getContent());
+});
+
+Cypress.Commands.add("getDatePickerInputByLabel", (label) => {
+  return cy.get(`date-field:has(label:contains("${label}"))`).find("input");
 });
