@@ -10,7 +10,7 @@ Cypress.Commands.add("waitForTinyMCE", () => {
   });
 });
 
-Cypress.Commands.add("enterText",{prevSubject: true}, (editor, data) => {
+Cypress.Commands.add("enterText", {prevSubject: true}, (editor, data) => {
   editor.execCommand("mceSetContent", false, data);
   return editor;
 });
@@ -24,4 +24,8 @@ Cypress.Commands.add("pasteText", {prevSubject: true}, (editor, data) => {
 
 Cypress.Commands.add("getContent", {prevSubject: true}, (editor) => {
   return cy.wrap(editor.getContent());
+});
+
+Cypress.Commands.add("getDatePickerInputByLabel", (label) => {
+  return cy.get(`date-field:has(label:contains("${label}"))`).find("input");
 });
