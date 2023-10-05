@@ -43,7 +43,7 @@ describe(
       cy.get(".in-page-success-banner:contains(Downloaded successfully)").should("not.exist")
       cy.get(`finance-download-reports-form label:contains(${report.name})`).click()
       if (report.date) {
-        cy.get(".download-report-date input.date-input").type(report.date)
+        cy.getDatePickerInputByLabel("Date invoice created").type(report.date)
       }
       cy.get("footer button:contains(Download)").click()
       cy.get(".in-page-success-banner:contains(Downloaded successfully)").should("be.visible")
