@@ -26,7 +26,7 @@ describe(
             // temporary fix while changing datepicker implementation
             cy.get($el).type("24 January 2023");
           } else {
-            cy.get($el).type("24/012023");
+            cy.get($el).type("24/01/2023");
           }
         });
         cy.waitForTinyMCE()
@@ -53,7 +53,7 @@ describe(
             // temporary fix while changing datepicker implementation
             cy.get($el).type("24 January 2023");
           } else {
-            cy.get($el).type("24/012023");
+            cy.get($el).type("24/01/2023");
           }
         });
         const data =
