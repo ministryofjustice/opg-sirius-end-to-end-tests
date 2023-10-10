@@ -13,12 +13,12 @@ describe(
   () => {
     it("can not be deleted due to having a document associated to them", () => {
       cy.loginAs("Allocations User");
-      cy.get("@client").then(({ id }) => {
+      cy.get("@client").then(({id}) => {
         cy.visit(`/supervision/#/clients/${id}`);
       });
       cy.get("@client").withOrder();
-      cy.get("@order").then(({ id: orderId }) => {
-        cy.get("@client").then(({ id: clientId }) => {
+      cy.get("@order").then(({id: orderId}) => {
+        cy.get("@client").then(({id: clientId}) => {
           cy.visit(
             `/supervision/#/clients/${clientId}/orders/${orderId}/drafts/create/template`
           );
@@ -38,19 +38,17 @@ describe(
       cy.get("#publish-close-button").click();
       cy.get(".TABS_CONTACTS button").click();
       cy.get(".delete").click();
-      cy.get(".dialog-footer > .button").should("be.visible", {
-        timeout: 30000,
-      });
-      cy.get(".dialog-footer > .button").click();
+      cy.get(".dialog-footer > .button")
+        .should("be.visible", {timeout: 30000}).click();
+
       cy.get(
-        "tab-contact-list > .hook-tab-content > :nth-child(1) > .in-page-banner"
-      ).should("be.visible", { timeout: 60000, interval: 500 });
-      cy.get(
-        "tab-contact-list > .hook-tab-content > :nth-child(1) > .in-page-banner"
-      ).should(
-        "contain.text",
-        "This contact cannot be deleted. There’s a draft letter to this person, you need to delete it before you can delete the contact. To do this, go to ‘Retrieve drafts’."
-      );
+        "tab-contact-list .in-page-banner"
+      )
+        .should("be.visible", {timeout: 60000, interval: 500})
+        .and(
+          "contain.text",
+          "This contact cannot be deleted. There’s a draft letter to this person, you need to delete it before you can delete the contact. To do this, go to ‘Retrieve drafts’."
+        );
     });
 
     it("can not be deleted", () => {
