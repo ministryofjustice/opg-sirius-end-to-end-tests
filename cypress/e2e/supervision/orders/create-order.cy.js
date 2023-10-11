@@ -71,7 +71,7 @@ beforeEach(() => {
     "Create a new order",
     {tags: ["@supervision-core", "@order", "@smoke-journey"]},
     () => {
-      it("creates a supervised pfa order in supervision with mandatory fields as a system admin", ,
+      it("creates a supervised pfa order in supervision with mandatory fields as a system admin",
         {
           retries: {
             runMode: 2,

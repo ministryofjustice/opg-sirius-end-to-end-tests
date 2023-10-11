@@ -42,9 +42,9 @@ describe(
         .should("be.visible", {timeout: 30000}).click();
 
       cy.get(
-        "tab-contact-list .in-page-banner"
+        "tab-contact-list .in-page-error-banner"
       )
-        .should("be.visible", {timeout: 60000, interval: 500})
+        .should("be.visible")
         .and(
           "contain.text",
           "This contact cannot be deleted. There’s a draft letter to this person, you need to delete it before you can delete the contact. To do this, go to ‘Retrieve drafts’."
