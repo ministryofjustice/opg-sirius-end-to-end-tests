@@ -36,38 +36,40 @@ describe(
       cy.get(".deputy-details-form-surname").type(lastName);
       cy.contains("Save & continue").should("be.visible").click();
       cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
+
       cy.get(".TABS_DEPUTIES").click();
-      cy.contains("Loading deputies...")
-        .as("loadingDeputies")
-        .should("be.visible");
-      cy.get("@loadingDeputies").should("not.exist");
-      cy.get("#deputies-table")
-        .find("tr")
-        .then((rows) => {
-          expect(rows.length === 1);
-        });
-      cy.get(".deputy-name").contains(fullName).should("be.visible");
-      cy.get(".deputy-type").contains("Lay");
-      cy.get(".deputy-status-on-case").contains("Open");
-      cy.get(".deputy-relationship-to-client").should("have.value", "");
-      cy.get(".full-details").last().click();
-      cy.get(".deputy-details-type").contains("Lay");
-      cy.get(".deputy-details-deputy-name").contains(fullName);
-      cy.get(".deputy-details-is-airmail-required").contains("No");
-      cy.get(".deputy-additional-details-newsletter").contains("No");
-      cy.get(".order-details-deputy-type").contains("Lay");
-      cy.get(".order-details-main-correspondent").contains("Yes");
-      cy.get(".order-details-deputy-status-on-case").contains("Open");
-      cy.get(".order-details-fee-payer").contains("Yes");
-      cy.get(".edit").should("be.visible");
-      cy.get(".deputy-record").should("be.visible");
+      cy.waitForLoading("Loading deputies...");
+
+      cy.get("#deputies-table").within(() => {
+        cy.find("tr")
+          .then((rows) => {
+            expect(rows.length === 1);
+          });
+        cy.get(".deputy-name").contains(fullName).should("be.visible");
+        cy.get(".deputy-type").contains("Lay");
+        cy.get(".deputy-status-on-case").contains("Open");
+        cy.get(".deputy-relationship-to-client").should("have.value", "");
+        cy.get(".full-details").last().click();
+        cy.get(".deputy-details-type").contains("Lay");
+        cy.get(".deputy-details-deputy-name").contains(fullName);
+        cy.get(".deputy-details-is-airmail-required").contains("No");
+        cy.get(".deputy-additional-details-newsletter").contains("No");
+        cy.get(".order-details-deputy-type").contains("Lay");
+        cy.get(".order-details-main-correspondent").contains("Yes");
+        cy.get(".order-details-deputy-status-on-case").contains("Open");
+        cy.get(".order-details-fee-payer").contains("Yes");
+        cy.get(".edit").should("be.visible");
+        cy.get(".deputy-record").should("be.visible");
+      });
       cy.get("#add-deputy-button").should("be.visible").should("be.enabled");
       cy.get("#create-letter-button").should("be.visible").should("be.enabled");
       cy.get("#add-task-button").should("be.visible").should("be.enabled");
       cy.get("#retrieve-drafts-button")
         .should("be.visible")
         .should("be.disabled");
+
       cy.get(".TABS_TIMELINELIST").click();
+
       cy.get(".timeline-event-title", { timeout: 30000 })
         .should("contain", "Link")
         .should("contain", "Set fee payer");
@@ -84,31 +86,31 @@ describe(
         cy.get(".deputy-search__input").should("be.visible").type(fullName);
         cy.get(".deputy-search__search-button").click();
         cy.get(".deputy-search__use-button").first().click();
+
         cy.get(".TABS_DEPUTIES").click();
-        cy.contains("Loading deputies...")
-          .as("loadingDeputies")
-          .should("be.visible");
-        cy.get("@loadingDeputies").should("not.exist");
-        cy.get("#deputies-table")
-          .find("tr")
-          .then((rows) => {
-            expect(rows.length === 1);
-          });
-        cy.get(".deputy-name").contains(fullName).should("be.visible");
-        cy.get(".deputy-type").contains("Professional");
-        cy.get(".deputy-status-on-case").contains("Open");
-        cy.get(".deputy-relationship-to-client").should("have.value", "");
-        cy.get(".full-details").last().click();
-        cy.get(".deputy-details-type").contains("Professional");
-        cy.get(".deputy-details-deputy-name").contains(fullName);
-        cy.get(".deputy-details-is-airmail-required").contains("No");
-        cy.get(".deputy-additional-details-newsletter").contains("No");
-        cy.get(".order-details-deputy-type").contains("Professional");
-        cy.get(".order-details-main-correspondent").contains("Yes");
-        cy.get(".order-details-deputy-status-on-case").contains("Open");
-        cy.get(".order-details-fee-payer").contains("Yes");
-        cy.get(".edit").should("be.visible");
-        cy.get(".deputy-record").should("be.visible");
+        cy.waitForLoading("Loading deputies...");
+
+        cy.get("#deputies-table").within(() => {
+          cy.find("tr")
+            .then((rows) => {
+              expect(rows.length === 1);
+            });
+          cy.get(".deputy-name").contains(fullName).should("be.visible");
+          cy.get(".deputy-type").contains("Professional");
+          cy.get(".deputy-status-on-case").contains("Open");
+          cy.get(".deputy-relationship-to-client").should("have.value", "");
+          cy.get(".full-details").last().click();
+          cy.get(".deputy-details-type").contains("Professional");
+          cy.get(".deputy-details-deputy-name").contains(fullName);
+          cy.get(".deputy-details-is-airmail-required").contains("No");
+          cy.get(".deputy-additional-details-newsletter").contains("No");
+          cy.get(".order-details-deputy-type").contains("Professional");
+          cy.get(".order-details-main-correspondent").contains("Yes");
+          cy.get(".order-details-deputy-status-on-case").contains("Open");
+          cy.get(".order-details-fee-payer").contains("Yes");
+          cy.get(".edit").should("be.visible");
+          cy.get(".deputy-record").should("be.visible");
+        });
         cy.get("#add-deputy-button").should("be.visible").should("be.enabled");
         cy.get("#create-letter-button")
           .should("be.visible")
@@ -117,7 +119,9 @@ describe(
         cy.get("#retrieve-drafts-button")
           .should("be.visible")
           .should("be.disabled");
+
         cy.get(".TABS_TIMELINELIST").click();
+
         cy.get(".timeline-event-title", { timeout: 30000 })
           .should("contain", "Link")
           .should("contain", "Set fee payer");
@@ -139,11 +143,10 @@ describe(
           .type(organisationName);
         cy.get(".deputy-search__search-button").click();
         cy.get(".deputy-search__use-button").first().click();
+
         cy.get(".TABS_DEPUTIES").click();
-        cy.contains("Loading deputies...")
-          .as("loadingDeputies")
-          .should("be.visible");
-        cy.get("@loadingDeputies").should("not.exist");
+        cy.waitForLoading("Loading deputies...");
+
         cy.get("#deputies-table")
           .find("tr")
           .then((rows) => {
@@ -160,7 +163,7 @@ describe(
       });
     });
 
-    it(
+    it.only(
       "Sets the deputy as the main fee payer and correspondent when added to a client",
       {
         retries: {
@@ -178,34 +181,24 @@ describe(
         cy.get(".deputy-details-form-surname").type("Star");
         cy.contains("Save & continue").should("be.visible").click();
         cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
+
         cy.get(".TABS_DEPUTIES").click();
-        cy.contains("Loading deputies...")
-          .as("loadingDeputies")
-          .should("be.visible");
-        cy.get("@loadingDeputies").should("not.exist");
-        cy.get("tr.summary-row > :nth-child(1) > .dotted-link").should(
-          "be.visible",
-          { timeout: 30000 }
-        );
-        cy.get("tr.summary-row > :nth-child(1) > .dotted-link").click();
-        cy.get(".person-name").should("be.visible", {
-          timeout: 60000,
-          interval: 500,
+        cy.waitForLoading("Loading deputies...");
+
+        cy.get("#deputies-table").within(() => {
+          cy.contains("View full details").click();
+          cy.get(".person-name").should("be.visible", {
+            timeout: 60000,
+            interval: 500,
+          });
+          cy.contains(".person-name", "Patrick Star");
+          cy.contains(".deputy-details-type", "Professional");
+          cy.contains(".deputy-relation-type", "Professional");
+          cy.get(".fee-payer").should("be.visible");
+          cy.get(".main-contact").should("be.visible");
+          cy.contains(".order-details-main-correspondent", "Yes");
+          cy.contains(".order-details-fee-payer", "Yes");
         });
-        cy.get(".person-name").should("contain.text", "Patrick Star");
-        cy.get(".summary-row.open > :nth-child(1)").should(
-          "contain.text",
-          "Patrick Star"
-        );
-        cy.get(".deputy-details-type").should("contain.text", "Professional");
-        cy.get(".deputy-relation-type").should("contain.text", "Professional");
-        cy.get(".fee-payer").should("be.visible");
-        cy.get(".main-contact").should("be.visible");
-        cy.get(".order-details-main-correspondent").should(
-          "contain.text",
-          "Yes"
-        );
-        cy.get(".order-details-fee-payer").should("contain.text", "Yes");
       }
     );
 

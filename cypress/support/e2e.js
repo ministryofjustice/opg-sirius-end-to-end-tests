@@ -9,6 +9,7 @@ require("./lpa-commands");
 require("./order-commands");
 require("./visit-commands");
 require("./invoice");
+require("./supervision-commands")
 
 require("cypress-failed-log");
 require("cy-verify-downloads").addCustomCommand();
