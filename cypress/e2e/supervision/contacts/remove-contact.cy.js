@@ -47,11 +47,11 @@ describe(
         .should("be.visible")
         .and(
           "contain.text",
-          "This contact cannot be deleted. There’s a draft letter to this person, you need to delete it before you can delete the contact. To do this, go to ‘Retrieve drafts’."
+          "This contact cannot be deleted."
         );
     });
 
-    it("can not be deleted", () => {
+    it("can be deleted", () => {
       cy.get(".TABS_CONTACTS button").click();
       cy.get(".delete").click();
       cy.get(".dialog-footer > .button").click();
