@@ -1,7 +1,26 @@
+// log the courtReference DOM element's position to see if it's moving
+let previous = null;
+
+let checkPosition = function () {
+  const elt = Cypress.$('input[name="courtReference"]');
+
+  if (elt.length > 0) {
+    const pos = elt.position();
+    Cypress.log({message: '+++++++++++++++++++ position of courtReference input: ' + JSON.stringify(pos)});
+    if (previous !== null && (previous.top !== pos.top || previous.left !== pos.left)) {
+      Cypress.log({message: '!!!!!!!!!!!!!!!!!!! courtReference input moved from ' + JSON.stringify(previous) + ' to ' + JSON.stringify(pos)});
+    }
+    previous = pos;
+  }
+}
+
+setInterval(checkPosition, 10);
+
 const createOrder = (orderType, orderSubType, orderDate, optional) => {
   let orderDay = orderDate.split("/")[0];
   let orderMonth = orderDate.split("/")[1];
   let orderYear = orderDate.split("/")[2];
+
   cy.get("@client").then(({id, caseRecNumber}) => {
     cy.visit(`/supervision/#/clients/${id}`);
     cy.contains("Create order").click();
@@ -21,7 +40,7 @@ const createOrder = (orderType, orderSubType, orderDate, optional) => {
     cy.get("#orderReceivedDate_day").should("not.be.disabled").clear();
     cy.get("#orderReceivedDate_month").should("not.be.disabled").clear();
     cy.get("#orderReceivedDate_year").should("not.be.disabled").clear();
-        cy.get('input[name="courtReference"]').type(caseRecNumber);
+    cy.get('input[name="courtReference"]').type(caseRecNumber);
     cy.get("#fIELDLABELSORDERDATE_day").type(orderDay);
     cy.get("#fIELDLABELSORDERDATE_month").type(orderMonth);
     cy.get("#fIELDLABELSORDERDATE_year").type(orderYear);
@@ -67,7 +86,7 @@ beforeEach(() => {
   cy.createClient();
 });
 
-  describe(
+  describe.only(
     "Create a new order",
     {tags: ["@supervision-core", "@order", "@smoke-journey"]},
     () => {
@@ -83,7 +102,9 @@ beforeEach(() => {
           url: "/supervision-api/v1/bond-providers",
         }).as("bondProviderCall");
         cy.loginAs("System Admin");
+
         createOrder("Property & affairs", "New deputy", "01/01/2022", false);
+
         cy.wait("@bondProviderCall").then(() => {
           cy.contains("Cancel").click();
         });
