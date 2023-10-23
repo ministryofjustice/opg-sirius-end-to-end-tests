@@ -5,6 +5,9 @@ const createOrder = (orderType, orderSubType, orderDate, optional) => {
   cy.get("@client").then(({id, caseRecNumber}) => {
     cy.visit(`/supervision/#/clients/${id}`);
     cy.contains("Create order").click();
+
+    // click orders tab to clear UI inconsistencies caused by the menu bar on changing screens
+    cy.get(".TABS_ORDERS").click();
     cy.get("#orderType")
       .closest(".fieldset")
       .contains(orderType)
