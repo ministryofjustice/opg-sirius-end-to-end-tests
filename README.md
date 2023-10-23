@@ -1,4 +1,4 @@
-# opg-sirius-end-to-end-tests
+# opg-sirius-end-to-end-tests test
 
 End-to-end tests for the components that make up Sirius: Managed by opg-org-infra &amp; Terraform
 
