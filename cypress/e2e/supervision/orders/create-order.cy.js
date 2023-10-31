@@ -11,7 +11,7 @@ const createOrder = (orderType, orderSubType, orderDate, optional) => {
     cy.get("#orderType")
       .closest(".fieldset")
       .contains(orderType)
-      .click();
+      .click({ force: true });
     cy.contains("Order subtype")
       .closest(".fieldset")
       .find("Select")
