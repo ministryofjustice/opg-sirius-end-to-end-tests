@@ -5,7 +5,6 @@
         "schedule:earlyMondays"
     ],
     "branchPrefix": "renovate-",
-    "lockFileMaintenance": { "enabled": true },
     "packageRules": [
         {
             "automerge": true,
