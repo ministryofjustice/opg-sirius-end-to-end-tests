@@ -2,6 +2,20 @@ import randomInt from "../../../support/random-int";
 const dayjs = require('dayjs')
 
 describe(
+  "Finance hub unauthorized redirect",
+  { tags: ["@supervision", "@supervision-regression", "@finance-hub", "@finance"] },
+  () => {
+
+    it("loads unauthorized page for case manager", () => {
+      cy.loginAs("Case Manager");
+      cy.visit(`/supervision`);
+      cy.get('#finance-reporting-main-menu-link').should("not.exist")
+      cy.visit("/supervision/#/finance-hub");
+      cy.get("h1.banner__title").should("contain.text", "You do not have access to this service")
+    });
+  });
+
+describe(
 "Finance hub",
 { tags: ["@supervision", "@supervision-regression", "@finance-hub", "@finance"] },
 () => {
