@@ -21,7 +21,8 @@ Cypress._.times(30, () => {
         })
         cy.get('.deputy-type').contains('Lay')
         cy.get('.deputy-status-on-case').contains('Open')
-        cy.get("#deputies-table").contains("Deputy record").should("be.visible").click();
+        cy.get("#deputies-table").contains("Deputy record").should("be.visible");
+        cy.get('.deputy-record').first().click();
         cy.get('#edit-deputy-button').click();
         cy.get('#deputy-hub-view-deputy-edit-deputy-details').click();
         cy.get('[label="Date of birth"]').type("25");
