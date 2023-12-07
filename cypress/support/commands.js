@@ -7,8 +7,12 @@ Cypress.Commands.add("login", (email) => {
 
   cy.visit("/oauth/login");
 
-  cy.get('input[name="email"]').clear();
-  cy.get('input[name="email"]').type(email);
+  cy.window().then(win => {
+    cy.get('input[name="email"]').clear().then(elt => {
+      win.setTimeout(elt.val(email), 0);
+    });
+  });
+
   cy.get('[type="submit"]').click();
 });
 
