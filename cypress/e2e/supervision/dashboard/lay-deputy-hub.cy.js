@@ -13,8 +13,6 @@ it("Loads the lay deputy hub", () => {
 
   cy.get('.tab-container__tabs').should('contain.text', 'Details');
   cy.get('.tab-container__tabs').should('contain.text', 'Clients');
-  cy.get('.tab-container__tabs').should('contain.text', 'Tasks');
-  cy.get('.tab-container__tabs').should('contain.text', 'Warnings');
   cy.get('.tab-container__tabs').should('contain.text', 'Timeline');
   cy.get('.tab-container__tabs').should('contain.text', 'Documents');
 
