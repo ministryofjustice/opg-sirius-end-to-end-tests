@@ -8,9 +8,9 @@ describe(
   () => {
     it("should load the Supervision dashboard correctly", () => {
       cy.visit("/supervision/#/dashboard");
-      // cy.contains(
-      //   "Tasks and caseloads can be managed from the Workflow page in Sirius Supervision."
-      // );
+      cy.contains(
+        "Tasks and caseloads can be managed from the Workflow page in Sirius Supervision."
+      );
     });
   }
 );
