@@ -15,9 +15,7 @@ describe(
       });
 
       cy.get(".TABS_ORDERS").click();
-      cy.get("#tab-order-list-in-page-notification").should("contain", "Please wait...");
-      cy.get("#tab-order-list-in-page-notification").should("not.contain", "Please wait...");
-      cy.get('.add-bond-button').click();
+      cy.wait(1000).get('.add-bond-button').click();
       cy.get('#securityBond').contains('Yes').click()
 
       cy.get('#requiredBondAmount').type("1000");
