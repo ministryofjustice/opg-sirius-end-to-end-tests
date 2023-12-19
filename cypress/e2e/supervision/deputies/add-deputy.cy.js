@@ -19,7 +19,7 @@ const searchForADeputyToReachAddADeputyPage = () => {
   });
 };
 
-describe(
+Cypress._.times(5, () => describe(
   "Create deputy for client",
   { tags: ["@supervision", "@deputy", "supervision-core", "@smoke-journey"] },
   () => {
@@ -38,13 +38,10 @@ describe(
       cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
 
       cy.get(".TABS_DEPUTIES").click();
-      cy.waitForLoading("Loading deputies...");
+
+      cy.get("#deputies-table").find("tr.summary-row").should("have.length", 1);
 
       cy.get("#deputies-table").within(() => {
-        cy.find("tr")
-          .then((rows) => {
-            expect(rows.length === 1);
-          });
         cy.get(".deputy-name").contains(fullName).should("be.visible");
         cy.get(".deputy-type").contains("Lay");
         cy.get(".deputy-status-on-case").contains("Open");
@@ -88,13 +85,10 @@ describe(
         cy.get(".deputy-search__use-button").first().click();
 
         cy.get(".TABS_DEPUTIES").click();
-        cy.waitForLoading("Loading deputies...");
+
+        cy.get("#deputies-table").find("tr.summary-row").should("have.length", 1);
 
         cy.get("#deputies-table").within(() => {
-          cy.find("tr")
-            .then((rows) => {
-              expect(rows.length === 1);
-            });
           cy.get(".deputy-name").contains(fullName).should("be.visible");
           cy.get(".deputy-type").contains("Professional");
           cy.get(".deputy-status-on-case").contains("Open");
@@ -145,13 +139,9 @@ describe(
         cy.get(".deputy-search__use-button").first().click();
 
         cy.get(".TABS_DEPUTIES").click();
-        cy.waitForLoading("Loading deputies...");
 
-        cy.get("#deputies-table")
-          .find("tr")
-          .then((rows) => {
-            expect(rows.length === 1);
-          });
+        cy.get("#deputies-table").find("tr.summary-row").should("have.length", 1);
+
         cy.get("#add-deputy-button").should("be.visible").click();
         cy.get(".deputy-search__input")
           .should("be.visible")
@@ -163,7 +153,7 @@ describe(
       });
     });
 
-    it.only(
+    it(
       "Sets the deputy as the main fee payer and correspondent when added to a client",
       {
         retries: {
@@ -183,7 +173,6 @@ describe(
         cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
 
         cy.get(".TABS_DEPUTIES").click();
-        cy.waitForLoading("Loading deputies...");
 
         cy.get("#deputies-table").within(() => {
           cy.contains("View full details").click();
@@ -274,4 +263,4 @@ describe(
       }
     );
   }
-);
+));
