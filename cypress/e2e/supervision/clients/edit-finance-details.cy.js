@@ -36,8 +36,8 @@ describe(
         cy.contains(".title.section-title", "Edit Finance Person");
 
         let newSopNumber = Date.now().toString() + '0';
-        cy.get('input[name="financeBillingReference"]').clear();
-        cy.get('input[name="financeBillingReference"]').type(newSopNumber);
+        cy.get("label:contains('SOP Number') + input").clear();
+        cy.get("label:contains('SOP Number') + input").type(newSopNumber);
         cy.contains("Direct Debit").click();
 
         cy.contains("Save & exit").click().then(() => {
