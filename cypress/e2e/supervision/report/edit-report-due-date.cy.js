@@ -11,6 +11,8 @@ describe(
   {tags: ["@supervision", "@search", "supervision-core"]},
   () => {
     it("Successfully edit due date on report in supervision", () => {
+        const year = (new Date()).getFullYear()
+
         cy.get("@order").then(({id: orderId}) => {
           cy.get("@client").then(({id: clientId}) => {
             cy.visit(
@@ -22,12 +24,12 @@ describe(
         cy.get('.extend-report-due-date-link').first().click();
         cy.get('#begin-extend-report-due-date-button > span').click();
         cy.getDatePickerInputByLabel("Report due date").clear();
-        cy.getDatePickerInputByLabel("Report due date").type("24/01/2023");
+        cy.getDatePickerInputByLabel("Report due date").type(`24/01/${year}`);
         cy.waitForTinyMCE()
           .enterText('<p>I am extending the annual report</p>');
         cy.get('[type="submit"]').click();
         cy.get('.button > span').click();
-        cy.get('.report-date-details > :nth-child(2) > .date-item-detail').first().contains('24 Jan 2023');
+        cy.get('.report-date-details > :nth-child(2) > .date-item-detail').first().contains(`24 Jan ${year}`);
       }
     );
 
