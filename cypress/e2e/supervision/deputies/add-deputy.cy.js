@@ -38,7 +38,6 @@ describe(
       cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
 
       cy.get(".TABS_DEPUTIES").click();
-      cy.waitForLoading("Loading deputies...");
 
       cy.get("#deputies-table").within(() => {
         cy.find("tr")
@@ -88,7 +87,6 @@ describe(
         cy.get(".deputy-search__use-button").first().click();
 
         cy.get(".TABS_DEPUTIES").click();
-        cy.waitForLoading("Loading deputies...");
 
         cy.get("#deputies-table").within(() => {
           cy.find("tr")
@@ -145,7 +143,6 @@ describe(
         cy.get(".deputy-search__use-button").first().click();
 
         cy.get(".TABS_DEPUTIES").click();
-        cy.waitForLoading("Loading deputies...");
 
         cy.get("#deputies-table")
           .find("tr")
@@ -163,7 +160,7 @@ describe(
       });
     });
 
-    it.only(
+    it(
       "Sets the deputy as the main fee payer and correspondent when added to a client",
       {
         retries: {
@@ -183,7 +180,6 @@ describe(
         cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
 
         cy.get(".TABS_DEPUTIES").click();
-        cy.waitForLoading("Loading deputies...");
 
         cy.get("#deputies-table").within(() => {
           cy.contains("View full details").click();
