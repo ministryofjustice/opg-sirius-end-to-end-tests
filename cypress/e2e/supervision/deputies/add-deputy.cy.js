@@ -208,6 +208,8 @@ describe(
       () => {
         cy.get("@order").then(({ id }) => {
           cy.createADeputyAndAssignToExistingOrder(id).then(() => {
+            // deputy created through API so page needs reloading in order for Angular to be aware of the change
+            cy.reload();
             cy.get(".TABS_DEPUTIES").should("be.visible").click();
             cy.contains("Mr Abc Def").should("be.visible");
             // I can create a second deputy to set them as feepayer
