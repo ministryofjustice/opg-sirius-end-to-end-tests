@@ -96,7 +96,7 @@ describe(
       cy.get("finance-upload-card-payment-data h2").should("be.visible").and("contain.text", "Upload card payment data")
       cy.get('[name="bankFile"]').selectFile('cypress/fixtures/finance/empty.csv');
       cy.intercept("POST", "/supervision-api/v1/finance/reports/card-payments").as("formSubmit")
-      // cy.get('.finance-upload-date-form-button > .button').should("be.visible")
+      cy.get('.finance-upload-date-form-button > .button').should("be.visible")
       cy.get('.finance-upload-date-form-button > .button').click();
       cy.wait("@formSubmit").its('response.statusCode').should('equal', 400)
       cy.get("validation-summary")
