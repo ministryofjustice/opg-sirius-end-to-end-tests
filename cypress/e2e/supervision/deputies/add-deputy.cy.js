@@ -167,7 +167,7 @@ describe(
         cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
 
         cy.get(".TABS_DEPUTIES").click();
-
+        cy.reload();
         cy.get("#deputies-table").within(() => {
           cy.contains("View full details").click();
           // breaks here
