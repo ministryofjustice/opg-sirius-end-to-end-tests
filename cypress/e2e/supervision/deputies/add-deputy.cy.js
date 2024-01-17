@@ -170,6 +170,7 @@ describe(
 
         cy.get("#deputies-table").within(() => {
           cy.contains("View full details").click();
+          // breaks here
           cy.get(".person-name").should("be.visible", {
             timeout: 60000,
             interval: 500,
