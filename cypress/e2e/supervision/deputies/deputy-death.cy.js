@@ -1,5 +1,5 @@
 
-  Cypress._.times(30, () => {
+  Cypress._.times(40, () => {
   describe(
     "Deputy Death Notification & Confirmation",
     { tags: ["@supervision", "@deputy", "@supervision-core", "@deputy-hub", "@deputy-record-death-notification", "@deputy-record-death-confirmation"] },
