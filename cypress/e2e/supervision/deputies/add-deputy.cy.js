@@ -150,10 +150,6 @@ describe(
     it(
       "Sets the deputy as the main fee payer and correspondent when added to a client",
       {
-        // retries: {
-        //   runMode: 2,
-        //   openMode: 0,
-        // },
       },
       () => {
         searchForADeputyToReachAddADeputyPage();
@@ -170,7 +166,6 @@ describe(
         cy.reload();
         cy.get("#deputies-table").within(() => {
           cy.contains("View full details").click();
-          // breaks here
           cy.get(".person-name").should("be.visible", {
             timeout: 60000,
             interval: 500,
