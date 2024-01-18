@@ -18,7 +18,6 @@ const searchForADeputyToReachAddADeputyPage = () => {
     cy.contains("Add a new deputy").should("be.visible").click();
   });
 };
-
 describe(
   "Create deputy for client",
   { tags: ["@supervision", "@deputy", "supervision-core", "@smoke-journey"] },
@@ -150,10 +149,6 @@ describe(
     it(
       "Sets the deputy as the main fee payer and correspondent when added to a client",
       {
-        retries: {
-          runMode: 2,
-          openMode: 0,
-        },
       },
       () => {
         searchForADeputyToReachAddADeputyPage();
@@ -167,7 +162,7 @@ describe(
         cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
 
         cy.get(".TABS_DEPUTIES").click();
-
+        cy.reload();
         cy.get("#deputies-table").within(() => {
           cy.contains("View full details").click();
           cy.get(".person-name").should("be.visible", {
