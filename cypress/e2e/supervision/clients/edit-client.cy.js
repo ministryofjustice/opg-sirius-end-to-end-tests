@@ -15,7 +15,7 @@ const editClient = (isCourtReferenceChanged) => {
     cy.get('input[name="lastName"]').should("have.value", surname);
     cy.get('input[name="lastName"]').should("not.be.disabled");
     cy.get('input[name="memorablePhrase"]').should("not.be.disabled");
-
+    cy.reload();
     cy.get('input[name="firstName"]').clear();
     cy.get('input[name="firstName"]').type(newFirstName);
     cy.get('input[name="lastName"]').clear();
@@ -37,31 +37,32 @@ const editClient = (isCourtReferenceChanged) => {
   });
 };
 
-beforeEach(() => {
-  cy.loginAs("Case Manager");
-  cy.createClient();
-  cy.get("@client").then(({id, firstname, surname}) => {
-    cy.visit(`/supervision/#/clients/${id}/edit`);
-    cy.contains(`Edit Client: ${firstname} ${surname}`);
-  });
-});
-describe(
-  "Edit an existing client",
-  { tags: ["@supervision-core", "@client", "@smoke-journey"] },
-  () => {
-    it("Edits an existing client",
-      {
-        retries: {
-          runMode: 2,
-          openMode: 0,
-        },
-      }, () => {
-        editClient(true);
-        cy.get("@newCourtReference").then((newCourtReference) => {
-          cy.get(".title-person-name").contains(`${newFirstName} ${newLastName}`);
-          cy.get(".court-reference-value-in-client-summary").contains(
-            newCourtReference
-          );
+
+Cypress._.times(40, () => {
+
+  describe(
+    "Edit an existing client",
+    { tags: ["@supervision-core", "@client", "@smoke-journey"] },
+    () => {
+      it("Edits an existing client",
+        {
+          retries: {
+            runMode: 2,
+            openMode: 0,
+          },
+        }, () => {
+            cy.loginAs("Case Manager");
+            cy.createClient();
+            cy.get("@client").then(({ id, firstname, surname }) => {
+              cy.visit(`/supervision/#/clients/${id}/edit`);
+              cy.contains(`Edit Client: ${firstname} ${surname}`);
+            });
+          editClient(true);
+          cy.get("@newCourtReference").then((newCourtReference) => {
+            cy.get(".title-person-name").contains(`${newFirstName} ${newLastName}`);
+            cy.get(".court-reference-value-in-client-summary").contains(
+              newCourtReference
+            );
 
             cy.get(".TABS_CLIENT_SUMMARY").click();
             cy.get(".client-summary-full-name-value").contains(
@@ -76,6 +77,7 @@ describe(
 
             cy.get(".TABS_TIMELINELIST").click();
 
+            cy.reload()
             cy.get(".timeline-event-title", { timeout: 30000 }).should(
               "contain",
               "Client edited"
@@ -95,3 +97,4 @@ describe(
         }
       );
     });
+});
