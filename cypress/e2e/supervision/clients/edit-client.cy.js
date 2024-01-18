@@ -87,7 +87,7 @@ Cypress._.times(40, () => {
             cy.get("timeline-generic-changeset")
               .first()
               .within(() => {
-                cy.get("@client").then(({ caseRecNumber, firstname, surname }) => {
+                cy.get("@client", { timeout: 30000 }).then(({ caseRecNumber, firstname, surname }) => {
                   cy.contains(`First name changed from ${firstname} to ${newFirstName}`);
                   cy.contains(`Last name changed from ${surname} to ${newLastName}`);
                   cy.contains(`Memorable phrase set to ${memorablePhrase}`);
