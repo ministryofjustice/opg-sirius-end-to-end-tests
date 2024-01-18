@@ -9,13 +9,14 @@ const editClient = (isCourtReferenceChanged) => {
       method: "PUT",
       url: `/supervision-api/v1/clients/${id}`,
     }).as("editClientCall");
+    cy.reload();
     cy.get('input[name="firstName"]').should('be.visible');
     cy.get('input[name="firstName"]').should("have.value", firstname);
     cy.get('input[name="firstName"]').should("not.be.disabled");
     cy.get('input[name="lastName"]').should("have.value", surname);
     cy.get('input[name="lastName"]').should("not.be.disabled");
     cy.get('input[name="memorablePhrase"]').should("not.be.disabled");
-    cy.reload();
+
     cy.get('input[name="firstName"]').clear();
     cy.get('input[name="firstName"]').type(newFirstName);
     cy.get('input[name="lastName"]').clear();
