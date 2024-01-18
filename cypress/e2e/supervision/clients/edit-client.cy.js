@@ -17,8 +17,9 @@ const editClient = (isCourtReferenceChanged) => {
     cy.get('input[name="lastName"]').should("not.be.disabled");
     cy.get('input[name="memorablePhrase"]').should("not.be.disabled");
 
+    cy.get('input[name="firstName"]', { timeout: 30000 }).should("not.be.disabled");
     cy.get('input[name="firstName"]', { timeout: 30000 }).clear();
-    cy.get('input[name="firstName"]').type(newFirstName);
+    cy.get('input[name="firstName"]', { timeout: 30000 }).type(newFirstName);
     cy.get('input[name="lastName"]').clear();
     cy.get('input[name="lastName"]').type(newLastName);
     cy.get('input[name="memorablePhrase"]').clear();
