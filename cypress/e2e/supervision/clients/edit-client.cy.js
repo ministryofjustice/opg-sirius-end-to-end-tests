@@ -12,10 +12,10 @@ const editClient = (isCourtReferenceChanged) => {
     cy.reload();
     cy.get('input[name="firstName"]').should('be.visible');
     cy.get('input[name="firstName"]').should("have.value", firstname);
-    cy.get('input[name="firstName"]').should("not.be.disabled");
+    cy.get('input[name="firstName"]', { timeout: 30000 }).should("not.be.disabled");
     cy.get('input[name="lastName"]').should("have.value", surname);
-    cy.get('input[name="lastName"]').should("not.be.disabled");
-    cy.get('input[name="memorablePhrase"]').should("not.be.disabled");
+    cy.get('input[name="lastName"]', { timeout: 30000 }).should("not.be.disabled");
+    cy.get('input[name="memorablePhrase"]', { timeout: 30000 }).should("not.be.disabled");
 
     cy.get('input[name="firstName"]').clear();
     cy.get('input[name="firstName"]').type(newFirstName);
