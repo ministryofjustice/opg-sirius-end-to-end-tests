@@ -1,24 +1,25 @@
-beforeEach(() => {
-  cy.loginAs("Case Manager");
-  cy.createClient()
-    .withOrder()
-    .withDeputy()
-
-  cy.get("@client").then(({id}) => {
-    cy.visit(`/supervision/#/clients/${id}`);
-  });
-});
 
 describe(
   "Deputy Death Notification & Confirmation",
-  {tags: ["@supervision", "@deputy", "@supervision-core", "@deputy-hub", "@deputy-record-death-notification", "@deputy-record-death-confirmation"]},
+  { tags: ["@supervision", "@deputy", "@supervision-core", "@deputy-hub", "@deputy-record-death-notification", "@deputy-record-death-confirmation"] },
   () => {
+    beforeEach(() => {
+      cy.loginAs("Case Manager");
+      cy.createClient()
+        .withOrder()
+        .withDeputy()
+
+      cy.get("@client").then(({id}) => {
+        cy.visit(`/supervision/#/clients/${id}`);
+      });
+    });
+
     it("records a death notification for a deputy and confirms it", () => {
       cy.get(".TABS_DEPUTIES").click();
       cy.get("#deputies-table").contains("Deputy record").should("be.visible").click();
       cy.get(".actions-menu").contains("Record death").should("be.enabled").click();
 
-      let today = new Date().toLocaleString("en-GB", {day: "2-digit", month: "2-digit", year: "numeric"});
+      let today = new Date().toLocaleString("en-GB", { day: "2-digit", month: "2-digit", year: "numeric" });
 
       cy.contains("button", "Confirm death notification").as("confirm-button").should("be.disabled");
       cy.get('input[name="dateNotified"]').type(today);
@@ -31,7 +32,7 @@ describe(
       cy.contains('.banner', "Deputy's Death Notified");
 
       cy.get(".TABS_TIMELINELIST").click();
-      cy.contains(".timeline-event-title", "Death", {timeout: 30000})
+      cy.contains(".timeline-event-title", "Death", { timeout: 30000 })
         .parents(".wrapper")
         .within(() => {
           cy.contains("The death of the deputy has been notified");
@@ -55,7 +56,7 @@ describe(
       cy.contains('.banner', "Deputy is Deceased");
 
       cy.get(".TABS_TIMELINELIST").click();
-      cy.contains(".timeline-event-title", "Death", {timeout: 30000})
+      cy.contains(".timeline-event-title", "Death", { timeout: 30000 })
         .parents(".wrapper")
         .within(() => {
           cy.contains("The death of the deputy has been confirmed");

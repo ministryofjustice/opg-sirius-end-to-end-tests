@@ -14,7 +14,7 @@ describe(
         openMode: 0,
       },
     }, () => {
-      cy.get("@client").then(({id: clientId}) => {
+      cy.get("@client").then(({ id: clientId }) => {
         cy.visit(
           `/supervision/#/clients/${clientId}`
         );
@@ -27,8 +27,8 @@ describe(
       cy.get("#tab-order-list-in-page-notification").should("contain", "Please wait...");
       cy.get("#tab-order-list-in-page-notification").should("not.contain", "Please wait...");
 
-      cy.get(".edit-bond-button").click();
-      cy.contains("button", "Dispense with the bond").click();
+    cy.get(".edit-bond-button").click();
+    cy.contains("button", "Dispense with the bond").click();
 
       cy.get("dispense-bond-dialog").contains("button", "Dispense with the bond").click();
 
