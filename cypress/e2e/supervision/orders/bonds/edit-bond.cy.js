@@ -16,7 +16,7 @@ describe(
   },
   () => {
     it("Triggering the validation summary when editing a bond in supervision", () => {
-      cy.get("@client").then(({id: clientId}) => {
+      cy.get("@client").then(({ id: clientId }) => {
         cy.visit(
           `/supervision/#/clients/${clientId}`
         );
@@ -26,7 +26,7 @@ describe(
       cy.get("#tab-order-list-in-page-notification").should("contain", "Please wait...");
       cy.get("#tab-order-list-in-page-notification").should("not.contain", "Please wait...");
       cy.get(".edit-bond-button").click();
-
+      cy.get('#requiredBondAmount').should('be.visible');
       cy.get('#requiredBondAmount').clear();
       cy.get('#requiredBondAmount').type("999999999999")
       cy.contains("button", "Save & exit").click();
@@ -44,3 +44,4 @@ describe(
     });
   }
 );
+
