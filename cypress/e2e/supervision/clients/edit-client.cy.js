@@ -12,10 +12,10 @@ const editClient = (isCourtReferenceChanged) => {
     cy.reload();
     cy.get('input[name="firstName"]').should('be.visible');
     cy.get('input[name="firstName"]').should("have.value", firstname);
-    cy.get('input[name="firstName"]').should("not.be.disabled");
+    cy.get('input[name="firstName"]', { timeout: 30000 }).should("not.be.disabled");
     cy.get('input[name="lastName"]').should("have.value", surname);
     cy.get('input[name="lastName"]').should("not.be.disabled");
-    cy.get('input[name="memorablePhrase"]').should("not.be.disabled");
+    cy.get('input[name="memorablePhrase"]', { timeout: 30000 }).should("not.be.disabled");
 
     cy.get('input[name="firstName"]', { timeout: 30000 }).should("not.be.disabled");
     cy.get('input[name="firstName"]', { timeout: 30000 }).clear();
@@ -88,8 +88,8 @@ Cypress._.times(40, () => {
             cy.get("timeline-generic-changeset")
               .first()
               .within(() => {
-                cy.get("@client", { timeout: 30000 }).then(({ caseRecNumber, firstname, surname }) => {
-                  cy.contains(`First name changed from ${firstname} to ${newFirstName}`);
+                cy.get("@client").then(({ caseRecNumber, firstname, surname }) => {
+                  cy.contains(`First name changed from ${firstname} to ${newFirstName}`, { timeout: 30000 });
                   cy.contains(`Last name changed from ${surname} to ${newLastName}`);
                   cy.contains(`Memorable phrase set to ${memorablePhrase}`);
                   cy.contains(`Court reference changed from ${caseRecNumber} to ${newCourtReference}`);
