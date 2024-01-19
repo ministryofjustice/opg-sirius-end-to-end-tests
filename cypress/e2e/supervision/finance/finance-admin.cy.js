@@ -102,7 +102,7 @@ describe(
       cy.get('[name="bankFile"]').selectFile('cypress/fixtures/finance/empty.csv');
       cy.intercept("POST", "/supervision-api/v1/finance/reports/card-payments").as("formSubmit");
       cy.get('.finance-upload-date-form-button > .button', { timeout: 30000 }).should("not.be.disabled");
-      cy.get('.finance-upload-date-form-button > .button', { timeout: 30000 }).click();
+      cy.get('.finance-upload-date-form-button > .button').click();
       cy.wait("@formSubmit").its('response.statusCode').should('equal', 400)
       cy.get("validation-summary")
         .should("be.visible")
