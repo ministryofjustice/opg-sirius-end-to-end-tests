@@ -1,0 +1,14 @@
+{
+  "orderStatus": {
+    "handle": "CLOSED",
+    "label": "Closed",
+    "deprecated": false
+  },
+  "orderClosureReason": {
+    "handle": "FULL ORDER EXPIRED",
+    "label": "Full order expired",
+    "isSupervised": "1"
+  },
+  "statusDate": "12/07/2023",
+  "statusNotes": ""
+}

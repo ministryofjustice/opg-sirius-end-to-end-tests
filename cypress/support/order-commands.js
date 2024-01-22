@@ -67,24 +67,10 @@ Cypress.Commands.add("withOrderExpiryDate", {prevSubject: true}, (order, overrid
   cy.get('@order');
 });
 
-Cypress.Commands.add("setOrderAsExpired", (orderId, overrides = {}) => {
-  let orderStatusBody = {
-    "orderStatus": {
-      "handle": "CLOSED",
-      "label": "Closed",
-      "deprecated": false
-    },
-    "orderClosureReason": {
-      "handle": "FULL ORDER EXPIRED",
-      "label": "Full order expired",
-      "isSupervised": "1"
-    },
-    "statusDate": "12/07/2023",
-    "statusNotes": ""
-  }
-  orderStatusBody = { ...orderStatusBody, ...overrides };
-  cy.putToApi(`/supervision-api/v1/orders/${orderId}/status`, orderStatusBody);
-  cy.get('@order');
+Cypress.Commands.add("closeOrder", {prevSubject: true}, ({id: orderId}, closureType, overrides = {}) => {
+  cy.fixture(`order/closures/${closureType}.json`).then((body) => {
+    cy.putToApi(`/supervision-api/v1/orders/${orderId}/status`, { ...body, ...overrides });
+  })
 });
 
 Cypress.Commands.add("withBond", {prevSubject: true}, (order, overrides = {}) => {
@@ -98,4 +84,16 @@ Cypress.Commands.add("withBond", {prevSubject: true}, (order, overrides = {}) =>
 
   });
   cy.get("@order")
+});
+
+Cypress.Commands.add("withTask", {prevSubject: true}, ({id: orderId}, overrides = {}) => {
+  let task = {
+    "caseId": `${orderId}`,
+    "type": "CWRD",
+    "name": "Optional Task Name",
+    "description": "Mandatory description",
+    "dueDate": "29/03/2025",
+    "assigneeId": 3
+  }
+  cy.postToApi(`/supervision-api/v1/tasks`, task);
 });
