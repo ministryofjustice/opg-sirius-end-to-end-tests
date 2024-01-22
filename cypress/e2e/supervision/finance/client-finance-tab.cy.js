@@ -84,9 +84,7 @@
     });
 
     it('shows annual fee information', () => {
-      cy.get("@order").then(({ id: orderId }) => {
-        cy.setOrderAsExpired(orderId)
-      });
+      cy.get("@order").closeOrder("expired");
       cy.reload();
       cy.get('.TABS_FINANCEINFO').click();
       cy.get('span > .full-details').should('be.visible');
