@@ -78,14 +78,13 @@ Cypress.Commands.add("lodgeReport", (clientId, overrides = {}) => {
   });
 });
 
-Cypress.Commands.add("withTask", {prevSubject: true}, ({id: orderId}, overrides = {}) => {
-  let task = {
-    "caseId": `${orderId}`,
-    "type": "CWRD",
-    "name": "Optional Task Name",
-    "description": "Mandatory description",
-    "dueDate": "29/03/2025",
-    "assigneeId": 3
-  }
-  cy.postToApi(`/supervision-api/v1/tasks`, task);
+Cypress.Commands.add("addWarning", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
+  let warning = {
+    "warningText": "<p>Warning</p>",
+    "warningType": {
+      "handle": "Abuse Suspected",
+      "label": "Abuse Suspected"
+    }
+  };
+  cy.postToApi(`/supervision-api/v1/clients/${clientId}/warnings`, warning);
 });
