@@ -1,0 +1,14 @@
+{
+  "orderStatus": {
+    "handle": "CLOSED",
+    "label": "Closed",
+    "deprecated": false
+  },
+  "orderClosureReason": {
+    "handle": "DEPUTY DECEASED",
+    "label": "Deputy deceased",
+    "isSupervised": "1"
+  },
+  "statusDate": "19/01/2024",
+  "statusNotes": ""
+}
