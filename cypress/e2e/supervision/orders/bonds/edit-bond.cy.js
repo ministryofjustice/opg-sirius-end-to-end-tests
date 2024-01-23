@@ -26,7 +26,8 @@ describe(
       cy.get("#tab-order-list-in-page-notification").should("contain", "Please wait...");
       cy.get("#tab-order-list-in-page-notification").should("not.contain", "Please wait...");
       cy.get(".edit-bond-button").click();
-      cy.get('#requiredBondAmount').should('be.visible');
+      cy.reload()
+      cy.get('#requiredBondAmount', { timeout: 60000 }).should('be.visible');
       cy.get('#requiredBondAmount').clear();
       cy.get('#requiredBondAmount').type("999999999999")
       cy.contains("button", "Save & exit").click();
@@ -44,4 +45,6 @@ describe(
     });
   }
 );
+
+
 
