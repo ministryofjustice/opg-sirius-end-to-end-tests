@@ -38,8 +38,11 @@ describe(
         // button is enabled and renamed to reset report
         cy.contains('[type="submit"]', 'Reset report').should('not.be.disabled').click();
 
-        // TODO (SW-6973): This started failing in New Year 2024
-        // cy.get('.report-summary-container').first().contains('.report-status', 'non-compliant');
+        cy.get('.lodge-report-button').first().click();
+
+        cy.get('#dateReportReceived_day').should('be.empty');
+        cy.get('#dateReportReceived_month').should('be.empty');
+        cy.get('#dateReportReceived_year').should('be.empty');
       }
     );
   });
