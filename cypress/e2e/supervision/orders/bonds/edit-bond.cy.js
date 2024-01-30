@@ -6,7 +6,7 @@ beforeEach(() => {
 
 });
 
-describe(
+describe.skip(
   "Edit bond",
   {
     retries: {

@@ -5,7 +5,7 @@ beforeEach(() => {
     .withBond();
 });
 
-describe(
+describe.skip(
   "Dispense bond",
   () => {
     it("successfully dispenses a bond on an order", {

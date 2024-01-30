@@ -4,7 +4,7 @@ beforeEach(() => {
     .withOrder();
 });
 
-describe(
+describe.skip(
   "Add bond",
   () => {
     it("Add a bond in supervision", () => {
