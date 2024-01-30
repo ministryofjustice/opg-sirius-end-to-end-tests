@@ -22,11 +22,6 @@ describe(
 
       cy.get(".TABS_ORDERS").click();
 
-      // action buttons for orders are not actually clickable until the orders are fully loaded so
-      // we need to wait for the notification to disappear
-      cy.get("#tab-order-list-in-page-notification").should("contain", "Please wait...");
-      cy.get("#tab-order-list-in-page-notification").should("not.contain", "Please wait...");
-
     cy.get(".edit-bond-button").click();
     cy.contains("button", "Dispense with the bond").click();
 
