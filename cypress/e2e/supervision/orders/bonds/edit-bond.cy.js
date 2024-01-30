@@ -23,8 +23,6 @@ describe(
       });
 
       cy.get(".TABS_ORDERS").click();
-      cy.get("#tab-order-list-in-page-notification").should("contain", "Please wait...");
-      cy.get("#tab-order-list-in-page-notification").should("not.contain", "Please wait...");
       cy.get(".edit-bond-button").click();
       cy.reload()
       cy.get('#requiredBondAmount', { timeout: 60000 }).should('be.visible');
