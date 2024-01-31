@@ -74,7 +74,7 @@ describe(
         deputyType: { handle: "PRO", label: "Professional" },
         deputySubType: { handle: "PERSON", label: "Person" },
       });
-      cy.reload();
+      cy.wait(500);
       cy.get("@deputy").then(({ firstname, surname }) => {
         const fullName = `${firstname} ${surname}`;
         cy.get("#add-deputy-button").should("be.visible").click();
@@ -126,6 +126,7 @@ describe(
         organisationName: organisationName,
         deputyType: { handle: "PA", label: "Public Authority" },
       });
+      cy.wait(500);
       cy.get("@deputy").then(() => {
         cy.get("#add-deputy-button").should("be.visible").click();
         cy.get(".deputy-search__input")
