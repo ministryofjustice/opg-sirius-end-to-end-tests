@@ -31,4 +31,27 @@ describe("Navigation", { tags: ["@supervision", "@smoke-journey"] }, () => {
       cy.get('.client-priority-info > span').contains('Case has warnings');
     });
   });
+
+
+  it("actions in the menu remain available on navigation", () =>{
+    cy.loginAs("Case Manager");
+
+    cy.createClient()
+      .withOrder()
+      .withSupervisionLevel()
+      .withActiveOrderStatus();
+
+    cy.get("@client").then(({id}) => {
+      cy.visit("supervision/#/clients/" + id);
+      cy.waitUntil(() => cy.get('@order').then(({id}) => cy.url().should('contain', '?order=' + id)));
+      cy.get('#create-letter-button').should('be.enabled');
+
+      cy.get('#edit-client-risk-score-button').click();
+      cy.contains('#edit-client-risk-score', 'Record client risk score');
+      cy.get('.footer > .cancel').click();
+
+      cy.waitUntil(() => cy.get('@order').then(({id}) => cy.url().should('contain', '?order=' + id)));
+      cy.get('#create-letter-button').should('be.enabled');
+    });
+  });
 });
