@@ -127,7 +127,7 @@ describe("Edit LPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
 describe("Display digital LPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
   beforeEach(() => {
-    cy.loginAs("LPA Manager");
+    cy.loginAs("System Admin");
     cy.createDonor().then(({ id: donorId }) => {
       cy.wrap(donorId).as("digitalLpaDonorId");
     });
@@ -140,67 +140,58 @@ describe("Display digital LPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
       {
         statusCode: 200,
         body: {
-          "limit": 25,
-          "metadata": {
-              "statuses": [
-                  {
-                      "status": "Pending",
-                      "total": 1
-                  }
-              ]
-          },
-          "pages": {
-              "current": 1,
-              "total": 1
-          },
-          "total": 1,
           "cases": [
-              {
-                  "id": 83,
-                  "uId": "7000-0000-1789",
-                  "caseSubtype": "pfa",
-                  "receiptDate": "02/04/2019",
-                  "tasks": [
-                      {
-                          "id": 165,
-                          "status": "Not started"
-                      },
-                      {
-                          "id": 166,
-                          "status": "Not started"
-                      }
-                  ],
-                  "caseType": "LPA"
-              },
-              {
-                  "id": 84,
-                  "uId": "7000-0000-1790",
-                  "caseSubtype": "hw",
-                  "receiptDate": "02/04/2019",
-                  "tasks": [
-                      {
-                          "id": 167,
-                          "status": "Not started"
-                      }
-                  ],
-                  "caseType": "LPA"
-              }
+            {
+              "id": 83,
+              "uId": "M-DIGI-LPA4-9877",
+              "caseSubtype": "property-and-affairs",
+              "receiptDate": "02/04/2019",
+              "tasks": [
+                {
+                  "id": 165,
+                  "status": "Not started"
+                },
+                {
+                  "id": 166,
+                  "status": "Not started"
+                }
+              ],
+              "caseType": "DIGITAL_LPA",
+              "status": "Draft"
+            },
+            {
+              "id": 84,
+              "uId": "M-DIGI-LPA4-9876",
+              "caseSubtype": "personal-welfare",
+              "receiptDate": "02/04/2019",
+              "tasks": [
+                {
+                  "id": 167,
+                  "status": "Not started"
+                }
+              ],
+              "caseType": "DIGITAL_LPA",
+              "status": "Draft"
+            }
           ]
-      }
-
-
-
-        /*{
-          "cases": [
-            {"id": 333, "uId": "M-DIGI-LPA3-3333", "caseSubtype": "personal-welfare", "caseType": "DIGITAL_LPA"}
-          ]
-        }*/
+        }
       }
     );
 
-
-
-
     cy.visit(`/lpa/#/person/${this.digitalLpaDonorId}`);
+
+    cy.waitForStableDOM().then(() => {
+      cy.get(".card-wrapper").then(elts => {
+        expect(elts.length).to.eql(2);
+
+        cy.wrap(elts[0]).find(".case-tile-type")
+          .should("contain", "M-DIGI-LPA4-9876")
+          .should("contain", "PW");
+
+        cy.wrap(elts[1]).find(".case-tile-type")
+          .should("contain", "M-DIGI-LPA4-9877")
+          .should("contain", "PA");
+      });
+    })
   });
 });
