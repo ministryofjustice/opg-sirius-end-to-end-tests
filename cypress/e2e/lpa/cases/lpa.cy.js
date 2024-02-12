@@ -124,3 +124,83 @@ describe("Edit LPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
       .contains("Chelsie Lal");
   });
 });
+
+describe("Display digital LPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
+  beforeEach(() => {
+    cy.loginAs("LPA Manager");
+    cy.createDonor().then(({ id: donorId }) => {
+      cy.wrap(donorId).as("digitalLpaDonorId");
+    });
+  });
+
+  it.only("should display digital LPAs in case tiles", function () {
+    cy.intercept(
+      "GET",
+      `/lpa-api/v1/persons/${this.digitalLpaDonorId}/cases`,
+      {
+        statusCode: 200,
+        body: {
+          "limit": 25,
+          "metadata": {
+              "statuses": [
+                  {
+                      "status": "Pending",
+                      "total": 1
+                  }
+              ]
+          },
+          "pages": {
+              "current": 1,
+              "total": 1
+          },
+          "total": 1,
+          "cases": [
+              {
+                  "id": 83,
+                  "uId": "7000-0000-1789",
+                  "caseSubtype": "pfa",
+                  "receiptDate": "02/04/2019",
+                  "tasks": [
+                      {
+                          "id": 165,
+                          "status": "Not started"
+                      },
+                      {
+                          "id": 166,
+                          "status": "Not started"
+                      }
+                  ],
+                  "caseType": "LPA"
+              },
+              {
+                  "id": 84,
+                  "uId": "7000-0000-1790",
+                  "caseSubtype": "hw",
+                  "receiptDate": "02/04/2019",
+                  "tasks": [
+                      {
+                          "id": 167,
+                          "status": "Not started"
+                      }
+                  ],
+                  "caseType": "LPA"
+              }
+          ]
+      }
+
+
+
+        /*{
+          "cases": [
+            {"id": 333, "uId": "M-DIGI-LPA3-3333", "caseSubtype": "personal-welfare", "caseType": "DIGITAL_LPA"}
+          ]
+        }*/
+      }
+    );
+
+
+
+
+    cy.visit(`/lpa/#/person/${this.digitalLpaDonorId}`);
+  });
+});
