@@ -29,7 +29,7 @@ describe(
 
       const today = new Date();
 
-      cy.get('input[name="bondDispenseDischargedDate_day"]').type(today.getDate().toString());
+      cy.get('input[name="bondDispenseDischargedDate_day"]').type(1);
       cy.get('input[name="bondDispenseDischargedDate_month"]').type((today.getMonth() + 1).toString());
       // future date to display the validation box
       cy.get('input[name="bondDispenseDischargedDate_year"]').type((today.getFullYear() + 1).toString());
