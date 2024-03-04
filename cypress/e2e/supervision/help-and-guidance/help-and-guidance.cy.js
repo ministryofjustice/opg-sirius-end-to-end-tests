@@ -7,7 +7,6 @@ describe("Help and Guidance", { tags: ["@supervision", "@smoke-journey"] }, () =
 
     cy.intercept('GET', '/*/v1/config*', {
       statusCode: 200,
-      body: {"data":{"featureToggles": []}},
     });
 
     cy.intercept('GET', '/*/v1/help-url*', {
@@ -16,7 +15,7 @@ describe("Help and Guidance", { tags: ["@supervision", "@smoke-journey"] }, () =
     });
 
     // it needs this wait to think about the intercepts or it won't redirect properly
-    cy.wait(1000);
+    cy.get('#open-help-and-guidance-main-menu-link').wait(2000);
 
     cy.get('#open-help-and-guidance-main-menu-link')
       .should('be.visible')
