@@ -1,29 +1,33 @@
 describe("Help and Guidance", { tags: ["@supervision", "@smoke-journey"] }, () => {
+  Cypress._.times(30, () => {
+
   it("content is accessible when expanded", () => {
     cy.loginAs("Case Manager");
     cy.visit("/supervision/#/dashboard");
 
-    // cy.window().then((win) => {
-    //   cy.stub(win, 'open', url => {
-    //     win.location.href = 'http://localhost:8080/help-and-guidance/';
-    //   }).as("popup")
-    // })
-
-    cy.intercept('GET', '/*/v1/help-url', {
+    cy.intercept('GET', '/*/v1/config*', {
       statusCode: 200,
-      body: {"data":{"url":"\/help-and-guidance\/"}},
+      body: {"data":{"featureToggles": []}},
     });
 
-    cy
-      .get('#open-help-and-guidance-main-menu-link')
-      .invoke('attr', 'href')
-      .should('contain', '/help-and-guidance');
+    cy.intercept('GET', '/*/v1/help-url*', {
+      statusCode: 200,
+      body: {"data":{"url":"https:\/\/wordpress.sirius.opg.service.justice.gov.uk\/"}},
+    });
 
-    cy.get('#open-help-and-guidance-main-menu-link').click();
-    cy.get('@popup').should("be.called");
-    cy.url().should('contain.text', 'help');
+    // it needs this wait to think about the intercepts or it won't redirect properly
+    cy.wait(1000);
 
-    cy.get('h1').should('have.class', "help-header");
-
-  })
+    cy.get('#open-help-and-guidance-main-menu-link')
+      .should('be.visible')
+      .then(($a) => {
+        expect($a).to.have.attr('target','_blank')
+        // update attr to open in same tab
+        $a.attr('target', '_self')
+      })
+      .click()
+    cy.url().should('include', 'wordpress.sirius')
+    cy.get('h1').should('include.text', 'Help and Guidance')
+  });
+  });
 });
