@@ -1,4 +1,6 @@
 describe("Help and Guidance", { tags: ["@supervision", "@smoke-journey"] }, () => {
+  Cypress._.times(30, () => {
+
   it("content is accessible when expanded", () => {
     cy.loginAs("Case Manager");
     cy.visit("/supervision/#/dashboard");
@@ -13,7 +15,7 @@ describe("Help and Guidance", { tags: ["@supervision", "@smoke-journey"] }, () =
     });
 
     // it needs this wait to think about the intercepts or it won't redirect properly
-    cy.get('#open-help-and-guidance-main-menu-link').wait(2000);
+    cy.get('#open-help-and-guidance-main-menu-link').wait(3000);
 
     cy.get('#open-help-and-guidance-main-menu-link')
       .should('be.visible')
@@ -25,5 +27,6 @@ describe("Help and Guidance", { tags: ["@supervision", "@smoke-journey"] }, () =
       .click()
     cy.url().should('include', 'wordpress.sirius')
     cy.get('h1').should('include.text', 'Help and Guidance')
+  });
   });
 });
