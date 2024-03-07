@@ -11,5 +11,7 @@ describe("Help and Guidance", { tags: ["@supervision", "@smoke-journey"] }, () =
           $a.attr('target', '_self')
         })
         .click()
+
+      cy.url().should('not.contain', 'dashboard');
     });
 });
