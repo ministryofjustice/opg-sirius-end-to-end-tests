@@ -1,8 +1,5 @@
 describe("Help and Guidance", { tags: ["@supervision", "@smoke-journey"] }, () => {
-  Cypress._.times(30, () => {
-
     it("content is accessible when expanded", () => {
-
       cy.loginAs("Case Manager");
       cy.visit("/supervision/#/dashboard");
 
@@ -15,5 +12,4 @@ describe("Help and Guidance", { tags: ["@supervision", "@smoke-journey"] }, () =
         })
         .click()
     });
-  });
 });
