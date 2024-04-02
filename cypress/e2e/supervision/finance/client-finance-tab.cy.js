@@ -46,11 +46,11 @@
       cy.get('#add-finance-discount-button').click();
       cy.get('.head > .title').should('contain.text', 'Award fee reduction');
       cy.get(':nth-child(1) > .radio-button').click();
-      cy.get('#fIELDLABELSSTARTDATE_year').type('2023');
-      cy.get('#fIELDLABELSENDDATE_year').type('2024');
+      cy.get('#fIELDLABELSSTARTDATE_year').type('2024');
+      cy.get('#fIELDLABELSENDDATE_year').type('2025');
       cy.get('#dateReceived_day').type('01');
       cy.get('#dateReceived_month').type('04');
-      cy.get('#dateReceived_year').type('2023');
+      cy.get('#dateReceived_year').type('2024');
       const data = '<p>Test applying fee reduction</p>';
       cy.waitForTinyMCE()
         .enterText(data);
@@ -60,8 +60,8 @@
       cy.get('.TABS_FINANCEINFO').click();
       cy.get('#list-finance-discounts').should('contain.text', 'Fee reductions');
       cy.get('.finance-discount-list-discount').should('contain.text', 'Remission');
-      cy.get('#finance-discount-list-table').should('contain.text', '01/04/2023');
-      cy.get('#finance-discount-list-table').should('contain.text', '31/03/2024');
+      cy.get('#finance-discount-list-table').should('contain.text', '01/04/2024');
+      cy.get('#finance-discount-list-table').should('contain.text', '31/03/2025');
       cy.get('#finance-discount-list-table').should('contain.text', 'Active');
       cy.get('.finance-discount-list-notes').should('contain.text', 'Test applying fee reduction');
     });
