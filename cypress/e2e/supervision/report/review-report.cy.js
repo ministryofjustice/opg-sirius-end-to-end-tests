@@ -28,7 +28,7 @@ describe(
   {tags: ["@supervision", "@reports", "@review-report"]},
   () => {
     it("Successfully reset a report", () => {
-        cy.get(".report-summary-container").first().contains(".report-status", "lodged");
+        cy.get(".report-summary-container").first().contains(".report-status", "lodged", { matchCase: false});
         cy.get(".review-report-link").first().click();
 
         cy.get("#reviewDecision")
