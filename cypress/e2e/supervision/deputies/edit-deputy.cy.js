@@ -8,22 +8,22 @@ beforeEach(() => {
     cy.visit(`/supervision/#/clients/${id}`);
   });
 });
-// describe(
-//   "Edit deputy for client",
-//   { tags: ["@supervision", "@deputy", "@supervision-core", "@smoke-journey"] },
-//   () => {
-//     it("Editing deputy details via the deputy hub", () => {
-//       cy.get(".TABS_DEPUTIES").click();
-//
-//       cy.get('@deputy').then(({ firstname, surname }) => {
-//         cy.get('.summary-row-heading').contains(`${firstname} ${surname}`)
-//       })
-//       cy.get('.deputy-type').contains('Lay')
-//       cy.get('.deputy-status-on-case').contains('Open')
-//       cy.get("#deputies-table").contains("Deputy record").should("be.visible");
-//       cy.get('.deputy-record').first().click();
-//       cy.get('#edit-deputy-button').click();
-//       cy.get('#deputy-hub-view-deputy-edit-deputy-details').click();
+describe(
+  "Edit deputy for client",
+  { tags: ["@supervision", "@deputy", "@supervision-core", "@smoke-journey"] },
+  () => {
+    it("Editing deputy details via the deputy hub", () => {
+      cy.get(".TABS_DEPUTIES").click();
+
+      cy.get('@deputy').then(({ firstname, surname }) => {
+        cy.get('.summary-row-heading').contains(`${firstname} ${surname}`)
+      })
+      cy.get('.deputy-type').contains('Lay')
+      cy.get('.deputy-status-on-case').contains('Open')
+      cy.get("#deputies-table").contains("Deputy record").should("be.visible");
+      cy.get('.deputy-record').first().click();
+      cy.get('#edit-deputy-button').click();
+      cy.get('#deputy-hub-view-deputy-edit-deputy-details').click();
 //       cy.get('[name="dob"]').first().type("25");
 //       cy.get('.footer > :nth-child(1) > .button').click()
 //       cy.get('.validation-summary').should("be.visible")
@@ -36,5 +36,5 @@ beforeEach(() => {
 //       cy.get('.in-page-banner').contains('has been updated');
 //       cy.get('.deputy-details-date-of-birth').contains("25/02/2000");
 //     });
-//   }
-// );
+  }
+);
