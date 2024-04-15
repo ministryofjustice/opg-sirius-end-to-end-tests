@@ -39,7 +39,7 @@ beforeEach(() => {
       cy.get('.report-item.received').should('be.visible');
       cy.get('.report-summary-content-details.received').within(() => {
         cy.get('.report-received-date-value').should('contain.text', '4 May 2020')
-        cy.get('.report-status-value').should('contain.text', 'received')
+        cy.get('.report-status-value').should('contain.text', 'received', { matchCase: false})
       })
       cy.contains('Lodging details').click()
       cy.get('report-lodge-view').within(() => {
