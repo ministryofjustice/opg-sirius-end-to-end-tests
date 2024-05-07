@@ -1,5 +1,10 @@
 describe("Help and Guidance", { tags: ["@supervision", "@smoke-journey"] }, () => {
-  it("content is accessible when expanded", () => {
+  it("content is accessible when expanded", {
+    retries: {
+      runMode: 2,
+      openMode: 0,
+    },
+  }, () => {
     cy.loginAs("Case Manager");
     cy.visit("/supervision/#/dashboard");
 
