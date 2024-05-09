@@ -19,7 +19,7 @@ describe(
             `/supervision/#/clients/${clientId}`
           );
 
-          // cy.contains('Order status:').contains("Active");
+          cy.contains('Order status:').contains("Active");
 
           cy.visit(
             `/supervision/#/clients/${clientId}/orders/${orderId}/status`
@@ -45,7 +45,7 @@ describe(
           cy.get(".closed-order-badge").should("exist");
           cy.get(".add-bond-button").should("not.exist");
 
-          // cy.contains('Order status:').contains("Closed");
+          cy.contains('Order status:').contains("Closed");
 
           cy.get('.TABS_TIMELINELIST').click();
 
@@ -90,7 +90,7 @@ describe(
           cy.get('.duplicate-order-badge').should("exist");
           cy.get(".add-bond-button").should("not.exist");
 
-          // cy.contains('Order status:').contains("Duplicate");
+          cy.contains('Order status:').contains("Duplicate");
 
           cy.get('.TABS_TIMELINELIST').click();
 
