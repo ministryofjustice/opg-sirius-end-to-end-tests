@@ -26,7 +26,7 @@ describe(
       cy.contains("Save & exit").click();
 
 
-      cy.get('.TABS_DOCUMENTS').click();
+      cy.get('#tab-container').contains('Documents').click();
       cy.get('document-list-item').find('.tab-table').should('have.length', 2);
 
       cy.get('.filter-check-button').contains('Order').click();
