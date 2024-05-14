@@ -22,7 +22,7 @@ describe(
       cy.get("input[type=radio][data-core-value=OUTGOING]").check({ force: true }).should('be.checked')
       cy.contains("Save & exit").click();
 
-      cy.get('.TABS_DOCUMENTS').click();
+      cy.get('#tab-container').contains('Documents').click();
       cy.get('.summary-row > :nth-child(2)').should('contain.text', 'niceFile.txt');
       cy.get('.summary-row > :nth-child(2)').should('contain.text', 'Call');
       cy.get('.summary-row > :nth-child(2)').should('contain.text', 'Outbound');
@@ -45,14 +45,14 @@ describe(
       cy.get("input[name=fIELDLABELSDOCUMENTNAME]").clear()
       cy.contains("Save & exit").click();
 
-      cy.get('.TABS_DOCUMENTS').click();
+      cy.get('#tab-container').contains('Documents').click();
       cy.get('.summary-row > :nth-child(2)').should('contain.text', 'replacedFile.txt');
       cy.get('.summary-row > :nth-child(2)').should('contain.text', 'Call');
       cy.get('.summary-row > :nth-child(2)').should('contain.text', 'Outbound');
       cy.get('.summary-row > :nth-child(2)').should('not.contain.text', 'niceFile.txt');
       cy.get('.summary-row > :nth-child(3)').should('contain.text', 'Replaced date');
 
-      cy.get('.TABS_TIMELINELIST').click();
+      cy.get('#tab-container').contains('Timeline').click();
       cy.get('.event-replaced-document-file > .section-content > .wrapper > .title > h2').should('contain.text', 'Document replaced');
       cy.get('.event-replaced-document-file > .section-content').should('contain.text', 'A document has been replaced');
       cy.get('.event-replaced-document-file > .section-content').should('contain.text', 'replacedFile.txt');

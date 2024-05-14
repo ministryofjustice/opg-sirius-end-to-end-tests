@@ -13,8 +13,8 @@ describe(
   { tags: ["@supervision", "@supervision-regression", "@client-dashboard"] },
   () => {
     it("Reassigning and changing due date tasks in supervision", () => {
-      cy.get('.TABS_CLIENT_TASKS > .tab-container__tab-with-count > span').should('contain.text', 1);
-      cy.get('.TABS_CLIENT_TASKS').click();
+      cy.get('#tab-container').contains('Tasks').should('contain.text', 1);
+      cy.get('#tab-container').contains('Tasks').click();
       cy.wait(500);
       cy.get('.update-task-button').should("be.enabled").click();
       cy.contains("Assign to")

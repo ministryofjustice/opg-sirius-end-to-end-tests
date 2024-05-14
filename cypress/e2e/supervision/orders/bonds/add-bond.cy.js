@@ -24,7 +24,7 @@ describe(
       cy.get('[label="Reference number"]').type("12345");
 
       cy.contains("button", "Save & exit").click();
-      cy.get('.TABS_TIMELINELIST').click();
+      cy.get('#tab-container').contains('Timeline').click();
       cy.get('.event-bond-added > .section-content > .wrapper')
         .should("contain", "Bond added")
         .should("contain", "Bond amount required set to ")

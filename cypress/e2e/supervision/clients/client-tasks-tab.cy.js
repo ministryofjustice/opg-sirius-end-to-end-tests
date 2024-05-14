@@ -14,8 +14,8 @@ describe(
   { tags: ["@supervision", "@supervision-regression", "@client-dashboard"] },
   () => {
     it("shows client tasks as expected and updates them when tasks completed", () => {
-      cy.get('.TABS_CLIENT_TASKS > .tab-container__tab-with-count > span').should('contain.text', 2);
-      cy.get('.TABS_CLIENT_TASKS').click();
+      cy.get('#tab-container').contains('Tasks').should('contain.text', 2);
+      cy.get('#tab-container').contains('Tasks').click();
       cy.get('#client-tasks-list').should('be.visible');
       cy.get('.task-columns > :nth-child(1)').should('contain.text', 'Type');
       cy.get('.task-columns > :nth-child(2)').should('contain.text', 'Task due date');
@@ -41,9 +41,9 @@ describe(
       cy.get('.footer > :nth-child(1) > .button').should('contain.text', 'Complete the task')
       cy.get('.footer > :nth-child(1) > .button').click();
 
-      cy.get('.TABS_CLIENT_TASKS').click();
+      cy.get('#tab-container').contains('Tasks').click();
       cy.reload();
-      cy.get('.TABS_CLIENT_TASKS > .tab-container__tab-with-count > span').should('contain.text', 1);
+      cy.get('#tab-container').contains('Tasks').should('contain.text', 1);
       cy.get('.task-name').should('contain.not.text', 'Order - Allocate to team');
     });
   });
