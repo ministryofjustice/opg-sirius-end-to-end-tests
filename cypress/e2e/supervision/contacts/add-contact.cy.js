@@ -6,7 +6,7 @@ beforeEach(() => {
       `/supervision/#/clients/${id}`
     );
   });
-  cy.get(".TABS_CONTACTS button").click();
+  cy.get('#tab-container').contains('Contacts').click();
   cy.get("#no-contacts-message").should("contain.text", "There are no contacts")
   cy.get("#add-contact-button").click();
   cy.get(".add-contact-title").should("be.visible").should("contain.text", "Create a new contact")

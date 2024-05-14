@@ -42,7 +42,7 @@ describe(
     it("can extend a visit's report due date for an existing visit", () => {
       cy.get("@client").then(({id}) => {
         cy.visit(`/supervision/#/clients/${id}`);
-        cy.get(".TABS_VISITS button").click();
+        cy.get('#tab-container').contains('Visits').click();
 
         cy.get(".visit-type-field").contains("Supervision");
         cy.get(".visit-sub-type-field").contains("Pro Visit");
@@ -79,7 +79,7 @@ describe(
           cy.contains("Visit report due by: " + nextWeekDate)
         });
       });
-      cy.get(".TABS_TIMELINELIST").click();
+      cy.get('#tab-container').contains('Timeline').click();
       cy.get(".timeline-event-title", { timeout: 30000 })
         .should("contain", "Visit report due date extended");
       cy.get(".timeline-extended-visit-report-due-date").contains(nextWeekDate);

@@ -9,7 +9,7 @@ beforeEach(() => {
       cy.visit(`/supervision/#/clients/${clientId}?order=${orderId}`);
     });
   });
-  cy.get(".TABS_REPORTS").click();
+  cy.get('#tab-container').contains('Reports').click();
 });
   describe(
     "Abandon report",

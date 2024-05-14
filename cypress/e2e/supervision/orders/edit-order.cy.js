@@ -16,7 +16,7 @@ describe(
           );
         });
       });
-      cy.get(".TABS_ORDERS").click();
+      cy.get('#tab-container').contains('Orders').click();
       cy.get('#begin-change-order-button > span').click();
       cy.contains("button", "Yes, edit order").should("be.enabled").click();
       cy.get('[label="Order title"] > .fieldset > .ng-untouched').type('This is an order title');
@@ -25,7 +25,7 @@ describe(
       cy.waitForTinyMCE()
         .enterText(data);
       cy.get('[type="submit"]').click();
-      cy.get(".TABS_TIMELINELIST").click();
+      cy.get('#tab-container').contains('Timeline').click();
       cy.get(".timeline-event-title", {timeout: 30000}).should(
         "contain",
         "Order updated"
