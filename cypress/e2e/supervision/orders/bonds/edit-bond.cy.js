@@ -36,7 +36,7 @@ describe(
       cy.get('#requiredBondAmount').clear();
       cy.get('#requiredBondAmount').type("1000");
       cy.contains("button", "Save & exit").click();
-      cy.get('.TABS_TIMELINELIST').click();
+      cy.get('#tab-container').contains('Timeline').click();
       cy.get('.event-bond-edited > .section-content > .wrapper')
         .should("contain", "Bond edited")
         .should("contain", "Bond amount required changed from ");

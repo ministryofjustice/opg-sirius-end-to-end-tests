@@ -38,8 +38,8 @@ describe(
       cy.waitForTinyMCE()
         .enterText('<p>Working now</p>');
       cy.get('button').contains('Save & exit').click();
-      cy.get('.TABS_CLIENT_TASKS > .tab-container__tab-with-count > span').should('contain.text', 2);
-      cy.get('.TABS_CLIENT_TASKS').click();
+      cy.get('#tab-container').contains('Tasks').should('contain.text', 2);
+      cy.get('#tab-container').contains('Tasks').click();
       cy.get('#client-tasks-list').should('be.visible');
     });
   });

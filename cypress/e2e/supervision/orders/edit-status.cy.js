@@ -47,7 +47,7 @@ describe(
 
           cy.contains('Order status:').contains("Closed");
 
-          cy.get('.TABS_TIMELINELIST').click();
+          cy.get('#tab-container').contains('Timeline').click();
 
           cy.get(".timeline-event-title", {timeout: 30000}).should(
             "contain",
@@ -92,7 +92,7 @@ describe(
 
           cy.contains('Order status:').contains("Duplicate");
 
-          cy.get('.TABS_TIMELINELIST').click();
+          cy.get('#tab-container').contains('Timeline').click();
 
           cy.get(".timeline-event-title", {timeout: 30000}).should(
             "contain",

@@ -6,7 +6,7 @@ beforeEach(() => {
 });
 it("Loads the lay deputy hub", () => {
   cy.get("@client").then(({id}) => cy.visit(`/supervision/#/clients/${id}`));
-  cy.get('.TABS_DEPUTIES').click();
+  cy.get('#tab-container').contains('Deputies').click();
   cy.get('.record').click();
   cy.url().should('include', 'supervision/#/deputy-hub');
   cy.get('.deputy-hub-deputy-name-header-link').should('be.visible');
