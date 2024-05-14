@@ -4,7 +4,7 @@ beforeEach(() => {
   cy.get("@client").then(({ id }) => {
     cy.visit(`/supervision/#/clients/${id}`);
   });
-  cy.get(".TABS_CONTACTS button").click();
+  cy.get('#tab-container').contains('Contacts').click();
 });
 
 describe(
@@ -36,7 +36,7 @@ describe(
       cy.get("#preview-publish-button").click();
       cy.get(".footer > .button").click();
       cy.get("#publish-close-button").click();
-      cy.get(".TABS_CONTACTS button").click();
+      cy.get('#tab-container').contains('Contacts').click();
       cy.get(".delete").click();
       cy.get(".dialog-footer > .button")
         .should("be.visible", {timeout: 30000}).click();
@@ -52,7 +52,7 @@ describe(
     });
 
     it("can be deleted", () => {
-      cy.get(".TABS_CONTACTS button").click();
+      cy.get('#tab-container').contains('Contacts').click();
       cy.get(".delete").click();
       cy.get(".dialog-footer > .button").click();
       cy.get(

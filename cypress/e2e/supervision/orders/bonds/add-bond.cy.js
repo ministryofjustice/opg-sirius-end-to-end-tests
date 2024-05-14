@@ -14,7 +14,7 @@ describe(
         );
       });
 
-      cy.get(".TABS_ORDERS").click();
+      cy.get('#tab-container').contains('Orders').click();
       cy.get('.add-bond-button').click();
       cy.get('#securityBond').contains('Yes').click()
 

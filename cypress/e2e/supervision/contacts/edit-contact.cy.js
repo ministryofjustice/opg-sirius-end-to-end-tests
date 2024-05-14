@@ -7,7 +7,7 @@ beforeEach(() => {
       `/supervision/#/clients/${id}`
     );
   });
-  cy.get(".TABS_CONTACTS button").click();
+  cy.get('#tab-container').contains('Contacts').click();
 });
 
 describe(

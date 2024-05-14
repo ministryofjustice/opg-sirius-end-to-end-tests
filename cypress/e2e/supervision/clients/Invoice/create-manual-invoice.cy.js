@@ -37,7 +37,7 @@ describe(
 
       cy.get("button").contains("Create manual invoice").click()
 
-      cy.get(".TABS_TIMELINELIST").click();
+      cy.get('#tab-container').contains('Timeline').click();
       cy.get(".timeline-event-title", {timeout: 30000}).should(
         "contain",
         "Manual Invoice Created"

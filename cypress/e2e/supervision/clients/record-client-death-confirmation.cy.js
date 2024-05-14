@@ -41,7 +41,7 @@ describe(
         cy.contains("Confirm client is deceased").click();
         cy.contains("The client is deceased").click();
         cy.get('.client-priority-info').contains('Client deceased');
-        cy.get(".TABS_TIMELINELIST").click();
+        cy.get('#tab-container').contains('Timeline').click();
         cy.get(".timeline-event-title", { timeout: 3000 })
           .should("contain", "Death")
           .should("contain", "Client status");

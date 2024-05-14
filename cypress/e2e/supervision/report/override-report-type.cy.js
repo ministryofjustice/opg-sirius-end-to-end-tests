@@ -9,7 +9,7 @@ beforeEach(() => {
       cy.visit(`/supervision/#/clients/${clientId}?order=${orderId}`);
     });
   });
-  cy.get(".TABS_REPORTS").click();
+  cy.get('#tab-container').contains('Reports').click();
 });
   describe(
   "Override report type",
@@ -30,7 +30,7 @@ beforeEach(() => {
       cy.get('footer .button.primary').click()
       cy.get('.dialog-header').should('contain.text', 'Override report type');
       cy.get('.hook-modal-confirm').click()
-      cy.get(".TABS_REPORTS").click();
+      cy.get('#tab-container').contains('Reports').click();
       cy.get('@actionLink').should('be.visible').and('contain.text', 'Cancel OPG102 request')
       cy.get('report-summary .report-type').should('contain.text', 'OPG102')
     });

@@ -7,7 +7,7 @@ const createOrder = (orderType, orderSubType, orderDate, optional) => {
     cy.contains("Create order").click();
 
     // click orders tab to clear UI inconsistencies caused by the menu bar on changing screens
-    cy.get(".TABS_ORDERS").click();
+    cy.get('#tab-container').contains('Orders').click();
     cy.get("#orderType")
       .closest(".fieldset")
       .contains(orderType)
@@ -90,7 +90,7 @@ beforeEach(() => {
         cy.wait("@bondProviderCall").then(() => {
           cy.contains("Cancel").click();
         });
-        cy.get(".TABS_ORDERS").click();
+        cy.get('#tab-container').contains('Orders').click();
         cy.get("#order-table")
           .find("tr")
           .then((rows) => {
@@ -112,7 +112,7 @@ beforeEach(() => {
 
     it("creates a supervised h&w order in supervision with mandatory fields as an allocations user", () => {
       createOrder("Health & welfare", "New deputy", "01/01/2022", false);
-      cy.get(".TABS_ORDERS").click();
+      cy.get('#tab-container').contains('Orders').click();
       cy.get("#order-table")
         .find("tr")
         .then((rows) => {
@@ -141,7 +141,7 @@ beforeEach(() => {
       cy.wait("@bondProviderCall").then(() => {
         cy.contains("Cancel").click();
       });
-      cy.get(".TABS_ORDERS").click();
+      cy.get('#tab-container').contains('Orders').click();
       cy.get("#order-table")
         .find("tr")
         .then((rows) => {
@@ -163,7 +163,7 @@ beforeEach(() => {
       cy.get(".order-title").contains("Test");
       cy.get(".key-value-list__read-only").children().eq(19).contains("Sole");
       cy.get(".notes-not-bold").contains("Test");
-      cy.get(".TABS_TIMELINELIST").click();
+      cy.get('#tab-container').contains('Timeline').click();
       cy.get(".timeline-event-title", {timeout: 30000}).should(
         "contain",
         "Order created"
@@ -172,7 +172,7 @@ beforeEach(() => {
 
     it("creates a non-supervised hw order in supervision with mandatory fields", () => {
       createOrder("Health & welfare", "Guardianship", "01/01/2022", true);
-      cy.get(".TABS_ORDERS").click();
+      cy.get('#tab-container').contains('Orders').click();
       cy.get("#order-table")
         .find("tr")
         .then((rows) => {
@@ -194,7 +194,7 @@ beforeEach(() => {
       cy.get(".order-title").contains("Test");
       cy.get(".key-value-list__read-only").children().eq(19).contains("Sole");
       cy.get(".notes-not-bold").contains("Test");
-      cy.get(".TABS_TIMELINELIST").click();
+      cy.get('#tab-container').contains('Timeline').click();
       cy.get(".timeline-event-title", {timeout: 30000}).should(
         "contain",
         "Order created"
