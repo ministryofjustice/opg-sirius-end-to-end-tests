@@ -63,7 +63,7 @@ describe(
             newCourtReference
           );
 
-          cy.get(".TABS_CLIENT_SUMMARY").click();
+          cy.get('#tab-container').contains('Summary').click();
           cy.get(".client-summary-full-name-value").contains(
             `${newFirstName} ${newLastName}`
           );
@@ -74,7 +74,7 @@ describe(
             memorablePhrase
           );
 
-          cy.get(".TABS_TIMELINELIST").click();
+          cy.get('#tab-container').contains('Timeline').click();
 
           cy.reload()
           cy.get(".timeline-event-title", { timeout: 30000 }).should(

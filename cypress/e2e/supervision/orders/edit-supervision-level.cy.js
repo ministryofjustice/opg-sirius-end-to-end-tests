@@ -16,7 +16,7 @@ describe(
           );
         });
       });
-      cy.get(".TABS_ORDERS").click();
+      cy.get('#tab-container').contains('Orders').click();
 
       cy.get(".edit-supervision-level")
         .should("contain.text", "Edit supervision level")
@@ -43,7 +43,7 @@ describe(
         .enterText("<p>I'm a note</p>");
       cy.get("button:contains('Save & exit')").click()
 
-      cy.get(".TABS_TIMELINELIST").click();
+      cy.get('#tab-container').contains('Timeline').click();
       cy.get("timeline-template-loader:nth-of-type(1) .timeline-event-title")
         .should("contain.text", "Supervision level")
 

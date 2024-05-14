@@ -22,7 +22,7 @@ describe(
     it(
       "Finance person details can be updated",
       () => {
-        cy.get(".TABS_FINANCEINFO").click();
+        cy.get('#tab-container').contains('Finance').click();
         cy.get(".finance-summary-payment-method").contains("Demanded");
 
         cy.get("@sopNumber").then((sopNumber) => {
@@ -46,7 +46,7 @@ describe(
           cy.get('.finance-summary-finance-billing-reference', { timeout: 30000 })
             .should("contain", newSopNumber);
 
-          cy.get(".TABS_TIMELINELIST").click();
+          cy.get('#tab-container').contains('Timeline').click();
 
           cy.get(".timeline-event-title", { timeout: 30000 })
             .should("contain", "Finance personal details updated");

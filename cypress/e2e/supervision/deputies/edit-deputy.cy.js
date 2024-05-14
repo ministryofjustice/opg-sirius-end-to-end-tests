@@ -13,7 +13,7 @@ describe(
   { tags: ["@supervision", "@deputy", "@supervision-core", "@smoke-journey"] },
   () => {
     it("Editing deputy details via the deputy hub", () => {
-      cy.get(".TABS_DEPUTIES").click();
+      cy.get('#tab-container').contains('Deputies').click();
 
       cy.get('@deputy').then(({ firstname, surname }) => {
         cy.get('.summary-row-heading').contains(`${firstname} ${surname}`)

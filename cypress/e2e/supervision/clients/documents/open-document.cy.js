@@ -16,7 +16,7 @@ describe(
       cy.get("@client").then(({id, firstname, surname}) => {
         cy.visit(`/supervision/#/clients/${id}`);
         cy.contains(`${firstname} ${surname}`);
-        cy.get(".TABS_DOCUMENTS").click();
+        cy.get('#tab-container').contains('Documents').click();
         cy.get(".filter-numbers > .number").should("have.text", 1);
         cy.get("#select-all-documents-checkbox").check({ force: true });
       });
@@ -42,7 +42,7 @@ describe(
       cy.get("@client").then(({id, firstname, surname}) => {
         cy.visit(`/supervision/#/clients/${id}`);
         cy.contains(`${firstname} ${surname}`);
-        cy.get(".TABS_DOCUMENTS").click();
+        cy.get('#tab-container').contains('Documents').click();
         cy.get(".filter-numbers > .number").should("have.text", 2);
         cy.get("#select-all-documents-checkbox").check({force: true});
       });

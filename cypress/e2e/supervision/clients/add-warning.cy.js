@@ -32,7 +32,7 @@ describe(
       cy.contains("Save & exit").click();
 
       cy.get('div.panel > in-page-notification > .in-page-banner').contains('Warning created, redirecting...')
-      cy.get(".TABS_CLIENT_SUMMARY").click();
+      cy.get('#tab-container').contains('Summary').click();
       cy.get('.warnings-list').contains('Compensation Claim Pending');
       cy.get('.client-priority-info > span').contains('Case has warnings');
     });

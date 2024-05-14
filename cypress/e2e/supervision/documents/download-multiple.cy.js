@@ -29,7 +29,7 @@ describe(
         cy.visit(`/supervision/#/clients/${id}`);
       });
 
-      cy.get(".TABS_DOCUMENTS").click();
+      cy.get('#tab-container').contains('Documents').click();
       cy.get(".filter-numbers > .number").should("have.text", 2);
       cy.get("#select-all-documents-checkbox").check({ force: true });
       cy.contains(".button", "Open").click();

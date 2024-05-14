@@ -14,7 +14,7 @@ describe(
     });
 
       it("records a death notification for a deputy and confirms it", () => {
-        cy.get(".TABS_DEPUTIES").click();
+        cy.get('#tab-container').contains('Deputies').click();
         cy.reload()
         cy.get("#deputies-table").contains("Deputy record").should("be.visible");
         cy.get("#deputies-table").contains("Deputy record").click();
@@ -32,7 +32,7 @@ describe(
 
         cy.contains('.banner', "Deputy's Death Notified");
 
-        cy.get(".TABS_TIMELINELIST").click();
+        cy.get('#tab-container').contains('Timeline').click();
         cy.contains(".timeline-event-title", "Death", { timeout: 30000 })
           .parents(".wrapper")
           .within(() => {
@@ -56,7 +56,7 @@ describe(
 
         cy.contains('.banner', "Deputy is Deceased");
 
-        cy.get(".TABS_TIMELINELIST").click();
+        cy.get('#tab-container').contains('Timeline').click();
         cy.contains(".timeline-event-title", "Death", { timeout: 30000 })
           .parents(".wrapper")
           .within(() => {

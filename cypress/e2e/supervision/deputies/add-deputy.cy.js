@@ -36,7 +36,7 @@ describe(
       cy.contains("Save & continue").should("be.visible").click();
       cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
 
-      cy.get(".TABS_DEPUTIES").click();
+      cy.get('#tab-container').contains('Deputies').click();
 
       cy.get("#deputies-table").within(() => {
         cy.get(".deputy-name").contains(fullName).should("be.visible");
@@ -62,7 +62,7 @@ describe(
         .should("be.visible")
         .should("be.disabled");
 
-      cy.get(".TABS_TIMELINELIST").click();
+      cy.get('#tab-container').contains('Timeline').click();
 
       cy.get(".timeline-event-title", { timeout: 30000 })
         .should("contain", "Link")
@@ -82,7 +82,7 @@ describe(
         cy.get(".deputy-search__search-button").click();
         cy.get(".deputy-search__use-button").first().click();
 
-        cy.get(".TABS_DEPUTIES").click();
+        cy.get('#tab-container').contains('Deputies').click();
 
         cy.get("#deputies-table").within(() => {
           cy.get(".deputy-name").contains(fullName).should("be.visible");
@@ -110,7 +110,7 @@ describe(
           .should("be.visible")
           .should("be.disabled");
 
-        cy.get(".TABS_TIMELINELIST").click();
+        cy.get('#tab-container').contains('Timeline').click();
 
         cy.get(".timeline-event-title", { timeout: 30000 })
           .should("contain", "Link")
@@ -135,7 +135,7 @@ describe(
         cy.get(".deputy-search__search-button").click();
         cy.get(".deputy-search__use-button").first().click();
 
-        cy.get(".TABS_DEPUTIES").click();
+        cy.get('#tab-container').contains('Deputies').click();
 
         cy.get("#add-deputy-button").should("be.visible").click();
         cy.get(".deputy-search__input")
@@ -163,7 +163,7 @@ describe(
         cy.contains("Save & continue").should("be.visible").click();
         cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
 
-        cy.get(".TABS_DEPUTIES").click();
+        cy.get('#tab-container').contains('Deputies').click();
         cy.reload();
         cy.get("#deputies-table").within(() => {
           cy.contains("View full details").click();
@@ -207,7 +207,7 @@ describe(
           cy.createADeputyAndAssignToExistingOrder(id).then(() => {
             // deputy created through API so page needs reloading in order for Angular to be aware of the change
             cy.reload();
-            cy.get(".TABS_DEPUTIES").should("be.visible").click();
+            cy.get('#tab-container').contains('Deputies').should("be.visible").click();
             cy.contains("Mr Abc Def").should("be.visible");
             // I can create a second deputy to set them as feepayer
             searchForADeputyToReachAddADeputyPage();

@@ -20,7 +20,7 @@ describe(
   { tags: ["@supervision", "@deputy", "@supervision-core", "@smoke-journey"] },
   () => {
     it("Should remove the deputy from the client's deputy list and deputy search", () => {
-      cy.get(".TABS_DEPUTIES").click();
+      cy.get('#tab-container').contains('Deputies').click();
       cy.get("#deputies-table tr.summary-row").should("have.length", 2)
 
       cy.get("@deputy").then(({salutation, firstname, surname}) => {
@@ -34,7 +34,7 @@ describe(
 
         cy.get("@client").then(({id}) => {
           cy.visit(`/supervision/#/clients/${id}`);
-          cy.get(".TABS_DEPUTIES").click();
+          cy.get('#tab-container').contains('Deputies').click();
           cy.get("#deputies-table tr.summary-row").should("have.length", 1)
 
           cy.get('#add-deputy-button').should("be.visible").click();

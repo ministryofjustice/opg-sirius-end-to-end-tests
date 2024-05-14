@@ -25,7 +25,7 @@ describe(
           cy.get(".case-owner-value-in-client-summary").contains("Lay Team 1 - (Supervision) - 0123456789");
           cy.get("#allocate-button").should("be.visible");
           cy.get("#allocate-button").should("be.disabled");
-          cy.get(".TABS_TIMELINELIST").click();
+          cy.get('#tab-container').contains('Timeline').click();
           cy.get(".timeline-event-title", { timeout: 30000 })
             .should("contain", "Client Allocated");
           cy.get(".hook-allocated-teamname").contains("Lay Team 1 - (Supervision)");
