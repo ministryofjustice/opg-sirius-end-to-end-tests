@@ -15,7 +15,7 @@ beforeEach(() => {
         });
     });
   });
-  cy.get('.TABS_REPORTS').click();
+  cy.get('#tab-container').contains('Reports').click();
 });
 
 describe(

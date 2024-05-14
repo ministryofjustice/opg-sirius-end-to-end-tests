@@ -88,7 +88,7 @@ describe(
       cy.wait('@fileDownload').its('response.statusCode').should('equal', 200)
     });
   });
-  
+
   it("Upload card payment data", {
     retries: {
       runMode: 2,
@@ -141,7 +141,7 @@ describe(
       cy.get(".in-page-success-banner").should("be.visible")
         .and("contain.text", "File uploaded successfully")
       cy.visit(`/supervision/#/clients/${client.id}`);
-      cy.get('.TABS_FINANCEINFO').click();
+      cy.get('#tab-container').contains('Finance').click();
       cy.get(`dt:contains(SOP Reference) + dd:contains(${sopNumber})`).should('be.visible')
     })
   });
@@ -239,7 +239,7 @@ describe(
         cy.get(`a[href="#/clients/${clientId}"]`).click();
       });
 
-      cy.get('.TABS_FINANCEINFO').click();
+      cy.get('#tab-container').contains('Finance').click();
       cy.get("@invoice").then(({ reference }) => {
         let dateToday = dayjs().format('DD/MM/YYYY')
 
@@ -274,7 +274,7 @@ describe(
         cy.visit(`/supervision/#/clients/` + clientId);
       })
 
-      cy.get('.TABS_FINANCEINFO').click();
+      cy.get('#tab-container').contains('Finance').click();
       cy.get('@invoice').then(({ reference }) => {
         cy.get('.ledger-entry-details .key-value-list__read-only > :nth-child(6)').contains(reference);
         cy.get('.ledger-entry-details .key-value-list__read-only > :nth-child(10)').contains('Approved');
@@ -295,7 +295,7 @@ describe(
       cy.get('@clientId').then(clientId => {
         cy.visit(`/supervision/#/clients/` + clientId);
       })
-      cy.get('.TABS_FINANCEINFO').click();
+      cy.get('#tab-container').contains('Finance').click();
       cy.get('@invoice').then(({ reference }) => {
         cy.get('.ledger-entry-details .key-value-list__read-only > :nth-child(6)').contains(reference);
         cy.get('.ledger-entry-details .key-value-list__read-only > :nth-child(10)').contains('Rejected');

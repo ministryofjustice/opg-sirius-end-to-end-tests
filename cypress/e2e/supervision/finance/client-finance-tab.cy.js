@@ -15,7 +15,7 @@
         cy.assignSOPNumberToClient(caseRecNumber)
         cy.visit(`/supervision/#/clients/${id}`);
       });
-      cy.get('.TABS_FINANCEINFO').click();
+      cy.get('#tab-container').contains('Finance').click();
     });
 
     it("allows adding credit and shows this correctly in the finance invoice list", () => {
@@ -31,7 +31,7 @@
       cy.get('[type="submit"]').should('not.be.disabled');
       cy.get('[type="submit"]').click();
 
-      cy.get('.TABS_FINANCEINFO').click();
+      cy.get('#tab-container').contains('Finance').click();
       cy.get('td > h2').should('contain.text', 'Invoice ledger allocations');
       cy.get('.invoice-list-item-amount').should('contain.text', '£100.00');
       cy.get('.invoice-list-item-outstanding').should('contain.text', '£100.00');
@@ -57,7 +57,7 @@
       cy.get('[type="submit"]').should('not.be.disabled');
       cy.get('[type="submit"]').click();
 
-      cy.get('.TABS_FINANCEINFO').click();
+      cy.get('#tab-container').contains('Finance').click();
       cy.get('#list-finance-discounts').should('contain.text', 'Fee reductions');
       cy.get('.finance-discount-list-discount').should('contain.text', 'Remission');
       cy.get('#finance-discount-list-table').should('contain.text', '01/04/2024');
@@ -80,13 +80,13 @@
         cy.assignSOPNumberToClient(caseRecNumber)
         cy.visit(`/supervision/#/clients/${id}`);
       });
-      cy.get('.TABS_FINANCEINFO').click();
+      cy.get('#tab-container').contains('Finance').click();
     });
 
     it('shows annual fee information', () => {
       cy.get("@order").closeOrder("expired");
       cy.reload();
-      cy.get('.TABS_FINANCEINFO').click();
+      cy.get('#tab-container').contains('Finance').click();
       cy.get('span > .full-details').should('be.visible');
       cy.get('span > .full-details').should('have.length', 2);
       cy.get(':nth-child(1) > .invoice-list-item-action').click();
@@ -118,7 +118,7 @@
         cy.get("@client").then(({ id }) => {
           cy.visit(`/supervision/#/clients/${id}`);
         });
-        cy.get('.TABS_FINANCEINFO').click();
+        cy.get('#tab-container').contains('Finance').click();
 
         cy.get('.add-credit').should('not.exist');
         cy.get('.write-off').should('not.exist');
@@ -131,7 +131,7 @@
         cy.get("@client").then(({ id }) => {
           cy.visit(`/supervision/#/clients/${id}`);
         });
-        cy.get('.TABS_FINANCEINFO').click();
+        cy.get('#tab-container').contains('Finance').click();
 
         cy.get('.add-credit').should('not.exist');
         cy.get('.write-off').should('not.exist');

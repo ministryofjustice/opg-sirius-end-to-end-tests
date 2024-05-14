@@ -20,7 +20,7 @@ describe(
             );
           });
         });
-        cy.get('.TABS_REPORTS').click();
+        cy.get('#tab-container').contains('Reports').click();
         cy.get('.extend-report-due-date-link').first().click();
         cy.get('#begin-extend-report-due-date-button > span').click();
         cy.getDatePickerInputByLabel("Report due date").clear();
@@ -41,7 +41,7 @@ describe(
             );
           });
         });
-        cy.get('.TABS_REPORTS').click();
+        cy.get('#tab-container').contains('Reports').click();
         cy.get('.extend-report-due-date-link').first().click();
         cy.get('#begin-extend-report-due-date-button > span').click();
         cy.getDatePickerInputByLabel("Report due date").clear();
