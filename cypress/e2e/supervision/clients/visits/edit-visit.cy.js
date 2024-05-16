@@ -16,7 +16,7 @@ describe(
         }
       );
 
-      cy.get(".TABS_VISITS button").click();
+      cy.get('#tab-container').contains('Visits').click();
 
       cy.contains("Supervision - Pro Visit - Standard");
       cy.get(".edit-visit-button").click();

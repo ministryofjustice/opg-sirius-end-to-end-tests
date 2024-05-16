@@ -20,7 +20,7 @@ describe(
         );
       });
 
-      cy.get(".TABS_ORDERS").click();
+      cy.get('#tab-container').contains('Orders').click();
 
     cy.get(".edit-bond-button").click();
     cy.contains("button", "Dispense with the bond").click();

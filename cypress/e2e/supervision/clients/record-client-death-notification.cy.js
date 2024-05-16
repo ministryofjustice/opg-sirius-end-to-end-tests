@@ -33,7 +33,7 @@ describe(
         cy.contains("Confirm death notification").click();
         cy.contains("Client death notified").click();
         cy.get('.client-priority-info').contains('Client notified deceased');
-        cy.get(".TABS_TIMELINELIST").click();
+        cy.get('#tab-container').contains('Timeline').click();
         cy.get('.event-death-record > .section-content > .wrapper', { timeout: 3000 })
           .should("contain", "Death")
           .should("contain", "The death of the client has been notified")

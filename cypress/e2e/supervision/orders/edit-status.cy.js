@@ -40,7 +40,7 @@ describe(
 
           cy.get("button[type='submit']").click();
 
-          cy.get(".TABS_ORDERS").click();
+          cy.get('#tab-container').contains('Orders').click();
 
           cy.get(".closed-order-badge").should("exist");
           cy.get(".add-bond-button").should("not.exist");
@@ -85,7 +85,7 @@ describe(
 
           cy.get("button[type='submit']").click();
 
-          cy.get(".TABS_ORDERS").click();
+          cy.get('#tab-container').contains('Orders').click();
 
           cy.get('.duplicate-order-badge').should("exist");
           cy.get(".add-bond-button").should("not.exist");

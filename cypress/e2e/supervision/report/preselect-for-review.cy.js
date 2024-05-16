@@ -9,7 +9,7 @@ beforeEach(() => {
       cy.visit(`/supervision/#/clients/${clientId}?order=${orderId}`);
     });
   });
-  cy.get(".TABS_REPORTS").click();
+  cy.get('#tab-container').contains('Reports').click();
 });
   describe(
   "Preselect report for review",
@@ -35,7 +35,7 @@ beforeEach(() => {
       cy.get("@order").then(({id: orderId}) => {
         cy.get("@client").then(({id: clientId}) => {
           cy.visit(`/supervision/#/clients/${clientId}?order=${orderId}`);
-          cy.get(".TABS_REPORTS").click();
+          cy.get('#tab-container').contains('Reports').click();
           cy.wait(1000) // :`(
           cy.contains('View pending report').click()
           cy.get('.preselect-report-for-review-link')
