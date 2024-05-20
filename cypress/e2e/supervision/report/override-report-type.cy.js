@@ -17,6 +17,7 @@ beforeEach(() => {
   () => {
     it("Successfully override a report type", () => {
       cy.get('report-summary .report-type').should('not.contain.text', 'OPG102')
+      cy.wait(500);
       cy.get('.report-item:first-child .override-report-type-link').as('actionLink')
       cy.get('@actionLink').should('be.visible')
       cy.get('@actionLink').should('contain.text', 'Request OPG102 report')
