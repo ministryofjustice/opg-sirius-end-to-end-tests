@@ -13,14 +13,7 @@ beforeEach(() => {
 });
   describe(
   "Override report type",
-    {
-      tags: ["@supervision", "@reports", "@override-report-type"],
-      retries: {
-        runMode: 2,
-        openMode: 0,
-      }
-    },
-    () => {
+    { tags: ["@supervision", "@reports", "@override-report-type"], }, () => {
       it("Successfully override a report type", () => {
         cy.get('report-summary .report-type').should('not.contain.text', 'OPG102')
         cy.get('.report-item:first-child .override-report-type-link').as('actionLink')
