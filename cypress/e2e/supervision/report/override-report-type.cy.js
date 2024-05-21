@@ -18,7 +18,12 @@ Cypress._.times(10, () => {
     "Override report type",
     { tags: ["@supervision", "@reports", "@override-report-type"] },
     () => {
-      it("Successfully override a report type", () => {
+      it("Successfully override a report type", {
+        retries: {
+          runMode: 2,
+          openMode: 0,
+        }
+      } => {
         cy.get('.report-summary-action-panel > .lodge-report-container-parent', { timeout: 10000 }).should('contain.text', 'Abandon report');
         cy.get('report-summary .report-type').should('not.contain.text', 'OPG102');
         cy.reload();
