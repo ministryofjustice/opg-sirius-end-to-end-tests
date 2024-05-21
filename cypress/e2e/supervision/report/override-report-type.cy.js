@@ -30,14 +30,14 @@ Cypress._.times(10, () => {
           cy.get('.lodge-report-container').should('contain.text', 'Lodge report')
          );
         cy.waitUntil(() =>
-          cy.get('.override-report-type-link', { timeout: 10000 }).first().should('exist')
+          cy.get('.override-report-type-link', { timeout: 10000 }).should('exist')
         );
-        cy.waitUntil(() => 
-          cy.get('.override-report-type-link', { timeout: 10000 }).first().as('actionLink')
+        cy.waitUntil(() =>
+          cy.get('.override-report-type-link', { timeout: 10000 }).as('actionLink')
         );
         cy.get('@actionLink').should('be.visible');
         cy.get('@actionLink').should('contain.text', 'Request OPG102 report');
-        cy.get('@actionLink').click();
+        cy.get('@actionLink').first().click();
         cy.get('.head > .title').should('contain.text', 'Request an OPG102 report');
         cy.get('footer .button.primary')
           .should('contain.text', 'Save & exit')
