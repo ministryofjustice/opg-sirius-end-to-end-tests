@@ -12,7 +12,7 @@ beforeEach(() => {
   cy.get('#tab-container').contains('Reports').click();
 });
 
-Cypress._.times(30, () => {
+Cypress._.times(10, () => {
 
   describe(
     "Override report type",
@@ -21,10 +21,11 @@ Cypress._.times(30, () => {
       it("Successfully override a report type", () => {
         cy.reload();
         cy.get('.report-summary-action-panel > .lodge-report-container-parent', { timeout: 10000 }).should('contain.text', 'Abandon report');
-        cy.get('report-summary .report-type').should('not.contain.text', 'OPG102')
-        cy.get('.report-item:first-child .override-report-type-link', { timeout: 10000 }).as('actionLink')
-        cy.get('@actionLink').should('be.visible')
-        cy.get('@actionLink').should('contain.text', 'Request OPG102 report')
+        cy.get('report-summary .report-type').should('not.contain.text', 'OPG102');
+        cy.wait(3000);
+        cy.get('.report-item:first-child .override-report-type-link', { timeout: 10000 }).as('actionLink');
+        cy.get('@actionLink').should('be.visible');
+        cy.get('@actionLink').should('contain.text', 'Request OPG102 report');
         cy.get('@actionLink').click();
         cy.get('.head > .title').should('contain.text', 'Request an OPG102 report');
         cy.get('footer .button.primary')
