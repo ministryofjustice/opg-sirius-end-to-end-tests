@@ -24,17 +24,17 @@ Cypress._.times(10, () => {
           openMode: 0,
         }
       }, () => {
-        cy.reload();
         cy.get('.report-summary-action-panel > .lodge-report-container-parent', { timeout: 10000 }).should('contain.text', 'Lodge report');
         cy.get('report-summary .report-type').should('not.contain.text', 'OPG102');
         cy.waitUntil(() =>
           cy.get('.lodge-report-container').should('contain.text', 'Lodge report')
          );
         cy.waitUntil(() =>
-          cy.get('.report-item:first-child .override-report-type-link', { timeout: 10000 }).should('exist')
+          cy.get('.override-report-type-link', { timeout: 10000 }).first().should('exist')
         );
-
-        cy.get('.report-item:first-child .override-report-type-link', { timeout: 10000 }).as('actionLink');
+        cy.waitUntil(() => 
+          cy.get('.override-report-type-link', { timeout: 10000 }).first().as('actionLink')
+        );
         cy.get('@actionLink').should('be.visible');
         cy.get('@actionLink').should('contain.text', 'Request OPG102 report');
         cy.get('@actionLink').click();
