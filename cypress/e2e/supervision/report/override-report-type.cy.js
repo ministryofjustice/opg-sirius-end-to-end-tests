@@ -22,7 +22,7 @@ Cypress._.times(30, () => {
         cy.reload();
         cy.get('.report-summary-action-panel > .lodge-report-container-parent', { timeout: 10000 }).should('contain.text', 'Abandon Report');
         cy.get('report-summary .report-type').should('not.contain.text', 'OPG102')
-        cy.get('.report-item:first-child .override-report-type-link').as('actionLink')
+        cy.get('.report-item:first-child .override-report-type-link', { timeout: 10000 }).as('actionLink')
         cy.get('@actionLink').should('be.visible')
         cy.get('@actionLink').should('contain.text', 'Request OPG102 report')
         cy.get('@actionLink').click();
