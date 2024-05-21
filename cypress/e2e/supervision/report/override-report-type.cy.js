@@ -20,7 +20,7 @@ Cypress._.times(30, () => {
     () => {
       it("Successfully override a report type", () => {
         cy.reload();
-        cy.get('.report-summary-action-panel > .lodge-report-container-parent', { timeout: 10000 }).should('contain.text', 'Abandon Report');
+        cy.get('.report-summary-action-panel > .lodge-report-container-parent', { timeout: 10000 }).should('contain.text', 'Abandon report');
         cy.get('report-summary .report-type').should('not.contain.text', 'OPG102')
         cy.get('.report-item:first-child .override-report-type-link').as('actionLink')
         cy.get('@actionLink').should('be.visible')
