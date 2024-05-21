@@ -4,7 +4,6 @@ beforeEach(() => {
     .withOrder()
     .withBond();
 });
-
 describe(
   "Dispense bond",
   () => {
@@ -22,8 +21,8 @@ describe(
 
       cy.get('#tab-container').contains('Orders').click();
 
-    cy.get(".edit-bond-button").click();
-    cy.contains("button", "Dispense with the bond").click();
+      cy.get(".edit-bond-button").click();
+      cy.contains("button", "Dispense with the bond").click();
 
       cy.get("dispense-bond-dialog").contains("button", "Dispense with the bond").click();
 
@@ -34,7 +33,7 @@ describe(
       // future date to display the validation box
       cy.get('input[name="bondDispenseDischargedDate_year"]').type((today.getFullYear() + 1).toString());
 
-      cy.get('[label="Dispensed reason"]').contains("Court instructions").click();
+      cy.contains("Court instructions").click();
 
       cy.contains("button", "Save & dispense with the bond").click();
 
