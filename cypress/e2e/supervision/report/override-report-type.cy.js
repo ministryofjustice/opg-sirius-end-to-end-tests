@@ -15,7 +15,7 @@ beforeEach(() => {
   cy.get('#tab-container').contains('Reports').click();
 });
 
-Cypress._.times(5, () => {
+Cypress._.times(10, () => {
   describe(
     "Override report type",
     { tags: ["@supervision", "@reports", "@override-report-type"] },
@@ -38,9 +38,11 @@ Cypress._.times(5, () => {
           .enterText('<p>A reason to override the report type</p>');
         cy.get('footer .button.primary').click()
         cy.get('.dialog-header').should('contain.text', 'Override report type');
+        cy.intercept('PUT', '**/override-report-type').as('overrideReportType');
         cy.get('.hook-modal-confirm').click()
-        cy.get('#tab-container').contains('Reports').click();
+        cy.wait('@overrideReportType');
         cy.reload();
+        cy.get('#tab-container').contains('Reports').click();
         cy.waitForStableDOM();
         cy.contains('Cancel OPG102', {timeout: 60000}).should('be.visible');
         cy.get('report-summary .report-type').should('contain.text', 'OPG102')
