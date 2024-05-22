@@ -42,8 +42,8 @@ Cypress._.times(10, () => {
         cy.get('.hook-modal-confirm').click()
         cy.wait('@overrideReportType');
         cy.get('#tab-container').contains('Reports').click();
-        cy.wait(10000);
-        cy.contains('Cancel OPG102', {timeout: 10000}).should('be.visible');
+        cy.waitForStableDOM();
+        cy.contains('Cancel OPG102', {timeout: 3000}).should('be.visible');
         cy.get('report-summary .report-type').should('contain.text', 'OPG102')
       });
     });
