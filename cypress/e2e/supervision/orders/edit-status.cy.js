@@ -2,11 +2,9 @@ beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createClient();
 });
-
-
 describe(
   "Edit order status successfully and timeline is created",
-  {tags: ["@supervision-core", "@order-status"]},
+  { tags: ["@supervision-core", "@order-status"] },
   () => {
     it("successfully edits the order status for a supervised order and creates a timeline event", () => {
       cy.get("@client").withOrder()
@@ -29,8 +27,7 @@ describe(
           cy.get("button[type='submit']").should('be.disabled');
           cy.getDatePickerInputByLabel("Status date").type("01/01/2023");
 
-          cy.get('[name="fIELDLABELSORDERSTATUS"][data-core-value=CLOSED]').check({ force: true }).should('be.checked')
-
+          cy.contains('Closed').click();
 
           cy.get("select[name='fIELDLABELSORDERCLOSUREREASON']")
             .select("Client deceased");
@@ -49,7 +46,7 @@ describe(
 
           cy.get('#tab-container').contains('Timeline').click();
 
-          cy.get(".timeline-event-title", {timeout: 30000}).should(
+          cy.get(".timeline-event-title", { timeout: 30000 }).should(
             "contain",
             "Order status changed"
           );
@@ -67,10 +64,12 @@ describe(
     });
 
     it("successfully edits the order status for a non-supervised order and creates a timeline event", () => {
-      cy.get("@client").withOrder({"orderSubtype": {
+      cy.get("@client").withOrder({
+        "orderSubtype": {
           "handle": "TENANCY",
           "label": "Tenancy"
-        }});
+        }
+      });
 
       cy.get("@order").then(({ id: orderId }) => {
         cy.get("@client").then(({ id: clientId }) => {
@@ -78,7 +77,7 @@ describe(
             `/supervision/#/clients/${clientId}/orders/${orderId}/status`
           );
 
-          cy.get('#fIELDLABELSORDERSTATUS fieldset > :nth-child(3) > label').click();
+          cy.contains('Duplicate').click();
 
           cy.getDatePickerInputByLabel("Status date").clear();
           cy.getDatePickerInputByLabel("Status date").type("01/01/2023");
@@ -94,7 +93,7 @@ describe(
 
           cy.get('#tab-container').contains('Timeline').click();
 
-          cy.get(".timeline-event-title", {timeout: 30000}).should(
+          cy.get(".timeline-event-title", { timeout: 30000 }).should(
             "contain",
             "Order status changed"
           );
