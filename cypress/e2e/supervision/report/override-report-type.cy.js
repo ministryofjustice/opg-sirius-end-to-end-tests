@@ -6,17 +6,10 @@ beforeEach(() => {
     .withActiveOrderStatus()
   cy.get("@order").then(({id: orderId}) => {
     cy.get("@client").then(({id: clientId}) => {
-      // cy.intercept('*/correspondence/orders/*').as('ordersRequest')
-      // cy.intercept('*/finance/*').as('financeRequest')
       cy.visit(`/supervision/#/clients/${clientId}?order=${orderId}`);
-      // cy.wait('@ordersRequest').first();
-      // cy.wait('@financeRequest');
-      cy.get('#tab-container').contains('Orders').click();
-      cy.wait(1000);
-      cy.get('#tab-container').contains('Reports').click();
-    // .its('response.statusCode').should('eq', 500)
     });
   });
+  cy.get('#tab-container').contains('Reports').click();
 });
 
 Cypress._.times(5, () => {
@@ -25,6 +18,8 @@ Cypress._.times(5, () => {
     { tags: ["@supervision", "@reports", "@override-report-type"] },
     () => {
       it("Successfully override a report type", () => {
+        cy.get('#tab-container').contains('Reports').click();
+        cy.waitForStableDOM();
         cy.get('report-summary .report-type').should('not.contain.text', 'OPG102');
         cy.get('.lodge-report-container', { timeout: 10000 }).should('contain.text', 'Lodge report');
         cy.get('.override-report-type-link', { timeout: 60000 }).should('be.visible');
