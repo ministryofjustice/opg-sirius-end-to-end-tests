@@ -34,7 +34,7 @@ describe(
         cy.intercept({ method: "DELETE" }).as("unlinkDeputyCall");
         cy.get("tr.summary-row")
           .filter(':contains("' + salutation + ' ' + firstname + ' ' + surname + '")')
-          .find("a.unlink-deputy").click()
+          .contains("Un-link deputy").click()
         cy.get("unlink-deputy-dialog").contains("Unlink deputy").click()
         cy.wait("@unlinkDeputyCall").then(() => {
           cy.reload()
