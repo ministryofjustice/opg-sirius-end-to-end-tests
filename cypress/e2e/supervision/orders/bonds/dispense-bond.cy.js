@@ -34,7 +34,7 @@ describe(
       // future date to display the validation box
       cy.get('input[name="bondDispenseDischargedDate_year"]').type((today.getFullYear() + 1).toString());
 
-      cy.get('[label="Dispensed reason"]').contains("Court instructions").click();
+      cy.contains("Court instructions").click();
 
       cy.contains("button", "Save & dispense with the bond").click();
 
