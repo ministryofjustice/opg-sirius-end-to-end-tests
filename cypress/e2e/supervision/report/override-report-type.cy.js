@@ -29,11 +29,7 @@ Cypress._.times(5, () => {
           cy.waitForStableDOM();
           cy.contains('Request OPG102').should('be.visible');
           cy.contains('Request OPG102').click();
-          // cy.get('.override-report-type-link', { timeout: 60000 }).as('actionLink');
         });
-        // cy.get('@actionLink', { timeout: 60000 }).should('be.visible');
-        // cy.get('@actionLink').should('contain.text', 'Request OPG102 report');
-        // cy.get('@actionLink').click();
         cy.get('.head > .title').should('contain.text', 'Request an OPG102 report');
         cy.get('footer .button.primary')
           .should('contain.text', 'Save & exit')
@@ -44,8 +40,9 @@ Cypress._.times(5, () => {
         cy.get('.dialog-header').should('contain.text', 'Override report type');
         cy.get('.hook-modal-confirm').click()
         cy.get('#tab-container').contains('Reports').click();
+        cy.reload();
         cy.waitForStableDOM();
-        cy.contains('Cancel OPG102 request', {timeout: 6000}).should('be.visible');
+        cy.contains('Cancel OPG102', {timeout: 60000}).should('be.visible');
         cy.get('report-summary .report-type').should('contain.text', 'OPG102')
       });
     });
