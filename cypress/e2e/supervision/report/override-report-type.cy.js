@@ -42,7 +42,6 @@ Cypress._.times(10, () => {
         cy.wait('@overrideReportType');
         cy.reload();
         cy.get('#tab-container').contains('Reports').click();
-        cy.waitForStableDOM();
         cy.contains('Cancel OPG102', {timeout: 60000}).should('be.visible');
         cy.get('report-summary .report-type').should('contain.text', 'OPG102')
       });
