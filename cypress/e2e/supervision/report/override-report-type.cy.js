@@ -8,7 +8,9 @@ beforeEach(() => {
     cy.get("@client").then(({id: clientId}) => {
       cy.visit(`/supervision/#/clients/${clientId}?order=${orderId}`);
       cy.intercept('GET', '**/orders').as('getOrders');
+      cy.intercept('GET', '**/finance/*').as('getFinance');
       cy.wait('@getOrders');
+      cy.wait('@getFinance');
     });
   });
   cy.get('#tab-container').contains('Reports').click();
