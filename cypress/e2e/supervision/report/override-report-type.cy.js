@@ -26,7 +26,7 @@ Cypress._.times(10, () => {
         cy.wait('@getFinance').then(() => {
           cy.get('report-summary .report-type').should('not.contain.text', 'OPG102');
           cy.get('.lodge-report-container', { timeout: 10000 }).should('contain.text', 'Lodge report');
-          cy.wait(10000)
+          cy.waitForStableDOM();
           cy.contains('Request OPG102').should('be.visible');
           cy.contains('Request OPG102').click();
         });
@@ -42,7 +42,7 @@ Cypress._.times(10, () => {
         cy.get('.hook-modal-confirm').click()
         cy.wait('@overrideReportType');
         cy.get('#tab-container').contains('Reports').click();
-        cy.waitForStableDOM();
+        cy.wait(10000);
         cy.contains('Cancel OPG102', {timeout: 10000}).should('be.visible');
         cy.get('report-summary .report-type').should('contain.text', 'OPG102')
       });
