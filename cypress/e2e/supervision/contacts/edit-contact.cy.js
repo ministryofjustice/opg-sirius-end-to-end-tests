@@ -15,7 +15,7 @@ describe(
   {tags: ["@supervision-core", "@contact", "@smoke-journey"]},
   () => {
     it("can edit a non organisation contact", () => {
-      cy.get(".contacts-list").contains("a", "Edit").click();
+      cy.get(".contacts-list").contains("Edit").click();
       cy.get("footer").contains("button", "Save & update contact").as("editContactButton");
 
       cy.get("input[name=firstName]").type("A".repeat(256));

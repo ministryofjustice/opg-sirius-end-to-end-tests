@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "cypress run --headless --browser chrome",
+    "test": "cypress run --headless --browser chromium",
     "parallel": "cypress-parallel --reporter cypress-multi-reporters --reporterOptions configFile=reporter-config.json -s test -t ${PARALLELISATION:=3} -d cypress/e2e"
   },
   "repository": {
