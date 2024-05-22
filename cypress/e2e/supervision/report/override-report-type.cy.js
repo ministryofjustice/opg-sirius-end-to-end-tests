@@ -12,26 +12,16 @@ beforeEach(() => {
   cy.get('#tab-container').contains('Reports').click();
 });
 
-Cypress._.times(10, () => {
-
+Cypress._.times(5, () => {
   describe(
     "Override report type",
     { tags: ["@supervision", "@reports", "@override-report-type"] },
     () => {
-      it("Successfully override a report type", {
-        retries: {
-          runMode: 2,
-          openMode: 0,
-        }
-      }, () => {
-        cy.get('.report-summary-action-panel > .lodge-report-container-parent', { timeout: 10000 }).should('contain.text', 'Lodge report');
+      it("Successfully override a report type", () => {
         cy.get('report-summary .report-type').should('not.contain.text', 'OPG102');
-        cy.waitUntil(() =>
-          cy.get('.lodge-report-container').should('contain.text', 'Lodge report')
-         );
-        cy.waitUntil(() =>
-          cy.get('.override-report-type-link', { timeout: 10000 }).should('exist')
-        );
+        cy.get('.lodge-report-container', { timeout: 10000 }).should('contain.text', 'Lodge report')
+        cy.get('.override-report-type-link', { timeout: 10000 }).should('exist')
+        cy.wait(5000);
         cy.waitUntil(() =>
           cy.get('.override-report-type-link', { timeout: 10000 }).as('actionLink')
         );
