@@ -22,7 +22,7 @@ Cypress._.times(5, () => {
         cy.waitForStableDOM();
         cy.get('report-summary .report-type').should('not.contain.text', 'OPG102');
         cy.get('.lodge-report-container', { timeout: 10000 }).should('contain.text', 'Lodge report');
-        cy.wait(60000);
+        cy.get('.override-report-type-link', { timeout: 60000 }).should('be.visible');
         cy.get('.override-report-type-link', { timeout: 10000 }).as('actionLink');
         cy.get('@actionLink').should('be.visible');
         cy.get('@actionLink').should('contain.text', 'Request OPG102 report');
