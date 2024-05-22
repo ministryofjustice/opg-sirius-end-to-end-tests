@@ -9,8 +9,7 @@ beforeEach(() => {
       cy.visit(`/supervision/#/clients/${clientId}?order=${orderId}`);
       cy.intercept('GET', '**/orders').as('getOrders');
       cy.intercept('GET', '**/finance/*').as('getFinance');
-      cy.wait('@getOrders');
-      cy.wait('@getFinance');
+
     });
   });
   cy.get('#tab-container').contains('Reports').click();
@@ -23,6 +22,8 @@ Cypress._.times(5, () => {
     () => {
       it("Successfully override a report type", () => {
         cy.get('#tab-container').contains('Reports').click();
+        cy.wait('@getOrders');
+        cy.wait('@getFinance');
         cy.waitForStableDOM();
         cy.get('report-summary .report-type').should('not.contain.text', 'OPG102');
         cy.get('.lodge-report-container', { timeout: 10000 }).should('contain.text', 'Lodge report');
