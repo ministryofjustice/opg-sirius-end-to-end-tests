@@ -20,7 +20,7 @@ describe(
       cy.get('#begin-change-order-button > span').click();
       cy.contains("button", "Yes, edit order").should("be.enabled").click();
       cy.get('[label="Order title"] > .fieldset > .ng-untouched').type('This is an order title');
-      cy.get('#howHaveTheDeputyDeputiesBeenAppointed > .fieldset > fieldset > :nth-child(1) > .radio-button').click();
+      cy.contains('Sole').click();
       const data = '<p>Order notes etc....</p>';
       cy.waitForTinyMCE()
         .enterText(data);
