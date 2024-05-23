@@ -46,7 +46,7 @@
       cy.get('#add-finance-discount-button', { timeout: 2000 }).should('be.visible');
       cy.get('#add-finance-discount-button').click();
       cy.get('.head > .title').should('contain.text', 'Award fee reduction');
-      cy.get('.fieldset > fieldset > :nth-child(1) > .radio-button').contains('Remission').click();
+      cy.get('.fieldset > fieldset').contains('Remission').click();
       cy.get('#fIELDLABELSSTARTDATE_year').type('2024');
       cy.get('#fIELDLABELSENDDATE_year').type('2025');
       cy.get('#dateReceived_day').type('01');
