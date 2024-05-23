@@ -78,7 +78,7 @@ describe(
             `/supervision/#/clients/${clientId}/orders/${orderId}/status`
           );
 
-          cy.contains('Duplicate').click();
+          cy.get('.fieldset > fieldset').contains('Duplicate').click();
 
           cy.getDatePickerInputByLabel("Status date").clear();
           cy.getDatePickerInputByLabel("Status date").type("01/01/2023");
