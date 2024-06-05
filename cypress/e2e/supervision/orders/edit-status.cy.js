@@ -29,7 +29,7 @@ describe(
           cy.get("button[type='submit']").should('be.disabled');
           cy.getDatePickerInputByLabel("Status date").type("01/01/2023");
 
-          cy.contains('Closed').click();
+          cy.get('.fieldset > fieldset').contains('Closed').click();
 
 
           cy.get("select[name='fIELDLABELSORDERCLOSUREREASON']")
