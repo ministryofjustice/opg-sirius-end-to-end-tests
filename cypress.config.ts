@@ -1,5 +1,6 @@
-const { defineConfig } = require("cypress");
-const { verifyDownloadTasks } = require("cy-verify-downloads");
+import { defineConfig } from "cypress";
+import { verifyDownloadTasks } from "cy-verify-downloads";
+
 const fs = require("fs");
 
 module.exports = defineConfig({
