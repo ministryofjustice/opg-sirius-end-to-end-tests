@@ -1,6 +1,8 @@
-const { defineConfig } = require("cypress");
-const { verifyDownloadTasks } = require("cy-verify-downloads");
-const fs = require("fs");
+import { defineConfig } from "cypress";
+import { verifyDownloadTasks } from "cy-verify-downloads";
+import generated from "@cypress/grep/src/plugin";
+import cypress_failed_log from "cypress-failed-log/src/failed";
+import * as fs from "fs";
 
 module.exports = defineConfig({
   defaultCommandTimeout: 60000,
@@ -17,10 +19,10 @@ module.exports = defineConfig({
   scrollBehavior: 'center',
   e2e: {
     setupNodeEvents(on, config) {
-      require('@cypress/grep/src/plugin')(config);
+      generated(config);
 
       on("task", {
-        failed: require("cypress-failed-log/src/failed")(),
+        failed: cypress_failed_log(),
       });
 
       on("task", verifyDownloadTasks);
