@@ -1,7 +1,7 @@
-require("cypress-iframe");
-require("cypress-wait-until");
+import "cypress-wait-until";
+import RequestBody = Cypress.RequestBody;
 
-Cypress.Commands.add("login", (email) => {
+Cypress.Commands.add("login", (email: string): void => {
   cy.visit("/auth/logout", { failOnStatusCode: false });
   cy.clearCookies();
 
@@ -16,7 +16,7 @@ Cypress.Commands.add("login", (email) => {
   cy.get('[type="submit"]').click();
 });
 
-Cypress.Commands.add("loginAs", (user) => {
+Cypress.Commands.add("loginAs", (user: string): void => {
   const emails = {
     "Allocations User": "allocations@opgtest.com",
     "Case Manager": "case.manager@opgtest.com",
@@ -38,7 +38,7 @@ Cypress.Commands.add("loginAs", (user) => {
   cy.login(email);
 });
 
-const getAndStoreTokens = () => {
+const getAndStoreTokens = (): void => {
   cy.request({
     url: "/api/v1/users/current",
     headers: {
@@ -56,7 +56,7 @@ const getAndStoreTokens = () => {
   });
 };
 
-const sendToApi = (verb, url, data, retry) => {
+const sendToApi = (verb: string, url: string, data: RequestBody, retry: boolean = false): void => {
   cy.then(getAndStoreTokens);
 
   const retryOptions = retry
@@ -82,15 +82,15 @@ const sendToApi = (verb, url, data, retry) => {
   });
 };
 
-Cypress.Commands.add("postToApi", (url, data, retry) => {
+Cypress.Commands.add("postToApi", (url: string, data: string, retry: boolean = false): void => {
   sendToApi("POST", url, data, retry);
 });
 
-Cypress.Commands.add("putToApi", (url, data) => {
+Cypress.Commands.add("putToApi", (url: string, data: string): void => {
   sendToApi("PUT", url, data);
 });
 
-Cypress.Commands.add("waitForSearchService", (searchTerm = "", personTypes = [], minimumExpected = 1) => {
+Cypress.Commands.add("waitForSearchService", (searchTerm: string = "", personTypes: string[] = [], minimumExpected: number = 1): void => {
   cy.waitUntil(
     () =>
       cy
