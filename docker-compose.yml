@@ -11,7 +11,7 @@ services:
         CYPRESS_BASE_URL: https://development.sirius.opg.service.justice.gov.uk
     volumes:
       - "./cypress:/home/node/cypress"
-      - "./cypress.config.js:/home/node/cypress.config.js"
+      - "./cypress.config.ts:/home/node/cypress.config.ts"
       - "./test-results/logs:/home/node/cypress/logs"
       - "./test-results/screenshots:/home/node/cypress/screenshots"
       - "./test-results:/test-results"

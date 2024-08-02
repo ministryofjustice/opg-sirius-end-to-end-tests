@@ -96,7 +96,7 @@ RUN npm install
 
 ENV CYPRESS_VIDEO=false
 
-COPY --chown=node:node cypress.config.js cypress.config.js
+COPY --chown=node:node cypress.config.ts cypress.config.ts
 COPY --chown=node:node reporter-config.json reporter-config.json
 COPY --chown=node:node cypress cypress
 
