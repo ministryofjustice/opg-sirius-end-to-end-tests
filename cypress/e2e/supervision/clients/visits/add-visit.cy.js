@@ -30,6 +30,10 @@ describe(
           .closest(".fieldset")
           .contains("Standard")
           .click();
+        cy.contains("Who to visit")
+          .closest(".fieldset")
+          .contains("Client")
+          .click();
       });
       cy.contains("Save & exit").click();
       cy.get('#tab-container').contains('Visits').click();
