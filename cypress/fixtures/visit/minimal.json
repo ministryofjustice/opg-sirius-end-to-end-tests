@@ -10,5 +10,9 @@
   "visitUrgency": {
     "handle": "VU-STAN",
     "label": "Standard"
+  },
+  "whoToVisit": {
+    "handle": "VPT-CLIENT",
+    "label": "Client"
   }
 }
