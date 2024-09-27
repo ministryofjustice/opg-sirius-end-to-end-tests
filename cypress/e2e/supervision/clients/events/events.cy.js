@@ -14,7 +14,6 @@ describe(
   () => {
     it("Successfully create a client event in Supervision", () => {
       cy.get('#create-event-button').click();
-      cy.waitForStableDOM();
       cy.get('*[id^="FIELDLABELSN_"]').first().select(1);
       cy.get('.footer .button').click();
       cy.get('#tab-container').contains('Timeline').click();
