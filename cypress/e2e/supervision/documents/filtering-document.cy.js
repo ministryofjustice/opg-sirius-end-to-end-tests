@@ -1,6 +1,6 @@
 describe(
   "Viewing the documents tab for the client",
-  { tags: ["@supervision", "@replace-document"] },
+  { tags: ["@supervision", "@filtering-document"] },
   () => {
     it("filtering the documents tab for the client", () => {
       cy.loginAs("Allocations User");
