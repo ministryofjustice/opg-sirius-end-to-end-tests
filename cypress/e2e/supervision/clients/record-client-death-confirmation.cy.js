@@ -60,6 +60,7 @@ describe(
           cy.visit(`/supervision/#/clients/${id}/record-death`);
         });
         cy.get("#record-death").as("record-death-panel");
+        cy.waitForStableDOM();
         cy.get("@record-death-panel").within(() => {
           cy.contains("Proof of death received")
             .closest(".fieldset")
