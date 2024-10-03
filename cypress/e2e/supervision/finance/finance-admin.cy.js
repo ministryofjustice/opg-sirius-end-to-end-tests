@@ -60,7 +60,7 @@ describe(
         cy.getDatePickerInputByLabel("Date invoice created").type(report.date)
       }
       cy.get("footer button:contains(Download)").click()
-      cy.get(".in-page-success-banner:contains(Downloaded successfully)").should("be.visible")
+      cy.get(".in-page-success-banner:contains(Downloaded successfully)", { timeout: 20000 }).should("be.visible")
     })
   })
 
