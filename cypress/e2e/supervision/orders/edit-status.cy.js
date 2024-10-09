@@ -1,7 +1,6 @@
 beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createClient();
-
 });
 
 describe(
@@ -84,6 +83,7 @@ describe(
             cy.get('.TABS_DOCUMENTS').click();
             cy.waitForStableDOM();
             cy.visit(
+
               `/supervision/#/clients/${clientId}/orders/${orderId}/status`
             );
 
