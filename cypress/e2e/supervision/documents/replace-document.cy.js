@@ -1,4 +1,3 @@
-import * as path from "path";
 describe(
   "Successfully replacing a document in supervision",
   { tags: ["@supervision", "@replace-document"] },
@@ -14,6 +13,8 @@ describe(
       cy.get("@client").then(({ id }) => {
         cy.visit(`/supervision/#/clients/${id}`);
       });
+      cy.get('.TABS_DOCUMENTS').click();
+      cy.waitForStableDOM();
       cy.get('[id="create-event-button"]').click();
 
       cy.get('[name="fIELDLABELSNOTEFILE"]').selectFile('cypress/fixtures/document/niceFile.txt');
