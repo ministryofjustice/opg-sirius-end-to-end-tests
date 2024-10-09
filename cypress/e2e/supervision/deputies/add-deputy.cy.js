@@ -6,6 +6,8 @@ beforeEach(() => {
 
   cy.get("@client").then(({ id }) => {
     cy.visit(`/supervision/#/clients/${id}`);
+    cy.get('.TABS_DOCUMENTS').click();
+    cy.waitForStableDOM();
   });
 });
 
@@ -18,6 +20,7 @@ const searchForADeputyToReachAddADeputyPage = () => {
     cy.contains("Add a new deputy").should("be.visible").click();
   });
 };
+
 describe(
     "Create deputy for client",
     {tags: ["@supervision", "@deputy", "supervision-core", "@smoke-journey"]},
@@ -153,7 +156,6 @@ describe(
         {},
         () => {
           searchForADeputyToReachAddADeputyPage();
-          cy.waitForStableDOM();
           cy.get("#typeOfDeputy .radio-button")
             .contains("Professional")
             .should("be.visible")

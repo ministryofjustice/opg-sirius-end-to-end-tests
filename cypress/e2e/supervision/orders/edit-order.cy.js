@@ -2,6 +2,7 @@ beforeEach(() => {
   cy.loginAs("Allocations User");
   cy.createClient()
     .withOrder()
+
 });
 
 describe(
@@ -16,6 +17,8 @@ describe(
           );
         });
       });
+      cy.get('.TABS_DOCUMENTS').click();
+      cy.waitForStableDOM();
       cy.get('#tab-container').contains('Orders').click();
       cy.get('#begin-change-order-button > span').click();
       cy.contains("button", "Yes, edit order").should("be.enabled").click();
