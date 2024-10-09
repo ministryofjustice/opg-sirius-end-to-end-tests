@@ -4,6 +4,8 @@ const createOrder = (orderType, orderSubType, orderDate, optional) => {
   let orderYear = orderDate.split("/")[2];
   cy.get("@client").then(({id, caseRecNumber}) => {
     cy.visit(`/supervision/#/clients/${id}`);
+    cy.get('.TABS_DOCUMENTS').click();
+    cy.waitForStableDOM();
     cy.contains("Create order").click();
 
     // click orders tab to clear UI inconsistencies caused by the menu bar on changing screens

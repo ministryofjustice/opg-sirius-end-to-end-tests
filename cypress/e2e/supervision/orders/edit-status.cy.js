@@ -2,6 +2,7 @@ beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createClient();
 });
+
 describe(
     "Edit order status successfully and timeline is created",
     {tags: ["@supervision-core", "@order-status"]},
@@ -16,6 +17,7 @@ describe(
             cy.visit(
               `/supervision/#/clients/${clientId}`
             );
+            cy.get('.TABS_DOCUMENTS').click();
             cy.waitForStableDOM();
 
             cy.contains('Order status:').contains("Active");
@@ -76,6 +78,12 @@ describe(
         cy.get("@order").then(({id: orderId}) => {
           cy.get("@client").then(({id: clientId}) => {
             cy.visit(
+              `/supervision/#/clients/${clientId}`
+            );
+            cy.get('.TABS_DOCUMENTS').click();
+            cy.waitForStableDOM();
+            cy.visit(
+
               `/supervision/#/clients/${clientId}/orders/${orderId}/status`
             );
 
