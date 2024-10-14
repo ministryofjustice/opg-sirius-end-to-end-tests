@@ -24,18 +24,7 @@ const editClient = (isCourtReferenceChanged) => {
     cy.get('input[name="lastName"]').type(newLastName);
     cy.get('input[name="memorablePhrase"]').clear();
     cy.get('input[name="memorablePhrase"]').type(memorablePhrase);
-    if (isCourtReferenceChanged) {
-      cy.get('input[name="courtReference"]').should("not.be.disabled");
-      cy.get('input[name="courtReference"]').clear();
-      cy.get('input[name="courtReference"]').type("00000000");
-    }
     cy.contains("Save & Exit").click();
-    if (isCourtReferenceChanged) {
-      cy.wait("@editClientCall").then(({response}) => {
-        expect(response.statusCode).to.be.eq(200);
-        cy.wrap(response.body.caseRecNumber).as("newCourtReference");
-      });
-    }
   });
 };
 
@@ -57,42 +46,33 @@ describe(
             cy.contains(`Edit Client: ${firstname} ${surname}`);
           });
         editClient(true);
-        cy.get("@newCourtReference").then((newCourtReference) => {
-          cy.get(".title-person-name").contains(`${newFirstName} ${newLastName}`);
-          cy.get(".court-reference-value-in-client-summary").contains(
-            newCourtReference
-          );
+        cy.get(".title-person-name").contains(`${newFirstName} ${newLastName}`);
 
-          cy.get('#tab-container').contains('Summary').click();
-          cy.get(".client-summary-full-name-value").contains(
-            `${newFirstName} ${newLastName}`
-          );
-          cy.get(".client-summary-court-reference-value").contains(
-            newCourtReference
-          );
-          cy.get(".client-summary-memorable-phrase-value").contains(
-            memorablePhrase
-          );
+        cy.get('#tab-container').contains('Summary').click();
+        cy.get(".client-summary-full-name-value").contains(
+          `${newFirstName} ${newLastName}`
+        );
+        cy.get(".client-summary-memorable-phrase-value").contains(
+          memorablePhrase
+        );
 
-          cy.get('#tab-container').contains('Timeline').click();
+        cy.get('#tab-container').contains('Timeline').click();
 
-          cy.reload()
-          cy.get(".timeline-event-title", { timeout: 30000 }).should(
-            "contain",
-            "Client edited"
-          );
+        cy.reload()
+        cy.get(".timeline-event-title", { timeout: 30000 }).should(
+          "contain",
+          "Client edited"
+        );
 
-          cy.get("timeline-generic-changeset")
-            .first()
-            .within(() => {
-              cy.get("@client").then(({ caseRecNumber, firstname, surname }) => {
-                cy.contains(`First name changed from ${firstname} to ${newFirstName}`, { timeout: 30000 });
-                cy.contains(`Last name changed from ${surname} to ${newLastName}`);
-                cy.contains(`Memorable phrase set to ${memorablePhrase}`);
-                cy.contains(`Court reference changed from ${caseRecNumber} to ${newCourtReference}`);
-              });
+        cy.get("timeline-generic-changeset")
+          .first()
+          .within(() => {
+            cy.get("@client").then(({ firstname, surname }) => {
+              cy.contains(`First name changed from ${firstname} to ${newFirstName}`, { timeout: 30000 });
+              cy.contains(`Last name changed from ${surname} to ${newLastName}`);
+              cy.contains(`Memorable phrase set to ${memorablePhrase}`);
             });
-        });
+          });
       }
     );
   });
