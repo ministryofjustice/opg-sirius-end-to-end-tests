@@ -6,5 +6,6 @@
   "contactNotes": "",
   "email": "test@email.com",
   "isMainContact": "false",
-  "isNamedDeputy": "false"
+  "isNamedDeputy": "false",
+  "isMonthlySpreadsheetRecipient": "false"
 }
