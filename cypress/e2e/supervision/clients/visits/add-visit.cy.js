@@ -4,6 +4,7 @@ beforeEach(() => {
     .withOrder();
 });
 
+Cypress._.times(10, () => {
 describe(
   "Add visit",
   { tags: ["@supervision-core", "@visit", "@smoke-journey"] },
@@ -16,6 +17,7 @@ describe(
           );
         });
       });
+      cy.get('#tab-container').contains('Documents').click();
       cy.get("#add-visit").as("add-visit-panel");
       cy.get("@add-visit-panel").within(() => {
         cy.contains("Visit type")
@@ -48,4 +50,5 @@ describe(
 
     }
   );
+});
 });
