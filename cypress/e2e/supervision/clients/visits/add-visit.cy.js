@@ -12,10 +12,13 @@ describe(
       cy.get("@order").then(({id: orderId}) => {
         cy.get("@client").then(({id: clientId}) => {
           cy.visit(
-            `/supervision/#/clients/${clientId}/visits/add?order=${orderId}`
+            `/supervision/#/clients/${clientId}?order=${orderId}`
           );
+          cy.get('.TABS_DOCUMENTS').click();
+          cy.waitForStableDOM();
         });
       });
+      cy.get('#add-visit-button').click();
       cy.get("#add-visit").as("add-visit-panel");
       cy.get("@add-visit-panel").within(() => {
         cy.contains("Visit type")
