@@ -25,6 +25,9 @@ describe(
       cy.get('input[name="courtReference"]').type("00000000");
       cy.get('input[name="firstName"]').type(firsName);
       cy.get('input[name="lastName"]').type(surname);
+      cy.get('input[name="addressLine1"]').type("1 A Street");
+      cy.get('input[name="town"]').type("Townsville");
+      cy.get('input[name="postcode"]').type("PS1 2CD");
 
       cy.contains("Save & exit").click();
 
