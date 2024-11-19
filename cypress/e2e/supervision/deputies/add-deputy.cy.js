@@ -34,8 +34,11 @@ describe(
           .contains("Lay")
           .should("be.visible")
           .click();
-        cy.get(".deputy-details-form-firstname").type(firstName);
-        cy.get(".deputy-details-form-surname").type(lastName);
+        cy.get('input[name="firstName"]').type(firstName);
+        cy.get('input[name="surname"]').type(lastName);
+        cy.get('input[name="addressLine1"]').type("1 A Street");
+        cy.get('input[name="town"]').type("Townsville");
+        cy.get('input[name="postcode"]').type("PS1 2CD");
         cy.contains("Save & continue").should("be.visible").click();
         cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
 
@@ -160,8 +163,11 @@ describe(
             .contains("Professional")
             .should("be.visible")
             .click();
-          cy.get(".deputy-details-form-firstname").type("Patrick");
-          cy.get(".deputy-details-form-surname").type("Star");
+          cy.get('input[name="firstName"]').type("Patrick");
+          cy.get('input[name="surname"]').type("Star");
+          cy.get('input[name="addressLine1"]').type("1 A Street");
+          cy.get('input[name="town"]').type("Townsville");
+          cy.get('input[name="postcode"]').type("PS1 2CD");
           cy.contains("Save & continue").should("be.visible").click();
           cy.get(".footer > .dotted-link").should("contain.text", "Exit").click();
 
@@ -218,8 +224,11 @@ describe(
                 .contains("Professional")
                 .should("be.visible")
                 .click();
-              cy.get(".deputy-details-form-firstname").type("Kermit");
-              cy.get(".deputy-details-form-surname").type("Frog");
+              cy.get('input[name="firstName"]').type("Kermit");
+              cy.get('input[name="surname"]').type("Frog");
+              cy.get('input[name="addressLine1"]').type("1 A Street");
+              cy.get('input[name="town"]').type("Townsville");
+              cy.get('input[name="postcode"]').type("PS1 2CD");
               cy.get("footer button[type=submit]").as("submitButton");
               cy.get("@submitButton")
                 .should("have.text", " Save & continue ")
