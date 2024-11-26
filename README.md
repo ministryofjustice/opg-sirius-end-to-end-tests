@@ -1,6 +1,6 @@
 # opg-sirius-end-to-end-tests
 
-End-to-end tests for the components that make up Sirius: Managed by opg-org-infra &amp; Terraform
+End-to-end tests for the components that make up Sirius: Managed by opg-org-infra & Terraform
 
 For standards follow https://docs.cypress.io/guides/references/best-practices unless otherwise agreed
 
