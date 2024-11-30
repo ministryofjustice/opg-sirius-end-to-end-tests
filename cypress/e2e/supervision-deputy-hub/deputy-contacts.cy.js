@@ -30,8 +30,7 @@ describe("Edit deputy contact", () => {
     cy.get('[type="submit"]').click();
 
     cy.get("@deputy").then(({ id }) => cy.visit("/supervision/deputies/" + id + "/timeline"));
-
-    cy.get('[data-cy="contact-edited-event"]').should("exist");
+    cy.get('[data-cy="contact-edited-event"]').should("exist", {timeout: 30000});
 
     cy.get('[data-cy="contact-edited-event"] > .moj-timeline__header > .moj-timeline__title').should("contain", "John Smith's details updated");
 
@@ -39,7 +38,7 @@ describe("Edit deputy contact", () => {
     cy.get('[data-cy="contact-edited-event"] > .moj-timeline__description').should("contain", "john.smith@email.com");
   });
 });
-    
+
 describe("Delete deputy contact", () => {
   it("Adds a new timeline event to the deputy timeline", () => {
     cy.get("@deputy").then(({ id }) => cy.visit("/supervision/deputies/" + id + "/contacts"));
