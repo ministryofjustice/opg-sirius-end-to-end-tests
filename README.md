@@ -19,7 +19,7 @@ Usually something like:
 Then run the tests with
 
 ```shell
-docker-compose up cypress
+docker compose up cypress
 ```
 
 Or to run in the Cypress app, install locally with `npm i` then open with
@@ -47,7 +47,7 @@ If you want to run a subset of tests extra options can be passed to run by tag o
 E.g.
 
 ```shell
-docker-compose run cypress test  -- --env grepTags=@dashboard,grepOmitFiltered=true
+docker compose run cypress test  -- --env grepTags=@dashboard,grepOmitFiltered=true
 ```
 
 or
