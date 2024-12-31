@@ -20,6 +20,7 @@ beforeEach(() => {
       cy.wait(1000) // sad times :(
       cy.contains('View pending report').click()
       cy.get('.preselect-report-for-review-link')
+        .first()
         .should('be.visible')
         .and('contain.text', 'Preselect for review')
         .click()
@@ -41,7 +42,7 @@ beforeEach(() => {
           cy.get('.preselect-report-for-review-link')
             .should('be.visible')
             .and('contain.text', 'Change review status')
-          cy.get('.report-summary-content-details.pending').within(() => {
+          cy.get('.report-summary-content-details.pending').first().within(() => {
             cy.get('.report-review-status-value').should('contain.text', 'Staff: preselected')
           })
         });
