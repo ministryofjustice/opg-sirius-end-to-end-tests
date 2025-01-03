@@ -27,7 +27,7 @@ Cypress.Commands.add("loginAs", (user: string): void => {
     "LPA Manager": "2manager@opgtest.com",
     "Lay User": "Lay1-14@opgtest.com",
     "System Admin": "system.admin@opgtest.com",
-    "Public API": "publicapi@opgtest.com",
+    "Public API": "opg+publicapi@digital.justice.gov.uk",
   };
 
   const email = emails[user];
