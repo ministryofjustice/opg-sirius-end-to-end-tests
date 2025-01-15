@@ -20,8 +20,8 @@ describe(
       cy.get('document-list-item').find('.tab-table').should('have.length', 1);
       cy.get('.clear > .dotted-link').click();
 
-      cy.get('.document-viewer__iframe', {timeout: 30000}).should('be.visible');
-      cy.iframe('.document-viewer__iframe', {timeout: 30000}).find('.endOfContent').should('exist');
-      cy.iframe('.document-viewer__iframe', {timeout: 30000}).contains("TEST");
+      cy.get('.document-viewer__iframe').should('be.visible');
+      cy.iframe('.document-viewer__iframe').find('.endOfContent').should('exist');
+      cy.iframe('.document-viewer__iframe').contains("TEST");
     });
   });
