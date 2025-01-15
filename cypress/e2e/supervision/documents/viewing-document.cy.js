@@ -1,12 +1,3 @@
-const uploadDocument = () => {
-  cy.fixture("document/minimal.json").then((document) => {
-    cy.get("@client").then(({caseRecNumber}) => {
-      document.caseRecNumber = caseRecNumber;
-    });
-    cy.postToApi(`/api/public/v1/documents`, document);
-  });
-};
-
 describe(
   "Viewing a document in the documents tab for the client",
   { tags: ["@supervision", "@deleting-document"] },
@@ -16,7 +7,7 @@ describe(
       cy.loginAs("Allocations User");
       cy.createClient();
       cy.loginAs("Public API");
-      uploadDocument();
+      cy.uploadDocument();
     })
 
     it("allows document to be viewed with PDF viewer", () => {
