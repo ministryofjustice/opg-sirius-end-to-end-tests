@@ -18,7 +18,7 @@ describe(
 
       cy.get('#tab-container').contains('Documents').click();
       cy.get('document-list-item').find('.tab-table').should('have.length', 1);
-      cy.get('.clear > .dotted-link').click();
+      cy.get('.multi-document-viewer').contains("TEST.pdf").click();
 
       cy.get('.document-viewer__iframe').should('be.visible');
       cy.iframe('.document-viewer__iframe').find('.endOfContent').should('exist');
