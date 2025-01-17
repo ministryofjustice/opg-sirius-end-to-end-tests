@@ -1,14 +1,5 @@
 import * as path from "path";
 
-const uploadDocument = () => {
-  cy.fixture("document/minimal.json").then((document) => {
-    cy.get("@client").then(({caseRecNumber}) => {
-      document.caseRecNumber = caseRecNumber;
-    });
-    cy.postToApi(`/api/public/v1/documents`, document);
-  });
-};
-
 describe(
   "Downloading multiple files",
   { tags: ["@supervision", "@supervision-regression", "@downloads"] },
@@ -18,8 +9,8 @@ describe(
       cy.createClient();
 
       cy.loginAs("Public API");
-      uploadDocument();
-      uploadDocument();
+      cy.uploadDocument();
+      cy.uploadDocument();
     }); /**/
 
     it("can download multiple files at once", () => {
