@@ -1,11 +1,3 @@
-const uploadDocument = () => {
-  cy.fixture("document/minimal.json").then((document) => {
-    cy.get("@client").then(({caseRecNumber}) => {
-      document.caseRecNumber = caseRecNumber;
-    });
-    cy.postToApi(`/api/public/v1/documents`, document);
-  });
-};
 
 describe(
   "Viewing the documents tab for the client",
@@ -17,7 +9,7 @@ describe(
       cy.createClient();
 
       cy.loginAs("Public API");
-      uploadDocument();
+      cy.uploadDocument();
     })
 
     it("hides delete button if user does not have permissions", () => {
