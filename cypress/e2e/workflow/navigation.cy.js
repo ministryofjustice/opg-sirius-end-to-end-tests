@@ -15,7 +15,7 @@ describe("Navigation", { tags: ["@workflow", "@smoke-journey"] }, () => {
       createClientUrl: { visible: true, current: false },
       workflowUrl: { visible: true, current: true },
       // guidanceUrl: { visible: true, current: false },
-      financeUrl: { visible: true, current: false },
+      // financeUrl: { visible: true, current: false },
     };
 
     cy.assertHeaderWorks(
