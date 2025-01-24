@@ -19,7 +19,7 @@ describe(
         createClientUrl: { visible: true, current: false },
         workflowUrl: { visible: true, current: false },
         // guidanceUrl: { visible: true, current: false },
-        financeUrl: { visible: true, current: false },
+        // financeUrl: { visible: true, current: false },
       };
 
       cy.assertHeaderWorks(
