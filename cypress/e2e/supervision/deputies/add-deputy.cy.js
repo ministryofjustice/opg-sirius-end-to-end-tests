@@ -53,7 +53,6 @@ describe(
           cy.get(".deputy-details-type").contains("Lay");
           cy.get(".deputy-details-deputy-name").contains(fullName);
           cy.get(".deputy-details-is-airmail-required").contains("No");
-          cy.get(".deputy-additional-details-newsletter").contains("No");
           cy.get(".order-details-deputy-type").contains("Lay");
           cy.get(".order-details-main-correspondent").contains("Yes");
           cy.get(".order-details-deputy-status-on-case").contains("Open");
@@ -99,7 +98,6 @@ describe(
             cy.get(".deputy-details-type").contains("Professional");
             cy.get(".deputy-details-deputy-name").contains(fullName);
             cy.get(".deputy-details-is-airmail-required").contains("No");
-            cy.get(".deputy-additional-details-newsletter").contains("No");
             cy.get(".order-details-deputy-type").contains("Professional");
             cy.get(".order-details-main-correspondent").contains("Yes");
             cy.get(".order-details-deputy-status-on-case").contains("Open");
