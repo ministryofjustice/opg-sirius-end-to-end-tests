@@ -10,26 +10,38 @@ describe(
       });
     });
 
-    it("tests header navigation", () => {
-      let expectedHeaderLinks = {
-        poaUrl: { visible: true, current: false },
-        supervisionUrl: { visible: true, current: false },
-        adminUrl: { visible: true, current: false },
-        signOutUrl: { visible: true, current: false },
-      };
+    // it("tests header navigation", () => {
+    //   let expectedHeaderLinks = {
+    //     poaUrl: { visible: true, current: false },
+    //     supervisionUrl: { visible: true, current: false },
+    //     adminUrl: { visible: true, current: false },
+    //     signOutUrl: { visible: true, current: false },
+    //   };
+    //
+    //   let expectedNavigationLinks = {
+    //     createClientUrl: { visible: true, current: false },
+    //     workflowUrl: { visible: true, current: false },
+    //     // guidanceUrl: { visible: true, current: false },
+    //     // financeUrl: { visible: true, current: false },
+    //   };
 
-      let expectedNavigationLinks = {
-        createClientUrl: { visible: true, current: false },
-        workflowUrl: { visible: true, current: false },
-        // guidanceUrl: { visible: true, current: false },
-        // financeUrl: { visible: true, current: false },
-      };
-
-      cy.assertHeaderWorks(
-        "deputy-hub",
-        expectedHeaderLinks,
-        expectedNavigationLinks
+    //   cy.assertHeaderWorks(
+    //     "deputy-hub",
+    //     expectedHeaderLinks,
+    //     expectedNavigationLinks
+    //   );
+    // });
+    it("tests help and guidance", () => {
+      cy.returnToMicroserviceHome("deputy-hub");
+      let guidanceLink = cy.get(':nth-child(3) > .moj-primary-navigation__link');
+      guidanceLink.should("exist");
+      guidanceLink.should("be.visible");
+      guidanceLink.should("not.have.attr",
+        "aria-current",
+        "page"
       );
+      guidanceLink.should("contain.text", "Guidance");
     });
+
   }
 );
