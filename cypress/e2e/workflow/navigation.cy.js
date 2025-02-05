@@ -5,17 +5,16 @@ describe("Navigation", { tags: ["@workflow", "@smoke-journey"] }, () => {
 
   it("tests header navigation", () => {
     let expectedHeaderLinks = {
-      poaUrl: { visible: true, current: false },
-      supervisionUrl: { visible: true, current: false },
-      adminUrl: { visible: true, current: false },
-      signOutUrl: { visible: true, current: false },
+      poaUrl: { current: false },
+      supervisionUrl: { current: false },
+      adminUrl: { current: false },
+      signOutUrl: { current: false },
     };
 
     let expectedNavigationLinks = {
-      createClientUrl: { visible: true, current: false },
-      workflowUrl: { visible: true, current: true },
-      // guidanceUrl: { visible: true, current: false },
-      // financeUrl: { visible: true, current: false },
+      createClientUrl: { current: false },
+      workflowUrl: { current: true },
+      // financeUrl: { current: false },
     };
 
     cy.assertHeaderWorks(
@@ -23,6 +22,11 @@ describe("Navigation", { tags: ["@workflow", "@smoke-journey"] }, () => {
       expectedHeaderLinks,
       expectedNavigationLinks
     );
+  });
+
+
+  it("tests help and guidance link", () => {
+    cy.checkGuidanceLinkWorks("workflow");
   });
 
   it("tests pagination", () => {

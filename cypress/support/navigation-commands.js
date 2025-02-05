@@ -51,9 +51,7 @@ Cypress.Commands.add(
       cy.returnToMicroserviceHome(microserviceName);
       let linkIdentifier = ":nth-child(" + link.position + ") > " + className;
       cy.get(linkIdentifier).should("exist");
-      cy.get(linkIdentifier).should(
-        link.visible ? "be.visible" : "not.be.visible"
-      );
+      cy.get(linkIdentifier).should("be.visible");
       cy.get(linkIdentifier).should(
         link.current ? "have.attr" : "not.have.attr",
         "aria-current",
@@ -97,4 +95,17 @@ Cypress.Commands.add("returnToMicroserviceHome", (microserviceName) => {
     default:
       break;
   }
+});
+
+Cypress.Commands.add("checkGuidanceLinkWorks", (microserviceName) => {
+  cy.returnToMicroserviceHome(microserviceName);
+  let guidanceLink = cy.get(':nth-child(3) > .moj-primary-navigation__link');
+  guidanceLink.should("exist");
+  guidanceLink.should("be.visible");
+  guidanceLink.should("not.have.attr", "aria-current", "page");
+  guidanceLink.should("contain.text", "Guidance");
+  guidanceLink.should(
+    "have.attr", "href", "https://wordpress.sirius.opg.service.justice.gov.uk"
+  );
+
 });
