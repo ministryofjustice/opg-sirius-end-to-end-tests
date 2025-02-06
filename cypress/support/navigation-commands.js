@@ -51,18 +51,20 @@ Cypress.Commands.add(
       cy.returnToMicroserviceHome(microserviceName);
       let linkIdentifier = ":nth-child(" + link.position + ") > " + className;
       cy.get(linkIdentifier).should("exist");
-      cy.get(linkIdentifier).should(
-        link.visible ? "be.visible" : "not.be.visible"
-      );
+      cy.get(linkIdentifier).should("be.visible");
       cy.get(linkIdentifier).should(
         link.current ? "have.attr" : "not.have.attr",
         "aria-current",
         "page"
       );
       cy.get(linkIdentifier).should("contain.text", link.title);
-      if (link.visible) {
+      if (!link.opensInNewTab) {
         cy.get(linkIdentifier).click();
         cy.url().should("include", link.url);
+      } else {
+        cy.get(linkIdentifier).should(
+          "have.attr", "href", link.url
+        );
       }
     };
 
