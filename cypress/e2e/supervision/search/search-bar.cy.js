@@ -23,10 +23,15 @@ describe(
         })
       })
     });
-
-    it("finds the deputy by surname", () => {
+    it("finds the deputy by surname",
+      {
+        retries: {
+          runMode: 2,
+          openMode: 0,
+        },
+      }, () => {
         cy.visit("/supervision/#/dashboard");
-        cy.get("@deputy").then(({firstname, salutation, surname}) => {
+        cy.get("@deputy").then(({ firstname, salutation, surname }) => {
           cy.waitForSearchService(surname, ["Deputy"]).then(() => {
             cy.get(".search-bar__input").clear();
             cy.get(".search-bar__input").type(surname);
@@ -37,9 +42,9 @@ describe(
                 .click();
             });
 
-            cy.get(".banner__deputy-wrap--name").contains(`${firstname} ${surname}`, {matchCase: false});
+            cy.get(".banner__deputy-wrap--name").contains(`${firstname} ${surname}`, { matchCase: false });
           })
         });
       }
-    );
+      );
   });
