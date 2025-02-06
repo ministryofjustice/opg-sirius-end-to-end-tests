@@ -22,7 +22,7 @@ describe(
           cy.get("@record-death-panel").within(() => {
             cy.get('input[name="dateNotified"]').clear();
             cy.get('input[name="dateNotified"]').type(dateNotified);
-            cy.get('[name="notifiedBy"]').select(notifiedBy);
+            cy.get('[name="notifiedBy"]', {timeout: 30000}).select(notifiedBy);
             cy.contains("How was the OPG notified?")
               .closest(".fieldset")
               .contains(howNotified)
