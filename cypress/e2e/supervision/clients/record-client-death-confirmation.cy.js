@@ -3,10 +3,16 @@ beforeEach(() => {
   cy.createClient();
 });
 
+Cypress._.times(25, () => {
   describe(
     "Successfully record client death confirmation",
-    {tags: ["@supervision-core", "@client", "@client-record-death-confirmation", "@smoke-journey"]},
-    () => {
+    { tags: ["@supervision-core", "@client", "@client-record-death-confirmation", "@smoke-journey"] },
+    {
+      retries: {
+        runMode: 2,
+        openMode: 0,
+      },
+    }, () => {
       const dateOfDeath = "16/03/2023";
       const dateDeathCetificateReceived = "16/03/2023";
       const dateNotified = "16/03/2023";
@@ -16,7 +22,7 @@ beforeEach(() => {
       it(
         "Records a client's death confirmation successfully when populating all fields",
         () => {
-          cy.get("@client").then(({id}) => {
+          cy.get("@client").then(({ id }) => {
             cy.visit(`/supervision/#/clients/${id}/record-death`);
           });
           cy.get('.TABS_DOCUMENTS').click();
@@ -43,7 +49,7 @@ beforeEach(() => {
           cy.contains("The client is deceased").click();
           cy.get('.client-priority-info').contains('Client deceased');
           cy.get('#tab-container').contains('Timeline').click();
-          cy.get(".timeline-event-title", {timeout: 3000})
+          cy.get(".timeline-event-title", { timeout: 3000 })
             .should("contain", "Death")
             .should("contain", "Client status");
           cy.get('.event-death-record > .section-content > .wrapper')
@@ -54,10 +60,11 @@ beforeEach(() => {
           cy.get('.client-status-current').contains('Death confirmed');
         }
       );
+    });
       it(
         "Displays a validation error when confirming a client's death with an invalid date of death",
         () => {
-          cy.get("@client").then(({id}) => {
+          cy.get("@client").then(({ id }) => {
             cy.visit(`/supervision/#/clients/${id}/record-death`);
           });
           cy.get("#record-death").as("record-death-panel");
