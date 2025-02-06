@@ -12,16 +12,17 @@ describe(
 
     it("tests header navigation", () => {
       let expectedHeaderLinks = {
-        poaUrl: { current: false },
-        supervisionUrl: { current: false },
-        adminUrl: { current: false },
-        signOutUrl: { current: false },
+        poaUrl: { current: false, opensInNewTab: false },
+        supervisionUrl: { current: false, opensInNewTab: false },
+        adminUrl: { current: false, opensInNewTab: false },
+        signOutUrl: { current: false, opensInNewTab: false },
       };
 
       let expectedNavigationLinks = {
-        createClientUrl: { current: false },
-        workflowUrl: { current: false },
-        // financeUrl: { current: false },
+        createClientUrl: { current: false, opensInNewTab: false },
+        workflowUrl: { current: false, opensInNewTab: false },
+        guidanceUrl: { current: false, opensInNewTab: true },
+        // financeUrl: { current: false, opensInNewTab: true },
       };
 
       cy.assertHeaderWorks(
@@ -30,10 +31,5 @@ describe(
         expectedNavigationLinks
       );
     });
-
-    it("tests help and guidance link", () => {
-      cy.checkGuidanceLinkWorks("deputy-hub");
-    });
-
   }
 );

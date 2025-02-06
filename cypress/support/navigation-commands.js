@@ -58,9 +58,13 @@ Cypress.Commands.add(
         "page"
       );
       cy.get(linkIdentifier).should("contain.text", link.title);
-      if (link.visible) {
+      if (!link.opensInNewTab) {
         cy.get(linkIdentifier).click();
         cy.url().should("include", link.url);
+      } else {
+        cy.get(linkIdentifier).should(
+          "have.attr", "href", link.url
+        );
       }
     };
 
@@ -95,17 +99,4 @@ Cypress.Commands.add("returnToMicroserviceHome", (microserviceName) => {
     default:
       break;
   }
-});
-
-Cypress.Commands.add("checkGuidanceLinkWorks", (microserviceName) => {
-  cy.returnToMicroserviceHome(microserviceName);
-  let guidanceLink = cy.get(':nth-child(3) > .moj-primary-navigation__link');
-  guidanceLink.should("exist");
-  guidanceLink.should("be.visible");
-  guidanceLink.should("not.have.attr", "aria-current", "page");
-  guidanceLink.should("contain.text", "Guidance");
-  guidanceLink.should(
-    "have.attr", "href", "https://wordpress.sirius.opg.service.justice.gov.uk"
-  );
-
 });
