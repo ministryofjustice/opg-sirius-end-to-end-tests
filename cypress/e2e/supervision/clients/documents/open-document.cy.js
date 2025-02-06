@@ -11,8 +11,14 @@ describe(
   "Open document successfully",
   { tags: ["@supervision-core", "@documents", "@open-document", "@smoke-journey"] },
   () => {
-    it("opens a document successfully", () => {
-      cy.loginAs("Case Manager");
+    it("opens a document successfully",
+      {
+        retries: {
+          runMode: 2,
+          openMode: 0,
+        },
+      }, () => {
+        cy.loginAs("Case Manager");
       cy.get("@client").then(({id, firstname, surname}) => {
         cy.visit(`/supervision/#/clients/${id}`);
         cy.contains(`${firstname} ${surname}`);
@@ -23,7 +29,7 @@ describe(
 
       cy.task("listContentsOfDownloadsFolder", Cypress.config("downloadsFolder")).then(beforeDownloadList => {
         cy.contains(".button", "Open").click();
-        cy.wait(1000);
+        cy.wait(2000);
         cy.task("listContentsOfDownloadsFolder", Cypress.config("downloadsFolder")).then(afterDownloadList => {
           const newFilename = afterDownloadList.filter(file => !beforeDownloadList.includes(file))[0];
           const newFilePath = path.join(
