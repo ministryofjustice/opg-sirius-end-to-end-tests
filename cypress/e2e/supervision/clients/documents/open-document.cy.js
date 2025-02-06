@@ -23,7 +23,7 @@ describe(
 
       cy.task("listContentsOfDownloadsFolder", Cypress.config("downloadsFolder")).then(beforeDownloadList => {
         cy.contains(".button", "Open").click();
-        cy.wait(1000);
+        cy.wait(2000);
         cy.task("listContentsOfDownloadsFolder", Cypress.config("downloadsFolder")).then(afterDownloadList => {
           const newFilename = afterDownloadList.filter(file => !beforeDownloadList.includes(file))[0];
           const newFilePath = path.join(
