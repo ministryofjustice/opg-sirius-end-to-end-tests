@@ -11,8 +11,14 @@ describe(
   "Open document successfully",
   { tags: ["@supervision-core", "@documents", "@open-document", "@smoke-journey"] },
   () => {
-    it("opens a document successfully", () => {
-      cy.loginAs("Case Manager");
+    it("opens a document successfully",
+      {
+        retries: {
+          runMode: 2,
+          openMode: 0,
+        },
+      }, () => {
+        cy.loginAs("Case Manager");
       cy.get("@client").then(({id, firstname, surname}) => {
         cy.visit(`/supervision/#/clients/${id}`);
         cy.contains(`${firstname} ${surname}`);

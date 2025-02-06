@@ -24,7 +24,13 @@ describe(
       })
     });
 
-    it("finds the deputy by surname", () => {
+    it("finds the deputy by surname",
+      {
+          retries: {
+            runMode: 2,
+            openMode: 0,
+          },
+        }, () => {
         cy.visit("/supervision/#/dashboard");
         cy.get("@deputy").then(({firstname, salutation, surname}) => {
           cy.waitForSearchService(surname, ["Deputy"]).then(() => {

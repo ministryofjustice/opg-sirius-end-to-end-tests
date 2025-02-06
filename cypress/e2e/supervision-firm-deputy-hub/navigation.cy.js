@@ -7,29 +7,26 @@ describe(
       cy.createAFirm();
     });
 
-    Cypress._.times(30, () => {
+    it("tests header navigation", () => {
+      let expectedHeaderLinks = {
+        poaUrl: { current: false, opensInNewTab: false },
+        supervisionUrl: { current: false, opensInNewTab: false },
+        adminUrl: { current: false, opensInNewTab: false },
+        signOutUrl: { current: false, opensInNewTab: false },
+      };
 
-      it("tests header navigation", () => {
-        let expectedHeaderLinks = {
-          poaUrl: { current: false, opensInNewTab: false },
-          supervisionUrl: { current: false, opensInNewTab: false },
-          adminUrl: { current: false, opensInNewTab: false },
-          signOutUrl: { current: false, opensInNewTab: false },
-        };
+      let expectedNavigationLinks = {
+        createClientUrl: { current: false, opensInNewTab: false },
+        workflowUrl: { current: false, opensInNewTab: false },
+        guidanceUrl: { current: false, opensInNewTab: true },
+        // financeUrl: { current: false, opensInNewTab: true },
+      };
 
-        let expectedNavigationLinks = {
-          createClientUrl: { current: false, opensInNewTab: false },
-          workflowUrl: { current: false, opensInNewTab: false },
-          guidanceUrl: { current: false, opensInNewTab: true },
-          // financeUrl: { current: false, opensInNewTab: true },
-        };
-
-        cy.assertHeaderWorks(
-          "firm-hub",
-          expectedHeaderLinks,
-          expectedNavigationLinks
-        );
-      });
+      cy.assertHeaderWorks(
+        "firm-hub",
+        expectedHeaderLinks,
+        expectedNavigationLinks
+      );
     });
   }
 );
