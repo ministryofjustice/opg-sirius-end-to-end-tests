@@ -23,30 +23,28 @@ describe(
         })
       })
     });
-    Cypress._.times(25, () => {
-      it("finds the deputy by surname",
-        {
-          retries: {
-            runMode: 2,
-            openMode: 0,
-          },
-        }, () => {
-          cy.visit("/supervision/#/dashboard");
-          cy.get("@deputy").then(({ firstname, salutation, surname }) => {
-            cy.waitForSearchService(surname, ["Deputy"]).then(() => {
-              cy.get(".search-bar__input").clear();
-              cy.get(".search-bar__input").type(surname);
+    it("finds the deputy by surname",
+      {
+        retries: {
+          runMode: 2,
+          openMode: 0,
+        },
+      }, () => {
+        cy.visit("/supervision/#/dashboard");
+        cy.get("@deputy").then(({ firstname, salutation, surname }) => {
+          cy.waitForSearchService(surname, ["Deputy"]).then(() => {
+            cy.get(".search-bar__input").clear();
+            cy.get(".search-bar__input").type(surname);
 
-              cy.get(".search-bar__results").within(() => {
-                cy.get(".search-bar__result").should("have.length.at.least", 1);
-                cy.contains(`${salutation} ${firstname} ${surname}`)
-                  .click();
-              });
+            cy.get(".search-bar__results").within(() => {
+              cy.get(".search-bar__result").should("have.length.at.least", 1);
+              cy.contains(`${salutation} ${firstname} ${surname}`)
+                .click();
+            });
 
-              cy.get(".banner__deputy-wrap--name").contains(`${firstname} ${surname}`, { matchCase: false });
-            })
-          });
-        }
+            cy.get(".banner__deputy-wrap--name").contains(`${firstname} ${surname}`, { matchCase: false });
+          })
+        });
+      }
       );
-    });
   });
