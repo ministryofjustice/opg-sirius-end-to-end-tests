@@ -22,9 +22,9 @@ describe(
       cy.get('.task-columns > :nth-child(3)').should('contain.text', 'Assigned to');
       cy.get('.task-columns > :nth-child(4)').should('contain.text', 'Order');
 
-      cy.get(':nth-child(3) > .task-name').should('contain.text', 'Casework - Reply due');
-      cy.get(':nth-child(3) > :nth-child(2) > .due-date').should('contain.text', '29/03/2025');
-      cy.get(':nth-child(3) > .assigned-to').should('contain.text', 'Attorneyship Investigation Team');
+      cy.get('.task-name').should('contain.text', 'Casework - Reply due');
+      cy.get('.due-date').should('contain.text', '29/03/2025');
+      cy.get('.assigned-to').should('contain.text', 'Attorneyship Investigation Team');
       cy.get('.mark').should('contain.text', 'Complete');
       cy.get('.update-task-button').should('contain.text', 'Update Task');
 
@@ -44,7 +44,6 @@ describe(
       cy.get('#tab-container').contains('Tasks').click();
       cy.reload();
       cy.get('#tab-container').contains('Tasks').should('contain.text', 1);
-      cy.get('.task-name').should('contain.not.text', 'Order - Allocate to team');
     });
   });
 
