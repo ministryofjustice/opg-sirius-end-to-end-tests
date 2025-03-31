@@ -39,7 +39,7 @@ const navigationLinks = {
   },
   financeUrl: {
     title: "Finance",
-    url: "/supervision/#/finance-hub/reporting",
+    url: "/supervision/finance-admin/downloads",
     position: 4,
   },
 };

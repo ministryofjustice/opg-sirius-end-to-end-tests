@@ -15,7 +15,7 @@ describe(
       });
     });
 
-    it("does not show reports and finance tabs for guardianship orders", () => {
+    it("does not show reports for guardianship orders", () => {
       cy.get('#tab-container').contains('Orders').click();
       cy.get("#order-table")
         .find("tr")
@@ -25,7 +25,6 @@ describe(
       cy.get(".order-header-details-case-type").contains("PFA");
       cy.get(".order-header-details-case-sub-type").contains("Guardianship");
       cy.get('#tab-container').contains('Reports').should('not.be.visible');
-      cy.get('#tab-container').contains('Finance').should('not.be.visible');
     });
   }
 );
