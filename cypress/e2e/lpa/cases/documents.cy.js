@@ -70,7 +70,7 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.waitForStableDOM();
     cy.get('button[title="Documents associated to this case"]').click();
-    cy.get(".document-list").contains("a", "IT-BANK-LPA").click();
+    cy.get(".document-list").contains("IT-BANK-LPA").click();
 
     cy.waitForIframe("#docViewer");
     cy.enter("iframe#docViewer").then((getBody) => {
