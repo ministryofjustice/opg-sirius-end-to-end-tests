@@ -30,7 +30,7 @@
     "cypress": "^13.13.2",
     "cypress-failed-log": "^2.10.0",
     "cypress-iframe": "^1.0.1",
-    "cypress-multi-reporters": "^1.6.4",
+    "cypress-multi-reporters": "^2.0.5",
     "cypress-parallel": "^0.15.0",
     "cypress-wait-until": "^3.0.2",
     "eslint": "^9.8.0",
