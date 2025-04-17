@@ -22,7 +22,7 @@ describe(
         createClientUrl: { current: false, opensInNewTab: false },
         workflowUrl: { current: false, opensInNewTab: false },
         guidanceUrl: { current: false, opensInNewTab: true },
-        // financeUrl: { current: false, opensInNewTab: true },
+        financeUrl: { current: false, opensInNewTab: true },
       };
 
       cy.assertHeaderWorks(
