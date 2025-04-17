@@ -15,7 +15,7 @@ describe("Navigation", { tags: ["@workflow", "@smoke-journey"] }, () => {
       createClientUrl: { current: false, opensInNewTab: false },
       workflowUrl: { current: true, opensInNewTab: false },
       guidanceUrl: { current: false, opensInNewTab: true },
-      // financeUrl: { current: false, opensInNewTab: true },
+      financeUrl: { current: false, opensInNewTab: false },
     };
 
     cy.assertHeaderWorks(
