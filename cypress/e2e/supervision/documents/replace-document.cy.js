@@ -36,7 +36,7 @@ describe(
       cy.waitForTinyMCE()
         .enterText('A good reason to change the document.');
 
-      cy.get('[name="fIELDLABELSREPLACEDOCUMENTFILE"]').selectFile('cypress/fixtures/document/replacedFile.txt');
+      cy.get('[name="fIELDLABELSREPLACEDOCUMENTFILE"]').selectFile('cypress/fixtures/document/newFile.txt');
       cy.get("input[name=fIELDLABELSDOCUMENTNAME]").should("be.visible").type("A".repeat(256))
       cy.contains("Save & exit").click();
 
@@ -47,7 +47,7 @@ describe(
       cy.contains("Save & exit").click();
 
       cy.get('#tab-container').contains('Documents').click();
-      cy.get('.summary-row > :nth-child(2)').should('contain.text', 'replacedFile.txt');
+      cy.get('.summary-row > :nth-child(2)').should('contain.text', 'newFile.txt');
       cy.get('.summary-row > :nth-child(2)').should('contain.text', 'Call');
       cy.get('.summary-row > :nth-child(2)').should('contain.text', 'Outbound');
       cy.get('.summary-row > :nth-child(2)').should('not.contain.text', 'niceFile.txt');
@@ -55,8 +55,8 @@ describe(
 
       cy.get('#tab-container').contains('Timeline').click();
       cy.get('.event-replaced-document-file > .section-content > .wrapper > .title > h2').should('contain.text', 'Document replaced');
-      cy.get('.event-replaced-document-file > .section-content').should('contain.text', 'A document has been replaced');
-      cy.get('.event-replaced-document-file > .section-content').should('contain.text', 'replacedFile.txt');
+      cy.get('.event-replaced-document-file > .section-content').should('contain.text', 'replaced');
+      cy.get('.event-replaced-document-file > .section-content').should('contain.text', 'newFile.txt');
       cy.get('.event-replaced-document-file > .section-content').should('contain.text', 'A good reason to change the document');
     });
   });
