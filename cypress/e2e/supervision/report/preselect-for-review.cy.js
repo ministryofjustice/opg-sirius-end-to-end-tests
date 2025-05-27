@@ -28,7 +28,7 @@ beforeEach(() => {
       cy.get('radio-button-group[name=preselectReportForReview] .checked').should('contain.text', 'No')
       cy.get('radio-button-group[name=preselectReportForReview] label:contains(Yes)').click()
       cy.get('footer .button.primary').should('contain.text', 'Save & exit').and('be.disabled')
-      cy.waitForTinyMCE()
+      cy.getEditorByLabel("Reason")
         .enterText('<p>A reason to preselect for staff review</p>');
       cy.get('footer .button.primary').click()
       cy.contains('Report review status updated, redirecting...')

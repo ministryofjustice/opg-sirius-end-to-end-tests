@@ -29,7 +29,7 @@ describe(
       cy.get(".selectable-list-select-recipients-list > :nth-child(2)").click();
       cy.get("#create-letter-button").click();
       const data = "<p>This is a letter that I have created.</p>";
-      cy.waitForTinyMCE().enterText(data);
+      cy.waitForLetterEditor().enterText(data);
 
       cy.contains(".button", "Save draft").click();
       cy.get("#publish-close-button").click();
