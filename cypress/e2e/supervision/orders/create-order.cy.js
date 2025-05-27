@@ -60,7 +60,7 @@ const createOrder = (orderType, orderSubType, orderDate, optional) => {
         .click();
       const text =
         '<p class="MsoNormal" style="margin: 0cm 0cm 11.25pt; font-size: 12pt; font-family: Calibri, sans-serif; text-align: justify; background: white;"><span style="font-size: 10.5pt; font-family: &quot;Open Sans&quot;, sans-serif;">Test note</span></p>';
-      cy.waitForTinyMCE()
+      cy.getEditorByLabel("Notes")
         .enterText(text);
     }
     cy.contains("Save & exit").click();

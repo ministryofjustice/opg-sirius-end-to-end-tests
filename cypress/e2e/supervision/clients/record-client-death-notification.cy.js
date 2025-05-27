@@ -27,7 +27,7 @@ describe(
               .closest(".fieldset")
               .contains(howNotified)
               .click();
-            cy.waitForTinyMCE()
+            cy.getEditorByLabel("Notes (optional)")
               .enterText('<p>Client has been notified dead</p>');
           });
 

@@ -32,7 +32,7 @@ describe(
       cy.get('footer .button.primary')
         .should('contain.text', 'Save & exit')
         .and('be.disabled')
-      cy.waitForTinyMCE()
+      cy.getEditorByLabel("Reason")
         .enterText('<p>A reason to override the report type</p>');
       cy.get('footer .button.primary').click()
       cy.get('.dialog-header').should('contain.text', 'Override report type');

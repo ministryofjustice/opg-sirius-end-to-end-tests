@@ -41,7 +41,7 @@ beforeEach(() => {
             .closest(".fieldset")
             .contains(howNotified)
             .click();
-          cy.waitForTinyMCE()
+          cy.getEditorByLabel("Notes (optional)")
             .enterText('<p>Gurps</p>');
         });
 

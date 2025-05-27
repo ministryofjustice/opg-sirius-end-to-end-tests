@@ -39,7 +39,7 @@ describe(
       cy.wait(2000)
       cy.get("#supervisionLevel label:contains('General')").click()
       cy.get("#supervision-level-applies-from-date input").type("02/08/2023")
-      cy.waitForTinyMCE()
+      cy.getEditorByLabel("Status notes (optional)")
         .enterText("<p>I'm a note</p>");
       cy.get("button:contains('Save & exit')").click()
 

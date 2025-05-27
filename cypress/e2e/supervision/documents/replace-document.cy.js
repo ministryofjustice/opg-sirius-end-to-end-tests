@@ -33,7 +33,7 @@ describe(
       cy.get('.replace-document-title').should('be.visible');
       cy.get('text-field.disabled > .fieldset > label').should('contain.text', 'File being replaced');
 
-      cy.waitForTinyMCE()
+      cy.getEditorByLabel("Why is this document being replaced?")
         .enterText('A good reason to change the document.');
 
       cy.get('[name="fIELDLABELSREPLACEDOCUMENTFILE"]').selectFile('cypress/fixtures/document/newFile.txt');
