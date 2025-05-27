@@ -31,7 +31,7 @@ beforeEach(() => {
       cy.get('#dateReportLodged_year').should('not.be.disabled').and('be.empty')
       cy.get('select[name="fIELDLABELSLODGEDSTATUS"]').should('not.be.disabled')
       cy.get('footer .button.primary').should('contain.text', 'Lodge report').and('be.disabled')
-      cy.waitForTinyMCE()
+      cy.getEditorByLabel("Reason")
         .enterText('<p>A reason to lodge the report</p>');
       cy.get('footer .button.primary').click()
       cy.get('.dialog-header').should('contain.text', 'Are you sure you want to mark report as received?');

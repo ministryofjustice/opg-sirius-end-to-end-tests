@@ -25,7 +25,7 @@ describe(
       cy.get('[label="Order title"] > .fieldset > .ng-untouched').type('This is an order title');
       cy.get('.fieldset > fieldset').contains('Sole').click();
       const data = '<p>Order notes etc....</p>';
-      cy.waitForTinyMCE()
+      cy.getEditorByLabel("Notes")
         .enterText(data);
       cy.get('[type="submit"]').click();
       cy.get('#tab-container').contains('Timeline').click();
