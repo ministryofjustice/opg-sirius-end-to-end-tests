@@ -10,35 +10,27 @@ Cypress.Commands.add("waitForLetterEditor", () => {
   });
 });
 
+// allows text areas to be interacted with as either TinyMCE-managed <text-wysiwyg> or <text-area>
 Cypress.Commands.add("getEditorByLabel", (labelText) => {
-  return cy.contains("label", labelText)
-    .invoke("attr", "for")
+  return cy.contains('label', labelText)
+    .invoke('attr', 'for')
     .then(id => {
-      return cy.get(`#${id}`).then($el => {
-        const isTinyMCE = $el.next().hasClass("tox-tinymce");
+      return cy.get(`#${id}`).parent().then($container => {
+        const isTinyMCE = $container.find('.tox-tinymce').length > 0;
 
         if (isTinyMCE) {
-          return cy.window().then(win => {
-            return new Cypress.Promise((resolve, reject) => {
-              const start = Date.now();
-              const timeout = 60000;
-
-              const checkEditorReady = () => {
-                const editor = win.tinymce.get(id);
-                if (editor && editor.initialized) {
-                  resolve({ isTinyMCE: true, editor, el: $el });
-                } else if (Date.now() - start > timeout) {
-                  reject(`TinyMCE editor for #${id} did not initialize in time`);
-                } else {
-                  setTimeout(checkEditorReady, 100);
-                }
-              };
-
-              checkEditorReady();
+          return cy.window()
+            .its("tinyMCE")
+            .its("activeEditor")
+            .should('have.property', 'initialized', true)
+            .then(() => {
+              return cy.window().then(win => {
+                const editor = win.tinymce.activeEditor;
+                return { isTinyMCE: true, editor, el: Cypress.$(`#${id}`) };
+              });
             });
-          });
         } else {
-          return { isTinyMCE: false, el: $el };
+          return cy.get(`#${id}`).then($el => ({ isTinyMCE: false, el: $el }));
         }
       });
     });
