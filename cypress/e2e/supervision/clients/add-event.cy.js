@@ -19,7 +19,7 @@ describe(
         const data =
           '<p class="MsoNormal" style="margin: 0cm 0cm 11.25pt; font-size: 12pt; font-family: Calibri, sans-serif; text-align: justify; background: white;"><span style="font-size: 10.5pt; font-family: &quot;Open Sans&quot;, sans-serif;">Test</span><span style="font-size: 10.5pt; font-family: &quot;Open Sans&quot;, sans-serif; color: rgb(192, 0, 0);"> this</span><span style="font-size: 10.5pt; font-family: &quot;Open Sans&quot;, sans-serif;"><b> pasted </b>data then.<o:p></o:p></span></p>';
 
-        cy.waitForTinyMCE()
+        cy.getEditorByLabel("Notes (optional)")
           .pasteText(data)
           .getContent()
           .then((content) => {
