@@ -6,45 +6,37 @@ Cypress.Commands.add("waitForLetterEditor", () => {
   return cy.window().then((win) => {
     let editor = win.tinymce.activeEditor;
     editor.dom.createRng();
-    return editor;
+    return { isTinyMCE: true, editor };
   });
 });
 
+// allows text areas to be interacted with as either TinyMCE-managed <text-wysiwyg> or <text-area>
 Cypress.Commands.add("getEditorByLabel", (labelText) => {
   return cy.contains("label", labelText)
     .invoke("attr", "for")
     .then(id => {
       return cy.get(`#${id}`).then($el => {
-        const isTinyMCE = $el.next().hasClass("tox-tinymce");
-
-        if (isTinyMCE) {
-          return cy.window().then(win => {
-            return new Cypress.Promise((resolve, reject) => {
-              const start = Date.now();
-              const timeout = 60000;
-
-              const checkEditorReady = () => {
-                const editor = win.tinymce.get(id);
-                if (editor && editor.initialized) {
-                  resolve({ isTinyMCE: true, editor, el: $el });
-                } else if (Date.now() - start > timeout) {
-                  reject(`TinyMCE editor for #${id} did not initialize in time`);
-                } else {
-                  setTimeout(checkEditorReady, 100);
-                }
-              };
-
-              checkEditorReady();
-            });
-          });
-        } else {
+        const tagName = $el.prop("tagName").toLowerCase();
+        if (tagName === "textarea" && !$el.closest("editor").length) {
           return { isTinyMCE: false, el: $el };
         }
+
+        return cy.window()
+          .its("tinyMCE")
+          .its("activeEditor")
+          .should("have.property", "initialized", true)
+          .then(() => {
+            return cy.window().then(win => {
+              const editor = win.tinymce.activeEditor;
+              return { isTinyMCE: true, editor, el: Cypress.$(`#${id}`) };
+            });
+          });
       });
     });
 });
 
 Cypress.Commands.add("enterText", { prevSubject: true }, (ctx, data) => {
+  cy.log(ctx)
   if (ctx.isTinyMCE) {
     ctx.editor.execCommand("mceSetContent", false, data);
   } else {

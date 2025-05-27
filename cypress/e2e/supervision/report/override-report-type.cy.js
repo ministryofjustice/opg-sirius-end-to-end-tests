@@ -32,7 +32,7 @@ describe(
       cy.get('footer .button.primary')
         .should('contain.text', 'Save & exit')
         .and('be.disabled')
-      cy.getEditorByLabel("Reason")
+      cy.getEditorByLabel("Explain why you’re asking the deputy to complete an OPG102 report")
         .enterText('<p>A reason to override the report type</p>');
       cy.get('footer .button.primary').click()
       cy.get('.dialog-header').should('contain.text', 'Override report type');
