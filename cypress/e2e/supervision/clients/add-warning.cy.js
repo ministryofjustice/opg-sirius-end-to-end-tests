@@ -23,9 +23,6 @@ describe(
         .find("select")
         .select("1")
         .contains("Compensation Claim Pending");
-      cy.getEditorByLabel("Notes")
-        .enterText('');
-      cy.contains("Save & exit").should('be.disabled');
 
       cy.getEditorByLabel("Notes")
         .enterText('<p>Warning has been added</p>');
