@@ -31,7 +31,7 @@ describe(
       cy.contains("button", "Save & exit").click();
       cy.get(".validation-summary")
         .and("contain.text", "There is a problem")
-        // .and("contain.text", "Required bond amount - Values must be less than 10000000000. Received \"999999999999\"");
+        .and("contain.text", "Required bond amount - Values must be less than 10000000000. Received \"999999999999\"");
 
       cy.get('#requiredBondAmount').clear();
       cy.get('#requiredBondAmount').type("1000");
