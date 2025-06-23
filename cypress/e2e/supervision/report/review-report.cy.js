@@ -34,7 +34,7 @@ describe(
         cy.get("#reviewDecision")
           .contains("No further action required")
           .click();
-        cy.waitForTinyMCE()
+       cy.getEditorByLabel("Reason for final decision")
           .enterText("<p>Report reviewed</p>");
 
         const today = new Date();

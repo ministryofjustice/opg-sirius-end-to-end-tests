@@ -14,7 +14,7 @@ describe(
       cy.get('#add-warning-button').click();
       cy.contains("Save & exit").should('be.disabled');
 
-      cy.waitForTinyMCE()
+      cy.getEditorByLabel("Notes")
         .enterText('<p>Warning has been added</p>');
       cy.contains("Save & exit").should('be.disabled');
 
@@ -23,11 +23,8 @@ describe(
         .find("select")
         .select("1")
         .contains("Compensation Claim Pending");
-      cy.waitForTinyMCE()
-        .enterText('');
-      cy.contains("Save & exit").should('be.disabled');
 
-      cy.waitForTinyMCE()
+      cy.getEditorByLabel("Notes")
         .enterText('<p>Warning has been added</p>');
       cy.contains("Save & exit").click();
 

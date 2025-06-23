@@ -63,7 +63,7 @@ describe(
           cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_month").type(reportDueDate.getMonth() + 1);
           cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_year").clear();
           cy.get("#fIELDLABELSEXTENDEDVISITREPORTDUEDATE_year").type(reportDueDate.getFullYear());
-          cy.waitForTinyMCE()
+          cy.getEditorByLabel("Why are you extending the visit report due date?")
             .enterText('<p>Because I said so</p>');
         });
         cy.intercept({

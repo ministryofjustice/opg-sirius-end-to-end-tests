@@ -29,13 +29,13 @@ describe(
         .find("input")
         .type("08/08/2020");
       const data = new Array(1000).join( 'A' )
-      cy.waitForTinyMCE()
+      cy.getEditorByLabel("Notes (optional)")
         .enterText('<p>'+data+'</p>');
       cy.get('button').contains('Save & exit').click();
       cy.get('.validation-summary')
         .and("contain.text", "There is a problem")
         .and("contain.text", "Notes - The input is more than 1000 characters long");
-      cy.waitForTinyMCE()
+      cy.getEditorByLabel("Notes (optional)")
         .enterText('<p>Working now</p>');
       cy.get('button').contains('Save & exit').click();
       cy.get('#tab-container').contains('Tasks').should('contain.text', 2);
