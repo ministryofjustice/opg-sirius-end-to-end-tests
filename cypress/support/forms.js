@@ -49,7 +49,8 @@ Cypress.Commands.add("pasteText", { prevSubject: true }, (ctx, data) => {
   if (ctx.isTinyMCE) {
     ctx.editor.execCommand("mceInsertClipboardContent", false, { content: data });
   } else {
-    cy.wrap(ctx.el).invoke("val", data).trigger("input");
+    cy.wrap(ctx.el).should('be.visible');
+    cy.wrap(ctx.el).type(data, {force: true});
   }
   return cy.wrap(ctx);
 });
