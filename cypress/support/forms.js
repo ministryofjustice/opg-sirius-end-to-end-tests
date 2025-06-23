@@ -51,10 +51,12 @@ Cypress.Commands.add("pasteText", { prevSubject: true }, (ctx, data) => {
   } else {
     cy.wrap(ctx.el).invoke("val", data).trigger("input");
   }
+  cy.wait(10000);
   return cy.wrap(ctx);
 });
 
 Cypress.Commands.add("getContent", { prevSubject: true }, (ctx) => {
+  cy.wait(10000);
   if (ctx.isTinyMCE) {
     return cy.wrap(ctx.editor.getContent());
   } else {
