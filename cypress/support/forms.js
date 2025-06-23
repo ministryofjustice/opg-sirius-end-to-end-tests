@@ -49,14 +49,13 @@ Cypress.Commands.add("pasteText", { prevSubject: true }, (ctx, data) => {
   if (ctx.isTinyMCE) {
     ctx.editor.execCommand("mceInsertClipboardContent", false, { content: data });
   } else {
-    cy.wrap(ctx.el).invoke("val", data).trigger("input");
+    cy.wrap(ctx.el).should('be.visible');
+    cy.wrap(ctx.el).type(data);
   }
-  cy.wait(10000);
   return cy.wrap(ctx);
 });
 
 Cypress.Commands.add("getContent", { prevSubject: true }, (ctx) => {
-  cy.wait(10000);
   if (ctx.isTinyMCE) {
     return cy.wrap(ctx.editor.getContent());
   } else {
