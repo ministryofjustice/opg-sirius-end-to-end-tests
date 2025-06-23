@@ -50,7 +50,7 @@ Cypress.Commands.add("pasteText", { prevSubject: true }, (ctx, data) => {
     ctx.editor.execCommand("mceInsertClipboardContent", false, { content: data });
   } else {
     cy.wrap(ctx.el).should('be.visible');
-    cy.wrap(ctx.el).type(data);
+    cy.wrap(ctx.el).type(data, {force: true});
   }
   return cy.wrap(ctx);
 });
