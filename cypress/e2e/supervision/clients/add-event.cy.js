@@ -2,7 +2,7 @@ beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createClient();
 });
-Cypress._.times(10, () => {
+Cypress._.times(30, () => {
   describe(
     "Add event to a client",
     { tags: ["@supervision", "client", "@smoke-journey", "supervision-notes"] },
