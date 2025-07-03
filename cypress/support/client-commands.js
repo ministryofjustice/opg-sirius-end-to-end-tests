@@ -27,31 +27,6 @@ Cypress.Commands.add("withOrder", {prevSubject: true}, ({id: clientId}, override
   });
 });
 
-Cypress.Commands.add("withOrderAndDeputy", {prevSubject: true}, ({id: clientId}, overrides = {}, alias = "order") => {
-  cy.fixture("order/minimal.json").then((order) => {
-    order = {...order, ...overrides};
-    cy.postToApi(`/supervision-api/v1/clients/${clientId}/orders`, order)
-      .its("body")
-      .then((res) => {
-        cy.wrap(res).as(alias);
-      });
-  });
-
-  cy.get("@order").then(({orderId}) => {
-    cy.fixture("deputy/minimal.json").then((deputy) => {
-      deputy = {...deputy, ...overrides};
-      cy.postToApi("/api/v1/deputies", deputy)
-        .its("body")
-        .then((res) => {
-          cy.wrap(res).as("deputy")
-            .then(({deputyId}) => {
-              cy.postToApi(`/api/v1/orders/${orderId}/deputies`, { deputyId })
-            });
-        })
-    });
-  });
-});
-
 Cypress.Commands.add("withContact", {prevSubject: true}, ({id: clientId}, overrides = {}) => {
   cy.fixture("contact/minimal.json").then((contact) => {
     contact = {...contact, ...overrides};
