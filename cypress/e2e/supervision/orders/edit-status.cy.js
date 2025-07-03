@@ -10,7 +10,10 @@ describe(
       it("successfully edits the order status for a supervised order and creates a timeline event", () => {
         cy.get("@client").withOrder()
           .withSupervisionLevel()
-          .withActiveOrderStatus();
+        cy.get("@order").then(({id: orderId}) => {
+          cy.createADeputyAndAssignToExistingOrder(orderId)
+          cy.makeOrderActive(orderId)
+        });
 
         cy.get("@order").then(({id: orderId}) => {
           cy.get("@client").then(({id: clientId}) => {
