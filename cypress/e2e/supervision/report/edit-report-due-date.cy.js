@@ -3,7 +3,10 @@ beforeEach(() => {
   cy.createClient()
     .withOrder()
     .withSupervisionLevel()
-    .withActiveOrderStatus()
+  cy.get("@order").then(({id: orderId}) => {
+    cy.createADeputyAndAssignToExistingOrder(orderId)
+    cy.makeOrderActive(orderId)
+  });
 });
 
 let currentYear = new Date().getFullYear().toString()
