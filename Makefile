@@ -8,7 +8,7 @@ build:
 	docker compose build cypress
 
 scan:
-	trivy image sirius/end-to-end-tests:latest
+	trivy image 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/end-to-end-tests:latest
 
 dev:
 	docker compose run --rm cypress
