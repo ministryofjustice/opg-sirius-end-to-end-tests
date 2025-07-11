@@ -1,52 +1,56 @@
-Cypress.Commands.add("waitForLetterEditor", () => {
-  cy.window()
-    .its("tinyMCE")
-    .its("activeEditor")
-    .its("initialized", { timeout: 60000 });
-  return cy.window().then((win) => {
-    let editor = win.tinymce.activeEditor;
-    editor.dom.createRng();
-    return { isTinyMCE: true, editor };
-  });
-});
+const simulateTyping = false; // Much slower if true
 
-// allows text areas to be interacted with as either TinyMCE-managed <text-wysiwyg> or <text-area>
+// allows text areas to be interacted with as either Rich Text Editor or <textarea>
 Cypress.Commands.add("getEditorByLabel", (labelText) => {
   return cy.contains("label", labelText)
     .invoke("attr", "for")
     .then(id => {
       return cy.get(`#${id}`).then($el => {
         const tagName = $el.prop("tagName").toLowerCase();
+
+        // Check if it's a standard textarea (not managed by an RTE)
         if (tagName === "textarea" && !$el.closest("editor").length) {
-          return { isTinyMCE: false, el: $el };
+          cy.log(`Editor "${labelText}" is a standard textarea.`);
+          return cy.wrap({ isRichTextEditor: false, el: $el });
         }
 
-        return cy.window()
-          .its("tinyMCE")
-          .its("activeEditor")
-          .should("have.property", "initialized", true)
-          .then(() => {
-            return cy.window().then(win => {
-              const editor = win.tinymce.activeEditor;
-              return { isTinyMCE: true, editor, el: Cypress.$(`#${id}`) };
-            });
+        const iframes = $el.find("iframe")
+
+        if(iframes.length > 0) {
+          const iframeId = $el.find("iframe")[0].id;
+
+          const iframeSelector = `#${iframeId}`;
+
+          cy.frameLoaded(iframeSelector);
+
+          return cy.iframe(iframeSelector).then(($iframeSection) => {
+            return { isRichTextEditor: true, editor: $iframeSection, el: $el };
           });
+        }
       });
     });
 });
 
 Cypress.Commands.add("enterText", { prevSubject: true }, (ctx, data) => {
-  cy.log(ctx)
-  if (ctx.isTinyMCE) {
-    ctx.editor.execCommand("mceSetContent", false, data);
+  cy.log(ctx); 
+  if (ctx.isRichTextEditor) {
+    if (simulateTyping) {
+      cy.wrap(ctx.editor).clear().type(data);
+    } else {
+      cy.wrap(ctx.editor).clear().invoke('html', data).trigger('input');
+    }
   } else {
-    cy.wrap(ctx.el).clear().type(data);
+    if (simulateTyping) {
+      cy.wrap(ctx.el).clear().type(data);
+    } else {
+      cy.wrap(ctx.el).clear().invoke('val', data).trigger('input');
+    }    
   }
-  return cy.wrap(ctx);
+  return cy.wrap(ctx); // Always return the context to allow chaining.
 });
 
 Cypress.Commands.add("pasteText", { prevSubject: true }, (ctx, data) => {
-  if (ctx.isTinyMCE) {
+  if (ctx.isRichTextEditor) {
     ctx.editor.execCommand("mceInsertClipboardContent", false, { content: data });
   } else {
     cy.wrap(ctx.el).should('be.visible');
@@ -56,8 +60,8 @@ Cypress.Commands.add("pasteText", { prevSubject: true }, (ctx, data) => {
 });
 
 Cypress.Commands.add("getContent", { prevSubject: true }, (ctx) => {
-  if (ctx.isTinyMCE) {
-    return cy.wrap(ctx.editor.getContent());
+  if (ctx.isRichTextEditor) {
+    return cy.wrap(ctx.editor).invoke("html");
   } else {
     return cy.wrap(ctx.el).invoke("val");
   }

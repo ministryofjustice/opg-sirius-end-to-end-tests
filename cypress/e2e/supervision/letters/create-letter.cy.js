@@ -1,13 +1,3 @@
-const getIframeBody = () => {
-  return cy
-    .get('iframe[id="editor_ifr"]', { timeout: 30000 })
-    .its("0.contentDocument")
-    .should("exist")
-    .its("body")
-    .should("not.be.undefined")
-    .then(cy.wrap);
-};
-
 beforeEach(function navigateToClient() {
   cy.loginAs("Allocations User");
   cy.createClient()
@@ -54,17 +44,19 @@ describe(
           .then(cy.wrap)
           .as("iframeBody");
 
-        getIframeBody().find("section").clear();
-        getIframeBody().find("p").type("My test letter content");
+        cy.enter('#editor_ifr').then(getBody => {
+          getBody().find('section').clear()
+          getBody().find("p").type("My test letter content");
 
-        cy.contains(".button", "Save draft").click();
-        cy.get("#publish-close-button").click();
-        cy.get("#preview-publish-button").click();
-        getIframeBody().contains("My test letter content");
+          cy.contains(".button", "Save draft").click();
+          cy.get("#publish-close-button").click();
+          cy.get("#preview-publish-button").click();
+          getBody().contains("My test letter content");
 
-        cy.contains(".hook-modal-publish", "Publish").click();
-        cy.contains("The draft has been successfully published");
-        cy.get("#publish-close-button").click();
+          cy.contains(".hook-modal-publish", "Publish").click();
+          cy.contains("The draft has been successfully published");
+          cy.get("#publish-close-button").click();
+        });
       }
     );
   }
