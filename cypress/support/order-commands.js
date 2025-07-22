@@ -12,7 +12,7 @@ Cypress.Commands.add("withSupervisionLevel", {prevSubject: true}, (order, overri
   cy.get('@order');
 });
 
-Cypress.Commands.add("withActiveOrderStatus", {prevSubject: true}, (order, overrides = {}) => {
+Cypress.Commands.add("makeOrderActive", (orderId, overrides = {}) => {
   let orderStatusBody = {
     "orderStatus": {
       "handle": "ACTIVE",
@@ -22,7 +22,7 @@ Cypress.Commands.add("withActiveOrderStatus", {prevSubject: true}, (order, overr
     "statusNotes": ""
   }
   orderStatusBody = {...orderStatusBody, ...overrides};
-  cy.putToApi(`/supervision-api/v1/orders/${order.id}/status`, orderStatusBody);
+  cy.putToApi(`/supervision-api/v1/orders/${orderId}/status`, orderStatusBody);
   cy.get('@order');
 });
 

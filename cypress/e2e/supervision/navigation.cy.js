@@ -39,7 +39,10 @@ describe("Navigation", { tags: ["@supervision", "@smoke-journey"] }, () => {
     cy.createClient()
       .withOrder()
       .withSupervisionLevel()
-      .withActiveOrderStatus();
+    cy.get("@order").then(({id: orderId}) => {
+      cy.createADeputyAndAssignToExistingOrder(orderId)
+      cy.makeOrderActive(orderId)
+    });
 
     cy.get("@client").then(({id}) => {
       cy.visit("supervision/#/clients/" + id);

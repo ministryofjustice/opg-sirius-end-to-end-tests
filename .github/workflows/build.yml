@@ -14,12 +14,14 @@ defaults:
     shell: bash
 
 jobs:
+  create-tag:
+    name: Create Tags
+    uses: ./.github/workflows/create-tags.yml
+
   build:
     name: "Build & Push Containers"
+    needs: ['create-tag']
     runs-on: ubuntu-latest
-    outputs:
-      branch: ${{ steps.set-outputs.outputs.branch }}
-      tag: ${{ steps.bump_version.outputs.tag }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -38,20 +40,8 @@ jobs:
         run: |
           make build
 
-      - name: Bump version
-        id: bump_version
-        uses: anothrNick/github-tag-action@1.36.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INITIAL_VERSION: 1.0.0
-          DEFAULT_BUMP: minor
-          PRERELEASE_SUFFIX: ${{ env.BRANCH_NAME }}
-          RELEASE_BRANCHES: main
-          WITH_V: true
-          DRY_RUN: ${{ github.actor == 'renovate[bot]' }}
-
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@ececac1a45f3b08a01d2dd070d28d111c5fe6722 # v4.1.0
+        uses: aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df # v4.2.1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_ACTIONS }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ACTIONS }}
@@ -71,29 +61,46 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           END_TO_END_TESTS_ECR_REPOSITORY: sirius/end-to-end-tests
         run: |
-          docker tag sirius/end-to-end-tests:latest $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY:${{ steps.bump_version.outputs.tag }}
+          docker tag 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/end-to-end-tests:latest $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY:${{ needs.create-tag.outputs.tag }}
           if [ $BRANCH_NAME == "main" ]; then
-            docker tag sirius/end-to-end-tests:latest $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY:latest
-            docker tag sirius/end-to-end-tests:latest $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY:main-${{ steps.bump_version.outputs.tag }}
+            docker tag 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/end-to-end-tests:latest $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY:main-${{ needs.create-tag.outputs.tag }}
+            docker tag 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/end-to-end-tests:latest $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY:main-${{ needs.create-tag.outputs.tag }}-${{ needs.create-tag.outputs.timestamp }}
             # We want all of the tags pushed
             docker push --all-tags $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY
           else
-            docker push $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY:${{ steps.bump_version.outputs.tag }}
+            docker push $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY:${{ needs.create-tag.outputs.tag }}
           fi
 
       - name: Trigger remote testing
         shell: bash
-        run: curl -XPOST -u ${{ secrets.JENKINS_API_USER }}:${{ secrets.JENKINS_API_TOKEN }} "https://${{ secrets.JENKINS_URL }}/job/Sirius/job/End-to-End%20test/buildWithParameters?token=${{ secrets.JENKINS_API_TOKEN_NAME }}&e2e_tag=${{ steps.bump_version.outputs.tag }}&e2e_commit=${{ github.event.pull_request.head.sha }}"
+        run: curl -XPOST -u ${{ secrets.JENKINS_API_USER }}:${{ secrets.JENKINS_API_TOKEN }} "https://${{ secrets.JENKINS_URL }}/job/Sirius/job/End-to-End%20test/buildWithParameters?token=${{ secrets.JENKINS_API_TOKEN_NAME }}&e2e_tag=${{ needs.create-tag.outputs.tag }}&e2e_commit=${{ github.event.pull_request.head.sha }}"
+
+  end_of_pr_workflow:
+    name: End of PR Workflow
+    runs-on: ubuntu-latest
+    if: always()
+    needs: ['create-tag', 'build']
+    steps:
+      - name: End of PR Workflow
+        run: |
+          if ${{ contains(needs.*.result,'failure') }}
+          then
+            echo "Not all checks succedeed, check the previous jobs."
+            exit 1
+          else
+            echo "All checks succedeed!"
+            exit 0
+          fi
 
   push-tags:
     runs-on: ubuntu-latest
-    needs: build
+    needs: ['create-tag', 'end_of_pr_workflow']
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@ececac1a45f3b08a01d2dd070d28d111c5fe6722 # v4.1.0
+        uses: aws-actions/configure-aws-credentials@b47578312673ae6fa5b5096b330d9fbac3d116df # v4.2.1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_ACTIONS }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ACTIONS }}
@@ -108,4 +115,4 @@ jobs:
 
       - name: Push Tag to Parameter Store
         run: |
-          aws ssm put-parameter --name "opg-sirius-end-to-end-tests-latest-green-build" --type "String" --value "${{ needs.build.outputs.tag}}" --overwrite --region=eu-west-1
+          aws ssm put-parameter --name "opg-sirius-end-to-end-tests-latest-green-build" --type "String" --value "${{ needs.create-tag.outputs.tag }}" --overwrite --region=eu-west-1

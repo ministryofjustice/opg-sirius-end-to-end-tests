@@ -28,8 +28,10 @@ describe(
       cy.contains("blank: Blank template").click();
       cy.get(".selectable-list-select-recipients-list > :nth-child(2)").click();
       cy.get("#create-letter-button").click();
-      const data = "<p>This is a letter that I have created.</p>";
-      cy.waitForTinyMCE().enterText(data);
+      cy.enter('#editor_ifr').then(getBody => {
+        getBody().find('section').clear()
+        getBody().find("p").type("This is a letter that I have created.");
+      });
 
       cy.contains(".button", "Save draft").click();
       cy.get("#publish-close-button").click();
