@@ -3,9 +3,9 @@ beforeEach(() => {
   cy.createClient()
     .withOrder()
     .withSupervisionLevel()
-    .withActiveOrderStatus();
-
   cy.get("@order").then(({id: orderId}) => {
+    cy.createADeputyAndAssignToExistingOrder(orderId)
+    cy.makeOrderActive(orderId)
     cy.get("@client").then(({id: clientId}) => {
       cy.lodgeReport(clientId, {
         dateReportReceived: "01/01/2022",
@@ -34,7 +34,7 @@ describe(
         cy.get("#reviewDecision")
           .contains("No further action required")
           .click();
-        cy.waitForTinyMCE()
+       cy.getEditorByLabel("Reason for final decision")
           .enterText("<p>Report reviewed</p>");
 
         const today = new Date();

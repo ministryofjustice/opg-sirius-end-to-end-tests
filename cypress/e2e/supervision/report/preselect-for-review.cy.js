@@ -3,8 +3,9 @@ beforeEach(() => {
   cy.createClient()
     .withOrder()
     .withSupervisionLevel()
-    .withActiveOrderStatus()
   cy.get("@order").then(({id: orderId}) => {
+    cy.createADeputyAndAssignToExistingOrder(orderId)
+    cy.makeOrderActive(orderId)
     cy.get("@client").then(({id: clientId}) => {
       cy.visit(`/supervision/#/clients/${clientId}?order=${orderId}`);
     });
@@ -28,7 +29,7 @@ beforeEach(() => {
       cy.get('radio-button-group[name=preselectReportForReview] .checked').should('contain.text', 'No')
       cy.get('radio-button-group[name=preselectReportForReview] label:contains(Yes)').click()
       cy.get('footer .button.primary').should('contain.text', 'Save & exit').and('be.disabled')
-      cy.waitForTinyMCE()
+      cy.getEditorByLabel("Reason")
         .enterText('<p>A reason to preselect for staff review</p>');
       cy.get('footer .button.primary').click()
       cy.contains('Report review status updated, redirecting...')

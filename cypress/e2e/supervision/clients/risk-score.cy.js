@@ -22,7 +22,7 @@ describe(
           .find("select")
           .select("1"); // the values are indexed from zero so this actually selects "2"...
 
-        cy.waitForTinyMCE()
+        cy.getEditorByLabel("Notes")
           .enterText('<p>Risk score added</p>');
       });
 
