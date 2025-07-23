@@ -32,7 +32,7 @@ describe(
       cy.get('.dotted-link').should('contain.text', 'View notes');
       cy.get('.dotted-link').first().click();
       cy.get('.details-row > td').should('be.visible');
-      cy.get('.details-row > td').should('contain.text', 'A client has been created');
+      cy.get('.details-row > td').should('contain.text', 'Mandatory description');
 
       cy.get('.order-number').should('contain.text', 'PFA');
       cy.wait(500);
