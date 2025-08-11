@@ -8,6 +8,17 @@ Specifics on migration from our old UI tests [here](/docs/Migration.md)
 
 ## Running the tests
 
+### Within This Repo
+
+Commands for running the tests inside the dir of this repo can be found in the Makefile, including:
+
+```shell
+# Runs the Cypress tests
+make dev
+```
+
+### In Sirius
+
 Ensure Sirius is running
 
 Usually something like:
