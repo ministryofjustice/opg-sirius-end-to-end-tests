@@ -8,6 +8,17 @@ Specifics on migration from our old UI tests [here](/docs/Migration.md)
 
 ## Running the tests
 
+### Within This Repo
+
+Commands for running the tests inside the dir of this repo can be found in the Makefile, including:
+
+```shell
+# Runs the Cypress tests
+make dev
+```
+
+### In Sirius
+
 Ensure Sirius is running
 
 Usually something like:
@@ -19,7 +30,7 @@ Usually something like:
 Then run the tests with
 
 ```shell
-docker compose up cypress
+docker compose up end-to-end-tests
 ```
 
 Or to run in the Cypress app, install locally with `npm i` then open with
@@ -47,13 +58,13 @@ If you want to run a subset of tests extra options can be passed to run by tag o
 E.g.
 
 ```shell
-docker compose run cypress test  -- --env grepTags=@dashboard,grepOmitFiltered=true
+docker compose run end-to-end-tests test  -- --env grepTags=@dashboard,grepOmitFiltered=true
 ```
 
 or
 
 ```shell
-docker-compose run cypress test  -- --env grep=dashboard,grepOmitFiltered=true
+docker-compose run end-to-end-tests test  -- --env grep=dashboard,grepOmitFiltered=true
 ```
 
 If you don't include grepOmitFiltered=true then filtered tests appear as pending in reports.
