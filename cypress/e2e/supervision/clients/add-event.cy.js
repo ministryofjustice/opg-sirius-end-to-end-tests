@@ -12,18 +12,28 @@ describe(
         cy.visit("/supervision/#/clients/" + id);
         cy.contains(`${firstname} ${surname}`);
         cy.get('[id="create-event-button"]').click();
+        cy.get('[name="noteCategory"]').should('be.visible', {timeout: 5000});
+        cy.get('[name="noteCategory"]').first().click();
+        cy.get('[name="noteType"]').should('be.visible', {timeout: 5000});
+        cy.get('[name="noteType"]').last().select("Call");
+        cy.get('[name="noteDirection"]').should('be.visible', {timeout: 5000});
+        cy.get('[name="noteDirection"]').first().click();
 
         const data =
           "<p>Test this<strong> pasted </strong>data then.</p>";
 
+        // ensure hugerte has loaded
+        cy.get('.tox-statusbar', {timeout: 5000});
         cy.getEditorByLabel("Notes (optional)")
           .pasteText(data)
           .getContent()
           .then((content) => {
-            expect(content).to.contain(
-              "<p>Test this<strong> pasted </strong>data then.</p>"
-            );
+            expect(content).to.contain("<p>&lt;p&gt;Test this&lt;strong&gt; pasted &lt;/strong&gt;data then.&lt;/p&gt;</p>");
           })
+        cy.contains("Save").should('be.visible', {timeout: 5000});
+        cy.contains("Save").click();
+        cy.contains("Timeline").click({timeout: 4000});
+        cy.get('.event-note > .section-content > .wrapper').should('contain.text', data);
       });
     });
   }
