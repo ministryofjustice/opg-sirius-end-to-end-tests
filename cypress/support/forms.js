@@ -10,7 +10,6 @@ Cypress.Commands.add("getEditorByLabel", (labelText) => {
 
         // Check if it's a standard textarea (not managed by an RTE)
         if (tagName === "textarea" && !$el.closest("editor").length) {
-          cy.log(`Editor "${labelText}" is a standard textarea.`);
           return cy.wrap({ isRichTextEditor: false, el: $el });
         }
 
@@ -18,9 +17,7 @@ Cypress.Commands.add("getEditorByLabel", (labelText) => {
 
         if(iframes.length > 0) {
           const iframeId = $el.find("iframe")[0].id;
-
           const iframeSelector = `#${iframeId}`;
-
           cy.frameLoaded(iframeSelector);
 
           return cy.iframe(iframeSelector).then(($iframeSection) => {
@@ -32,7 +29,6 @@ Cypress.Commands.add("getEditorByLabel", (labelText) => {
 });
 
 Cypress.Commands.add("enterText", { prevSubject: true }, (ctx, data) => {
-  cy.log(ctx); 
   if (ctx.isRichTextEditor) {
     if (simulateTyping) {
       cy.wrap(ctx.editor).clear().type(data);
@@ -44,18 +40,32 @@ Cypress.Commands.add("enterText", { prevSubject: true }, (ctx, data) => {
       cy.wrap(ctx.el).clear().type(data);
     } else {
       cy.wrap(ctx.el).clear().invoke('val', data).trigger('input');
-    }    
+    }
   }
   return cy.wrap(ctx); // Always return the context to allow chaining.
 });
 
-Cypress.Commands.add("pasteText", { prevSubject: true }, (ctx, data) => {
+Cypress.Commands.add("enterTextK", { prevSubject: true }, (ctx, data) => {
   if (ctx.isRichTextEditor) {
-    ctx.editor.execCommand("mceInsertClipboardContent", false, { content: data });
+    if (simulateTyping) {
+      cy.wrap(ctx.editor).type(data);
+    } else {
+      cy.wrap(ctx.editor).invoke('html', data).trigger('input');
+    }
   } else {
-    cy.wrap(ctx.el).should('be.visible');
-    cy.wrap(ctx.el).type(data, {force: true});
+    if (simulateTyping) {
+      cy.wrap(ctx.el).type(data);
+    } else {
+      cy.find(ctx.el).invoke('val', data).trigger('input');
+    }
   }
+  return cy.wrap(ctx); // Always return the context to allow chaining.
+});
+
+
+Cypress.Commands.add("pasteText", { prevSubject: true }, (ctx, data) => {
+    cy.wrap(ctx.el).should('exist');
+    cy.wrap(ctx.editor).type(data, {force: true});
   return cy.wrap(ctx);
 });
 
