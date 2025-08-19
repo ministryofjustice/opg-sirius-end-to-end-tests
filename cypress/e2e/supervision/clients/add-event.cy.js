@@ -14,10 +14,10 @@ describe(
         cy.get('[id="create-event-button"]').click();
         cy.get('[name="noteCategory"]').should('be.visible', {timeout: 5000});
         cy.get('[name="noteCategory"]').first().click();
-        cy.get('[name="noteType"]').should('be.visible', {timeout: 5000});
-        cy.get('[name="noteType"]').last().select("Call");
-        cy.get('[name="noteDirection"]').should('be.visible', {timeout: 5000});
-        cy.get('[name="noteDirection"]').first().click();
+        cy.get('[name="FIELDLABELSNOTETYPE"]').should('be.visible', {timeout: 5000});
+        cy.get('[name="FIELDLABELSNOTETYPE"]').last().select("Call");
+        cy.get('[name="FIELDLABELSNOTEDIRECTION"]').should('be.visible', {timeout: 5000});
+        cy.get('[name="FIELDLABELSNOTEDIRECTION"]').first().click();
 
         const data =
           "<p>Test this<strong> pasted </strong>data then.</p>";
