@@ -15,14 +15,14 @@
             "schedule": "* 0-6 1 * *",
             "minimumReleaseAge": "5 days",
             "matchPackageNames": ["*"]
-        },
-        {
-            "groupName": "Major Updates",
-            "groupSlug": "all-major-updates",
-            "matchUpdateTypes": ["major"],
-            "matchPackageNames": ["*"]
         }
     ],
+    "major": {
+        "labels": [
+            "Dependencies",
+            "Renovate"
+        ]
+    },
     "vulnerabilityAlerts": {
         "groupName": "Vulnerability Patches",
         "schedule": ["after 6am and before 7am every weekday"],
