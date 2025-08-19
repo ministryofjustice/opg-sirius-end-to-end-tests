@@ -12,12 +12,12 @@ describe(
         cy.visit("/supervision/#/clients/" + id);
         cy.contains(`${firstname} ${surname}`);
         cy.get('[id="create-event-button"]').click();
-        cy.get('[name="noteCategory"]').should('be.visible', {timeout: 5000});
-        cy.get('[name="noteCategory"]').first().click();
-        cy.get('[name="noteType"]').should('be.visible', {timeout: 5000});
-        cy.get('[name="noteType"]').last().select("Call");
-        cy.get('[name="noteDirection"]').should('be.visible', {timeout: 5000});
-        cy.get('[name="noteDirection"]').first().click();
+        cy.get('[name="FIELDLABELSNOTE_CATEGORY"]').should('be.visible', {timeout: 5000});
+        cy.get('[name="FIELDLABELSNOTE_CATEGORY"]').first().click();
+        cy.get('[name="FIELDLABELSNOTE_TYPE"]').should('be.visible', {timeout: 5000});
+        cy.get('[name="FIELDLABELSNOTE_TYPE"]').last().select("Call");
+        cy.get('[name="FIELDLABELSNOTE_DIRECTION"]').should('be.visible', {timeout: 5000});
+        cy.get('[name="FIELDLABELSNOTE_DIRECTION"]').first().click();
 
         const data =
           "<p>Test this<strong> pasted </strong>data then.</p>";
