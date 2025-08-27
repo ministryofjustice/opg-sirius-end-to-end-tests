@@ -34,17 +34,19 @@ describe(
         cy.get("#reviewDecision")
           .contains("No further action required")
           .click();
-       cy.getEditorByLabel("Reason")
-          .enterText("<p>Report reviewed</p>");
+       cy.get("[name=reasonForFinalDecision]").should('be.visible', { timeout: 10000 });
 
         const today = new Date();
-
         cy.get('input[name="dateReportReviewed_day"]').clear();
         cy.get('input[name="dateReportReviewed_day"]').type(today.getDate().toString());
         cy.get('input[name="dateReportReviewed_month"]').clear();
         cy.get('input[name="dateReportReviewed_month"]').type((today.getMonth() + 1).toString());
         cy.get('input[name="dateReportReviewed_year"]').clear();
         cy.get('input[name="dateReportReviewed_year"]').type(today.getFullYear().toString());
+
+//        cy.get(".tox-editor-header").should('be.visible', { timeout: 10000 });
+        cy.getEditorByLabel("Reason")
+          .enterText("<p>Report reviewed</p>");
 
         cy.contains('[type="submit"]', "Yes, submit review").should("not.be.disabled").click();
       cy.contains(".hook-modal-confirm", "Yes, submit review").click();
