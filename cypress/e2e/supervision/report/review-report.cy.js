@@ -34,6 +34,7 @@ describe(
         cy.get("#reviewDecision")
           .contains("No further action required")
           .click();
+      
        cy.get("[name=reasonForFinalDecision]").should('be.visible', { timeout: 10000 });
 
         const today = new Date();
