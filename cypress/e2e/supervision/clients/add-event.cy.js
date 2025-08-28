@@ -2,9 +2,7 @@ beforeEach(() => {
   cy.loginAs("Case Manager");
   cy.createClient();
 });
-
-Cypress._.times(20, () => {
-  describe(
+ describe(
     "Add event to a client",
     { tags: ["@supervision", "client", "@smoke-journey", "supervision-notes"] },
     () => {
@@ -20,6 +18,7 @@ Cypress._.times(20, () => {
           cy.contains(`${firstname} ${surname}`);
           cy.get('[id="create-event-button"]').click();
           cy.url().should('contain', '/event/create');
+          cy.waitForStableDOM();
 
           cy.get('[label="FIELDLABELS.NOTE_TYPE"]').should('be.visible', {timeout: 3000});
           cy.get('[label="FIELDLABELS.NOTE_TYPE"]').find('select').select("Call", { force: true });
@@ -47,4 +46,4 @@ Cypress._.times(20, () => {
       });
     }
   );
-});
+
