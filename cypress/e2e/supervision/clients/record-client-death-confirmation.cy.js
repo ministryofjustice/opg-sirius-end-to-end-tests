@@ -74,7 +74,7 @@ Cypress._.times(20, () => {
             cy.visit(`/supervision/#/clients/${id}/record-death`);
           });
           cy.get("#record-death").as("record-death-panel");
-          // cy.waitForStableDOM();
+          cy.wait(1500);
           cy.get("@record-death-panel").within(() => {
             cy.contains("Proof of death received")
               .closest(".fieldset")

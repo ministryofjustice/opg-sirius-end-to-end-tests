@@ -18,7 +18,7 @@ Cypress._.times(20, () => {
         cy.get("@client").then(({ id, firstname, surname }) => {
           cy.visit("/supervision/#/clients/" + id);
           cy.contains(`${firstname} ${surname}`);
-          // cy.waitForStableDOM();
+          cy.waitForStableDOM();
           cy.get('[id="create-event-button"]').click();
           cy.url().should('contain', '/event/create');
 
