@@ -8,11 +8,17 @@ Cypress._.times(20, () => {
     "Add event to a client",
     { tags: ["@supervision", "client", "@smoke-journey", "supervision-notes"] },
     () => {
-      it("Given I'm a Case Manager on Supervision, when I add an event, then Word formatting is cleaned", () => {
+      it("Given I'm a Case Manager on Supervision, when I add an event, then Word formatting is cleaned",
+        {
+          retries: {
+            runMode: 0,
+            openMode: 0,
+          },
+        }, () => {
         cy.get("@client").then(({ id, firstname, surname }) => {
           cy.visit("/supervision/#/clients/" + id);
           cy.contains(`${firstname} ${surname}`);
-          cy.waitForStableDOM();
+          // cy.waitForStableDOM();
           cy.get('[id="create-event-button"]').click();
           cy.url().should('contain', '/event/create');
 

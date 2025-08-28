@@ -64,12 +64,17 @@ Cypress._.times(20, () => {
       // );
       it(
         "Displays a validation error when confirming a client's death with an invalid date of death",
-        () => {
+        {
+          retries: {
+            runMode: 0,
+            openMode: 0,
+          },
+        }, () => {
           cy.get("@client").then(({ id }) => {
             cy.visit(`/supervision/#/clients/${id}/record-death`);
           });
           cy.get("#record-death").as("record-death-panel");
-          cy.waitForStableDOM();
+          // cy.waitForStableDOM();
           cy.get("@record-death-panel").within(() => {
             cy.contains("Proof of death received")
               .closest(".fieldset")
