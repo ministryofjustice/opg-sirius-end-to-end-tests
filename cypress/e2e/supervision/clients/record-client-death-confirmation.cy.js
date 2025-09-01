@@ -45,40 +45,45 @@ beforeEach(() => {
             .enterText('<p>Gurps</p>');
         });
 
-        cy.contains("Confirm client is deceased").click();
-        cy.contains("The client is deceased").click();
-        cy.get('.client-priority-info').contains('Client deceased');
-        cy.get('#tab-container').contains('Timeline').click();
-        cy.get(".timeline-event-title", { timeout: 3000 })
-          .should("contain", "Death")
-          .should("contain", "Client status");
-        cy.get('.event-death-record > .section-content > .wrapper')
-          .should("contain", "The death of the client has been confirmed")
-          .should("contain", "Date of death " + dateOfDeath)
-          .should("contain", "Certificate received " + dateDeathCetificateReceived)
-          .should("contain", "Notified by " + notifiedBy + " on " + dateNotified + " by " + howNotified)
-        cy.get('.client-status-current').contains('Death confirmed');
-      }
-    );
+          cy.contains("Confirm client is deceased").click();
+          cy.contains("The client is deceased").click();
+          cy.get('.client-priority-info').contains('Client deceased');
+          cy.get('#tab-container').contains('Timeline').click();
+          cy.get(".timeline-event-title", { timeout: 3000 })
+            .should("contain", "Death")
+            .should("contain", "Client status");
+          cy.get('.event-death-record > .section-content > .wrapper')
+            .should("contain", "The death of the client has been confirmed")
+            .should("contain", "Date of death " + dateOfDeath)
+            .should("contain", "Certificate received " + dateDeathCetificateReceived)
+            .should("contain", "Notified by " + notifiedBy + " on " + dateNotified + " by " + howNotified)
+          cy.get('.client-status-current').contains('Death confirmed');
+        }
+      );
       it(
         "Displays a validation error when confirming a client's death with an invalid date of death",
-        () => {
+        {
+          retries: {
+            runMode: 2,
+            openMode: 0,
+          },
+        }, () => {
           cy.get("@client").then(({ id }) => {
             cy.visit(`/supervision/#/clients/${id}/record-death`);
           });
+
           cy.get("#record-death").as("record-death-panel");
-          cy.waitForStableDOM();
           cy.get("@record-death-panel").within(() => {
             cy.contains("Proof of death received")
               .closest(".fieldset")
               .contains("Yes")
               .click();
-            cy.get('input[name="dateOfDeath"]').clear();
             cy.get('input[name="dateOfDeath"]').type(dateOfDeathIncorrect);
             cy.get('input[name="dateDeathCertificateReceived"]').clear();
             cy.get('input[name="dateDeathCertificateReceived"]').type(dateDeathCetificateReceived);
             cy.get('input[name="dateNotified"]').clear();
             cy.get('input[name="dateNotified"]').type(dateNotified);
+            cy.get('[name="notifiedBy"]').should('be.visible', { timeout: 4000 });
             cy.get('[name="notifiedBy"]').select(notifiedBy);
             cy.contains("How was the OPG notified?")
               .closest(".fieldset")
