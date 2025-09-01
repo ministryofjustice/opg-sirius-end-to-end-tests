@@ -34,7 +34,7 @@ describe(
         cy.get("#reviewDecision")
           .contains("No further action required")
           .click();
-      
+
        cy.get("[name=reasonForFinalDecision]").should('be.visible', { timeout: 10000 });
 
         const today = new Date();
@@ -45,7 +45,7 @@ describe(
         cy.get('input[name="dateReportReviewed_year"]').clear();
         cy.get('input[name="dateReportReviewed_year"]').type(today.getFullYear().toString());
 
-//        cy.get(".tox-editor-header").should('be.visible', { timeout: 10000 });
+       cy.get(".tox-editor-header").should('be.visible', { timeout: 10000 });
         cy.getEditorByLabel("Reason")
           .enterText("<p>Report reviewed</p>");
 

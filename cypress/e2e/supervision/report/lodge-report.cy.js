@@ -31,8 +31,7 @@ beforeEach(() => {
       cy.get('#dateReportLodged_month').should('not.be.disabled').and('be.empty')
       cy.get('#dateReportLodged_year').should('not.be.disabled').and('be.empty')
 
-//      uncomment after PR merged
-//      cy.get(".tox-editor-header").should('be.visible', { timeout: 10000 });
+     cy.get(".tox-editor-header").should('be.visible', { timeout: 10000 });
       cy.get('select[name="fIELDLABELSLODGEDSTATUS"]').should('not.be.disabled')
       cy.get('footer .button.primary').should('contain.text', 'Lodge report').and('be.disabled')
       cy.getEditorByLabel("Reason")
