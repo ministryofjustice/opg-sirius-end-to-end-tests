@@ -29,19 +29,17 @@ beforeEach(() => {
           const data =
             "<p>Test this<strong> pasted </strong>data then.</p>";
 
-          // comment in after huge rte changes
-          // ensure hugerte has loaded
-          // cy.get('.tox-statusbar', {timeout: 5000});
-          // cy.getEditorByLabel("Notes (optional)")
-          //   .pasteText(data)
-          //   .getContent()
-          //   .then((content) => {
-          //     expect(content).to.contain("<p>&lt;p&gt;Test this&lt;strong&gt; pasted &lt;/strong&gt;data then.&lt;/p&gt;</p>");
-          //   })
-          // cy.contains("Save").should('be.visible', {timeout: 5000});
-          // cy.contains("Save").click();
-          // cy.contains("Timeline").click({timeout: 4000});
-          // cy.get('.event-note > .section-content > .wrapper').should('contain.text', data);
+          cy.get('.tox-statusbar', {timeout: 5000});
+          cy.getEditorByLabel("Notes (optional)")
+            .pasteText(data)
+            .getContent()
+            .then((content) => {
+              expect(content).to.contain("<p>&lt;p&gt;Test this&lt;strong&gt; pasted &lt;/strong&gt;data then.&lt;/p&gt;</p>");
+            })
+          cy.contains("Save").should('be.visible', {timeout: 5000});
+          cy.contains("Save").click();
+          cy.contains("Timeline").click({timeout: 4000});
+          cy.get('.event-note > .section-content > .wrapper').should('contain.text', data);
         });
       });
     }
