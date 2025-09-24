@@ -92,7 +92,7 @@ COPY --chown=node:node package-lock.json package-lock.json
 
 USER node
 
-RUN npm install
+RUN npm ci --ignore-scripts
 
 ENV CYPRESS_VIDEO=false
 
@@ -102,7 +102,7 @@ COPY --chown=node:node cypress cypress
 
 ENV CYPRESS_CACHE_FOLDER=/home/node/.cache/Cypress
 
-RUN npx cypress verify
+RUN ./node_modules/.bin/cypress install
 
 ENTRYPOINT ["npm", "run"]
 
