@@ -92,7 +92,7 @@ COPY --chown=node:node package-lock.json package-lock.json
 
 USER node
 
-RUN npm install
+RUN npm ci --ignore-scripts
 
 ENV CYPRESS_VIDEO=false
 
