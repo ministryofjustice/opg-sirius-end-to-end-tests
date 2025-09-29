@@ -12,5 +12,5 @@ require("./visit-commands");
 require("cypress-failed-log");
 require("cy-verify-downloads").addCustomCommand();
 
-const registerCypressGrep = require('@cypress/grep')
+const { register: registerCypressGrep } = require('@cypress/grep')
 registerCypressGrep()
