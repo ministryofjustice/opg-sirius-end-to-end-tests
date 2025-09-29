@@ -1,6 +1,6 @@
 import { defineConfig } from "cypress";
 import { verifyDownloadTasks } from "cy-verify-downloads";
-import generated from "@cypress/grep/src/plugin";
+import { plugin as grep } from "@cypress/grep/plugin";
 import cypress_failed_log from "cypress-failed-log/src/failed";
 import * as fs from "fs";
 
@@ -19,7 +19,7 @@ module.exports = defineConfig({
   scrollBehavior: 'center',
   e2e: {
     setupNodeEvents(on, config) {
-      generated(config);
+      grep(config);
 
       on("task", {
         failed: cypress_failed_log(),
