@@ -1,4 +1,8 @@
 describe("Create EPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
+  it("checks nothing for now", () => {
+    // tests disabled whilst we change the form
+  });
+
   // beforeEach(() => {
   //   cy.loginAs("LPA Manager");
   //   cy.createDonor().then(({ id }) => {
