@@ -77,7 +77,7 @@ jobs:
 
       - name: Trigger remote testing
         shell: bash
-        run: curl -XPOST -u ${{ secrets.JENKINS_API_USER }}:${{ secrets.JENKINS_API_TOKEN }} "https://${{ secrets.JENKINS_URL }}/job/Sirius/job/End-to-End%20test/buildWithParameters?token=${{ secrets.JENKINS_API_TOKEN_NAME }}&e2e_tag=${{ needs.create-tag.outputs.tag }}&e2e_commit=${{ github.event.pull_request.head.sha }}"
+        run: curl -XPOST -u ${{ secrets.JENKINS_API_USER }}:${{ secrets.JENKINS_API_TOKEN }} "https://${{ secrets.JENKINS_URL }}/job/Sirius/job/End-to-End_Test/buildWithParameters?token=${{ secrets.JENKINS_API_TOKEN_NAME }}&e2e_tag=${{ needs.create-tag.outputs.tag }}&e2e_commit=${{ github.event.pull_request.head.sha }}"
 
   end_of_pr_workflow:
     name: End of PR Workflow
