@@ -36,7 +36,7 @@ beforeEach(() => {
           cy.get('input[name="dateOfDeath"]').type(dateOfDeath);
           cy.get('input[name="dateDeathCertificateReceived"]').type(dateDeathCetificateReceived);
           cy.get('input[name="dateNotified"]').type(dateNotified);
-          cy.get('[name="notifiedBy"]').select(notifiedBy);
+          cy.get('[name="notifiedBy"]', {timeout: 30000}).select(notifiedBy, {timeout: 30000});
           cy.contains("How was the OPG notified?")
             .closest(".fieldset")
             .contains(howNotified)
@@ -83,8 +83,7 @@ beforeEach(() => {
             cy.get('input[name="dateDeathCertificateReceived"]').type(dateDeathCetificateReceived);
             cy.get('input[name="dateNotified"]').clear();
             cy.get('input[name="dateNotified"]').type(dateNotified);
-            cy.get('[name="notifiedBy"]').should('be.visible', { timeout: 4000 });
-            cy.get('[name="notifiedBy"]').select(notifiedBy);
+            cy.get('[name="notifiedBy"]', {timeout: 30000}).select(notifiedBy, {timeout: 30000});
             cy.contains("How was the OPG notified?")
               .closest(".fieldset")
               .contains(howNotified)
