@@ -54,3 +54,23 @@ describe(
     });
   }
 );
+
+describe(
+  "Mark Bond as not required",
+  () => {
+    it("Can create a non security bond", () => {
+      cy.get("@client").then(({ id: clientId }) => {
+        cy.visit(
+          `/supervision/#/clients/${clientId}`
+        );
+      });
+
+      cy.get('#tab-container').contains('Orders').click();
+      cy.get('.add-bond-button').click();
+      cy.get('#securityBond').contains('No').click()
+      cy.contains("button", "Save & exit").click();
+      cy.get('#tab-container').contains('Timeline').click();
+      cy.contains('Security bond not required');
+    });
+  }
+);
