@@ -1,6 +1,6 @@
 import { defineConfig } from "cypress";
 import { verifyDownloadTasks } from "cy-verify-downloads";
-import { plugin as cypressGrepPlugin } from '@cypress/grep/plugin'
+const { plugin: cypressGrepPlugin } = require('@cypress/grep/plugin')
 import cypress_failed_log from "cypress-failed-log/src/failed";
 import * as fs from "fs";
 
