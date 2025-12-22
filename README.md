@@ -58,12 +58,6 @@ If you want to run a subset of tests extra options can be passed to run by tag o
 E.g.
 
 ```shell
-npx cypress run --env grep="dashboard",grepOmitFiltered="true" -c baseUrl=http://localhost:8080
-```
-
-or
-
-```shell
 docker compose run -e CYPRESS_grep=dashboard -e CYPRESS_grepOmitFiltered=true cypress
 ```
 This will filter on the 'describe' or 'it' definition of the test, not the test filename.
