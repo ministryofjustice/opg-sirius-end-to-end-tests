@@ -30,7 +30,7 @@ Usually something like:
 Then run the tests with
 
 ```shell
-docker compose up end-to-end-tests
+docker compose up
 ```
 
 Or to run in the Cypress app, install locally with `npm i` then open with
@@ -58,14 +58,16 @@ If you want to run a subset of tests extra options can be passed to run by tag o
 E.g.
 
 ```shell
-docker compose run end-to-end-tests test  -- --env grepTags=@dashboard,grepOmitFiltered=true
+npx cypress run --env grep="dashboard",grepOmitFiltered="true" -c baseUrl=http://localhost:8080
 ```
 
 or
 
 ```shell
-docker-compose run end-to-end-tests test  -- --env grep=dashboard,grepOmitFiltered=true
+docker compose run -e CYPRESS_grep=dashboard -e CYPRESS_grepOmitFiltered=true cypress
 ```
+This will filter on the 'describe' or 'it' definition of the test, not the test filename.
+It may look like it's running all tests, but will skip over those that don't match (you will see 0 tests ran)
 
 If you don't include grepOmitFiltered=true then filtered tests appear as pending in reports.
 
