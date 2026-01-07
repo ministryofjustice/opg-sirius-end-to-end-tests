@@ -9,6 +9,9 @@
   "scripts": {
     "eslint": "npx eslint . --ignore-pattern \"**/*.js\"",
     "test": "cypress run --headless --browser chromium",
+    "test-single": "npx cypress run --headless --browser chromium --spec \"cypress/e2e/common/login.cy.js\"",
+    "ui": "npx cypress open -c baseUrl=http://localhost:8080",
+    "ui:dev": "npx cypress open -c baseUrl=http://localhost:8080",
     "parallel": "cypress-parallel --reporter cypress-multi-reporters --reporterOptions configFile=reporter-config.json -s test -t ${PARALLELISATION:=3} -d cypress/e2e"
   },
   "repository": {

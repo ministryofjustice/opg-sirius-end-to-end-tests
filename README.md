@@ -27,22 +27,26 @@ Usually something like:
 (cd ../opg-sirius && make dev-up)
 ```
 
-Then run the tests with
+Then run *all* the tests headlessly with
 
 ```shell
 docker compose up
+```
+Run a *single* test headlessly by updating the test name in package.json test-single (line 12)
+```shell
+docker compose run --rm cypress test-single
 ```
 
 Or to run in the Cypress app, install locally with `npm i` then open with
 
 ```
-npx cypress open -c baseUrl=http://localhost:8080
+npm run ui
 ```
 
 If you want to run it against the dev environment (instead of localhost) run
 
 ```
-npx cypress open -c baseUrl=https://development.sirius.opg.service.justice.gov.uk/
+npm run ui:dev
 ```
 
 If you want to re-run a test multiple times, wrap it in
