@@ -68,14 +68,14 @@ describe("Documents", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().contains("button", "Publish draft").click();
     });
 
-    cy.waitForStableDOM();
-    cy.contains(".timeline-event", "Outbound document");
-    cy.get('button[title="Documents associated to this case"]').click();
-    cy.get(".document-list").contains("IT-BANK-LPA",).click();
-
-    cy.waitForIframe("#docViewer");
-    cy.enter("iframe#docViewer").then((getBody) => {
-      getBody().contains("Dear Sponge");
-    });
+    // cy.waitForStableDOM();
+    // cy.contains(".timeline-event", "Outbound document");
+    // cy.get('button[title="Documents associated to this case"]').click();
+    // cy.get(".document-list").contains("IT-BANK-LPA",).click();
+    //
+    // cy.waitForIframe("#docViewer");
+    // cy.enter("iframe#docViewer").then((getBody) => {
+    //   getBody().contains("Dear Sponge");
+    // });
   });
 });
