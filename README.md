@@ -33,12 +33,22 @@ Then run *all* the tests headlessly with
 docker compose up
 ```
 Run a *single* test headlessly by updating the test name in package.json test-single (line 12)
+
 ```shell
 docker compose run --rm cypress test-single
 ```
 
-Or to run in the Cypress app, install locally with `npm i` then open with
+or through the command line
+```shell
+docker compose run --rm cypress test -- --spec "cypress/e2e/user-management/navigation.cy.js"
+```
 
+you can also run whole folders/ subfolders this way, e.g. 
+```shell
+docker compose run --rm cypress test -- --spec "cypress/e2e/supervision/clients/*"
+```
+
+Or to run in the Cypress app, install locally with `npm i` then open with
 ```
 npm run ui
 ```
