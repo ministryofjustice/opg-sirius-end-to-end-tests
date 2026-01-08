@@ -9,6 +9,9 @@
   "scripts": {
     "eslint": "npx eslint . --ignore-pattern \"**/*.js\"",
     "test": "cypress run --headless --browser chromium",
+    "test-single": "npx cypress run --headless --browser chromium --spec \"cypress/e2e/common/login.cy.js\"",
+    "ui": "npx cypress open -c baseUrl=http://localhost:8080",
+    "ui:dev": "npx cypress open -c baseUrl=https://development.sirius.opg.service.justice.gov.uk",
     "parallel": "cypress-parallel --reporter cypress-multi-reporters --reporterOptions configFile=reporter-config.json -s test -t ${PARALLELISATION:=3} -d cypress/e2e"
   },
   "repository": {
@@ -27,7 +30,7 @@
     "@eslint/js": "^9.8.0",
     "@types/eslint__js": "^9.0.0",
     "cy-verify-downloads": "^0.3.0",
-    "cypress": "^15.0.0",
+    "cypress": "^15.8.0",
     "cypress-failed-log": "^2.10.0",
     "cypress-iframe": "^1.0.1",
     "cypress-multi-reporters": "^2.0.5",
