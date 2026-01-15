@@ -15,3 +15,6 @@ dev:
 
 dev-parallel:
 	docker compose run --rm cypress parallel
+
+cypress-single:
+	docker compose run --rm cypress test -- --spec cypress/e2e/$(SPEC)
