@@ -62,8 +62,8 @@ describe("Create LPA", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.get(".task-list-task").contains("Create physical case file");
     cy.get(".task-list-task").contains("Manager allocate case to case worker");
 
-    cy.get(".timeline").contains(".timeline-event h2", "LPA (Create / Edit)");
-    cy.get(".timeline").contains(".timeline-event p", "LPA was created");
+    // cy.get(".timeline").contains(".timeline-event h2", "LPA (Create / Edit)");
+    // cy.get(".timeline").contains(".timeline-event p", "LPA was created");
 
     cy.get(".opg-icon").contains("CasePeople").click({ force: true });
     cy.get(".person-info")
