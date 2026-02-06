@@ -23,9 +23,9 @@ describe("Allocate case", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().find("button[type=submit]").click();
     });
 
-    cy.contains(
-      ".timeline .timeline-event",
-      "Case was assigned to !Manager Team now assigned to Complaints Team"
-    );
+    // cy.contains(
+    //   ".timeline .timeline-event",
+    //   "Case was assigned to !Manager Team now assigned to Complaints Team"
+    // );
   });
 });

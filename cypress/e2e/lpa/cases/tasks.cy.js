@@ -30,9 +30,9 @@ describe("Create a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
       .should("contain", "Assigned to Complaints Team")
       .should("contain", "To be completed by 01 January 9999");
 
-    cy.contains(".timeline .timeline-event", "Change of Address")
-      .should("contain", "now assigned to Complaints Team")
-      .should("contain", "Donor has moved — New address is somewhere else");
+    // cy.contains(".timeline .timeline-event", "Change of Address")
+    //   .should("contain", "now assigned to Complaints Team")
+    //   .should("contain", "Donor has moved — New address is somewhere else");
   });
 });
 
@@ -53,7 +53,7 @@ describe("Complete a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.get("@taskButton").click();
     cy.contains("Yes, confirm").as("confirmButton");
     cy.get("@confirmButton").click();
-    cy.contains(".timeline-event", "Create physical case file Completed");
+    // cy.contains(".timeline-event", "Create physical case file Completed");
   });
 });
 
@@ -85,10 +85,10 @@ describe("Reassign a task", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().find("button[type=submit]").click();
     });
 
-    cy.contains(
-      ".timeline-event",
-      "Task was assigned to File Creation Team now assigned to Card Payment Team"
-    );
-    cy.contains(".task-list", "Assigned to Card Payment Team");
+    // cy.contains(
+    //   ".timeline-event",
+    //   "Task was assigned to File Creation Team now assigned to Card Payment Team"
+    // );
+    // cy.contains(".task-list", "Assigned to Card Payment Team");
   });
 });

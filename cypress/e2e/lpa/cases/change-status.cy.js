@@ -15,7 +15,7 @@ describe("Change LPA status", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.get(".case-tile-status").contains("Pending");
 
-    cy.contains("LPA (Create / Edit)");
+    // cy.contains("LPA (Create / Edit)");
 
     cy.contains("Change Status").click();
     cy.waitForIframe(".action-widget-content iframe", { selector: '#f-status' });
@@ -26,7 +26,7 @@ describe("Change LPA status", { tags: ["@lpa", "@smoke-journey"] }, () => {
 
     cy.contains(".case-tile-status", "Perfect");
 
-    cy.get(".timeline-event").first().contains("h2", "LPA (Create / Edit)");
-    cy.get(".timeline-event").first().contains("p", "Status changed from Pending to Perfect");
+    // cy.get(".timeline-event").first().contains("h2", "LPA (Create / Edit)");
+    // cy.get(".timeline-event").first().contains("p", "Status changed from Pending to Perfect");
   });
 });

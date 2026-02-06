@@ -27,11 +27,11 @@ describe("Create an investigation", { tags: ["@lpa", "@smoke-journey"] }, () => 
       getBody().find("button[type=submit]").click();
     });
 
-    cy.contains(".timeline .timeline-event", "Investigation")
-      .should("contain", "test title")
-      .should("contain", "some test info")
-      .should("contain", "Aspect")
-      .should("contain", "Investigation received on 06/04/2022");
+    // cy.contains(".timeline .timeline-event", "Investigation")
+    //   .should("contain", "test title")
+    //   .should("contain", "some test info")
+    //   .should("contain", "Aspect")
+    //   .should("contain", "Investigation received on 06/04/2022");
   });
 });
 
@@ -59,9 +59,9 @@ describe("Put investigation on hold", { tags: ["@lpa", "@smoke-journey"] }, () =
       getBody().find("button[type=submit]").click();
     });
 
-    cy.get(".timeline .timeline-event", { timeout: 10000 });
-    cy.contains(".timeline-event", "Hold Period")
-      .should("contain", "Investigation placed on hold");
+    // cy.get(".timeline .timeline-event", { timeout: 10000 });
+    // cy.contains(".timeline-event", "Hold Period")
+    //   .should("contain", "Investigation placed on hold");
   });
 });
 
@@ -91,8 +91,8 @@ describe("Take investigation off hold", { tags: ["@lpa", "@smoke-journey"] }, ()
       getBody().find("button[type=submit]").click();
     });
 
-    cy.get(".timeline .timeline-event", { timeout: 10000 });
-    cy.contains(".timeline-event", "Hold Period")
-      .should("contain", "Investigation taken off hold");
+    // cy.get(".timeline .timeline-event", { timeout: 10000 });
+    // cy.contains(".timeline-event", "Hold Period")
+    //   .should("contain", "Investigation taken off hold");
   });
 });

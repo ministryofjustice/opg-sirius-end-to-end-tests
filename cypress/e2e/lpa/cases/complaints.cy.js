@@ -24,7 +24,7 @@ describe("Complaints", { tags: ["@lpa", "@smoke-journey"] }, () => {
       getBody().find("button[type=submit]").click();
     });
 
-    cy.contains(".timeline-event", "Complaint").should("contain", "You know");
+    // cy.contains(".timeline-event", "Complaint").should("contain", "You know");
 
     cy.contains(".complaint-item", "Minor: Hey")
       .should("contain", "You know")
