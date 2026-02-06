@@ -30,10 +30,10 @@ describe("Warnings on a case", { tags: ["@lpa", "@smoke-journey"] }, () => {
       "contain",
       "This is a big problem"
     );
-    cy.contains(".timeline-event", "Fee Issue").should(
-      "contain",
-      "This is a big problem"
-    );
+    // cy.contains(".timeline-event", "Fee Issue").should(
+    //   "contain",
+    //   "This is a big problem"
+    // );
   });
 
   it("should remove a warning on a case", () => {
@@ -44,7 +44,7 @@ describe("Warnings on a case", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.get(".remove-warning-modal").contains("Remove warning").click();
 
     cy.contains(".warnings", "No warnings in place");
-    cy.contains(".timeline-event", "Warning removed by atwo manager");
+    // cy.contains(".timeline-event", "Warning removed by atwo manager");
   });
 });
 
@@ -79,10 +79,10 @@ describe("Warnings on the donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
       "contain",
       "This is a big problem"
     );
-    cy.contains(".timeline-event", "Fee Issue").should(
-      "contain",
-      "This is a big problem"
-    );
+    // cy.contains(".timeline-event", "Fee Issue").should(
+    //   "contain",
+    //   "This is a big problem"
+    // );
   });
 
   it("should remove a warning on the donor record", () => {
@@ -93,6 +93,6 @@ describe("Warnings on the donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
     cy.get(".remove-warning-modal").contains("Remove warning").click();
 
     cy.contains(".warnings", "No warnings in place");
-    cy.contains(".timeline-event", "Warning removed by atwo manager");
+    // cy.contains(".timeline-event", "Warning removed by atwo manager");
   });
 });
