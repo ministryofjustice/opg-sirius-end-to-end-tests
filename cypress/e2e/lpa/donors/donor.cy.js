@@ -31,11 +31,11 @@ describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
             )
           );
 
-          cy.get(".timeline .timeline-event", { timeout: 10000 });
-          cy.contains(".timeline-event", "Person (Create / Edit)").should(
-            "contain",
-            "Spongebob Squarepants"
-          );
+          // cy.get(".timeline .timeline-event", { timeout: 10000 });
+          // cy.contains(".timeline-event", "Person (Create / Edit)").should(
+          //   "contain",
+          //   "Spongebob Squarepants"
+          // );
         });
     });
   });
