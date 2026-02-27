@@ -1,5 +1,5 @@
 declare namespace Cypress {
-  interface Chainable<> {
+  interface Chainable {
     login(email: string): Chainable<void>
     loginAs(user: string): Chainable<void>
     postToApi(url: string, data: RequestBody, retry?: boolean): Chainable<Response<unknown>>
