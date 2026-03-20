@@ -25,3 +25,7 @@ playwright/
 - `playwright/utils/`: Reusable helper functions used by tests and fixtures.
 
 Keep tests feature-focused, and prefer extracting reusable setup/data logic into `fixtures/` and `utils/` to avoid duplication.
+
+## Standards
+
+- Use snake_case for typescript files and directories (e.g., `example.spec.ts`, `test_utils.ts`).
