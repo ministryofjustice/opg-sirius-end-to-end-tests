@@ -7,12 +7,20 @@ test.describe("Add Client page", () => {
     await loginAsCaseManager(page, context);
   });
 
-  test("Search for client that does not exist and create a new one", async ({ page }) => {
+  test("Search for client that does not exist and create a new one", async ({
+    page,
+  }) => {
     await page.goto("/supervision/#/clients/search-for-client");
 
-    await page.locator('main input[placeholder="Search by Order Number, SIRIUS ID or Name"]').fill("DoNotFindMe");
+    await page
+      .locator(
+        'main input[placeholder="Search by Order Number, SIRIUS ID or Name"]',
+      )
+      .fill("DoNotFindMe");
 
-    const searchButton = page.locator("button.button.client-search__search-button");
+    const searchButton = page.locator(
+      "button.button.client-search__search-button",
+    );
     await expect(searchButton).toBeVisible();
     await searchButton.click();
 
@@ -37,7 +45,7 @@ test.describe("Add Client page", () => {
     await expect(personName).toContainText(`${firstName} ${surname}`);
 
     const courtReferenceValue = page.locator(
-      "div.client-summary__cell.client-summary__cell--value.court-reference-value-in-client-summary"
+      "div.client-summary__cell.client-summary__cell--value.court-reference-value-in-client-summary",
     );
     await expect(courtReferenceValue).not.toHaveText("00000000");
   });
