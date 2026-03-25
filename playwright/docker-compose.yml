@@ -1,0 +1,24 @@
+services:
+  playwright:
+    image: 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/end-to-end-tests-pw:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+#    ports:
+#      - "9323:9323" # Playwright HTML report
+#      - "8080:8080"
+    environment:
+      BASE_URL: "http://frontend-proxy"
+    volumes:
+      - "./playwright.config.ts:/playwright/playwright.config.ts"
+      - "./tests:/playwright/tests"
+      - "./utils:/playwright/utils"
+      - "./playwright-report:/playwright/playwright-report"
+      - "./test-results:/playwright/test-results"
+    networks:
+      - sirius-network
+
+networks:
+  sirius-network:
+    name: opg-sirius_default
+    external: true
