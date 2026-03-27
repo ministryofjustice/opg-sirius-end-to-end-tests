@@ -115,6 +115,46 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-05-26T08:00:00Z
         created: 2026-03-26T15:33:00Z
+  SNYK-DEBIAN12-CHROMIUM-15789521:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-26T08:00:00Z
+        created: 2026-03-27T08:30:00Z
+  SNYK-DEBIAN12-CHROMIUM-15789526:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-26T08:00:00Z
+        created: 2026-03-27T08:30:00Z
+  SNYK-DEBIAN12-CHROMIUM-15789532:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-26T08:00:00Z
+        created: 2026-03-27T08:30:00Z
+  SNYK-DEBIAN12-CHROMIUM-15789538:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-26T08:00:00Z
+        created: 2026-03-27T08:30:00Z
+  SNYK-DEBIAN12-CHROMIUM-15789544:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-26T08:00:00Z
+        created: 2026-03-27T08:30:00Z
+  SNYK-DEBIAN12-CHROMIUM-15789545:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-26T08:00:00Z
+        created: 2026-03-27T08:30:00Z
+  SNYK-DEBIAN12-CHROMIUM-15789558:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-26T08:00:00Z
+        created: 2026-03-27T08:30:00Z
+  SNYK-DEBIAN12-CHROMIUM-15789559:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-26T08:00:00Z
+        created: 2026-03-27T08:30:00Z
   SNYK-DEBIAN12-COREUTILS-1543939:
     - '*':
         reason: Known issue in End-to-End tests container
@@ -1055,6 +1095,11 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-05-26T08:00:00Z
         created: 2026-03-26T15:33:00Z
+  SNYK-JS-BRACEEXPANSION-15789759:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-26T08:00:00Z
+        created: 2026-03-27T08:30:00Z
   SNYK-JS-BRACES-6838727:
     - '*':
         reason: Known issue in End-to-End tests container
@@ -1190,6 +1235,11 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-05-26T08:00:00Z
         created: 2026-03-26T15:33:00Z
+  SNYK-JS-PATHTOREGEXP-15789761:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-26T08:00:00Z
+        created: 2026-03-27T08:30:00Z
   SNYK-JS-PHIN-6598077:
     - '*':
         reason: Known issue in End-to-End tests container
