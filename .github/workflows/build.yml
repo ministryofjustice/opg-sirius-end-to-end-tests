@@ -19,7 +19,7 @@ permissions:
   packages: none
   pull-requests: write
   repository-projects: none
-  security-events: read
+  security-events: write
   statuses: none
 
 defaults:
