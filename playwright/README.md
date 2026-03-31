@@ -7,18 +7,17 @@
 - [X] Prettier for formatting
 - [X] ESLint for linting
 - [X] Document formatting and linting, how to run in standards
-- [ ] Dockerisation
+- [X] Dockerisation
   - [X] Run ESLint
   - [X] Run Prettier
   - [X] Run tests
-  - [ ] Run tests with UI
-- [ ] Document Dockerisation
+  - [X] Run tests with UI
 - [ ] CI integration
   - [ ] Run ESLint check
   - [ ] Run Prettier check
   - [ ] Run tests
   - [ ] CI Reports
-  - [ ] Archive screenshots
+  - [ ] Archive screenshots (not currently captured)
 
 ## Using Copilot (if you want to)
 
