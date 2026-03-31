@@ -9,21 +9,22 @@ async function setupHandlerForAuthRedirectInDocker(page: Page) {
     const response = await route.fetch({ maxRedirects: 0 });
     expect(response.status()).toBe(302);
 
-    const locationHeader = response.headers()['location'];
+    const locationHeader = response.headers()["location"];
     console.debug("Received redirect to: ", locationHeader);
-    const newLocation = locationHeader.replace("http://localhost:8080", config.default.use.baseURL);
+    const newLocation = locationHeader.replace(
+      "http://localhost:8080",
+      config.default.use.baseURL,
+    );
     console.debug("Rewriting redirect to: ", newLocation);
 
-    await route.fulfill(
-      {
-        "status": 302,
-        "headers": {
-          ...response.headers(),
-          "location": newLocation
-        },
-        "body": await response.body()
-      }
-    )
+    await route.fulfill({
+      status: 302,
+      headers: {
+        ...response.headers(),
+        location: newLocation,
+      },
+      body: await response.body(),
+    });
   });
 }
 
