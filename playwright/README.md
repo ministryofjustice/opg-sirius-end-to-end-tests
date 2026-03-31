@@ -4,15 +4,15 @@
 
 - [X] Project structure
 - [X] Project structure documentation [Standards](/docs/PlaywrightStandards.md) (Partially done)
-- [ ] Prettier for formatting
-- [ ] ESLint for linting
-- [ ] Document formatting and linting, how to run in standards
+- [X] Prettier for formatting
+- [X] ESLint for linting
+- [X] Document formatting and linting, how to run in standards
 - [ ] Dockerisation
-  - [ ] Run ESLint
-  - [ ] Run Prettier
-  - [ ] Run tests
-  - [ ] RUn tests with UI
-- Document Dockerisation
+  - [X] Run ESLint
+  - [X] Run Prettier
+  - [X] Run tests
+  - [ ] Run tests with UI
+- [ ] Document Dockerisation
 - [ ] CI integration
   - [ ] Run ESLint check
   - [ ] Run Prettier check
