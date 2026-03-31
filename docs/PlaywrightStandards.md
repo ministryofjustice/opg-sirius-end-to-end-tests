@@ -33,3 +33,5 @@ Keep tests feature-focused, and prefer extracting reusable setup/data logic into
 ## Standards
 
 - Use snake_case for TypeScript files and directories (e.g., `example.spec.ts`, `test_utils.ts`).
+- Ensure consistent formatting with Prettier (check with `make check-format` and automatically fix with `make format`).
+- Use ESLint for linting (check with `make lint`).
