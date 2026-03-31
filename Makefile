@@ -29,9 +29,8 @@ format:
 run-playwright:
 	cd playwright && docker compose run --rm playwright npx playwright test
 
+run-playwright-ui:
+	cd playwright && docker compose run -p 9525:9525 --rm playwright npx playwright test --ui --ui-host=0.0.0.0 --ui-port=9525
+
 view-playwright-report:
 	cd playwright && docker compose run --rm -p 9323:9323 playwright npx playwright show-report --host 0.0.0.0
-
-
-
-
