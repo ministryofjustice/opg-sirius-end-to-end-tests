@@ -13,9 +13,13 @@ playwright/
 ├── package.json
 ├── playwright.config.ts
 ├── fixtures/
+│   └── example-entity/
+│       ├── example_entity_fixture.ts
+│       └── minimal.json
 ├── tests/
 │   └── example.spec.ts
 └── utils/
+    └── example_common_code.ts
 ```
 
 - `playwright/package.json`: Playwright-specific scripts and dependencies.
@@ -28,4 +32,4 @@ Keep tests feature-focused, and prefer extracting reusable setup/data logic into
 
 ## Standards
 
-- Use snake_case for typescript files and directories (e.g., `example.spec.ts`, `test_utils.ts`).
+- Use snake_case for TypeScript files and directories (e.g., `example.spec.ts`, `test_utils.ts`).
