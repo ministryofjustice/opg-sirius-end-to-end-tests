@@ -2,8 +2,8 @@
 
 ## Establishing foundations and patters
 
-- [ ] Project structure (DONE - pending review)
-- [ ] Project structure documentation [Standards](/docs/PlaywrightStandards.md) (Partially done)
+- [X] Project structure
+- [X] Project structure documentation [Standards](/docs/PlaywrightStandards.md) (Partially done)
 - [ ] Prettier for formatting
 - [ ] ESLint for linting
 - [ ] Document formatting and linting, how to run in standards
