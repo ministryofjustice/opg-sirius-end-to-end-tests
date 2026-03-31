@@ -11,6 +11,13 @@ RUN npm ci --ignore-scripts
 RUN apt-get update && apt-get upgrade -y
 RUN npx playwright install chromium --with-deps
 
+# Copy prettier config
+COPY --chown=node:node .prettierignore .prettierignore
+
+# Copy eslint config
+COPY --chown=node:node eslint.config.mjs eslint.config.mjs
+
+# Copy playwright files
 COPY --chown=node:node playwright.config.ts playwright.config.ts
 COPY --chown=node:node tests tests
 COPY --chown=node:node utils utils
