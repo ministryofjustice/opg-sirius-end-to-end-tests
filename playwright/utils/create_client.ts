@@ -1,4 +1,4 @@
-import { type BrowserContext, type Page } from "@playwright/test";
+import { type Page } from "@playwright/test";
 import { randomText } from "./random_text";
 import { postToSiriusApi } from "./sirius_api";
 
@@ -85,13 +85,11 @@ const buildMinimalClientPayload = (): ClientPayload => ({
 
 export const createClient = async (
   page: Page,
-  context: BrowserContext,
 ): Promise<CreatedClient> => {
   const payload = buildMinimalClientPayload();
 
   return await postToSiriusApi<CreatedClient>(
     page,
-    context,
     "/api/v1/clients",
     payload,
   );
