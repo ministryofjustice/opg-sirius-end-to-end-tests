@@ -9,9 +9,9 @@ test.describe("Add Client page - existing client", () => {
     context,
   }) => {
     await loginAsCaseManager(page, context);
-    const client = await createClient(page, context);
+    const client = await createClient(page);
 
-    await waitForSearchService(page, context, client.caseRecNumber, ["Client"]);
+    await waitForSearchService(page, client.caseRecNumber, ["Client"]);
 
     await page.goto("/supervision/#/clients/search-for-client");
 
@@ -32,6 +32,7 @@ test.describe("Add Client page - existing client", () => {
     const searchResults = page.locator(".search-results__list").locator("li");
     await expect(searchResults).toHaveCount(1);
     await searchResults
+      .getByRole("link")
       .filter({ hasText: `${client.firstname} ${client.surname}` })
       .first()
       .click();
