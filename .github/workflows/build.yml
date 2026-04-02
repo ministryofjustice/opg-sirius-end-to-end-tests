@@ -57,6 +57,14 @@ jobs:
         with:
           sarif_file: 'test-results/snyk.sarif'
 
+      - name: Check formatting
+        run: |
+          make check-format
+
+      - name: Linting
+        run: |
+          make lint
+
       - name: Configure OIDC AWS credentials for ECR push
         uses: aws-actions/configure-aws-credentials@8df5847569e6427dd6c4fb1cf565c83acfa8afa7 # v6.0.0
         with:
