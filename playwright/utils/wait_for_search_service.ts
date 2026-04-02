@@ -1,4 +1,4 @@
-import { type BrowserContext, expect, type Page } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
 import { postToSiriusApi } from "./sirius_api";
 
 interface SearchResponse {
@@ -9,7 +9,6 @@ interface SearchResponse {
 
 export const waitForSearchService = async (
   page: Page,
-  context: BrowserContext,
   searchTerm = "",
   personTypes: string[] = [],
   minimumExpected = 1,
@@ -19,7 +18,6 @@ export const waitForSearchService = async (
       async () => {
         const response = await postToSiriusApi<SearchResponse>(
           page,
-          context,
           "/api/v1/search/searchAll",
           {
             personTypes,
