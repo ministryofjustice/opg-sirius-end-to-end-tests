@@ -1395,4 +1395,59 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-04-26T08:00:00Z
         created: 2026-03-26T15:33:00Z
+  SNYK-JS-AXIOS-15930944:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-08T08:00:00Z
+        created: 2026-04-08T15:33:00Z
+  SNYK-JS-SERIALIZEJAVASCRIPT:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-08T08:00:00Z
+        created: 2026-04-08T15:33:00Z
+  SNYK-JS-NODEFORGE-8615576:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-09T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-JS-NODEFORGE-8615579:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-09T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-JS-NODEFORGE-8615581:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-09T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-JS-NODEFORGE-8733498:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-09T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-JS-NODEFORGE-8733500:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-09T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-JS-NODEFORGE-8733502:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-09T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-JS-NODEFORGE-8733504:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-09T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-JS-BASICFTP-15953339:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-04-16T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-JS-XMLDOMXMLDOM-8724785:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-09T08:00:00Z
+        created: 2026-04-09T15:33:00Z
 patch: {}
