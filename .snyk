@@ -1545,4 +1545,14 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-04-16T08:00:00Z
         created: 2026-04-09T15:33:00Z
+  SNYK-DEBIAN12-LIBCAP2-15960211:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-13T08:00:00Z
+        created: 2026-04-13T12:33:00Z
+  SNYK-DEBIAN12-TAR-15962844:
+    - '*':
+      reason: Known issue in End-to-End tests container
+      expires: 2026-05-13T08:00:00Z
+      created: 2026-04-13T12:33:00Z
 patch: {}
