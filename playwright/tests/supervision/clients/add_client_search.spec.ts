@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { createClient } from "../../../utils/create_client";
+import { createClient } from "../../../fixtures/client/create_client";
 import { loginAsCaseManager } from "../../../utils/login_as_case_manager";
 import { waitForSearchService } from "../../../utils/wait_for_search_service";
 
