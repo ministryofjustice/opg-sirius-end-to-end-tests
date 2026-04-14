@@ -1,8 +1,6 @@
-import { type Page } from "@playwright/test";
-import { randomText } from "./random_text";
-import { postToSiriusApi } from "./sirius_api";
+import { randomText } from "../../utils/random_text";
 
-interface ClientPayload {
+export interface ClientPayload {
   salutation: string;
   firstname: string;
   middlenames: string;
@@ -39,14 +37,7 @@ interface ClientPayload {
   };
 }
 
-interface CreatedClient {
-  id: number;
-  caseRecNumber: string;
-  firstname: string;
-  surname: string;
-}
-
-const buildMinimalClientPayload = (): ClientPayload => ({
+export const buildMinimalClientPayload = (): ClientPayload => ({
   salutation: "",
   firstname: randomText(),
   middlenames: "",
@@ -82,16 +73,4 @@ const buildMinimalClientPayload = (): ClientPayload => ({
     spellingOfNameRequiresCare: "",
   },
 });
-
-export const createClient = async (
-  page: Page,
-): Promise<CreatedClient> => {
-  const payload = buildMinimalClientPayload();
-
-  return await postToSiriusApi<CreatedClient>(
-    page,
-    "/api/v1/clients",
-    payload,
-  );
-};
 
