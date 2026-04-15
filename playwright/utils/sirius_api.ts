@@ -5,21 +5,23 @@ export const postToSiriusApi = async <TResponse>(
   url: string,
   data: unknown,
 ): Promise<TResponse> => {
-  const csrfCookie = (await page.context().cookies()).find((cookie) => cookie.name === 'XSRF-TOKEN');
+  const csrfCookie = (await page.context().cookies()).find(
+    (cookie) => cookie.name === "XSRF-TOKEN",
+  );
   if (csrfCookie == null) {
-    throw new Error('Missing XSRF-TOKEN cookie');
+    throw new Error("Missing XSRF-TOKEN cookie");
   }
 
   const csrfToken = decodeURIComponent(csrfCookie.value);
 
   const response = await page.request.post(url, {
     headers: {
-      'accept': 'application/json',
-      'content-type': 'application/json',
-      'x-xsrf-token': csrfToken,
+      accept: "application/json",
+      "content-type": "application/json",
+      "x-xsrf-token": csrfToken,
     },
     data: data,
-  })
+  });
 
   if (response.ok()) {
     if (response.status() === 200 || response.status() === 201) {
@@ -29,4 +31,3 @@ export const postToSiriusApi = async <TResponse>(
     }
   }
 };
-
