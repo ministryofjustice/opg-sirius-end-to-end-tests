@@ -44,4 +44,3 @@ test.describe("Add Client page - existing client", () => {
     await expect(courtReferenceValue).toContainText(client.caseRecNumber);
   });
 });
-
