@@ -15,11 +15,7 @@ playwright/
 ├── fixtures/
 │   ├── client/
 │   │   ├── create_client.ts
-│   │   ├── build_minimal_client_payload.ts
-│   │   └── minimal.json
-│   └── example-entity/
-│       ├── example_entity_fixture.ts
-│       └── minimal.json
+│   │   ├── create_client_payload.ts
 ├── tests/
 │   └── example.spec.ts
 └── utils/
@@ -41,7 +37,6 @@ Keep tests feature-focused, and prefer extracting reusable setup/data logic into
   - creating entities through the API
   - building default payloads for a specific entity
   - domain-specific setup helpers
-  - fixture data files such as `minimal.json`
 
 - Use `playwright/utils/` for code that is generic and cross-cutting, such as:
   - API transport wrappers

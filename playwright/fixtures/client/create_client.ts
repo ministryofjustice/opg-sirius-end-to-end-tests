@@ -1,6 +1,6 @@
 import { type Page } from "@playwright/test";
 import { postToSiriusApi } from "../../utils/sirius_api";
-import { buildMinimalClientPayload } from "./build_minimal_client_payload";
+import { buildMinimalClientPayload } from "./create_client_payload";
 
 export interface CreatedClient {
   id: number;
