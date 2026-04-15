@@ -1,6 +1,15 @@
 SHELL = '/bin/bash'
+include Makefile.dev.mk
 export DOCKER_BUILDKIT ?= 1
 export BUILD_TAG ?= latest
+
+ifeq ($(CI),1)
+	DOCKER_FEATURE_FILES=-f docker-compose.yml
+else ifeq ($(CI),true)
+	DOCKER_FEATURE_FILES=-f docker-compose.yml
+else
+	DOCKER_FEATURE_FILES=-f docker-compose.yml -f docker-compose.override.yml
+endif
 
 all: build dev
 
@@ -18,19 +27,10 @@ cypress-single:
 	docker compose run --rm cypress test -- --spec cypress/e2e/$(SPEC)
 
 lint:
-	cd playwright && docker compose run --rm playwright npm run lint
+	cd playwright && docker compose $(DOCKER_FEATURE_FILES) run --rm playwright npm run lint
 
 check-format:
-	cd playwright && docker compose run --rm playwright npm run check-format
-
-format:
-	cd playwright && docker compose run --rm playwright npm run format
+	cd playwright && docker compose $(DOCKER_FEATURE_FILES) run --rm playwright npm run check-format
 
 run-playwright:
-	cd playwright && docker compose run --rm playwright npx playwright test
-
-run-playwright-ui:
-	cd playwright && docker compose run -p 9525:9525 --rm playwright npx playwright test --ui --ui-host=0.0.0.0 --ui-port=9525
-
-view-playwright-report:
-	cd playwright && docker compose run --rm -p 9323:9323 playwright npx playwright show-report --host 0.0.0.0
+	cd playwright && docker compose $(DOCKER_FEATURE_FILES) run --rm playwright npx playwright test
