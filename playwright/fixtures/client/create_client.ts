@@ -9,15 +9,8 @@ export interface CreatedClient {
   surname: string;
 }
 
-export const createClient = async (
-  page: Page,
-): Promise<CreatedClient> => {
+export const createClient = async (page: Page): Promise<CreatedClient> => {
   const payload = buildMinimalClientPayload();
 
-  return await postToSiriusApi<CreatedClient>(
-    page,
-    "/api/v1/clients",
-    payload,
-  );
+  return await postToSiriusApi<CreatedClient>(page, "/api/v1/clients", payload);
 };
-
