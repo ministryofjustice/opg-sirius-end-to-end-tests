@@ -51,3 +51,34 @@ If a helper is specific to a single entity, colocate it under that entity's fixt
 - Use snake_case for TypeScript files and directories (e.g., `example.spec.ts`, `test_utils.ts`).
 - Ensure consistent formatting with Prettier (check with `make check-format` and automatically fix with `make format`).
 - Use ESLint for linting (check with `make lint`).
+
+### Locator Guidance
+
+Choose locators in this order of preference:
+
+1. `getByRole` with an accessible name (most resilient and closest to user behavior)
+2. `getByLabel` for form controls
+3. `getByText` for stable, user-visible copy
+4. `getByTestId` when semantic/user-facing selectors are not practical
+
+Avoid brittle selectors tied to implementation details:
+
+- Long CSS chains or class-based selectors (for example `.foo .bar button`)
+- Positional selectors like `nth-child`/`first()` used to disambiguate unstable lists
+- Selectors based on framework-generated attributes or dynamic classes
+
+Use `data-testid` when an element has no reliable accessible role/name, repeated controls cannot be uniquely targeted by role/text, or visible text is dynamic/translated.
+
+Examples:
+
+```typescript
+// Preferred
+await page.getByRole("button", { name: "Search" }).click();
+await page.getByLabel("Postcode").fill("PS1 2CD");
+await page.getByTestId("client-search-result").click();
+
+// Avoid
+await page.locator("button.button.client-search__search-button").click();
+await page.locator(".search-results__list li").first().click();
+```
+
