@@ -4,23 +4,3 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "9323:9323" # Playwright HTML report
-#      - "8080:8080"
-    environment:
-      BASE_URL: "http://frontend-proxy"
-    volumes:
-      - "./.prettierignore:/playwright/.prettierignore"
-      - "./eslint.config.mjs:/playwright/eslint.config.mjs"
-      - "./playwright.config.ts:/playwright/playwright.config.ts"
-      - "./tests:/playwright/tests"
-      - "./utils:/playwright/utils"
-      - "./playwright-report:/playwright/playwright-report"
-      - "./test-results:/playwright/test-results"
-    networks:
-      - sirius-network
-
-networks:
-  sirius-network:
-    name: opg-sirius_default
-    external: true
