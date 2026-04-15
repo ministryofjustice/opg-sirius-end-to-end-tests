@@ -16,26 +16,19 @@ test.describe("Add Client page - existing client", () => {
     await page.goto("/supervision/#/clients/search-for-client");
 
     await page
-      .locator(
-        'main input[placeholder="Search by Order Number, SIRIUS ID or Name"]',
-      )
+      .getByPlaceholder("Search by Order Number, SIRIUS ID or Name")
+      .getByRole("textbox")
       .fill(client.caseRecNumber);
 
-    const searchButton = page.locator(
-      "button.button.client-search__search-button",
-    );
+    const searchButton = page.getByRole("button", { name: "Search" });
     await expect(searchButton).toBeVisible();
     await searchButton.click();
 
-    await expect(page.locator(".search-results__term")).toBeVisible();
-
-    const searchResults = page.locator(".search-results__list").locator("li");
-    await expect(searchResults).toHaveCount(1);
-    await searchResults
-      .getByRole("link")
-      .filter({ hasText: `${client.firstname} ${client.surname}` })
-      .first()
-      .click();
+    const clientLink = page.getByRole("link", {
+      name: `${client.firstname} ${client.surname}`,
+    });
+    await expect(clientLink).toHaveCount(1);
+    await clientLink.click();
 
     const courtReferenceValue = page.locator(
       "div.client-summary__cell.client-summary__cell--value.court-reference-value-in-client-summary",
