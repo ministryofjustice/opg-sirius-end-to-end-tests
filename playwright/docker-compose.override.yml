@@ -11,6 +11,7 @@ services:
     volumes:
       - "./.prettierignore:/playwright/.prettierignore"
       - "./eslint.config.mjs:/playwright/eslint.config.mjs"
+      - "./fixtures:/playwright/fixtures"
       - "./playwright.config.ts:/playwright/playwright.config.ts"
       - "./playwright-report:/playwright/playwright-report"
       - "./test-results:/playwright/test-results"
