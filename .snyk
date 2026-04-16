@@ -1540,4 +1540,29 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-04-25T08:00:00Z
         created: 2026-04-09T15:33:00Z
+  SNYK-DEBIAN12-PYTHON311-16049531:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-15T08:00:00Z
+        created: 2026-04-15T15:33:00Z
+  SNYK-DEBIAN12-PYTHON311-16049532:
+     - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-15T08:00:00Z
+        created: 2026-04-15T15:33:00Z
+  SNYK-DEBIAN12-MESA-16049509:
+     - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-15T08:00:00Z
+        created: 2026-04-15T15:33:00Z
+  SNYK-DEBIAN12-PYTHON311-16066583:
+     - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-15T08:00:00Z
+        created: 2026-04-15T15:33:00Z
+  SNYK-DEBIAN12-OPENJPEG2-16066386:
+     - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-15T08:00:00Z
+        created: 2026-04-15T15:33:00Z
 patch: {}
