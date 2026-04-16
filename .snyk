@@ -1555,4 +1555,64 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-05-16T08:00:00Z
         created: 2026-04-16T15:33:00Z
+  SNYK-DEBIAN12-LIBCAP2-15960211:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-04-25T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-DEBIAN12-TAR-15962844:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-04-25T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-DEBIAN12-SYSTEMD-16009478:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-04-25T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-DEBIAN12-SYSTEMD-16009482:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-04-25T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-DEBIAN12-SYSTEMD-16009491:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-04-25T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-DEBIAN12-LIBPNG16-15988544:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-04-25T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-DEBIAN12-CUPS-15967881:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-04-25T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-DEBIAN12-CUPS-15967883:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-04-25T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-JS-FOLLOWREDIRECTS-16032162:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-04-25T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-JS-AXIOS-15965856:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-04-25T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-JS-AXIOS-15969258:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-04-25T08:00:00Z
+        created: 2026-04-09T15:33:00Z
+  SNYK-JS-BASICFTP-15989098:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-04-25T08:00:00Z
+        created: 2026-04-09T15:33:00Z
 patch: {}
