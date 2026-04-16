@@ -76,16 +76,23 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           END_TO_END_TESTS_ECR_REPOSITORY: sirius/end-to-end-tests
+          END_TO_END_TESTS_PW_ECR_REPOSITORY: sirius/end-to-end-tests-pw
         run: |
           docker tag 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/end-to-end-tests:latest $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY:${{ needs.create-tag.outputs.tag }}
+          docker tag 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/end-to-end-tests-pw:latest $ECR_REGISTRY/END_TO_END_TESTS_PW_ECR_REPOSITORY:${{ needs.create-tag.outputs.tag }}
           if ${{ github.ref_name == 'main' }}
           then
             docker tag 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/end-to-end-tests:latest $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY:main-${{ needs.create-tag.outputs.tag }}
             docker tag 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/end-to-end-tests:latest $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY:main-${{ needs.create-tag.outputs.tag }}-${{ needs.create-tag.outputs.timestamp }}
+            docker tag 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/end-to-end-tests-pw:latest $ECR_REGISTRY/END_TO_END_TESTS_PW_ECR_REPOSITORY:main-${{ needs.create-tag.outputs.tag }}
+            docker tag 311462405659.dkr.ecr.eu-west-1.amazonaws.com/sirius/end-to-end-tests-pw:latest $ECR_REGISTRY/END_TO_END_TESTS_PW_ECR_REPOSITORY:main-${{ needs.create-tag.outputs.tag }}-${{ needs.create-tag.outputs.timestamp }}
+
             # We want all of the tags pushed
             docker push --all-tags $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY
+            docker push --all-tags $ECR_REGISTRY/$END_TO_END_TESTS_PW_ECR_REPOSITORY
           else
             docker push $ECR_REGISTRY/$END_TO_END_TESTS_ECR_REPOSITORY:${{ needs.create-tag.outputs.tag }}
+            docker push $ECR_REGISTRY/$END_TO_END_TESTS_PW_ECR_REPOSITORY:${{ needs.create-tag.outputs.tag }}
           fi
 
       - name: Trigger remote testing
