@@ -19,5 +19,8 @@ COPY --chown=node:node eslint.config.mjs eslint.config.mjs
 
 # Copy playwright files
 COPY --chown=node:node playwright.config.ts playwright.config.ts
+COPY --chown=node:node fixtures fixtures
 COPY --chown=node:node tests tests
 COPY --chown=node:node utils utils
+
+ENTRYPOINT ["npm", "run"]
