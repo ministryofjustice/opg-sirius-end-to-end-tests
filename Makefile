@@ -27,10 +27,10 @@ cypress-single:
 	docker compose run --rm cypress test -- --spec cypress/e2e/$(SPEC)
 
 lint:
-	cd playwright && docker compose $(DOCKER_FEATURE_FILES) run --rm playwright npm run lint
+	cd playwright && docker compose $(DOCKER_FEATURE_FILES) run --rm playwright lint
 
 check-format:
-	cd playwright && docker compose $(DOCKER_FEATURE_FILES) run --rm playwright npm run check-format
+	cd playwright && docker compose $(DOCKER_FEATURE_FILES) run --rm playwright check-format
 
 run-playwright:
-	cd playwright && docker compose $(DOCKER_FEATURE_FILES) run --rm playwright npx playwright test
+	cd playwright && docker compose $(DOCKER_FEATURE_FILES) run --rm playwright test
