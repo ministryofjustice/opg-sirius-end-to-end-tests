@@ -6,7 +6,9 @@
     "lint": "eslint",
     "check-format": "prettier --check .",
     "format": "prettier --write .",
-    "test": "playwright test"
+    "test": "playwright test",
+    "ui": "playwright test --ui --ui-host=0.0.0.0 --ui-port=9525",
+    "show-report": "playwright show-report --host 0.0.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
