@@ -9,6 +9,8 @@ services:
     environment:
       BASE_URL: "http://frontend-proxy"
     volumes:
+      - "./package.json:/playwright/package.json"
+      - "./package-lock.json:/playwright/package-lock.json"
       - "./.prettierignore:/playwright/.prettierignore"
       - "./eslint.config.mjs:/playwright/eslint.config.mjs"
       - "./fixtures:/playwright/fixtures"

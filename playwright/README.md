@@ -12,9 +12,9 @@
   - [X] Run Prettier
   - [X] Run tests
   - [X] Run tests with UI
-- [ ] CI integration
-  - [ ] Run ESLint check
-  - [ ] Run Prettier check
+- [X] CI integration
+  - [X] Run ESLint check
+  - [X] Run Prettier check
   - [ ] Run tests
   - [ ] CI Reports
   - [ ] Archive screenshots (not currently captured)
@@ -27,3 +27,16 @@ Until the agent plugin is working, something like.
 Following the instructions in cypress-to-playwright.agent.md convert cypress/e2e/supervision/clients/add-new-client.cy.js
 ```
 
+## Instructions
+
+To run locally ensure Sirius is started and then run headless:
+
+```sh
+make run-playwright
+```
+
+To run with the UI:
+
+```sh
+make test-ui
+```
