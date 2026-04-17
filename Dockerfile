@@ -1,22 +1,11 @@
-FROM node:25-bookworm-slim@sha256:435f3537a088a01fd208bb629a4b69c28d85deb9a60af8a710cafc3befd6e3be
+FROM node:lts-trixie-slim@sha256:28fd420825d8e922eab0fd91740c7cf88ddbdc8116a2b20a82049f0c946feb03
 
 #based on the official cypress image, but flattened to reduce duplication and
 #using -slim rather than buster to reduce size and a non-root user to run tests
 #uses the chrome stable repo
 
-RUN apt-get update && apt-get upgrade -y && \
-  apt-get install --no-install-recommends -y \
-  bzip2 \
-  libgtk2.0-0 \
-  libgtk-3-0 \
-  libnotify-dev \
-  libgconf-2-4 \
-  libgbm-dev \
-  libnss3 \
-  libxss1 \
-  libasound2 \
-  libxtst6 \
-  xauth \
+RUN apt-get update && \
+  apt-get install -y \
   xvfb \
   # clean up
   && rm -rf /var/lib/apt/lists/* \
@@ -33,42 +22,16 @@ RUN node -p process.versions
 
 # Install deps + add Chrome Stable + purge all the things
 #from https://hub.docker.com/r/justinribeiro/chrome-headless/dockerfile/
-RUN apt-get update && apt-get install -y \
-	apt-transport-https \
-	ca-certificates \
-	curl \
-	gnupg \
-	--no-install-recommends \
-	&& apt-get update && apt-get install -y \
-	chromium \
-  wget \
-	fontconfig \
-	fonts-ipafont-gothic \
-	fonts-wqy-zenhei \
-	fonts-thai-tlwg \
-	fonts-kacst \
-	fonts-symbola \
-	fonts-noto \
-	fonts-freefont-ttf \
-	--no-install-recommends \
-	&& apt-get purge --auto-remove -y curl gnupg \
-	&& rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+  apt-get install -y \
+  chromium \
+  # clean up
+  && rm -rf /var/lib/apt/lists/* \
+  && apt-get clean
 
 # "fake" dbus address to prevent errors
 # https://github.com/SeleniumHQ/docker-selenium/issues/87
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
-
-# add codecs needed for video playback in firefox
-# https://github.com/cypress-io/cypress-docker-images/issues/150
-# We don't use video so disabling until we need it
-#RUN apt-get install mplayer -y
-
-# install Firefox browser
-ARG FIREFOX_VERSION=93.0
-RUN wget --no-verbose -O /tmp/firefox.tar.bz2 https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2 \
-  && tar -C /opt -xjf /tmp/firefox.tar.bz2 \
-  && rm /tmp/firefox.tar.bz2 \
-  && ln -fs /opt/firefox/firefox /usr/bin/firefox
 
 # avoid too many progress messages
 # https://github.com/cypress-io/cypress/issues/1243

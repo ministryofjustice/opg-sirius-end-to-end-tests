@@ -1,10 +1,11 @@
 import { defineConfig } from "cypress";
 import { verifyDownloadTasks } from "cy-verify-downloads";
-import { plugin as cypressGrepPlugin } from '@cypress/grep/plugin'
+import { plugin as cypressGrepPlugin } from "@cypress/grep/plugin";
 import cypress_failed_log from "cypress-failed-log/src/failed";
 import * as fs from "fs";
 
 module.exports = defineConfig({
+  allowCypressEnv: false,
   defaultCommandTimeout: 60000,
   requestTimeout: 60000,
   responseTimeout: 60000,
