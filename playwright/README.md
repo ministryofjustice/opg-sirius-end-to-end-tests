@@ -1,31 +1,6 @@
-# TODO
+# Playwright tests
 
-## Establishing foundations and patters
-
-- [X] Project structure
-- [X] Project structure documentation [Standards](/docs/PlaywrightStandards.md) (Partially done)
-- [X] Prettier for formatting
-- [X] ESLint for linting
-- [X] Document formatting and linting, how to run in standards
-- [X] Dockerisation
-  - [X] Run ESLint
-  - [X] Run Prettier
-  - [X] Run tests
-  - [X] Run tests with UI
-- [X] CI integration
-  - [X] Run ESLint check
-  - [X] Run Prettier check
-  - [ ] Run tests
-  - [ ] CI Reports
-  - [ ] Archive screenshots (not currently captured)
-
-## Using Copilot (if you want to)
-
-Until the agent plugin is working, something like.
-
-```sh
-Following the instructions in cypress-to-playwright.agent.md convert cypress/e2e/supervision/clients/add-new-client.cy.js
-```
+These are intended to ultimately replate the Cypress tests, but this is not a quick process, so for the duration of the migration both will need to be maintained.
 
 ## Instructions
 
@@ -40,3 +15,18 @@ To run with the UI:
 ```sh
 make test-ui
 ```
+
+## Using Copilot to migrate an existing test (if you want to)
+
+Until the agent plugin is working, something like.
+
+```sh
+Following the instructions in cypress-to-playwright.agent.md convert cypress/e2e/supervision/clients/add-new-client.cy.js
+```
+
+## Notes
+
+- Using Firefox as the test runner does have some issues where elements are incorrectly reported as outside the viewport.
+  While we can work around this, chromium is closer to what users are working with, so we've elected to use this as the test browser.
+- There is a known issue with race conditions on some pages retrieving multiple lookup data.
+  Currently there is no good workaround in PlayWright, so this needs to be resolved in the Sirius frontend.
