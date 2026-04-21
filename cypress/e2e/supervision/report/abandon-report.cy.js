@@ -22,7 +22,8 @@ beforeEach(() => {
           cy.get('.head > .title').should('contain.text', 'Abandon report');
           cy.get('#abandoned-date').should('contain.text', 'Abandoned date');
           cy.get('.smart__action').should('contain.text', 'Reason');
-        cy.getDatePickerInputByLabel("Abandoned date").type("01/01/2023");
+          cy.getDatePickerInputByLabel("Abandoned date").clear();
+          cy.getDatePickerInputByLabel("Abandoned date").type("01/01/2023");
           cy.getEditorByLabel("Reason")
             .enterText('<p>A reason to abandon the report</p>');
           cy.get('.footer > :nth-child(1) > .button').should('contain.text', 'Abandon report').click();
