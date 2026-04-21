@@ -33,6 +33,8 @@ describe(
       cy.get('#tab-container').contains('Documents').click();
       cy.get('document-list-item').find('.tab-table').should('have.length', 1);
 
+      cy.wait(2000); // need delete reasons to load before opening the modal
+
       cy.contains("Delete").should('exist').click();
       cy.get('.header-text').should('contain.text', 'Delete this client document');
       cy.contains("Reason")

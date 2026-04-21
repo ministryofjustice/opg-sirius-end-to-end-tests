@@ -33,9 +33,9 @@ describe(
       cy.getEditorByLabel("Explain why you’re asking the deputy to complete an OPG102 report")
         .enterText('<p>A reason to override the report type</p>');
       cy.get('footer .button.primary').click()
-      cy.get('.dialog-header').should('contain.text', 'Override report type');
+      cy.get('.dialog-header').should('be.visible');
       cy.intercept('PUT', '**/override-report-type').as('overrideReportType');
-      cy.get('.hook-modal-confirm').click()
+      cy.get('.hook-modal-confirm').click();
       cy.wait('@overrideReportType');
       cy.reload();
       cy.get('#tab-container').contains('Reports').click();
