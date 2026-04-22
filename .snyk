@@ -1507,4 +1507,9 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-05-20T07:57:59.393Z
         created: 2026-04-20T07:57:59.411Z
+  SNYK-DEBIAN12-SED-16114942:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-21T13:01:29.296Z
+        created: 2026-04-21T13:01:29.318Z
 patch: {}
