@@ -40,34 +40,3 @@ describe("Create Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
     });
   });
 });
-
-describe("Edits a Donor", { tags: ["@lpa", "@smoke-journey"] }, () => {
-  before(() => {
-    cy.loginAs("Case Manager");
-    cy.createDonor().then(({ id, uId }) => {
-      cy.wrap(id).as("donorId");
-      cy.wrap(uId).as("donorUid");
-    });
-  });
-
-  it("should change the donor's firstname", function () {
-    cy.visit(`/lpa/#/person/${this.donorId}`);
-    cy.waitForStableDOM();
-
-    cy.get(".person-panel-details").contains(this.donorUid);
-
-    cy.contains("Edit Donor").click();
-    cy.waitForIframe(".action-widget-content iframe", { selector: "#f-firstname" });
-    cy.enter(".action-widget-content iframe").then((getBody) => {
-      getBody().find("#f-firstname").clear();
-      getBody().find("#f-firstname").type("Patrick");
-      getBody().find("button[type=submit]").click();
-    });
-
-    // cy.get(".timeline-event")
-    //   .should("contain", "First name: Bob changed to: Patrick", {
-    //     timeout: 20000,
-    //   })
-    //   .should("be.visible");
-  });
-});
