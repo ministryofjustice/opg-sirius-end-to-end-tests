@@ -1,7 +1,7 @@
 import { type BrowserContext, expect, type Page } from "@playwright/test";
 import * as config from "../playwright.config";
 
-async function setupHandlerForAuthRedirectInDocker(page: Page) {
+export async function setupHandlerForAuthRedirectInDocker(page: Page) {
   // /oauth/login will redirect to where-ever Sirius is set up to redirect to, which is the mock-oauth-provider on
   // localhost:8080 for local dev. This rewrites the redirect to work in dockers internal network so Sirius can be used
   // for local development without needing reconfiguring and restarting for the end-to-end tests to run
@@ -10,12 +10,14 @@ async function setupHandlerForAuthRedirectInDocker(page: Page) {
     expect(response.status()).toBe(302);
 
     const locationHeader = response.headers()["location"];
-    console.debug("Received redirect to: ", locationHeader);
+    // TODO Add/find option for debug messages
+    // console.debug("Received redirect to: ", locationHeader);
     const newLocation = locationHeader.replace(
       "http://localhost:8080",
       config.default.use.baseURL,
     );
-    console.debug("Rewriting redirect to: ", newLocation);
+    // TODO Add/find option for debug messages
+    // console.debug("Rewriting redirect to: ", newLocation);
 
     await route.fulfill({
       status: 302,
