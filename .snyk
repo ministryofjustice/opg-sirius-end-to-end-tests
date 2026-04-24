@@ -167,11 +167,6 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-05-26T08:00:00.000Z
         created: 2026-03-26T15:33:00.000Z
-  SNYK-DEBIAN12-CUPS-1543886:
-    - '*':
-        reason: Known issue in End-to-End tests container
-        expires: 2026-05-26T08:00:00.000Z
-        created: 2026-03-26T15:33:00.000Z
   SNYK-DEBIAN12-DAV1D-5518047:
     - '*':
         reason: Known issue in End-to-End tests container
@@ -373,11 +368,6 @@ ignore:
         expires: 2026-05-26T08:00:00.000Z
         created: 2026-03-26T15:33:00.000Z
   SNYK-DEBIAN12-IPTABLES-1548895:
-    - '*':
-        reason: Known issue in End-to-End tests container
-        expires: 2026-05-26T08:00:00.000Z
-        created: 2026-03-26T15:33:00.000Z
-  SNYK-DEBIAN12-JBIGKIT-1549085:
     - '*':
         reason: Known issue in End-to-End tests container
         expires: 2026-05-26T08:00:00.000Z
@@ -1002,16 +992,6 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-05-26T08:00:00.000Z
         created: 2026-03-26T15:33:00.000Z
-  SNYK-DEBIAN12-XDGUTILS-1563679:
-    - '*':
-        reason: Known issue in End-to-End tests container
-        expires: 2026-05-26T08:00:00.000Z
-        created: 2026-03-26T15:33:00.000Z
-  SNYK-DEBIAN12-XDGUTILS-3135679:
-    - '*':
-        reason: Known issue in End-to-End tests container
-        expires: 2026-05-26T08:00:00.000Z
-        created: 2026-03-26T15:33:00.000Z
   SNYK-DEBIAN12-XORGSERVER-6035097:
     - '*':
         reason: Known issue in End-to-End tests container
@@ -1282,36 +1262,11 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-04-26T08:00:00.000Z
         created: 2026-03-26T15:33:00.000Z
-  SNYK-JS-AXIOS-15930944:
-    - '*':
-        reason: Known issue in End-to-End tests container
-        expires: 2026-05-08T08:00:00.000Z
-        created: 2026-04-08T15:33:00.000Z
   SNYK-JS-SERIALIZEJAVASCRIPT-15809196:
     - '*':
         reason: Known issue in End-to-End tests container
         expires: 2026-05-08T08:00:00.000Z
         created: 2026-04-08T15:33:00.000Z
-  SNYK-JS-NODEFORGE-15789767:
-    - '*':
-        reason: Known issue in End-to-End tests container
-        expires: 2026-05-09T08:00:00.000Z
-        created: 2026-04-09T15:33:00.000Z
-  SNYK-JS-NODEFORGE-15789773:
-    - '*':
-        reason: Known issue in End-to-End tests container
-        expires: 2026-05-09T08:00:00.000Z
-        created: 2026-04-09T15:33:00.000Z
-  SNYK-JS-NODEFORGE-15789771:
-    - '*':
-        reason: Known issue in End-to-End tests container
-        expires: 2026-05-09T08:00:00.000Z
-        created: 2026-04-09T15:33:00.000Z
-  SNYK-JS-NODEFORGE-15789769:
-    - '*':
-        reason: Known issue in End-to-End tests container
-        expires: 2026-05-09T08:00:00.000Z
-        created: 2026-04-09T15:33:00.000Z
   SNYK-JS-XMLDOMXMLDOM-15869636:
     - '*':
         reason: Known issue in End-to-End tests container
@@ -1512,4 +1467,89 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-05-21T13:01:29.296Z
         created: 2026-04-21T13:01:29.318Z
+  SNYK-JS-XMLDOMXMLDOM-16133132:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T10:59:50.986Z
+        created: 2026-04-24T10:59:51.003Z
+  SNYK-DEBIAN12-NSS-16169900:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T10:59:52.755Z
+        created: 2026-04-24T10:59:52.774Z
+  SNYK-DEBIAN12-NSS-16169916:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T10:59:54.449Z
+        created: 2026-04-24T10:59:54.468Z
+  SNYK-JS-UUID-16133035:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T10:59:56.579Z
+        created: 2026-04-24T10:59:56.601Z
+  SNYK-JS-XMLDOMXMLDOM-16134530:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T10:59:58.195Z
+        created: 2026-04-24T10:59:58.208Z
+  SNYK-JS-XMLDOMXMLDOM-16134552:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T10:59:59.738Z
+        created: 2026-04-24T10:59:59.754Z
+  SNYK-DEBIAN12-CHROMIUM-16188397:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T11:00:01.486Z
+        created: 2026-04-24T11:00:01.496Z
+  SNYK-DEBIAN12-NSS-16169911:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T11:00:03.316Z
+        created: 2026-04-24T11:00:03.327Z
+  SNYK-JS-XMLDOMXMLDOM-16134549:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T11:00:05.134Z
+        created: 2026-04-24T11:00:05.151Z
+  SNYK-DEBIAN12-PYTHON311-16162300:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T11:00:06.807Z
+        created: 2026-04-24T11:00:06.825Z
+  SNYK-DEBIAN12-LIBXPM-16135011:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T11:00:08.399Z
+        created: 2026-04-24T11:00:08.416Z
+  SNYK-DEBIAN12-GLIBC-16115569:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T11:00:10.139Z
+        created: 2026-04-24T11:00:10.158Z
+  SNYK-DEBIAN12-GLIBC-16115572:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T11:00:11.809Z
+        created: 2026-04-24T11:00:11.822Z
+  SNYK-JS-SIMPLEGIT-15456078:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T11:00:13.353Z
+        created: 2026-04-24T11:00:13.368Z
+  SNYK-DEBIAN12-GLIBC-16115579:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T11:00:15.019Z
+        created: 2026-04-24T11:00:15.037Z
+  SNYK-DEBIAN12-LIBGCRYPT20-16135008:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T11:00:16.544Z
+        created: 2026-04-24T11:00:16.563Z
+  SNYK-DEBIAN12-CHROMIUM-16188393:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-05-24T11:00:18.150Z
+        created: 2026-04-24T11:00:18.167Z
 patch: {}
