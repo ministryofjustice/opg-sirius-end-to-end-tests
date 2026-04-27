@@ -1,6 +1,10 @@
 import { type BrowserContext, expect, type Page } from "@playwright/test";
 import * as config from "../playwright.config";
 
+export enum UserEmail {
+  CaseManager = "case.manager@opgtest.com",
+}
+
 export async function setupHandlerForAuthRedirectInDocker(page: Page) {
   // /oauth/login will redirect to where-ever Sirius is set up to redirect to, which is the mock-oauth-provider on
   // localhost:8080 for local dev. This rewrites the redirect to work in dockers internal network so Sirius can be used
@@ -30,9 +34,10 @@ export async function setupHandlerForAuthRedirectInDocker(page: Page) {
   });
 }
 
-export const loginAsCaseManager = async (
+export const loginAsUser = async (
   page: Page,
   context: BrowserContext,
+  userEmail: UserEmail,
 ): Promise<void> => {
   await page.goto("/auth/logout");
   await context.clearCookies();
@@ -46,6 +51,13 @@ export const loginAsCaseManager = async (
 
   const emailInput = page.locator('input[name="email"]');
   await expect(emailInput).toHaveValue(/@opgtest\.com/);
-  await emailInput.fill("case.manager@opgtest.com");
+  await emailInput.fill(userEmail);
   await page.locator('[type="submit"]').click();
+};
+
+export const loginAsCaseManager = async (
+  page: Page,
+  context: BrowserContext,
+): Promise<void> => {
+  await loginAsUser(page, context, UserEmail.CaseManager);
 };
