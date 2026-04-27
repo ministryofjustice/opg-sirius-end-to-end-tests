@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { loginAsCaseManager } from "../../../utils/login_as_case_manager";
+import { loginAsCaseManager } from "../../../utils/login_as";
 import { randomText } from "../../../utils/random_text";
 
 test.describe("Add Client page", () => {

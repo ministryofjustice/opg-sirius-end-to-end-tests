@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { createClient } from "../../../fixtures/client/create_client";
-import { loginAsCaseManager } from "../../../utils/login_as_case_manager";
+import { loginAsCaseManager } from "../../../utils/login_as";
 import { waitForSearchService } from "../../../utils/wait_for_search_service";
 
 test.describe("Add Client page - existing client", () => {
