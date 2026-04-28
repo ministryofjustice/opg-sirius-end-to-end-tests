@@ -1367,11 +1367,6 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-06-25T08:00:00.000Z
         created: 2026-04-09T15:33:00.000Z
-  SNYK-JS-AXIOS-16298046:
-    - '*':
-        reason: Known issue in End-to-End tests container
-        expires: 2026-06-25T08:00:00.000Z
-        created: 2026-04-28T13:30:00.000Z
   SNYK-JS-AXIOS-16298058:
     - '*':
         reason: Known issue in End-to-End tests container
@@ -1587,11 +1582,6 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-05-24T10:59:59.738Z
         created: 2026-04-24T10:59:59.754Z
-  SNYK-DEBIAN12-CHROMIUM-16188397:
-    - '*':
-        reason: Known issue in End-to-End tests container
-        expires: 2026-05-24T11:00:01.486Z
-        created: 2026-04-24T11:00:01.496Z
   SNYK-DEBIAN12-NSS-16169911:
     - '*':
         reason: Known issue in End-to-End tests container
@@ -1627,19 +1617,9 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-05-24T11:00:13.353Z
         created: 2026-04-24T11:00:13.368Z
-  SNYK-DEBIAN12-GLIBC-16115579:
-    - '*':
-        reason: Known issue in End-to-End tests container
-        expires: 2026-05-24T11:00:15.019Z
-        created: 2026-04-24T11:00:15.037Z
   SNYK-DEBIAN12-LIBGCRYPT20-16135008:
     - '*':
         reason: Known issue in End-to-End tests container
         expires: 2026-05-24T11:00:16.544Z
         created: 2026-04-24T11:00:16.563Z
-  SNYK-DEBIAN12-CHROMIUM-16188393:
-    - '*':
-        reason: Known issue in End-to-End tests container
-        expires: 2026-05-24T11:00:18.150Z
-        created: 2026-04-24T11:00:18.167Z
 patch: {}
