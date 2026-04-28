@@ -1028,8 +1028,8 @@ ignore:
         expires: 2026-05-26T08:00:00.000Z
         created: 2026-03-26T15:33:00.000Z
   SNYK-JS-BRACEEXPANSION-15789759:
-    - '*':
-        reason: Known issue in End-to-End tests container
+    - npm@11.12.1:
+        reason: Built-in NPM dependency
         expires: 2026-05-26T08:00:00.000Z
         created: 2026-03-27T08:30:00.000Z
   SNYK-JS-BRACES-6838727:
@@ -1133,13 +1133,13 @@ ignore:
         expires: 2026-05-26T08:00:00.000Z
         created: 2026-03-26T15:33:00.000Z
   SNYK-JS-PICOMATCH-15765511:
-    - '*':
-        reason: Known issue in End-to-End tests container
+    - npm@11.12.1:
+        reason: Built-in NPM dependency
         expires: 2026-05-26T08:00:00.000Z
         created: 2026-03-26T15:33:00.000Z
   SNYK-JS-PICOMATCH-15765513:
-    - '*':
-        reason: Known issue in End-to-End tests container
+    - npm@11.12.1:
+        reason: Built-in NPM dependency
         expires: 2026-05-26T08:00:00.000Z
         created: 2026-03-26T15:33:00.000Z
   SNYK-JS-SIRV-12558119:
