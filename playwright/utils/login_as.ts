@@ -4,6 +4,7 @@ import * as config from "../playwright.config";
 export enum UserEmail {
   AllocationsUser = "allocations@opgtest.com",
   CaseManager = "case.manager@opgtest.com",
+  FinanceManager = "finance.manager@opgtest.com",
 }
 
 export async function setupHandlerForAuthRedirectInDocker(page: Page) {
@@ -68,4 +69,11 @@ export const loginAsCaseManager = async (
   context: BrowserContext,
 ): Promise<void> => {
   await loginAsUser(page, context, UserEmail.CaseManager);
+};
+
+export const loginAsFinanceManager = async (
+  page: Page,
+  context: BrowserContext,
+): Promise<void> => {
+  await loginAsUser(page, context, UserEmail.FinanceManager);
 };
