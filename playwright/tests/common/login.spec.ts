@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import * as config from "../../playwright.config";
-import { setupHandlerForAuthRedirectInDocker } from "../../utils/login_as_case_manager";
+import { setupHandlerForAuthRedirectInDocker } from "../../utils/login_as";
 
 test.describe('Log in page', () => {
   test.beforeEach(async ({ page }) => {
