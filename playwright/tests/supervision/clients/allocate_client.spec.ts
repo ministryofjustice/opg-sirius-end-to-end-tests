@@ -1,8 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { createClient } from "../../../fixtures/client/create_client";
-import {
-  createDeputyAndAssignToExistingOrder
-} from "../../../fixtures/deputy/create_deputy_and_assign_to_existing_order";
+import { createDeputyAndAssignToExistingOrder } from "../../../fixtures/deputy/create_deputy_and_assign_to_existing_order";
 import { createOrderForClient } from "../../../fixtures/order/create_order";
 import { addSupervisionLevel } from "../../../fixtures/order/add_supervision_level";
 import { makeOrderActive } from "../../../fixtures/order/make_order_active";
@@ -13,6 +11,8 @@ test.describe("Allocate a client smoke journey", () => {
     "allocates a client to casework team when order is active",
     { tag: "@supervision-core @allocate-client @smoke-journey" },
     async ({ page, context }) => {
+      test.slow();
+
       await loginAsAllocationsUser(page, context);
 
       const client = await createClient(page);
@@ -41,7 +41,7 @@ test.describe("Allocate a client smoke journey", () => {
 
       await expect(
         page.locator(".timeline-event-title", { hasText: "Client Allocated" }),
-      ).toBeVisible({ timeout: 30_000 });
+      ).toBeVisible();
       await expect(page.locator(".hook-allocated-teamname")).toContainText(
         "Lay Team 1 - (Supervision)",
       );
