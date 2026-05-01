@@ -2,6 +2,7 @@ import { type BrowserContext, expect, type Page } from "@playwright/test";
 import * as config from "../playwright.config";
 
 export enum UserEmail {
+  AllocationsUser = "allocations@opgtest.com",
   CaseManager = "case.manager@opgtest.com",
 }
 
@@ -53,6 +54,13 @@ export const loginAsUser = async (
   await expect(emailInput).toHaveValue(/@opgtest\.com/);
   await emailInput.fill(userEmail);
   await page.locator('[type="submit"]').click();
+};
+
+export const loginAsAllocationsUser = async (
+  page: Page,
+  context: BrowserContext,
+): Promise<void> => {
+  await loginAsUser(page, context, UserEmail.AllocationsUser);
 };
 
 export const loginAsCaseManager = async (
