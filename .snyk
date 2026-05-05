@@ -1592,4 +1592,254 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-05-28T13:46:39.628Z
         created: 2026-04-28T13:46:39.642Z
+  SNYK-JS-AXIOS-16417750:
+    - '*':
+        reason: 'Downstream dependency, waiting on Cypress fixing'
+        expires: 2026-06-04T13:05:46.954Z
+        created: 2026-05-05T13:05:46.967Z
+  SNYK-DEBIAN12-GNUTLS28-16344333:
+    - '*':
+        reason: Debian base image vulnerability
+        expires: 2026-06-04T13:09:36.927Z
+        created: 2026-05-05T13:09:36.951Z
+  SNYK-DEBIAN12-GNUTLS28-16344325:
+    - '*':
+        reason: Debian base image vulnerability
+        expires: 2026-06-04T13:10:11.249Z
+        created: 2026-05-05T13:10:11.270Z
+  SNYK-DEBIAN12-CHROMIUM-16334056:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:26.048Z
+        created: 2026-05-05T13:23:26.061Z
+  SNYK-DEBIAN12-GNUTLS28-16344340:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:27.667Z
+        created: 2026-05-05T13:23:27.707Z
+  SNYK-DEBIAN12-CHROMIUM-16334067:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:29.577Z
+        created: 2026-05-05T13:23:29.593Z
+  SNYK-DEBIAN12-GNUTLS28-16344319:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:31.803Z
+        created: 2026-05-05T13:23:31.822Z
+  SNYK-DEBIAN12-GNUTLS28-16344358:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:33.432Z
+        created: 2026-05-05T13:23:33.447Z
+  SNYK-DEBIAN12-GNUTLS28-16344297:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:35.212Z
+        created: 2026-05-05T13:23:35.230Z
+  SNYK-DEBIAN12-CHROMIUM-16334107:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:36.966Z
+        created: 2026-05-05T13:23:36.985Z
+  SNYK-DEBIAN12-GNUTLS28-16344303:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:38.610Z
+        created: 2026-05-05T13:23:38.628Z
+  SNYK-DEBIAN12-CHROMIUM-16334024:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:40.385Z
+        created: 2026-05-05T13:23:40.404Z
+  SNYK-DEBIAN12-CHROMIUM-16334049:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:42.178Z
+        created: 2026-05-05T13:23:42.198Z
+  SNYK-DEBIAN12-CHROMIUM-16334093:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:44.003Z
+        created: 2026-05-05T13:23:44.022Z
+  SNYK-DEBIAN12-CHROMIUM-16334053:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:45.782Z
+        created: 2026-05-05T13:23:45.802Z
+  SNYK-DEBIAN12-CHROMIUM-16334004:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:47.834Z
+        created: 2026-05-05T13:23:47.852Z
+  SNYK-DEBIAN12-GLIBC-16325159:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:49.784Z
+        created: 2026-05-05T13:23:49.811Z
+  SNYK-DEBIAN12-LCMS2-16345331:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:52.013Z
+        created: 2026-05-05T13:23:52.033Z
+  SNYK-DEBIAN12-CHROMIUM-16334025:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:53.665Z
+        created: 2026-05-05T13:23:53.681Z
+  SNYK-DEBIAN12-GNUTLS28-16344335:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:55.666Z
+        created: 2026-05-05T13:23:55.686Z
+  SNYK-DEBIAN12-GLIBC-16325151:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:57.890Z
+        created: 2026-05-05T13:23:57.919Z
+  SNYK-DEBIAN12-CHROMIUM-16334091:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:23:59.573Z
+        created: 2026-05-05T13:23:59.594Z
+  SNYK-DEBIAN12-CHROMIUM-16334009:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:01.224Z
+        created: 2026-05-05T13:24:01.243Z
+  SNYK-DEBIAN12-CHROMIUM-16334113:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:03.098Z
+        created: 2026-05-05T13:24:03.108Z
+  SNYK-DEBIAN12-CHROMIUM-16334085:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:04.808Z
+        created: 2026-05-05T13:24:04.827Z
+  SNYK-DEBIAN12-GNUTLS28-16344348:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:06.510Z
+        created: 2026-05-05T13:24:06.529Z
+  SNYK-DEBIAN12-CHROMIUM-16334128:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:08.343Z
+        created: 2026-05-05T13:24:08.354Z
+  SNYK-DEBIAN12-CHROMIUM-16334052:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:10.126Z
+        created: 2026-05-05T13:24:10.146Z
+  SNYK-DEBIAN12-GNUTLS28-16344301:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:12.423Z
+        created: 2026-05-05T13:24:12.442Z
+  SNYK-DEBIAN12-CHROMIUM-16333991:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:14.134Z
+        created: 2026-05-05T13:24:14.152Z
+  SNYK-DEBIAN12-GNUTLS28-16344308:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:16.074Z
+        created: 2026-05-05T13:24:16.094Z
+  SNYK-DEBIAN12-KRB5-16334233:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:17.888Z
+        created: 2026-05-05T13:24:17.907Z
+  SNYK-DEBIAN12-CHROMIUM-16334014:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:20.225Z
+        created: 2026-05-05T13:24:20.237Z
+  SNYK-DEBIAN12-CHROMIUM-16334060:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:21.940Z
+        created: 2026-05-05T13:24:21.960Z
+  SNYK-DEBIAN12-CHROMIUM-16334044:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:23.877Z
+        created: 2026-05-05T13:24:23.896Z
+  SNYK-DEBIAN12-GNUTLS28-16344322:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:25.536Z
+        created: 2026-05-05T13:24:25.556Z
+  SNYK-DEBIAN12-CHROMIUM-16334089:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:27.432Z
+        created: 2026-05-05T13:24:27.453Z
+  SNYK-DEBIAN12-CHROMIUM-16334035:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:29.159Z
+        created: 2026-05-05T13:24:29.176Z
+  SNYK-DEBIAN12-CHROMIUM-16334080:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:30.775Z
+        created: 2026-05-05T13:24:30.786Z
+  SNYK-DEBIAN12-CHROMIUM-16334109:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:32.645Z
+        created: 2026-05-05T13:24:32.669Z
+  SNYK-DEBIAN12-GNUTLS28-16344316:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:34.420Z
+        created: 2026-05-05T13:24:34.436Z
+  SNYK-DEBIAN12-CHROMIUM-16334023:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:36.215Z
+        created: 2026-05-05T13:24:36.235Z
+  SNYK-DEBIAN12-CHROMIUM-16334096:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:37.927Z
+        created: 2026-05-05T13:24:37.947Z
+  SNYK-DEBIAN12-CHROMIUM-16334118:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:39.739Z
+        created: 2026-05-05T13:24:39.758Z
+  SNYK-DEBIAN12-CHROMIUM-16334075:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:41.442Z
+        created: 2026-05-05T13:24:41.462Z
+  SNYK-DEBIAN12-CHROMIUM-16334037:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:43.315Z
+        created: 2026-05-05T13:24:43.336Z
+  SNYK-DEBIAN12-KRB5-16334223:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:45.022Z
+        created: 2026-05-05T13:24:45.042Z
+  SNYK-DEBIAN12-CHROMIUM-16334068:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:46.959Z
+        created: 2026-05-05T13:24:46.978Z
+  SNYK-DEBIAN12-CHROMIUM-16334030:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:48.634Z
+        created: 2026-05-05T13:24:48.654Z
+  SNYK-DEBIAN12-LIBSNDFILE-16338496:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-04T13:24:50.368Z
+        created: 2026-05-05T13:24:50.380Z
 patch: {}
