@@ -46,6 +46,7 @@ test.describe("Edit an existing client", () => {
       await memorablePhraseInput.fill(memorablePhrase);
 
       await Promise.all([
+        page.getByText("Save & Exit").click(),
         page.waitForResponse(
           (response) =>
             response.request().method() === "PUT" &&
@@ -54,7 +55,6 @@ test.describe("Edit an existing client", () => {
               .includes(`/supervision-api/v1/clients/${client.id}`) &&
             response.ok(),
         ),
-        page.getByText("Save & Exit").click(),
       ]);
 
       await expect(page.locator(".title-person-name")).toContainText(
