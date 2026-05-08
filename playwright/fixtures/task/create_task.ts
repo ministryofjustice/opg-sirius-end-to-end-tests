@@ -19,7 +19,7 @@ export const createTaskForOrder = async (
     ...overrides,
   };
 
-  return postToSiriusApi<CreatedTask>(
+  return await postToSiriusApi<CreatedTask>(
     page,
     "/supervision-api/v1/tasks",
     payload,
