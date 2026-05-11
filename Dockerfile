@@ -1,4 +1,4 @@
-FROM node:25-bookworm-slim@sha256:e49fd70491eb042270f974167c874d6245287263ffc16422fcf93b3c150409d8
+FROM node:25-bookworm-slim@sha256:67134eb99e14d566f2882a38a374b8351ea474656487dbb1e0c79e4064cc1725
 
 #based on the official cypress image, but flattened to reduce duplication and
 #using -slim rather than buster to reduce size and a non-root user to run tests
