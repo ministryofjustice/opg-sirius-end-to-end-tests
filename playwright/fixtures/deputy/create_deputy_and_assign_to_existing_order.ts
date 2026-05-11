@@ -1,6 +1,9 @@
 import { type Page } from "@playwright/test";
 import { postToSiriusApi } from "../../utils/sirius_api";
-import { buildMinimalDeputyPayload, type DeputyPayload } from "./create_deputy_payload";
+import {
+  buildMinimalDeputyPayload,
+  type DeputyPayload,
+} from "./create_deputy_payload";
 
 interface CreatedDeputy {
   id: number;

@@ -1,6 +1,9 @@
 import { type Page } from "@playwright/test";
 import { postToSiriusApi } from "../../utils/sirius_api";
-import { buildMinimalOrderPayload, type OrderPayload } from "./create_order_payload";
+import {
+  buildMinimalOrderPayload,
+  type OrderPayload,
+} from "./create_order_payload";
 
 export interface CreatedOrder {
   id: number;
