@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { chromium, expect, Page, test } from "@playwright/test";
 import {
   createClient,
   CreatedClient,
@@ -11,20 +11,23 @@ import {
 
 test.describe("Open document successfully", () => {
   var client: CreatedClient;
+  var publicApiPage: Page;
 
   test.beforeEach(async ({ page, context }) => {
     await loginAsCaseManager(page, context);
     client = await createClient(page);
-    await loginAsPublicAPI(page, context);
-    await uploadDocumentForClient(page, client.caseRecNumber);
+    const browser = await chromium.launch();
+
+    const publicApiContext = await browser.newContext();
+    publicApiPage = await publicApiContext.newPage();
+    await loginAsPublicAPI(publicApiPage, publicApiContext);
+    await uploadDocumentForClient(publicApiPage, client.caseRecNumber);
   });
 
   test(
     "opens a document successfully",
     { tag: "@supervision-core @documents @open-document @smoke-journey" },
-    async ({ page, context }) => {
-      await page.waitForLoadState("networkidle");
-      await loginAsCaseManager(page, context);
+    async ({ page }) => {
       await page.goto(`/supervision/#/clients/${client.id}`);
       await expect(page.locator(".title-person-name")).toContainText(
         `${client.firstname} ${client.surname}`,
@@ -50,10 +53,8 @@ test.describe("Open document successfully", () => {
   test(
     "multiple document download",
     { tag: "@supervision-core @documents @open-document @smoke-journey" },
-    async ({ page, context }) => {
-      await uploadDocumentForClient(page, client.caseRecNumber);
-      await page.waitForLoadState("networkidle");
-      await loginAsCaseManager(page, context);
+    async ({ page }) => {
+      await uploadDocumentForClient(publicApiPage, client.caseRecNumber);
 
       await page.goto(`/supervision/#/clients/${client.id}`);
       await expect(page.locator(".title-person-name")).toContainText(
