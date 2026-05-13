@@ -2262,4 +2262,24 @@ ignore:
         reason: Known issue in End-to-End tests container
         expires: 2026-06-10T08:33:00.053Z
         created: 2026-05-11T08:33:00.075Z
+  SNYK-JS-WEBPACKDEVSERVER-16642067:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-12T08:33:00.170Z
+        created: 2026-05-13T08:33:00.193Z
+  SNYK-JS-IPADDRESS-16636412:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-12T08:33:02.105Z
+        created: 2026-05-13T08:33:02.127Z
+  SNYK-JS-FASTURI-16642399:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-12T08:33:03.957Z
+        created: 2026-05-13T08:33:03.979Z
+  SNYK-JS-FASTURI-16642394:
+    - '*':
+        reason: Known issue in End-to-End tests container
+        expires: 2026-06-12T08:33:05.844Z
+        created: 2026-05-13T08:33:05.866Z
 patch: {}
