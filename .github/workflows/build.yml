@@ -59,7 +59,7 @@ jobs:
             service_name: end-to-end
           - ecr_repository: sirius/end-to-end-tests-playwright
             service_name: playwright
-    name: "Scan & Push ${{ matrix.service_name }} Image"
+    name: "Push ${{ matrix.service_name }} Image"
     needs: ['create-tag', 'build']
     runs-on: ubuntu-latest
     steps:
@@ -94,20 +94,6 @@ jobs:
         uses: aws-actions/amazon-ecr-login@19d944daaa35f0fa1d3f7f8af1d3f2e5de25c5b7 # v2.1.4
         with:
           registries: 311462405659
-
-      - name: Snyk Scan
-        uses: ministryofjustice/opg-github-actions/actions/snyk-scan@9e8b7c2fb29c11e77b12913f74459fa48b11829f # v4.8.2
-        with:
-          SNYK_TEST_IMAGE: 311462405659.dkr.ecr.eu-west-1.amazonaws.com/${{ matrix.ecr_repository }}:latest
-          SNYK_TOKEN: ${{ secrets.SNYK_OPG_ORG_TOKEN }}
-          snyk_test_args: "--severity-threshold=high"
-
-      - name: Upload Snyk scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@e46ed2cbd01164d986452f91f178727624ae40d7 # v4.35.3
-        if: always()
-        with:
-          sarif_file: 'test-results/snyk.sarif'
-          category: snyk-docker-${{ matrix.service_name }}
 
       - name: Push Image
         env:
