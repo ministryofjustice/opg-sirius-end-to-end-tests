@@ -59,7 +59,7 @@ jobs:
             service_name: end-to-end
           - ecr_repository: sirius/end-to-end-tests-playwright
             service_name: playwright
-    name: "Push Images"
+    name: "Scan & Push ${{ matrix.service_name }} Image"
     needs: ['create-tag', 'build']
     runs-on: ubuntu-latest
     steps:
