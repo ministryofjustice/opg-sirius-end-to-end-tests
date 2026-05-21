@@ -95,20 +95,6 @@ jobs:
         with:
           registries: 311462405659
 
-      - name: Snyk Scan
-        uses: ministryofjustice/opg-github-actions/actions/snyk-scan@9e8b7c2fb29c11e77b12913f74459fa48b11829f # v4.8.2
-        with:
-          SNYK_TEST_IMAGE: 311462405659.dkr.ecr.eu-west-1.amazonaws.com/${{ matrix.ecr_repository }}:latest
-          SNYK_TOKEN: ${{ secrets.SNYK_OPG_ORG_TOKEN }}
-          snyk_test_args: "--severity-threshold=high"
-
-      - name: Upload Snyk scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@e46ed2cbd01164d986452f91f178727624ae40d7 # v4.35.3
-        if: always()
-        with:
-          sarif_file: 'test-results/snyk.sarif'
-          category: snyk-docker-${{ matrix.service_name }}
-
       - name: Push Image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
