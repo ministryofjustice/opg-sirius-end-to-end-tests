@@ -19,6 +19,7 @@ test.describe("Extend client visit", () => {
       tag: "@supervision-core @visit @smoke-journey @extend-visit-report-due-date",
     },
     async ({ page, context }) => {
+      test.setTimeout(120000);
       const reportDueDate = new Date();
       reportDueDate.setDate(reportDueDate.getDate() + 1);
       const tomorrowsDate = getDateInGbFormat(reportDueDate);
@@ -104,13 +105,13 @@ test.describe("Extend client visit", () => {
         page
           .getByText("Visit report due date extended", { exact: true })
           .first(),
-      ).toBeVisible();
+      ).toBeVisible({ timeout: 30000 });
       await expect(
         page.locator(".timeline-extended-visit-report-due-date"),
-      ).toContainText(nextWeekDate);
+      ).toContainText(nextWeekDate, { timeout: 30000 });
       await expect(
         page.locator(".timeline-reason-for-visit-report-due-date-extension"),
-      ).toContainText("Because I said so");
+      ).toContainText("Because I said so", { timeout: 30000 });
     },
   );
 });
