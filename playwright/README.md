@@ -16,6 +16,12 @@ To run with the UI:
 make test-ui
 ```
 
+To run a test multiple times, to test for flakiness:
+```sh
+cd playwright
+playwright test tests/path/to/your.spec.ts --repeat-each=200 --workers=4 --retries=0
+```
+
 ## Using Copilot to migrate an existing test (if you want to)
 
 Until the agent plugin is working, something like.
