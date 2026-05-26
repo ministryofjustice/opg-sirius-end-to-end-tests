@@ -29,7 +29,7 @@
     "@cypress/grep": "^6.0.0",
     "@eslint/js": "^10.0.0",
     "cy-verify-downloads": "^0.3.0",
-    "cypress": "^15.10.0",
+    "cypress": "^15.15.0",
     "cypress-failed-log": "^2.10.0",
     "cypress-iframe": "^1.0.1",
     "cypress-multi-reporters": "^2.0.5",
