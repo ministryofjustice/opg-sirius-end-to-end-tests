@@ -22,7 +22,7 @@ test.describe("Record a client risk score", () => {
         .locator("select")
         .selectOption({ label: "2" });
 
-      // await enterEditorTextByLabel(page, "Notes", "Risk score added");
+      await enterEditorTextByLabel(page, "Notes", "Risk score added");
 
       await page.getByRole("button", { name: "Save & exit" }).click();
 
