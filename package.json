@@ -37,7 +37,7 @@
     "cypress-wait-until": "^3.0.2",
     "eslint": "^10.0.0",
     "mocha-junit-reporter": "^2.2.1",
-    "typescript": "^5.5.4",
+    "typescript": "^6.0.0",
     "typescript-eslint": "^8.0.0"
   },
   "overrides": {
