@@ -4,13 +4,9 @@ import { createVisitForClient } from "../../../../fixtures/visit/create_visit";
 import { editVisitForClient } from "../../../../fixtures/visit/edit_visit";
 import { enterEditorTextByLabel } from "../../../../utils/enter_editor_text_by_label";
 import { loginAsCaseManager } from "../../../../utils/login_as";
+import { getDateInGbFormat } from "../../../../utils/date";
 
-const getDateInGbFormat = (date: Date): string =>
-  date.toLocaleDateString("en-GB", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
+
 
 test.describe("Extend client visit", () => {
   test(
