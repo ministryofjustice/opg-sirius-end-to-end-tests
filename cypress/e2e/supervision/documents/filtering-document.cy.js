@@ -14,6 +14,7 @@ describe(
       cy.get('[id="create-event-button"]').click();
 
       cy.get('[name="fIELDLABELSNOTEFILE"]').selectFile('cypress/fixtures/document/niceFile.txt');
+      cy.get('[name="fIELDLABELSNOTECATEGORY"][value="CASE_MANAGEMENT"]').check({force: true}).should('be.checked');
       cy.get('[name="fIELDLABELSNOTETYPE"]').should('be.visible');
       cy.get('[name="fIELDLABELSNOTETYPE"]').select('Call', { force: true });
       cy.get("input[type=radio][data-core-value=OUTGOING]").check({ force: true }).should('be.checked')
@@ -22,6 +23,7 @@ describe(
       cy.get('[id="create-event-button"]').click();
 
       cy.get('[name="fIELDLABELSNOTEFILE"]').selectFile('cypress/fixtures/document/niceFile.txt');
+      cy.get('[name="fIELDLABELSNOTECATEGORY"][value="CASE_MANAGEMENT"]').check({force: true}).should('be.checked');
       cy.get('[name="fIELDLABELSNOTETYPE"]').should('be.visible');
       cy.get('[name="fIELDLABELSNOTETYPE"]').select('Order', { force: true });
       cy.get("input[type=radio][data-core-value=OUTGOING]").check({ force: true }).should('be.checked')
