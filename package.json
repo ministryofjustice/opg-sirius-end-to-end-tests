@@ -44,5 +44,8 @@
     "cypress-parallel": {
       "serialize-javascript": "^7.0.5"
     }
+  },
+  "dependencies": {
+    "@playwright/test": "^1.60.0"
   }
 }

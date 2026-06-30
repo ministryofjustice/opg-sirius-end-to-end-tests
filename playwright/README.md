@@ -1,6 +1,6 @@
 # Playwright tests
 
-These are intended to ultimately replate the Cypress tests, but this is not a quick process, so for the duration of the migration both will need to be maintained.
+These are intended to ultimately replace the Cypress tests, but this is not a quick process, so for the duration of the migration both will need to be maintained.
 
 ## Instructions
 
@@ -13,12 +13,19 @@ make run-playwright
 To run with the UI:
 
 ```sh
-make test-ui
+make run-playwright-ui
+```
+
+To run a test multiple times, to check for flakiness:
+
+```sh
+cd playwright
+playwright test tests/path/to/your.spec.ts --repeat-each=200 --workers=4 --retries=0
 ```
 
 ## Using Copilot to migrate an existing test (if you want to)
 
-Until the agent plugin is working, something like.
+Until the agent plugin is working, something like:
 
 ```sh
 Following the instructions in cypress-to-playwright.agent.md convert cypress/e2e/supervision/clients/add-new-client.cy.js

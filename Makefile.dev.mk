@@ -12,3 +12,10 @@ run-playwright-ui: ## Start container so Playwright tests can be run through the
 
 show-playwright-report: ## Start server to view Playwright test report on http://localhost:9323
 	cd playwright && docker compose -f docker-compose.yml -f docker-compose.override.yml run --rm -p 9323:9323 playwright show-report
+
+run-playwright-multiple: ## Run a single Playwright spec multiple times to hunt for flakes. Usage: make run-playwright-multiple SPEC=tests/path/to.spec.ts [REPEATS=200] [WORKERS=4]
+	@if [ -z "$(SPEC)" ]; then \
+		echo "ERROR: SPEC is required. Usage: make run-playwright-multiple SPEC=tests/path/to.spec.ts [REPEATS=200] [WORKERS=4]"; \
+		exit 1; \
+	fi
+	cd playwright && docker compose -f docker-compose.yml -f docker-compose.override.yml run --rm playwright test -- "$(SPEC)" --repeat-each=$(or $(REPEATS),200) --workers=$(or $(WORKERS),4) --retries=0
