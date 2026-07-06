@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile
     environment:
         CYPRESS_BASE_URL: https://development.sirius.opg.service.justice.gov.uk
+    platform: linux/x86_64
     volumes:
       - "./cypress:/home/node/cypress"
       - "./cypress.config.ts:/home/node/cypress.config.ts"

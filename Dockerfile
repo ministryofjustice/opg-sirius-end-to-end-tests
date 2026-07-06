@@ -40,7 +40,6 @@ RUN apt-get update && apt-get install -y \
 	gnupg \
 	--no-install-recommends \
 	&& apt-get update && apt-get install -y \
-	chromium \
   wget \
 	fontconfig \
 	fonts-ipafont-gothic \
@@ -50,6 +49,7 @@ RUN apt-get update && apt-get install -y \
 	fonts-symbola \
 	fonts-noto \
 	fonts-freefont-ttf \
+  unzip \
 	--no-install-recommends \
 	&& apt-get purge --auto-remove -y curl gnupg \
 	&& rm -rf /var/lib/apt/lists/*
@@ -62,6 +62,12 @@ ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 # https://github.com/cypress-io/cypress-docker-images/issues/150
 # We don't use video so disabling until we need it
 #RUN apt-get install mplayer -y
+
+# install Chrome browser
+RUN INSTALL_OUTPUT=$(npx @puppeteer/browsers install chrome@stable --path /tmp/chrome-for-testing) && \
+  DOWNLOAD_DIR=$(echo "$INSTALL_OUTPUT" | grep -o '\/.*\/chrome-linux64') && \
+  mv $DOWNLOAD_DIR /opt/chrome-for-testing
+RUN ln -fs /opt/chrome-for-testing/chrome /usr/local/bin/chrome
 
 # install Firefox browser
 ARG FIREFOX_VERSION=93.0

@@ -8,8 +8,8 @@
   },
   "scripts": {
     "lint": "eslint . --ignore-pattern \"**/*.js\"",
-    "test": "cypress run --headless --browser chromium",
-    "test-single": "cypress run --headless --browser chromium --spec \"cypress/e2e/common/login.cy.js\"",
+    "test": "cypress run --headless --browser chrome-for-testing",
+    "test-single": "cypress run --headless --browser chrome-for-testing --spec \"cypress/e2e/common/login.cy.js\"",
     "ui": "cypress open -c baseUrl=http://localhost:8080",
     "ui:dev": "cypress open -c baseUrl=https://development.sirius.opg.service.justice.gov.uk",
     "parallel": "cypress-parallel --reporter cypress-multi-reporters --reporterOptions configFile=reporter-config.json -s test -t ${PARALLELISATION:=3} -d cypress/e2e"
@@ -28,6 +28,7 @@
   "devDependencies": {
     "@cypress/grep": "^6.0.0",
     "@eslint/js": "^10.0.0",
+    "@puppeteer/browsers": "^3.0.6",
     "cy-verify-downloads": "^0.3.0",
     "cypress": "^15.15.0",
     "cypress-failed-log": "^2.10.0",
