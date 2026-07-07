@@ -40,7 +40,6 @@ RUN apt-get update && apt-get install -y \
 	gnupg \
 	--no-install-recommends \
 	&& apt-get update && apt-get install -y \
-	chromium \
   wget \
 	fontconfig \
 	fonts-ipafont-gothic \
@@ -62,13 +61,6 @@ ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 # https://github.com/cypress-io/cypress-docker-images/issues/150
 # We don't use video so disabling until we need it
 #RUN apt-get install mplayer -y
-
-# install Firefox browser
-ARG FIREFOX_VERSION=93.0
-RUN wget --no-verbose -O /tmp/firefox.tar.bz2 https://download-installer.cdn.mozilla.net/pub/firefox/releases/$FIREFOX_VERSION/linux-x86_64/en-US/firefox-$FIREFOX_VERSION.tar.bz2 \
-  && tar -C /opt -xjf /tmp/firefox.tar.bz2 \
-  && rm /tmp/firefox.tar.bz2 \
-  && ln -fs /opt/firefox/firefox /usr/bin/firefox
 
 # avoid too many progress messages
 # https://github.com/cypress-io/cypress/issues/1243
