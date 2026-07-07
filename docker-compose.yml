@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    platform: linux/amd64
     environment:
         CYPRESS_BASE_URL: https://development.sirius.opg.service.justice.gov.uk
     volumes:
