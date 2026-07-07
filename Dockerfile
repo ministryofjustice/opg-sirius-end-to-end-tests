@@ -64,7 +64,7 @@ ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 #RUN apt-get install mplayer -y
 
 # install Chrome browser
-RUN INSTALL_OUTPUT=$(npx @puppeteer/browsers install chrome@stable --path /tmp/chrome-for-testing) && \
+RUN INSTALL_OUTPUT=$(npx @puppeteer/browsers install chrome@149.0.7827.200 --path /tmp/chrome-for-testing) && \
   DOWNLOAD_DIR=$(echo "$INSTALL_OUTPUT" | grep -o '\/.*\/chrome-linux64') && \
   mv $DOWNLOAD_DIR /opt/chrome-for-testing
 RUN ln -fs /opt/chrome-for-testing/chrome /usr/local/bin/chrome
