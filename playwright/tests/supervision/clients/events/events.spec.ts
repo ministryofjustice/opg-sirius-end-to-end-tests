@@ -16,6 +16,10 @@ test.describe("Events", () => {
       await page.locator("#create-event-button").click();
       await expect(page.locator("#noteDirection")).toContainText("Incoming");
 
+      const noteCategoryField = page.locator('[label="FIELDLABELS.NOTE_CATEGORY"]');
+      await noteCategoryField.getByText("Case Management", { exact: true }).click();
+
+
       await page
         .locator('*[id^="FIELDLABELSN_"]')
         .first()

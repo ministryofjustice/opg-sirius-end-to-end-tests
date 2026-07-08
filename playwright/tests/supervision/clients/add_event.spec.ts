@@ -20,6 +20,10 @@ test.describe("Add event to a client", () => {
       await page.locator("#create-event-button").click();
       await expect(page).toHaveURL(/\/event\/create/);
 
+      const noteCategoryField = page.locator('[label="FIELDLABELS.NOTE_CATEGORY"]');
+      await expect(noteCategoryField).toBeVisible();
+      await noteCategoryField.getByText("Case Management", { exact: true }).click();
+
       const noteTypeField = page.locator('[label="FIELDLABELS.NOTE_TYPE"]');
       await expect(noteTypeField).toBeVisible();
       await noteTypeField.locator("select").selectOption({ label: "Call" });
