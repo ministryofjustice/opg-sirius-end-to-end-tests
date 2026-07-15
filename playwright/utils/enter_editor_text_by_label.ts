@@ -42,7 +42,8 @@ export const enterEditorTextByLabel = async (
     return;
   }
 
-  const iframe = editorRoot.locator("iframe");
+  const iframe = editorRoot.locator("iframe").first();
+  await iframe.waitFor({ state: "attached", timeout: 5000 });
 
   if ((await iframe.count()) > 0) {
     await page
@@ -55,7 +56,9 @@ export const enterEditorTextByLabel = async (
     return;
   }
 
-  const textArea = editorRoot.locator("textarea").first();
+  const textArea = editorRoot
+    .locator("textarea:not([aria-hidden='true'])")
+    .first();
   if ((await textArea.count()) > 0) {
     await textArea.fill(value);
     return;
