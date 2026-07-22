@@ -6,8 +6,6 @@ import { enterEditorTextByLabel } from "../../../../utils/enter_editor_text_by_l
 import { loginAsCaseManager } from "../../../../utils/login_as";
 import { getDateInGbFormat } from "../../../../utils/date";
 
-
-
 test.describe("Extend client visit", () => {
   test(
     "can extend a visit's report due date for an existing visit",
