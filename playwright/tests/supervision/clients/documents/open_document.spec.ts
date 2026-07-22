@@ -10,7 +10,7 @@ import {
 } from "../../../../utils/login_as";
 
 test.describe("Open document successfully", () => {
-  var client: CreatedClient;
+  let client: CreatedClient;
 
   test.beforeEach(async ({ page, context }) => {
     await loginAsCaseManager(page, context);

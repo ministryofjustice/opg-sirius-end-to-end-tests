@@ -1,5 +1,5 @@
-import fs = require("fs");
-import path = require("node:path");
+import * as fs from "node:fs";
+import * as path from "node:path";
 
 export interface DocumentPayload {
   type: string;
