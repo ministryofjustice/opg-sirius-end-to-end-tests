@@ -1,6 +1,10 @@
 import type { Page } from "@playwright/test";
 import { postToSiriusApi } from "../../utils/sirius_api";
-import { buildMinimalContactPayload } from "./create_contact_payload";
+import {
+  buildMinimalContactPayload,
+  ContactPayload,
+} from "./create_contact_payload";
+import { buildMinimalVisitPayload } from "../visit/create_visit_payload";
 
 export interface CreatedContact {
   id: number;
@@ -9,8 +13,12 @@ export interface CreatedContact {
 export const createContactForClient = async (
   page: Page,
   clientId: number,
+  overrides: Partial<ContactPayload> = {},
 ): Promise<CreatedContact> => {
-  const payload = buildMinimalContactPayload();
+  const payload = {
+    ...buildMinimalContactPayload(),
+    ...overrides,
+  };
 
   return await postToSiriusApi<CreatedContact>(
     page,

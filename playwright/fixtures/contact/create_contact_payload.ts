@@ -1,6 +1,6 @@
 import { randomText } from "../../utils/random_text";
 
-class ContactPayload {
+export interface ContactPayload {
   salutation: string;
   firstname: string;
   otherNames: string;
