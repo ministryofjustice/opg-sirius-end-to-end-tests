@@ -33,6 +33,8 @@ const sendToSiriusApi = async <TResponse>(
     return null;
   }
 
+  console.log(await response.text());
+
   throw new Error(
     `Request failed (${method} ${url}) with status ${response.status()}`,
   );
