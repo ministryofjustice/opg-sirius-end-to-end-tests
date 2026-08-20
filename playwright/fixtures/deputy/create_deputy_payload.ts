@@ -23,6 +23,10 @@ export interface DeputyPayload {
     handle: string;
     label: string;
   };
+  deputySubType?: {
+    handle: string;
+    label: string;
+  };
   organisationName: string;
 }
 
