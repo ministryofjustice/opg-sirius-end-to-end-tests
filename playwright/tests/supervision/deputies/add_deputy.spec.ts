@@ -12,7 +12,7 @@ import {
 } from "../../../fixtures/deputy/create_deputy_and_assign_to_existing_order";
 
 const searchForADeputyToReachAddADeputyPage = async (page) => {
-  await page.locator("#add-deputy-button").click();
+  await page.getByRole("button", { name: "Add deputy" }).click();
   await page
     .getByRole("textbox", { name: "Search by SIRIUS ID or Name" })
     .fill("deputy");
