@@ -11,6 +11,16 @@ interface CreatedDeputy {
   surname: string;
 }
 
+export const assignDeputyToOrder = async (
+  page: Page,
+  orderId: number,
+  deputyId: number,
+): Promise<void> => {
+  await postToSiriusApi<unknown>(page, `/api/v1/orders/${orderId}/deputies`, {
+    id: deputyId,
+  });
+};
+
 export const createDeputy = async (
   page: Page,
   overrides: Partial<DeputyPayload> = {},
@@ -28,9 +38,7 @@ export const createDeputyAndAssignToExistingOrder = async (
 ): Promise<CreatedDeputy> => {
   const deputy = await createDeputy(page, overrides);
 
-  await postToSiriusApi<unknown>(page, `/api/v1/orders/${orderId}/deputies`, {
-    id: deputy.id,
-  });
+  await assignDeputyToOrder(page, orderId, deputy.id);
 
   return deputy;
 };
