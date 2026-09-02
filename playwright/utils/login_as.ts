@@ -5,6 +5,7 @@ export enum UserEmail {
   AllocationsUser = "allocations@opgtest.com",
   CaseManager = "case.manager@opgtest.com",
   PublicAPI = "publicapi@opgtest.com",
+  SystemAdmin = "system.admin@opgtest.com",
 }
 
 export async function setupHandlerForAuthRedirectInDocker(page: Page) {
@@ -76,4 +77,11 @@ export const loginAsPublicAPI = async (
   context: BrowserContext,
 ): Promise<void> => {
   await loginAsUser(page, context, UserEmail.PublicAPI);
+};
+
+export const loginAsSystemAdmin = async (
+  page: Page,
+  context: BrowserContext,
+): Promise<void> => {
+  await loginAsUser(page, context, UserEmail.SystemAdmin);
 };
