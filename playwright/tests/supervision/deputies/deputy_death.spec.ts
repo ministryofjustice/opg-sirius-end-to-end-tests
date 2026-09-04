@@ -71,7 +71,9 @@ test.describe("Deputy Death Notification & Confirmation", () => {
       await page
         .getByRole("button", { name: "The deputy is deceased" })
         .click();
-      await expect(page.getByText("Deputy is Deceased")).toBeVisible();
+      await expect(
+        page.getByText("Deputy is Deceased", { exact: true }),
+      ).toBeVisible();
 
       await page.getByRole("tab", { name: "Timeline" }).click();
       await expect(page.getByText("Death", { exact: true })).toBeVisible();
