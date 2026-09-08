@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/ministryofjustice/opg-sirius-end-to-end-tests#readme",
   "devDependencies": {
-    "@cypress/grep": "^6.0.0",
+    "@cypress/grep": "^7.0.0",
     "@eslint/js": "^10.0.0",
     "cy-verify-downloads": "^0.3.0",
     "cypress": "^15.15.0",
