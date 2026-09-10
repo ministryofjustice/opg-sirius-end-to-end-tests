@@ -14,7 +14,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.PARALLELISATION ? process.env.PARALLELISATION : 2,
+  workers: process.env.PARALLELISATION ? parseInt(process.env.PARALLELISATION, 10) : 2,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: process.env.CI ? [
     ['junit', { outputFile: '/test-results/playwright.xml' }],
