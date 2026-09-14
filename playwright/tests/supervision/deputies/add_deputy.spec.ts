@@ -49,7 +49,7 @@ test.describe(
       const fullName = `${firstName} ${lastName}`;
       await searchForADeputyToReachAddADeputyPage(page);
 
-      await page.getByText("Lay").click();
+      await page.getByText("Lay").first().click();
       await page.getByRole("textbox", { name: "First name" }).fill(firstName);
       await page.getByRole("textbox", { name: "Last name" }).fill(lastName);
       await page
@@ -241,7 +241,7 @@ test.describe(
     }) => {
       await searchForADeputyToReachAddADeputyPage(page);
 
-      await page.getByText("Lay").click();
+      await page.getByText("Lay").first().click();
       await page
         .getByRole("textbox", { name: "First name" })
         .fill(randomText());
@@ -262,7 +262,7 @@ test.describe(
       ).toBeVisible();
 
       await searchForADeputyToReachAddADeputyPage(page);
-      await page.getByText("Professional").click();
+      await page.getByText("Professional").first().click();
       await page.getByRole("textbox", { name: "First name" }).fill("Kermit");
       await page.getByRole("textbox", { name: "Last name" }).fill("Frog");
       await page
