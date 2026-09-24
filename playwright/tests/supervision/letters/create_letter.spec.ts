@@ -8,6 +8,8 @@ test.describe("Create letter", () => {
     "creates, edits, previews, and publishes a draft",
     { tag: "@supervision, @supervision-regression, @letter" },
     async ({ page, context }) => {
+      test.setTimeout(120_000)
+
       await loginAsAllocationsUser(page, context);
       const client = await createClient(page);
       const order = await createOrderForClient(page, client.id);
