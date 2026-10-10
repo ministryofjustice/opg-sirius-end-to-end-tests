@@ -5,7 +5,7 @@ import { loginAsSystemAdmin } from "../../../utils/login_as";
 import { createDeputyAndAssignToExistingOrder } from "../../../fixtures/deputy/create_deputy_and_assign_to_existing_order";
 import { updateDeputyWithErrorStatus } from "../../../fixtures/deputy/update_deputy_on_order";
 
-test.skip(
+test.describe(
   "Delete a deputy",
   { tag: "@supervision, @deputy, @supervision-core, @smoke-journey" },
   () => {
@@ -36,7 +36,7 @@ test.skip(
         .getByRole("dialog")
         .getByRole("button", { name: "Delete Deputy" })
         .click();
-      await expect(page).toHaveURL(/.*\/supervision\/#\/dashboard/);
+      await await expect(page).toHaveURL(/.*\/supervision\/#\/dashboard/);
       await page.goto(`/supervision/#/clients/${client.id}`);
       await page.getByRole("tab", { name: "Deputies" }).click();
       await page.getByRole("button", { name: "Add deputy" }).click();
