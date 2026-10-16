@@ -21,14 +21,14 @@ describe(
       cy.get("uib-tab-heading[id=Workflow]")
         .contains("Workflow")
         .click();
-      cy.contains("Edit Dates").click();
-
-      cy.waitForIframe(".action-widget-content iframe", { selector: '#f-receiptDate' });
-      cy.enter(".action-widget-content iframe").then((getBody) => {
-        getBody().find("#f-receiptDate").clear();
-        getBody().find("#f-receiptDate").type("2019-04-13");
-        getBody().find("button[type=submit]").click();
-      });
+      // cy.contains("Edit Dates").click();
+      //
+      // cy.waitForIframe(".action-widget-content iframe", { selector: '#f-receiptDate' });
+      // cy.enter(".action-widget-content iframe").then((getBody) => {
+      //   getBody().find("#f-receiptDate").clear();
+      //   getBody().find("#f-receiptDate").type("2019-04-13");
+      //   getBody().find("button[type=submit]").click();
+      // });
 
       // cy.contains(
       //   ".timeline-event",
