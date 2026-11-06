@@ -4,5 +4,6 @@
   },
   "caseSubtype": "pfa",
   "status": "Pending",
-  "receiptDate": "02/04/2019"
+  "receiptDate": "02/04/2019",
+  "paymentByCheque": true
 }
